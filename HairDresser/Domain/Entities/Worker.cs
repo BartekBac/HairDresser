@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Domain.ValueObjects;
-using Domain.ValueObjects.Schedule;
 using Domain.Entities.ManyToMany;
 
 namespace Domain.Entities
@@ -23,7 +22,7 @@ namespace Domain.Entities
             SalonId = salonId;
             Rating = -1.0f;
             Image = new EntityImage<Worker>(Id, this);
-            Schedule = new Schedule(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Schedule = new Schedule<Worker>(Id, this, new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
         }
         public Worker(IdentityUser user, string firstName, string lastName, Guid salonId, Salon salon, byte[] imageData) : base(Guid.Parse(user.Id))
         {
@@ -34,7 +33,7 @@ namespace Domain.Entities
             Salon = salon;
             Rating = -1.0f;
             Image = new EntityImage<Worker>(Id, this, imageData);
-            Schedule = new Schedule(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Schedule = new Schedule<Worker>(Id, this, new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
         }
         private Worker()
         {
@@ -47,7 +46,7 @@ namespace Domain.Entities
         public float Rating { get; private set; }
         public Guid SalonId { get; private set; }
         public Salon Salon { get; private set; }
-        public Schedule Schedule { get; set; }
+        public Schedule<Worker> Schedule { get; set; }
         public EntityImage<Worker> Image { get; set; }
         public IEnumerable<WorkerServices> Services
         {

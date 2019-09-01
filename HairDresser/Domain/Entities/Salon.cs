@@ -4,7 +4,6 @@ using System.Text;
 using Domain.Entities.ManyToMany;
 using Domain.Enums;
 using Domain.ValueObjects;
-using Domain.ValueObjects.Schedule;
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Entities
@@ -24,7 +23,7 @@ namespace Domain.Entities
             AdditionalInfo = additionalInfo;
             Type = type;
             Image = new EntityImage<Salon>(Id, this);
-            Schedule = new Schedule(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Schedule = new Schedule<Salon>(Id, this, new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
         }
         public Salon(IdentityUser admin, string name, Address address, string additionalInfo, SalonType type, byte[] imageData) : base(Guid.Parse(admin.Id))
         {
@@ -35,7 +34,7 @@ namespace Domain.Entities
             AdditionalInfo = additionalInfo;
             Type = type;
             Image = new EntityImage<Salon>(Id, this, imageData);
-            Schedule = new Schedule(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Schedule = new Schedule<Salon>(Id, this, new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
         }
         private Salon()
         {
@@ -47,7 +46,7 @@ namespace Domain.Entities
         public float Rating { get; private set; }
         public string AdditionalInfo { get; private set; }
         public SalonType Type { get; private set; }
-        public Schedule Schedule { get; set; }
+        public Schedule<Salon> Schedule { get; set; }
         public EntityImage<Salon> Image { get; set; }
         public IEnumerable<Service> Services
         {

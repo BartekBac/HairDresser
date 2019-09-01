@@ -30,6 +30,8 @@ namespace Domain.DbContexts
             builder.ApplyConfiguration(new EntityImageConfiguration());
             builder.ApplyConfiguration(new OpinionConfiguration());
             builder.ApplyConfiguration(new SalonConfiguration());
+            builder.ApplyConfiguration(new ScheduleWorkerConfiguration());
+            builder.ApplyConfiguration(new ScheduleSalonConfiguration());
             builder.ApplyConfiguration(new ServiceConfiguration());
             builder.ApplyConfiguration(new VisitConfiguration());
             builder.ApplyConfiguration(new VisitServicesConfiguration());

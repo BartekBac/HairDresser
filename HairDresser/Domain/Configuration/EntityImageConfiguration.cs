@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Domain.Configuration
 {
-    public class EntityImageConfiguration : IEntityTypeConfiguration<Visit>
+    public class EntityImageConfiguration : IEntityTypeConfiguration<EntityImage<Client>>
     {
-        public void Configure(EntityTypeBuilder<Visit> builder)
+        public void Configure(EntityTypeBuilder<EntityImage<Client>> builder)
         {
             builder.HasKey(e => e.Id);
 

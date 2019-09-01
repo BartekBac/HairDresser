@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Domain.ValueObjects.Schedule
+namespace Domain.ValueObjects
 {
     public class Day : ValueObject
     {
