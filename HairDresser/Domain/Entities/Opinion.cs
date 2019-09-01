@@ -27,6 +27,10 @@ namespace Domain.Entities
             Rate = rate;
             Image = new EntityImage<Opinion>(Id, this, imageData);
         }
+        private Opinion()
+        {
+
+        }
 
         public Guid ClientId { get; private set; }
         public Client Client { get; private set; }

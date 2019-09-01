@@ -18,6 +18,10 @@ namespace Domain.Entities
             SalonId = salonId;
             Salon = salon;
         }
+        private Service()
+        {
+
+        }
 
         public string Name { get; private set; }
         public float Price { get; private set; }

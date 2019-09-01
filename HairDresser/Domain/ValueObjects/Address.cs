@@ -6,38 +6,42 @@ using System.Text.RegularExpressions;
 
 namespace Domain.ValueObjects
 {
-    public class Address
+    public class Address : ValueObject
     {
-        private static readonly Regex CityCodeRegex = new Regex(@"\d{2}\-\d{3}");
+        private static readonly Regex zipCodeRegex = new Regex(@"\d{2}\-\d{3}");
         public string City {get; private set;}
-        public string CityCode { get; private set;}
+        public string ZipCode { get; private set;}
         public string Street { get; private set; }
         public int HouseNumber { get; private set; }
 
-        public Address(string city, string cityCode, string street, int houseNumber)
+        public Address(string city, string zipCode, string street, int houseNumber)
         {
-            if(CityCodeRegex.IsMatch(cityCode))
+            if(zipCodeRegex.IsMatch(zipCode))
             {
-                throw new DomainException("City code do not match.");
+                throw new DomainException("Zip code do not match.");
             }
 
             City = city;
-            CityCode = cityCode;
+            ZipCode = zipCode;
             Street = street;
             HouseNumber = houseNumber;
+        }
+        private Address()
+        {
+
         }
 
         public void SetCity(string city)
         {
             City = city;
         }
-        public void SetCityCode(string cityCode)
+        public void SetZipCode(string zipCode)
         {
-            if (CityCodeRegex.IsMatch(cityCode))
+            if (zipCodeRegex.IsMatch(zipCode))
             {
-                throw new DomainException("City code do not match.");
+                throw new DomainException("Zip code do not match.");
             }
-            CityCode = cityCode;
+            ZipCode = zipCode;
         }
         public void SetStreet(string street)
         {
@@ -46,6 +50,13 @@ namespace Domain.ValueObjects
         public void SetHouseNumber(int houseNumber)
         {
             HouseNumber = houseNumber;
+        }
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return City;
+            yield return ZipCode;
+            yield return Street;
+            yield return HouseNumber;
         }
     }
 }

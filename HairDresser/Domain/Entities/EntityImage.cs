@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.ValueObjects
+namespace Domain.Entities
 {
     public class EntityImage<T> : Entity
     {
@@ -22,6 +22,10 @@ namespace Domain.ValueObjects
             EntityId = entityId;
             Entity = entity;
             ImageData = imageData;
+        }
+        private EntityImage()
+        {
+
         }
     }
 }

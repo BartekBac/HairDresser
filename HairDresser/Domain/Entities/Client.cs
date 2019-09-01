@@ -28,6 +28,10 @@ namespace Domain.Entities
             LastName = lastName;
             Image = new EntityImage<Client>(Id, this, imageData);
         }
+        private Client()
+        {
+
+        }
 
         public string FirstName { get; private set; }
         public string LastName { get; private set; }

@@ -1,17 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Domain.ValueObjects.Schedule
 {
-    public class Day
+    public class Day : ValueObject
     {
-        public DayTime Begin { get; set; }
-        public DayTime End { get; set; }
+        public DayTime Begin { get; private set; }
+        public DayTime End { get; private set; }
 
-        public Day()
-        {
-            Begin = new DayTime();
-            End = new DayTime(23, 59);
-        }
         public Day(DayTime begin, DayTime end)
         {
             Begin = begin;
@@ -21,6 +17,15 @@ namespace Domain.ValueObjects.Schedule
         {
             Begin = new DayTime(beginHour, beginMinute);
             End = new DayTime(endHour, endMinute);
+        }
+        private Day()
+        {
+
+        }
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Begin;
+            yield return End;
         }
     }
 }

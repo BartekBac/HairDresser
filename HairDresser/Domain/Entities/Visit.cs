@@ -21,6 +21,10 @@ namespace Domain.Entities
             Term = term;
             TotalTime = totalTime;
         }
+        private Visit()
+        {
+
+        }
         public Guid ClientId { get; private set; }
         public Client Client { get; private set; }
         public Guid WorkerId { get; private set; }
