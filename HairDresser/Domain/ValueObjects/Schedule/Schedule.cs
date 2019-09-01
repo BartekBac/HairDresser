@@ -13,7 +13,7 @@ namespace Domain.ValueObjects.Schedule
         public Day Saturday { get; private set; }
         public Day Sunday { get; private set; }
 
-        public Schedule(DayTime beginDayTime, DayTime endDayTime)
+        public Schedule(int beginDayTime, int endDayTime)
         {
             Monday = new Day(beginDayTime, endDayTime);
             Tuesday = new Day(beginDayTime, endDayTime);
@@ -68,13 +68,13 @@ namespace Domain.ValueObjects.Schedule
         }
         public void ResetSchedule()
         {
-            Monday = new Day(new DayTime(0, 0), new DayTime(23, 59));
+            /*Monday = new Day(new DayTime(0, 0), new DayTime(23, 59));
             Tuesday = new Day(new DayTime(0, 0), new DayTime(23, 59));
             Wednesday = new Day(new DayTime(0, 0), new DayTime(23, 59));
             Thursday = new Day(new DayTime(0, 0), new DayTime(23, 59));
             Friday = new Day(new DayTime(0, 0), new DayTime(23, 59));
             Saturday = new Day(new DayTime(0, 0), new DayTime(23, 59));
-            Sunday = new Day(new DayTime(0, 0), new DayTime(23, 59));
+            Sunday = new Day(new DayTime(0, 0), new DayTime(23, 59));*/
         }
         protected override IEnumerable<object> GetEqualityComponents()
         {

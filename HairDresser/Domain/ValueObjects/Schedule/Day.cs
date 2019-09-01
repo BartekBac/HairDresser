@@ -5,18 +5,20 @@ namespace Domain.ValueObjects.Schedule
 {
     public class Day : ValueObject
     {
-        public DayTime Begin { get; private set; }
-        public DayTime End { get; private set; }
+       // public DayTime Begin { get; private set; }
+       // public DayTime End { get; private set; }
+        public int Begin { get; private set; }
+        public int End { get; private set; }
 
-        public Day(DayTime begin, DayTime end)
+        public Day(int begin, int end)
         {
             Begin = begin;
             End = end;
         }
         public Day(int beginHour, int beginMinute, int endHour, int endMinute)
         {
-            Begin = new DayTime(beginHour, beginMinute);
-            End = new DayTime(endHour, endMinute);
+            Begin = beginHour + beginMinute;
+            End = endHour + endMinute;
         }
         private Day()
         {

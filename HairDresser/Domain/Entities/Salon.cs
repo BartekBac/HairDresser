@@ -24,7 +24,7 @@ namespace Domain.Entities
             AdditionalInfo = additionalInfo;
             Type = type;
             Image = new EntityImage<Salon>(Id, this);
-            Schedule = new Schedule(new DayTime(0, 0), new DayTime(23, 59));
+            Schedule = new Schedule(0, 23);
         }
         public Salon(IdentityUser admin, string name, Address address, string additionalInfo, SalonType type, byte[] imageData) : base(Guid.Parse(admin.Id))
         {
@@ -35,7 +35,7 @@ namespace Domain.Entities
             AdditionalInfo = additionalInfo;
             Type = type;
             Image = new EntityImage<Salon>(Id, this, imageData);
-            Schedule = new Schedule(new DayTime(0, 0), new DayTime(23, 59));
+            Schedule = new Schedule(0,23);
         }
         private Salon()
         {

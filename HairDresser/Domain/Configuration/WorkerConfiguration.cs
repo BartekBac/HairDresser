@@ -27,7 +27,7 @@ namespace Domain.Configuration
             {
                 schedule.OwnsOne(s => s.Monday, day =>
                 {
-                    day.OwnsOne(d => d.Begin, dayTime => 
+                    /*day.OwnsOne(d => d.Begin, dayTime => 
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleModayBeginHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleModayBeginMinute");
@@ -36,11 +36,11 @@ namespace Domain.Configuration
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleModayEndHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleModayEndMinute");
-                    });
+                    });*/
                 });
                 schedule.OwnsOne(s => s.Tuesday, day =>
                 {
-                    day.OwnsOne(d => d.Begin, dayTime =>
+                    /*day.OwnsOne(d => d.Begin, dayTime =>
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleTuesdayBeginHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleTuesdayBeginMinute");
@@ -49,11 +49,11 @@ namespace Domain.Configuration
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleTuesdayEndHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleTuesdayEndMinute");
-                    });
+                    });*/
                 });
                 schedule.OwnsOne(s => s.Wednesday, day =>
                 {
-                    day.OwnsOne(d => d.Begin, dayTime =>
+                    /*day.OwnsOne(d => d.Begin, dayTime =>
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleWednesdayBeginHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleWednesdayBeginMinute");
@@ -62,11 +62,11 @@ namespace Domain.Configuration
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleWednesdayEndHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleWednesdayEndMinute");
-                    });
+                    });*/
                 });
                 schedule.OwnsOne(s => s.Thursday, day =>
                 {
-                    day.OwnsOne(d => d.Begin, dayTime =>
+                    /*day.OwnsOne(d => d.Begin, dayTime =>
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleThursdayBeginHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleThursdayBeginMinute");
@@ -75,11 +75,11 @@ namespace Domain.Configuration
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleThursdayEndHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleThursdayEndMinute");
-                    });
+                    });*/
                 });
                 schedule.OwnsOne(s => s.Friday, day =>
                 {
-                    day.OwnsOne(d => d.Begin, dayTime =>
+                    /*day.OwnsOne(d => d.Begin, dayTime =>
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleFridayBeginHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleFridayBeginMinute");
@@ -88,11 +88,11 @@ namespace Domain.Configuration
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleFridayEndHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleFridayEndMinute");
-                    });
+                    });*/
                 });
                 schedule.OwnsOne(s => s.Saturday, day =>
                 {
-                    day.OwnsOne(d => d.Begin, dayTime =>
+                    /*day.OwnsOne(d => d.Begin, dayTime =>
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleSaturdayBeginHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleSaturdayBeginMinute");
@@ -101,11 +101,11 @@ namespace Domain.Configuration
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleSaturdayEndHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleSaturdayEndMinute");
-                    });
+                    });*/
                 });
                 schedule.OwnsOne(s => s.Sunday, day =>
                 {
-                    day.OwnsOne(d => d.Begin, dayTime =>
+                    /*day.OwnsOne(d => d.Begin, dayTime =>
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleSundayBeginHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleSundayBeginMinute");
@@ -114,7 +114,7 @@ namespace Domain.Configuration
                     {
                         dayTime.Property(dt => dt.Hour).HasColumnName("ScheduleSundayEndHour");
                         dayTime.Property(dt => dt.Minute).HasColumnName("ScheduleSundayEndMinute");
-                    });
+                    });*/
                 });
             });
 
