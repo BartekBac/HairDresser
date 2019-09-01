@@ -23,7 +23,7 @@ namespace Domain.Entities
             SalonId = salonId;
             Rating = -1.0f;
             Image = new EntityImage<Worker>(Id, this);
-            Schedule = new Schedule(0,23);
+            Schedule = new Schedule(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
         }
         public Worker(IdentityUser user, string firstName, string lastName, Guid salonId, Salon salon, byte[] imageData) : base(Guid.Parse(user.Id))
         {
@@ -34,7 +34,7 @@ namespace Domain.Entities
             Salon = salon;
             Rating = -1.0f;
             Image = new EntityImage<Worker>(Id, this, imageData);
-            Schedule = new Schedule(0,23);
+            Schedule = new Schedule(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
         }
         private Worker()
         {

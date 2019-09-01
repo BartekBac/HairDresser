@@ -13,7 +13,8 @@ namespace Domain.Configuration
 
             builder.HasOne(vs => vs.Visit)
                    .WithMany(v => v.Services)
-                   .HasForeignKey(vs => vs.VisitId);
+                   .HasForeignKey(vs => vs.VisitId)
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(vs => vs.Service)
                    .WithMany(s => s.VisitsHistory)

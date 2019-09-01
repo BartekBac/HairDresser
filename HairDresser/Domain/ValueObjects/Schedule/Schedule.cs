@@ -13,7 +13,7 @@ namespace Domain.ValueObjects.Schedule
         public Day Saturday { get; private set; }
         public Day Sunday { get; private set; }
 
-        public Schedule(int beginDayTime, int endDayTime)
+        public Schedule(TimeSpan beginDayTime, TimeSpan endDayTime)
         {
             Monday = new Day(beginDayTime, endDayTime);
             Tuesday = new Day(beginDayTime, endDayTime);
