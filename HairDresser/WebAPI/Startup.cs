@@ -13,6 +13,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using WebAPI.Configurations;
+using Application.Services;
 
 namespace WebAPI
 {
@@ -28,7 +32,15 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDefaultIdentity<IdentityUser>()
+                    .AddRoles<IdentityRole>()
+                    .AddEntityFrameworkStores<HairDresserDbContext>();
+
+            services.AddAutoMapper(typeof(HairDresserProfile));
+
             services.AddControllers();
+
+            services.AddScoped<IUserService, UserService>();
 
             services.AddDbContext<HairDresserDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -41,7 +53,10 @@ namespace WebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app,
+                              IWebHostEnvironment env,
+                              ILoggerFactory loggerFactory,
+                              RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -58,6 +73,7 @@ namespace WebAPI
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
+            HairDresserRoles.SeedRoles(roleManager).Wait();
 
             app.UseHttpsRedirection();
 

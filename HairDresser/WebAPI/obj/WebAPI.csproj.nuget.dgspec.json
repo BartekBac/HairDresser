@@ -4,6 +4,89 @@
     "C:\\rep\\VII sem\\v2\\HairDresser\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
+    "C:\\rep\\VII sem\\v2\\HairDresser\\Application\\Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\rep\\VII sem\\v2\\HairDresser\\Application\\Application.csproj",
+        "projectName": "Application",
+        "projectPath": "C:\\rep\\VII sem\\v2\\HairDresser\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\Bartek\\.nuget\\packages\\",
+        "outputPath": "C:\\rep\\VII sem\\v2\\HairDresser\\Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Bartek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.0": {
+            "projectReferences": {
+              "C:\\rep\\VII sem\\v2\\HairDresser\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\rep\\VII sem\\v2\\HairDresser\\Domain\\Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.0": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.AspNetCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.0.0-preview8.19405.7, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100-preview8-013656\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\rep\\VII sem\\v2\\HairDresser\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -121,6 +204,9 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
+              "C:\\rep\\VII sem\\v2\\HairDresser\\Application\\Application.csproj": {
+                "projectPath": "C:\\rep\\VII sem\\v2\\HairDresser\\Application\\Application.csproj"
+              },
               "C:\\rep\\VII sem\\v2\\HairDresser\\Domain\\Domain.csproj": {
                 "projectPath": "C:\\rep\\VII sem\\v2\\HairDresser\\Domain\\Domain.csproj"
               }
@@ -136,6 +222,18 @@
       "frameworks": {
         "netcoreapp3.0": {
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.AspNet.Identity.Core": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
             "Microsoft.AspNetCore.ApiAuthorization.IdentityServer": {
               "target": "Package",
               "version": "[3.0.0-preview8.19405.7, )"

@@ -8,7 +8,6 @@ namespace Domain.ValueObjects
 {
     public class Address : ValueObject
     {
-        private static readonly Regex zipCodeRegex = new Regex(@"\d{2}\-\d{3}");
         public string City {get; private set;}
         public string ZipCode { get; private set;}
         public string Street { get; private set; }
@@ -16,11 +15,6 @@ namespace Domain.ValueObjects
 
         public Address(string city, string zipCode, string street, int houseNumber)
         {
-            if(zipCodeRegex.IsMatch(zipCode))
-            {
-                throw new DomainException("Zip code do not match.");
-            }
-
             City = city;
             ZipCode = zipCode;
             Street = street;
@@ -37,10 +31,6 @@ namespace Domain.ValueObjects
         }
         public void SetZipCode(string zipCode)
         {
-            if (zipCodeRegex.IsMatch(zipCode))
-            {
-                throw new DomainException("Zip code do not match.");
-            }
             ZipCode = zipCode;
         }
         public void SetStreet(string street)
