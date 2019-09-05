@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Domain.ValueObjects.Schedule
+namespace Domain.ValueObjects
 {
     public class Day : ValueObject
     {
-        public DayTime Begin { get; private set; }
-        public DayTime End { get; private set; }
+        public TimeSpan Begin { get; private set; }
+        public TimeSpan End { get; private set; }
 
-        public Day(DayTime begin, DayTime end)
+        public Day(TimeSpan begin, TimeSpan end)
         {
             Begin = begin;
             End = end;
         }
         public Day(int beginHour, int beginMinute, int endHour, int endMinute)
         {
-            Begin = new DayTime(beginHour, beginMinute);
-            End = new DayTime(endHour, endMinute);
+            Begin = new TimeSpan(beginHour, beginMinute, 0);
+            End = new TimeSpan(endHour, endMinute, 0);
         }
         private Day()
         {

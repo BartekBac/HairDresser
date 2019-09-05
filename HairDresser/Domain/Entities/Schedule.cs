@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 
-namespace Domain.ValueObjects.Schedule
+namespace Domain.Entities
 {
-    public class Schedule : ValueObject
+    public class Schedule<T> : Entity
     {
+        public T Entity { get; private set; }
+        public Guid EntityId { get; private set; }
         public Day Monday { get; private set; }
         public Day Tuesday { get; private set; }
         public Day Wednesday { get; private set; }
@@ -13,8 +16,10 @@ namespace Domain.ValueObjects.Schedule
         public Day Saturday { get; private set; }
         public Day Sunday { get; private set; }
 
-        public Schedule(DayTime beginDayTime, DayTime endDayTime)
+        public Schedule(Guid entityId, T entity, TimeSpan beginDayTime, TimeSpan endDayTime)
         {
+            EntityId = entityId;
+            Entity = entity;
             Monday = new Day(beginDayTime, endDayTime);
             Tuesday = new Day(beginDayTime, endDayTime);
             Wednesday = new Day(beginDayTime, endDayTime);
@@ -23,8 +28,10 @@ namespace Domain.ValueObjects.Schedule
             Saturday = new Day(beginDayTime, endDayTime);
             Sunday = new Day(beginDayTime, endDayTime);
         }
-        public Schedule(int beginHour, int beginMinute, int endHour, int endMinute)
+        public Schedule(Guid entityId, T entity, int beginHour, int beginMinute, int endHour, int endMinute)
         {
+            EntityId = entityId;
+            Entity = entity;
             Monday = new Day(beginHour, beginMinute, endHour, endMinute);
             Tuesday = new Day(beginHour, beginMinute, endHour, endMinute);
             Wednesday = new Day(beginHour, beginMinute, endHour, endMinute);
@@ -68,23 +75,13 @@ namespace Domain.ValueObjects.Schedule
         }
         public void ResetSchedule()
         {
-            Monday = new Day(new DayTime(0, 0), new DayTime(23, 59));
-            Tuesday = new Day(new DayTime(0, 0), new DayTime(23, 59));
-            Wednesday = new Day(new DayTime(0, 0), new DayTime(23, 59));
-            Thursday = new Day(new DayTime(0, 0), new DayTime(23, 59));
-            Friday = new Day(new DayTime(0, 0), new DayTime(23, 59));
-            Saturday = new Day(new DayTime(0, 0), new DayTime(23, 59));
-            Sunday = new Day(new DayTime(0, 0), new DayTime(23, 59));
-        }
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Monday;
-            yield return Tuesday;
-            yield return Wednesday;
-            yield return Thursday;
-            yield return Friday;
-            yield return Saturday;
-            yield return Sunday;
+            Monday = new Day(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Tuesday = new Day(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Wednesday = new Day(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Thursday = new Day(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Friday = new Day(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Saturday = new Day(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Sunday = new Day(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
         }
     }
 }

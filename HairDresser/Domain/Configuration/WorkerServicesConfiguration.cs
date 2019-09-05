@@ -14,7 +14,8 @@ namespace Domain.Configuration
 
             builder.HasOne(ws => ws.Worker)
                    .WithMany(w => w.Services)
-                   .HasForeignKey(ws => ws.WorkerId);
+                   .HasForeignKey(ws => ws.WorkerId)
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(ws => ws.Service)
                    .WithMany(s => s.Workers)

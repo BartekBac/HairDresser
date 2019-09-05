@@ -24,7 +24,11 @@
     ".NETCoreApp,Version=v3.0": {
       "WebAPI/1.0.0": {
         "dependencies": {
+          "Application": "1.0.0",
+          "AutoMapper": "9.0.0",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
           "Domain": "1.0.0",
+          "Microsoft.AspNet.Identity.Core": "2.2.2",
           "Microsoft.AspNetCore.ApiAuthorization.IdentityServer": "3.0.0-preview8.19405.7",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "3.0.0-preview8.19405.7",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.0.0-preview8.19405.7",
@@ -320,19 +324,34 @@
           "WebAPI.dll": {}
         }
       },
-      "AutoMapper/8.0.0": {
+      "AutoMapper/9.0.0": {
         "dependencies": {
           "Microsoft.CSharp": "4.6.0-preview8.19405.3",
           "System.Reflection.Emit": "4.3.0"
         },
         "runtime": {
           "lib/netstandard2.0/AutoMapper.dll": {
-            "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.0.0"
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
           }
         },
         "compile": {
           "lib/netstandard2.0/AutoMapper.dll": {}
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/7.0.0": {
+        "dependencies": {
+          "AutoMapper": "9.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "3.0.0-preview8.19405.4"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "7.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
       "IdentityModel/3.10.6": {
@@ -398,7 +417,7 @@
       },
       "IdentityServer4.EntityFramework.Storage/3.0.0-preview3.4": {
         "dependencies": {
-          "AutoMapper": "8.0.0",
+          "AutoMapper": "9.0.0",
           "IdentityServer4.Storage": "3.0.0-preview3.4",
           "Microsoft.EntityFrameworkCore.Relational": "3.0.0-preview8.19405.11"
         },
@@ -424,6 +443,17 @@
         },
         "compile": {
           "lib/netcoreapp3.0/IdentityServer4.Storage.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Identity.Core/2.2.2": {
+        "runtime": {
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
         }
       },
       "Microsoft.AspNetCore/2.2.0": {
@@ -1838,6 +1868,22 @@
         }
       },
       "System.Threading.Tasks.Extensions/4.5.2": {},
+      "Application/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "9.0.0",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
+          "Domain": "1.0.0",
+          "Microsoft.AspNetCore": "2.2.0",
+          "Microsoft.AspNetCore.Identity": "2.2.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.0.0-preview8.19405.7"
+        },
+        "runtime": {
+          "Application.dll": {}
+        },
+        "compile": {
+          "Application.dll": {}
+        }
+      },
       "Domain/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore": "2.2.0",
@@ -3548,12 +3594,19 @@
       "serviceable": false,
       "sha512": ""
     },
-    "AutoMapper/8.0.0": {
+    "AutoMapper/9.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-kcbje0Y71XkvzPn8k6OROZGOn2SKaWimon3Bu1WUTVoV5GTJVym+k+zQuKApyyFVRfk7bisumj/qUX4xIIXS+Q==",
-      "path": "automapper/8.0.0",
-      "hashPath": "automapper.8.0.0.nupkg.sha512"
+      "sha512": "sha512-xCqvoxT4HIrNY/xlXG9W+BA/awdrhWvMTKTK/igkGSRbhOhpl3Q8O8Gxlhzjc9JsYqE7sS6AxgyuUUvZ6R5/Bw==",
+      "path": "automapper/9.0.0",
+      "hashPath": "automapper.9.0.0.nupkg.sha512"
+    },
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-szI4yeRIM7GWe9JyekW0dKYehPB0t6M+I55fPeCebN6PhS7zQZa0eG3bgOnOx+eP3caSNoE7KEJs2rk7MLsh8w==",
+      "path": "automapper.extensions.microsoft.dependencyinjection/7.0.0",
+      "hashPath": "automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512"
     },
     "IdentityModel/3.10.6": {
       "type": "package",
@@ -3596,6 +3649,13 @@
       "sha512": "sha512-hWJoVt0LHSKWjND+oO/s298TSSYr67nUrrs9zzmwDA2cUIuqzKkpCHUUrb4P3jXs3Lxw1JlugM1Vw4Jo4L/vtg==",
       "path": "identityserver4.storage/3.0.0-preview3.4",
       "hashPath": "identityserver4.storage.3.0.0-preview3.4.nupkg.sha512"
+    },
+    "Microsoft.AspNet.Identity.Core/2.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aZoXAqqisAQlEdeMwcn204m7ErUeYXJuoZ4YqvV85OPeB0w8o8kW8Ww5o5ZTZFx3mrLmmtfWKjt4nLqfjzjXEw==",
+      "path": "microsoft.aspnet.identity.core/2.2.2",
+      "hashPath": "microsoft.aspnet.identity.core.2.2.2.nupkg.sha512"
     },
     "Microsoft.AspNetCore/2.2.0": {
       "type": "package",
@@ -4688,6 +4748,11 @@
       "sha512": "sha512-BG/TNxDFv0svAzx8OiMXDlsHfGw623BZ8tCXw4YLhDFDvDhNUEV58jKYMGRnkbJNm7c3JNNJDiN7JBMzxRBR2w==",
       "path": "system.threading.tasks.extensions/4.5.2",
       "hashPath": "system.threading.tasks.extensions.4.5.2.nupkg.sha512"
+    },
+    "Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Domain/1.0.0": {
       "type": "project",
