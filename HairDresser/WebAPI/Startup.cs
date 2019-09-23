@@ -17,6 +17,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using WebAPI.Configurations;
 using Application.Services;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using WebAPI.Authentication;
 
 namespace WebAPI
 {
@@ -32,15 +35,27 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDefaultIdentity<IdentityUser>()
-                    .AddRoles<IdentityRole>()
-                    .AddEntityFrameworkStores<HairDresserDbContext>();
+            services.AddDefaultIdentity<IdentityUser>(o =>
+            {
+                o.Password.RequireDigit = true;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireUppercase = false;
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequiredLength = 6;
+                o.Password.RequiredUniqueChars = 0;
+                o.User.RequireUniqueEmail = true;
+            }).AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<HairDresserDbContext>()
+            .AddDefaultTokenProviders();
 
             services.AddAutoMapper(typeof(HairDresserProfile));
 
+            services.ConfigureAuthentication(Configuration);
+
             services.AddControllers();
 
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IJWTFactory, JWTFactory>();
+            services.AddScoped<ISalonService, SalonService>();
 
             services.AddDbContext<HairDresserDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -78,6 +93,8 @@ namespace WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

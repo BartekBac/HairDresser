@@ -12,7 +12,7 @@ namespace Application.DTOs
         public string AdditionalInfo { get; set; }
         public SalonType Type { get; set; }
         public AddressDto Address { get; set; }
-        public UserCreationDto userCreation { get; set; }
+        public string userId { get; set; }
 
     }
 }

@@ -10,17 +10,22 @@ using Microsoft.Extensions.Logging;
 
 namespace WebAPI.Configurations
 {
+    public static class RoleString
+    {
+        public const string Client = "client";
+        public const string Salon = "salon";
+        public const string Worker = "worker";
+    }
     public static class HairDresserRoles
     {
-        private static readonly string[] roles = new[] {
-        "client",
-        "salon",
-        "worker"
+        private static readonly string[] _roles = new[] {
+        RoleString.Client,
+        RoleString.Salon,
+        RoleString.Worker
         };
         public static async Task SeedRoles(RoleManager<IdentityRole> roleManager)
         {
-
-            foreach (var role in roles)
+            foreach (var role in _roles)
             {
 
                 if (!await roleManager.RoleExistsAsync(role))

@@ -4,10 +4,10 @@ using System.Text;
 using Application.DTOs;
 using Microsoft.AspNetCore.Identity;
 
-namespace Application.Services
+namespace WebAPI.Authentication
 {
-    public interface IUserService
+    public interface IJWTFactory
     {
-        SalonDto CreateSalon(SalonCreationDto salonCreation, IdentityUser admin);
+        string GenerateToken(IdentityUser user, string userRole);
     }
 }

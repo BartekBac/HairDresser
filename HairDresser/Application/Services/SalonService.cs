@@ -8,21 +8,29 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Application.Services
 {
-    public class UserService : IUserService
+    public class SalonService : ISalonService
     {
         HairDresserDbContext _dbContext;
         IMapper _mapper;
 
-        public UserService(HairDresserDbContext dbContext, IMapper mapper)
+        public SalonService(HairDresserDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
         }
         public SalonDto CreateSalon(SalonCreationDto salonCreation, IdentityUser admin)
         {
+            var existingSalon = _dbContext.Salons.FirstOrDefault(s => s.Id.ToString() == admin.Id);
+
+            if(existingSalon != null)
+            {
+                throw new ApplicationException("Salon for user [id=" + admin.Id + "] already exists");
+            }
+
             var salon = new Salon(admin,
                                   salonCreation.Name,
                                   _mapper.Map<Address>(salonCreation.Address),
@@ -33,11 +41,10 @@ namespace Application.Services
 
             if (_dbContext.SaveChanges() == 0)
             {
-                throw new DomainException("Could not create salon.");
+                throw new DomainException("Could not save salon into database.");
             }
 
-            var ret = _mapper.Map<SalonDto>(salon);
-            return ret;
+            return _mapper.Map<SalonDto>(salon);
         }
     }
 }
