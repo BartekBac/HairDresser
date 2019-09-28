@@ -1,18 +1,39 @@
-<div style="display:flex; align-items:center; justify-content:center; height:100%">
-  <p-panel header="Login">
+<div class="my-panel-container">
+  <p-panel class="my-panel" [showHeader]="false">
     <div class="ui-g ui-fluid">
+      <div class="ui-g-12 my-title-container">
+        <h2 class="my-title">Sign In</h2>
+      </div>
       <div class="ui-g-12">
-      <div class="ui-inputgroup">
+        <div class="ui-inputgroup">
           <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
           <input type="text" pInputText placeholder="Username">
-      </div>
+        </div>
       </div>
       <div class="ui-g-12">
-      <div class="ui-inputgroup">
+        <div class="ui-inputgroup">
           <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>
           <input type="password" pPassword placeholder="Password">
+        </div>
       </div>
+      <div class="ui-g-12 my-btn-login-container">
+        <button pButton type="button" class="ui-button-raised ui-button-rounded" icon="pi pi-check" iconPos="right"
+          label="Login"></button>
+      </div>
+      <div class="ui-g-12 my-group-row-container p-grid p-justify-start">
+        <div class="my-label-container p-col">
+          <label class="my-label">Don't have account yet?</label>
+        </div>
+        <div class="my-btn-container p-col">
+          <button pButton type="button" class="my-button ui-button-raised" label="Sign Up"></button>
+        </div>
+      </div>
+
+      <div class="ui-g-12 my-group-row-container">
+        <label class="my-label">Do you run your own business? </label>
+        <a class="my-a-label">Add your Salon</a>
+        <label class="my-label">.</label>
       </div>
     </div>
   </p-panel>
-  </div>
+</div>

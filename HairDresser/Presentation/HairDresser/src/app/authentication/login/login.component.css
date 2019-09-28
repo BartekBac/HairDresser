@@ -1,0 +1,32 @@
+.my-panel-container {
+  border-radius: 25px;
+}
+.my-title-container {
+  text-align: center;
+}
+.my-btn-login-container{
+  text-align: right;
+}
+
+:host ::ng-deep .my-panel .ui-panel-content {
+  border-radius: 25px;
+}
+
+.my-label {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.my-a-label {
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.my-button {
+  font-size: 12px;
+}
+
+.my-label-container {
+  padding-top: 4.5%;
+}
+

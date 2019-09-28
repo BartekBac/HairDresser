@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './login/login.component';
-import { PasswordModule, InputTextModule, PanelModule } from 'primeng/primeng';
+import { PasswordModule, InputTextModule, PanelModule, ButtonModule } from 'primeng/primeng';
 import { HomeComponent } from './home/home.component';
 
 
@@ -13,7 +13,8 @@ import { HomeComponent } from './home/home.component';
     AuthenticationRoutingModule,
     PasswordModule,
     PanelModule,
-    InputTextModule
+    InputTextModule,
+    ButtonModule
   ],
   declarations: [LoginComponent, HomeComponent]
 })
