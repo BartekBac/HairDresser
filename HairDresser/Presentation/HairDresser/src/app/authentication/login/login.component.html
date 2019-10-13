@@ -7,25 +7,28 @@
       <div class="ui-g-12">
         <div class="ui-inputgroup">
           <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-          <input type="text" pInputText placeholder="Username">
+          <input #login type="text" pInputText [(ngModel)]="loginCredential.userName" (keydown)="onKeydownLogin($event)"
+            placeholder="Username">
         </div>
       </div>
       <div class="ui-g-12">
         <div class="ui-inputgroup">
           <span class="ui-inputgroup-addon"><i class="pi pi-lock"></i></span>
-          <input type="password" pPassword placeholder="Password">
+          <input #password type="password" pPassword [(ngModel)]="loginCredential.password"
+            (keydown)="onKeydownPassword($event)" [feedback]="false" placeholder="Password">
         </div>
       </div>
       <div class="ui-g-12 my-btn-login-container">
-        <button pButton type="button" class="ui-button-raised ui-button-rounded" icon="pi pi-check" iconPos="right"
-          label="Login"></button>
+        <button #loginBtn pButton type="button" class="ui-button-raised ui-button-rounded" icon="pi pi-check"
+          iconPos="right" label="Login" (keydown)=onKeydownLoginButton($event) (click)="onSubmit()"></button>
       </div>
       <div class="ui-g-12 my-group-row-container p-grid p-justify-start">
         <div class="my-label-container p-col">
           <label class="my-label">Don't have account yet?</label>
         </div>
         <div class="my-btn-container p-col">
-          <button pButton type="button" class="my-button ui-button-raised" label="Sign Up"></button>
+          <button pButton type="button" (click)="showRegisterClientDialog()" class="my-button ui-button-raised"
+            label="Sign Up"></button>
         </div>
       </div>
 
@@ -37,3 +40,7 @@
     </div>
   </p-panel>
 </div>
+
+<p-dialog header="Sign Up" [(visible)]="displayRegisterClient" [style]="{width: '450px'}">
+  <app-register-client></app-register-client>
+</p-dialog>

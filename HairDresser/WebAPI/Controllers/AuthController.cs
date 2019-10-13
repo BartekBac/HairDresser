@@ -8,11 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 
 namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("api/auth")]
+    [EnableCors("CorsPolicy")]
     public class AuthController : Controller
     {
         UserManager<IdentityUser> _userManager;
@@ -32,12 +34,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserCreationDto userCreation, string role)
+        public async Task<IActionResult> Register(UserCreationDto userCreation)
         {
             try
             {
                 var user = _mapper.Map<IdentityUser>(userCreation);
-                var roleIdentity = await _roleManager.FindByNameAsync(role);
+                var roleIdentity = await _roleManager.FindByNameAsync(userCreation.Role);
                 if (roleIdentity == null)
                 {
                     return BadRequest("Register Failed. Given role does not exists.");
@@ -55,10 +57,10 @@ namespace WebAPI.Controllers
                 }
 
 
-                result = await _userManager.AddToRoleAsync(user, role);
+                result = await _userManager.AddToRoleAsync(user, userCreation.Role);
                 if (!result.Succeeded)
                 {
-                    var errorMessage = "Register Failed. Cannot grant " + role + " role.";
+                    var errorMessage = "Register Failed. Cannot grant " + userCreation.Role + " role.";
                     foreach (var msg in result.Errors.ToArray())
                     {
                         errorMessage += " [" + msg.Code + "] " + msg.Description;
@@ -66,7 +68,13 @@ namespace WebAPI.Controllers
 
                     return BadRequest(errorMessage);
                 }
-                return Ok("Register succeeded, " + role + " account created.");
+                var response = new LoginResponse
+                {
+                    Id = user.Id,
+                    Token = null,
+                    Role = userCreation.Role
+                };
+                return Ok(response);
             }
             catch(Exception e)
             {

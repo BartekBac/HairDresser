@@ -9,8 +9,8 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    CoreModule.forRoot(),
     BrowserAnimationsModule,
+    CoreModule.forRoot(),
     AppRoutingModule
   ],
   providers: [],

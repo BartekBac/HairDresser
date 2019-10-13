@@ -19,11 +19,10 @@
 }
 
 .my-page-content {
-  padding-top: 15%;
-  padding-bottom: 25%;
+  margin: auto;
   position: relative;
   width: 100%;
-  height: 100%;
+  height: -webkit-fill-available;
 }
 
 .my-title{
@@ -36,4 +35,8 @@
 .my-sub-title{
   color: white;
   font-family: 'Kalam', cursive;
+}
+
+:host ::ng-deep .ui-g {
+  height: inherit; /* Mozzila */
 }

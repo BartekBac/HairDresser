@@ -35,6 +35,12 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+                    options.AddPolicy("CorsPolicy", p => p.WithOrigins("http://localhost:4200")
+                                                             .AllowAnyMethod()
+                                                             .AllowAnyHeader()
+                                                             .AllowCredentials()));
+
             services.AddDefaultIdentity<IdentityUser>(o =>
             {
                 o.Password.RequireDigit = true;
@@ -56,6 +62,7 @@ namespace WebAPI
 
             services.AddScoped<IJWTFactory, JWTFactory>();
             services.AddScoped<ISalonService, SalonService>();
+            services.AddScoped<IClientService, ClientService>();
 
             services.AddDbContext<HairDresserDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -92,11 +99,13 @@ namespace WebAPI
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,0 +1,26 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+      <div class="ui-g-12">
+          <h2>Personal data</h2>
+        </div>
+        <div class="ui-g-6">
+          <span class="ui-float-label">
+            <input id="float-input" [(ngModel)]="registerCredentials.firstName" type="text" size="30" pInputText>
+            <label for="float-input">First name</label>
+          </span>
+        </div>
+        <div class="ui-g-6">
+            <span class="ui-float-label">
+              <input id="float-input" [(ngModel)]="registerCredentials.lastName" type="text" size="30" pInputText>
+              <label for="float-input">Last name</label>
+            </span>
+          </div>
+        <br>
+  </div>
+  <div class="ui-g-12">
+    <app-user-data [userData]="registerCredentials.userData"></app-user-data>
+  </div>
+  <div class="ui-g-12">
+    <button pButton type="button" (click)="test()" class="ui-button-raised" label="test"></button>
+  </div>
+</div>
