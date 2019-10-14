@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
             _clientService = clientService;
         }
 
-        [Authorize(Roles = RoleString.Client)]
+        /*[Authorize(Roles = RoleString.Client)]
         [HttpPost]
         public async Task<IActionResult> CreateClientAsync(ClientCreationDto clientCreation)
         {
@@ -51,6 +51,6 @@ namespace WebAPI.Controllers
             }
 
             
-        }
+        }*/
     }
 }

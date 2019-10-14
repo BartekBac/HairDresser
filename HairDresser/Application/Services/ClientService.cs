@@ -31,16 +31,16 @@ namespace Application.Services
                 throw new ApplicationException("Client for user [id=" + user.Id + "] already exists");
             }
 
-            var Client = new Client(user, clientCreation.FirstName, clientCreation.LastName);
+            var client = new Client(user, clientCreation.FirstName, clientCreation.LastName);
 
-            _dbContext.Clients.Add(Client);
+            _dbContext.Clients.Add(client);
 
             if (_dbContext.SaveChanges() == 0)
             {
                 throw new DomainException("Could not save Client into database.");
             }
 
-            return _mapper.Map<ClientDto>(Client);
+            return _mapper.Map<ClientDto>(client);
         }
     }
 }

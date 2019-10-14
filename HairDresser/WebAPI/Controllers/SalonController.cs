@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
             _salonService = salonService;
         }
 
-        [Authorize(Roles = RoleString.Salon)]
+        /*[Authorize(Roles = RoleString.Salon)]
         [HttpPost]
         public async Task<IActionResult> CreateSalonAsync(SalonCreationDto salonCreation)
         {
@@ -55,6 +55,6 @@ namespace WebAPI.Controllers
             }
 
             
-        }
+        }*/
     }
 }

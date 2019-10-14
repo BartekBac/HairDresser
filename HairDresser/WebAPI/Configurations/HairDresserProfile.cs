@@ -16,8 +16,10 @@ namespace WebAPI.Configurations
         public HairDresserProfile()
         {
             CreateMap<UserCreationDto, IdentityUser>();
+            CreateMap<IdentityUser, UserDto>();
             CreateMap<AddressDto, Address>();
             CreateMap<Address, AddressDto>();
+            CreateMap<Client, ClientDto>();
             CreateMap<Salon, SalonDto>();
             //    .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address));
         }

@@ -61,6 +61,7 @@ namespace WebAPI
             services.AddControllers();
 
             services.AddScoped<IJWTFactory, JWTFactory>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISalonService, SalonService>();
             services.AddScoped<IClientService, ClientService>();
 

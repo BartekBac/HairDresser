@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginBtn', null) loginButton: ElementRef;
 
   protected displayRegisterClient = false;
+  protected displayRegisterSalon = false;
 
   protected loginCredential: LoginCredential = {
     userName: '',
@@ -67,6 +68,14 @@ export class LoginComponent implements OnInit {
 
   showRegisterClientDialog() {
     this.displayRegisterClient = true;
+  }
+
+  onCloseRegisterDialog(close: boolean) {
+    this.displayRegisterClient = !close;
+  }
+
+  showRegisterSalonDialog() {
+    this.displayRegisterSalon = true;
   }
 
 }

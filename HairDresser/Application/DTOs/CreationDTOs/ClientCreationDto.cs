@@ -10,7 +10,6 @@ namespace Application.DTOs
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string userId { get; set; }
-
+        public UserCreationDto UserData { get; set; }
     }
 }
