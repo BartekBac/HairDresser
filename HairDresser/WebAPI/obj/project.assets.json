@@ -107,6 +107,28 @@
           "lib/netcoreapp3.0/IdentityServer4.Storage.dll": {}
         }
       },
+      "MediatR/7.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MediatR.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MediatR.dll": {}
+        }
+      },
+      "MediatR.Extensions.Microsoft.DependencyInjection/7.0.0": {
+        "type": "package",
+        "dependencies": {
+          "MediatR": "7.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
       "Microsoft.AspNet.Identity.Core/2.2.2": {
         "type": "package",
         "compile": {
@@ -2289,6 +2311,7 @@
           "AutoMapper": "9.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
           "Domain": "1.0.0",
+          "MediatR": "7.0.0",
           "Microsoft.AspNetCore": "2.2.0",
           "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.0.0-preview8.19405.7",
@@ -2440,6 +2463,31 @@
         "lib/netcoreapp3.0/IdentityServer4.Storage.dll",
         "lib/netcoreapp3.0/IdentityServer4.Storage.pdb",
         "lib/netcoreapp3.0/IdentityServer4.Storage.xml"
+      ]
+    },
+    "MediatR/7.0.0": {
+      "sha512": "sgfHxkBsmMlHOD564SnLqTvSbAuGlFiZfc6ybxBSI1wYV/2u+Y5TXtFoIhCISFg5/s/6aMvB338QC2JseHsjTA==",
+      "type": "package",
+      "path": "mediatr/7.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/MediatR.dll",
+        "lib/netstandard2.0/MediatR.dll",
+        "mediatr.7.0.0.nupkg.sha512",
+        "mediatr.nuspec"
+      ]
+    },
+    "MediatR.Extensions.Microsoft.DependencyInjection/7.0.0": {
+      "sha512": "DRf8jBnjBg84da1L1L0YmwqkhCV+UJTg7bTBHOhleWrLfrtSK5h5aNeE1HOofs1Afisq03B6H2C10NmS47gmqA==",
+      "type": "package",
+      "path": "mediatr.extensions.microsoft.dependencyinjection/7.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/MediatR.Extensions.Microsoft.DependencyInjection.dll",
+        "mediatr.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
+        "mediatr.extensions.microsoft.dependencyinjection.nuspec"
       ]
     },
     "Microsoft.AspNet.Identity.Core/2.2.2": {
@@ -6555,6 +6603,8 @@
       "AutoMapper >= 9.0.0",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 7.0.0",
       "Domain >= 1.0.0",
+      "MediatR >= 7.0.0",
+      "MediatR.Extensions.Microsoft.DependencyInjection >= 7.0.0",
       "Microsoft.AspNet.Identity.Core >= 2.2.2",
       "Microsoft.AspNetCore.ApiAuthorization.IdentityServer >= 3.0.0-preview8.19405.7",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 3.0.0-preview8.19405.7",
@@ -6620,6 +6670,14 @@
             "version": "[9.0.0, )"
           },
           "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "[7.0.0, )"
+          },
+          "MediatR": {
+            "target": "Package",
+            "version": "[7.0.0, )"
+          },
+          "MediatR.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
             "version": "[7.0.0, )"
           },

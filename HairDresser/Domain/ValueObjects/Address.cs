@@ -11,9 +11,9 @@ namespace Domain.ValueObjects
         public string City {get; private set;}
         public string ZipCode { get; private set;}
         public string Street { get; private set; }
-        public int HouseNumber { get; private set; }
+        public string HouseNumber { get; private set; }
 
-        public Address(string city, string zipCode, string street, int houseNumber)
+        public Address(string city, string zipCode, string street, string houseNumber)
         {
             City = city;
             ZipCode = zipCode;
@@ -37,7 +37,7 @@ namespace Domain.ValueObjects
         {
             Street = street;
         }
-        public void SetHouseNumber(int houseNumber)
+        public void SetHouseNumber(string houseNumber)
         {
             HouseNumber = houseNumber;
         }

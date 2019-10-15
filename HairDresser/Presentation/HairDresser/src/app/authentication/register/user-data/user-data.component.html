@@ -1,0 +1,43 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <h2>User data</h2>
+  </div>
+  <div class="ui-g-12">
+    <span class="ui-float-label">
+      <input id="float-input" [(ngModel)]="userData.userName" type="text" size="30" pInputText>
+      <label for="float-input">Username</label>
+    </span>
+    <br>
+  </div>
+  <div class="ui-g-12">
+    <span class="ui-float-label">
+      <input id="float-input" [(ngModel)]="userData.password" type="password" size="30" pPassword>
+      <label for="float-input">Password</label>
+    </span>
+    <br>
+  </div>
+  <div class="ui-g-12">
+    <span class="ui-float-label">
+      <input id="float-input" [(ngModel)]="userData.confirmPassword" type="password" size="30" [feedback]="false" pPassword>
+      <label for="float-input">Confirm password</label>
+    </span>
+    <p-message severity="error" class="my-message" text="Confirm password don't match!" [ngStyle]="{visibility: passwordsMatch() ? 'hidden' : 'visible'}"></p-message>
+    <br>
+  </div>
+  <div class="ui-g-12">
+    <span class="ui-float-label">
+      <input id="float-input" [(ngModel)]="userData.email" type="email" size="30" pInputText>
+      <label for="float-input">Email</label>
+    </span>
+    <p-message severity="error" class="my-message" text="E-mail don't include @" [ngStyle]="{visibility: emailValid() ? 'hidden' : 'visible'}"></p-message>
+    <br>
+  </div>
+  <div class="ui-g-12">
+    <span class="ui-float-label">
+      <p-inputMask id="float-input"[(ngModel)]="userData.phoneNumber" mask="+99 999 999 999" type="text" size="30"
+        placeholder="+48 123 456 789"></p-inputMask>
+      <label for="float-input">Phone</label>
+    </span>
+    <br>
+  </div>
+</div>

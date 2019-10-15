@@ -14,12 +14,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using WebAPI.Configurations;
 using Application.Services;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using WebAPI.Authentication;
+using System.Reflection;
 
 namespace WebAPI
 {
@@ -35,6 +37,14 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+                    options.AddPolicy("CorsPolicy", p => p.WithOrigins("http://localhost:4200")
+                                                             .AllowAnyMethod()
+                                                             .AllowAnyHeader()
+                                                             .AllowCredentials()));
+            services.AddControllers();
+            services.AddDbContext<HairDresserDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(o =>
             {
                 o.Password.RequireDigit = true;
@@ -48,17 +58,15 @@ namespace WebAPI
             .AddEntityFrameworkStores<HairDresserDbContext>()
             .AddDefaultTokenProviders();
 
-            services.AddAutoMapper(typeof(HairDresserProfile));
-
             services.ConfigureAuthentication(Configuration);
 
-            services.AddControllers();
-
             services.AddScoped<IJWTFactory, JWTFactory>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISalonService, SalonService>();
-
-            services.AddDbContext<HairDresserDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IClientService, ClientService>();
+            
+            services.AddAutoMapper(typeof(HairDresserProfile));
+            services.AddMediatR(Assembly.Load(new AssemblyName("Application")));
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -89,13 +97,13 @@ namespace WebAPI
             });
 
             HairDresserRoles.SeedRoles(roleManager).Wait();
-
+           
             app.UseHttpsRedirection();
-
             app.UseRouting();
 
-            app.UseAuthentication();
+            app.UseCors("CorsPolicy");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

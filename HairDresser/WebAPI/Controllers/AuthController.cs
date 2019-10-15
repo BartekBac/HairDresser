@@ -8,67 +8,72 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 
 namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("api/auth")]
+    [EnableCors("CorsPolicy")]
     public class AuthController : Controller
     {
         UserManager<IdentityUser> _userManager;
-        RoleManager<IdentityRole> _roleManager;
-        IMapper _mapper;
+        IUserService _userService;
         IJWTFactory _jwtService;
-
+        IClientService _clientService;
+        ISalonService _salonService;
         public AuthController(UserManager<IdentityUser> userManager,
-                              RoleManager<IdentityRole> roleManager,
-                              IMapper mapper,
-                              IJWTFactory jwtService)
+                              IUserService userService,
+                              IJWTFactory jwtService,
+                              IClientService clientService,
+                              ISalonService salonService)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
-            _mapper = mapper;
+            _userService = userService;
             _jwtService = jwtService;
+            _clientService = clientService;
+            _salonService = salonService;
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register(UserCreationDto userCreation, string role)
+        [HttpPost("register/client")]
+        public async Task<IActionResult> RegisterClient(ClientCreationDto clientCreation)
         {
             try
             {
-                var user = _mapper.Map<IdentityUser>(userCreation);
-                var roleIdentity = await _roleManager.FindByNameAsync(role);
-                if (roleIdentity == null)
+                var user = await _userService.CreateUserAsync(clientCreation.UserData);
+                var identityUser = await _userManager.FindByIdAsync(user.Id);
+                _clientService.CreateClient(clientCreation, identityUser);
+                var response = new LoginResponse
                 {
-                    return BadRequest("Register Failed. Given role does not exists.");
-                }
-                IdentityResult result = await _userManager.CreateAsync(user, userCreation.Password);
-                if (!result.Succeeded)
-                {
-                    var errorMessage = "Register Failed. Cannot create user.";
-                    foreach (var msg in result.Errors.ToArray())
-                    {
-                        errorMessage += " [" + msg.Code + "] " + msg.Description;
-                    }
-
-                    return BadRequest(errorMessage);
-                }
-
-
-                result = await _userManager.AddToRoleAsync(user, role);
-                if (!result.Succeeded)
-                {
-                    var errorMessage = "Register Failed. Cannot grant " + role + " role.";
-                    foreach (var msg in result.Errors.ToArray())
-                    {
-                        errorMessage += " [" + msg.Code + "] " + msg.Description;
-                    }
-
-                    return BadRequest(errorMessage);
-                }
-                return Ok("Register succeeded, " + role + " account created.");
+                    Id = user.Id,
+                    Token = null,
+                    Role = clientCreation.UserData.Role
+                };
+                return Ok(response);
             }
             catch(Exception e)
+            {
+                return BadRequest("Register Failed. " + e.Message);
+            }
+        }
+
+        [HttpPost("register/salon")]
+        public async Task<IActionResult> RegisterSalon(SalonCreationDto salonCreation)
+        {
+            try
+            {
+                var user = await _userService.CreateUserAsync(salonCreation.UserData);
+                var identityUser = await _userManager.FindByIdAsync(user.Id);
+                _salonService.CreateSalon(salonCreation, identityUser);
+                var response = new LoginResponse
+                {
+                    Id = user.Id,
+                    Token = null,
+                    Role = salonCreation.UserData.Role
+                };
+                return Ok(response);
+            }
+            catch (Exception e)
             {
                 return BadRequest("Register Failed. " + e.Message);
             }

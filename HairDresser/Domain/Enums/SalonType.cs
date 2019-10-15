@@ -6,8 +6,8 @@ namespace Domain.Enums
 {
     public enum SalonType
     {
-        Male,
+        Unisex,
         Female,
-        Unisex
+        Male
     }
 }
