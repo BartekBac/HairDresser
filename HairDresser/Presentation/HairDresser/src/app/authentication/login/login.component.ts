@@ -70,12 +70,16 @@ export class LoginComponent implements OnInit {
     this.displayRegisterClient = true;
   }
 
-  onCloseRegisterDialog(close: boolean) {
+  onCloseRegisterClientDialog(close: boolean) {
     this.displayRegisterClient = !close;
   }
 
   showRegisterSalonDialog() {
     this.displayRegisterSalon = true;
+  }
+
+  onCloseRegisterSalonDialog(close: boolean) {
+    this.displayRegisterSalon = !close;
   }
 
 }

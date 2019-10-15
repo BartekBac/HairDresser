@@ -98,8 +98,7 @@ C:\rep\VII sem\v2\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\Microsoft.AspNetCor
 C:\rep\VII sem\v2\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\Domain.dll
 C:\rep\VII sem\v2\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\Domain.pdb
 C:\rep\VII sem\v2\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\rep\VII sem\v2\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.MvcApplicationPartsAssemblyInfo.cs
-C:\rep\VII sem\v2\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\rep\VII sem\v2\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\Microsoft.AspNet.Identity.Core.dll
 C:\rep\VII sem\v2\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\Application.dll
 C:\rep\VII sem\v2\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\Application.pdb
+C:\rep\VII sem\v2\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\MediatR.dll

@@ -42,11 +42,11 @@
 </div>
 
 <p-dialog header="Sign Up" [(visible)]="displayRegisterClient" [style]="{width: '450px'}">
-  <app-register-client (closeDialog)="onCloseRegisterDialog($event)" ></app-register-client>
+  <app-register-client (closeDialog)="onCloseRegisterClientDialog($event)" ></app-register-client>
   <p-footer></p-footer>
 </p-dialog>
 
 <p-dialog header="Add your salon" [(visible)]="displayRegisterSalon" [style]="{width: '450px'}">
-    <app-register-salon></app-register-salon>
+    <app-register-salon (closeDialog)="onCloseRegisterSalonDialog($event)"></app-register-salon>
     <p-footer></p-footer>
   </p-dialog>
