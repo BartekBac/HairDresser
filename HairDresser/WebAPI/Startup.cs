@@ -14,12 +14,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using WebAPI.Configurations;
 using Application.Services;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using WebAPI.Authentication;
+using System.Reflection;
 
 namespace WebAPI
 {
@@ -40,7 +42,9 @@ namespace WebAPI
                                                              .AllowAnyMethod()
                                                              .AllowAnyHeader()
                                                              .AllowCredentials()));
-
+            services.AddControllers();
+            services.AddDbContext<HairDresserDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(o =>
             {
                 o.Password.RequireDigit = true;
@@ -54,19 +58,15 @@ namespace WebAPI
             .AddEntityFrameworkStores<HairDresserDbContext>()
             .AddDefaultTokenProviders();
 
-            services.AddAutoMapper(typeof(HairDresserProfile));
-
             services.ConfigureAuthentication(Configuration);
-
-            services.AddControllers();
 
             services.AddScoped<IJWTFactory, JWTFactory>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISalonService, SalonService>();
             services.AddScoped<IClientService, ClientService>();
-
-            services.AddDbContext<HairDresserDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddAutoMapper(typeof(HairDresserProfile));
+            services.AddMediatR(Assembly.Load(new AssemblyName("Application")));
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -97,16 +97,14 @@ namespace WebAPI
             });
 
             HairDresserRoles.SeedRoles(roleManager).Wait();
-
+           
             app.UseHttpsRedirection();
-
-            app.UseAuthentication();
-
-            app.UseAuthorization();
-
             app.UseRouting();
 
             app.UseCors("CorsPolicy");
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

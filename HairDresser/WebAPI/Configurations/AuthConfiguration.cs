@@ -21,8 +21,12 @@ namespace WebAPI.Configurations
 
             services.AddAuthentication(authOptions =>
             {
-                authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                /*authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;*/
             }).AddJwtBearer(jwtOptions =>
             {
                 jwtOptions.RequireHttpsMetadata = false;

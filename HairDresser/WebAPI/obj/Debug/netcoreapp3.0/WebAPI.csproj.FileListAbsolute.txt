@@ -102,3 +102,6 @@ C:\rep\VII sem\v2\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\Microsoft.AspNet.Id
 C:\rep\VII sem\v2\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\Application.dll
 C:\rep\VII sem\v2\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\Application.pdb
 C:\rep\VII sem\v2\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\MediatR.dll
+C:\rep\VII sem\v2\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+C:\rep\VII sem\v2\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\rep\VII sem\v2\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.MvcApplicationPartsAssemblyInfo.cache
