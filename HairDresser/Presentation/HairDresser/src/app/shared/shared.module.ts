@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders } from '@angular/compiler/src/core';
+import { SalonService } from './services/salon.service';
+import { SalonResolver } from './resolvers/salon.resolver';
 
 
 @NgModule({
@@ -11,4 +14,14 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: [
+        SalonService,
+        SalonResolver
+      ]
+    };
+  }
+}

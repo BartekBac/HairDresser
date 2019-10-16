@@ -30,7 +30,8 @@ export class AuthService {
       tap(response => {
         localStorage.setItem(Constants.LOCAL_STORAGE_AUTH_TOKEN, response.token);
         const decodedToken = jwt_decode(response.token);
-        this.router.navigate([decodedToken[Constants.DECODE_TOKEN_ROLE]]);
+        const role = decodedToken[Constants.DECODE_TOKEN_ROLE];
+        this.router.navigate([role]);
       }),
       catchError(error => {
         console.log(error);
