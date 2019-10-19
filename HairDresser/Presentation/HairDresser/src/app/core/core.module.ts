@@ -1,14 +1,17 @@
 import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from '../authentication/services/auth.service';
+import { JwtInterceptor } from './interceptors/jwt-interceptor';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/primeng';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    HttpClientModule,
+    HttpClientModule
   ]
 })
 export class CoreModule {
@@ -22,7 +25,9 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        AuthService
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        AuthService,
+        MessageService
       ]
     };
   }

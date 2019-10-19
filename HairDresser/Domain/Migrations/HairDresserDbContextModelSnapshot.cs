@@ -694,6 +694,9 @@ namespace Domain.Migrations
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
 
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
+
                             b1.HasKey("Schedule<Salon>Id");
 
                             b1.ToTable("Schedule<Salon>");
@@ -712,6 +715,9 @@ namespace Domain.Migrations
 
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
+
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
 
                             b1.HasKey("Schedule<Salon>Id");
 
@@ -732,6 +738,9 @@ namespace Domain.Migrations
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
 
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
+
                             b1.HasKey("Schedule<Salon>Id");
 
                             b1.ToTable("Schedule<Salon>");
@@ -750,6 +759,9 @@ namespace Domain.Migrations
 
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
+
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
 
                             b1.HasKey("Schedule<Salon>Id");
 
@@ -770,6 +782,9 @@ namespace Domain.Migrations
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
 
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
+
                             b1.HasKey("Schedule<Salon>Id");
 
                             b1.ToTable("Schedule<Salon>");
@@ -789,6 +804,9 @@ namespace Domain.Migrations
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
 
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
+
                             b1.HasKey("Schedule<Salon>Id");
 
                             b1.ToTable("Schedule<Salon>");
@@ -807,6 +825,9 @@ namespace Domain.Migrations
 
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
+
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
 
                             b1.HasKey("Schedule<Salon>Id");
 
@@ -836,6 +857,9 @@ namespace Domain.Migrations
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
 
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
+
                             b1.HasKey("Schedule<Worker>Id");
 
                             b1.ToTable("Schedule<Worker>");
@@ -854,6 +878,9 @@ namespace Domain.Migrations
 
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
+
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
 
                             b1.HasKey("Schedule<Worker>Id");
 
@@ -874,6 +901,9 @@ namespace Domain.Migrations
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
 
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
+
                             b1.HasKey("Schedule<Worker>Id");
 
                             b1.ToTable("Schedule<Worker>");
@@ -892,6 +922,9 @@ namespace Domain.Migrations
 
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
+
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
 
                             b1.HasKey("Schedule<Worker>Id");
 
@@ -912,6 +945,9 @@ namespace Domain.Migrations
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
 
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
+
                             b1.HasKey("Schedule<Worker>Id");
 
                             b1.ToTable("Schedule<Worker>");
@@ -931,6 +967,9 @@ namespace Domain.Migrations
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
 
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
+
                             b1.HasKey("Schedule<Worker>Id");
 
                             b1.ToTable("Schedule<Worker>");
@@ -949,6 +988,9 @@ namespace Domain.Migrations
 
                             b1.Property<TimeSpan>("End")
                                 .HasColumnType("time");
+
+                            b1.Property<bool>("IsActive")
+                                .HasColumnType("bit");
 
                             b1.HasKey("Schedule<Worker>Id");
 

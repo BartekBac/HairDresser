@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { LoginCredential } from '../models/LoginCredential';
 import { AuthService } from '../services/auth.service';
+import { MessageService } from 'primeng/primeng';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   };
 
   constructor(
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private toastService: MessageService) { }
 
   ngOnInit() {
     this.focusLoginInput();
@@ -63,7 +65,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.login(this.loginCredential).subscribe();
+    this.authService.login(this.loginCredential).subscribe(
+      res => this.toastService.add({severity: 'success', summary: 'Login succeeded', detail: 'Loading page content...'}),
+      err => this.toastService.add({severity: 'error', summary: 'Login failed', detail: err.error})
+    );
   }
 
   showRegisterClientDialog() {

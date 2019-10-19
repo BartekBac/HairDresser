@@ -86,7 +86,7 @@ namespace WebAPI.Controllers
 
             if (user == null)
             {
-                return NotFound();
+                return NotFound("User don't exist.");
             }
 
             if (!await _userManager.CheckPasswordAsync(user, loginCredential.Password))

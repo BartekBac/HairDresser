@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RegisterClientCredentials } from '../../models/RegisterClientCredentials';
 import { ValidationMessage } from 'src/app/shared/models/ValidationMessage';
 import { AuthService } from '../../services/auth.service';
+import { MessageService } from 'primeng/primeng';
 
 @Component({
   selector: 'app-register-client',
@@ -27,13 +28,15 @@ export class RegisterClientComponent implements OnInit {
 
   protected validationMessage: ValidationMessage = null;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private toastService: MessageService) { }
 
   ngOnInit() {
   }
 
   dataValid(): ValidationMessage {
-    let toReturn = new ValidationMessage(true, 'Success');
+    let toReturn = new ValidationMessage(true, 'Data valid');
     if (this.registerCredentials.firstName === '') {
       toReturn.update(false, "First name cannot by empty.");
     } else if (this.registerCredentials.lastName === '') {
@@ -58,7 +61,11 @@ export class RegisterClientComponent implements OnInit {
     this.validationMessage = this.dataValid();
     if (this.validationMessage.isValid) {
       this.authService.registerClient(this.registerCredentials).subscribe(
-        res => setTimeout( () => this.closeDialog.emit(this.validationMessage.isValid), 2000 )
+        res => {
+          this.closeDialog.emit(this.validationMessage.isValid);
+          this.toastService.add({severity: 'success', summary: 'Register succeeded', detail: 'Client account created'});
+        },
+        err => this.toastService.add({severity: 'error', summary: 'Register failed', detail: err.error})
       );
     }
   }

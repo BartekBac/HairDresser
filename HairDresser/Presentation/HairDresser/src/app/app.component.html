@@ -1,1 +1,8 @@
+<p-progressBar
+  *ngIf="showProgressBar"
+  class="my-progress-bar"
+  [value]="progressBarValue"
+  [style]="{'height': '6px'}">
+</p-progressBar>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
 <router-outlet></router-outlet>

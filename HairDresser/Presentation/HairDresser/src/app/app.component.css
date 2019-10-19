@@ -1,0 +1,3 @@
+:host ::ng-deep .my-progress-bar .ui-progressbar{
+  z-index: 10;
+}

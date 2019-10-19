@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UserData } from '../../models/UserData';
 
 @Component({
-  selector: 'app-user-data',
-  templateUrl: './user-data.component.html',
-  styleUrls: ['./user-data.component.css']
+  selector: 'app-form-user-data',
+  templateUrl: './form-user-data.component.html',
+  styleUrls: ['./form-user-data.component.css']
 })
-export class UserDataComponent implements OnInit {
+export class FormUserDataComponent implements OnInit {
 
   @Input() userData: UserData;
 
