@@ -19,8 +19,9 @@
 
 .my-a-label {
   font-size: 12px;
-  text-decoration: underline;
+  text-decoration: underline !important;
   cursor: pointer;
+  color: blue !important;
 }
 
 .my-button {

@@ -4,6 +4,7 @@ import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProgressBarModule } from 'primeng/primeng';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ProgressBarModule } from 'primeng/primeng';
     BrowserAnimationsModule,
     CoreModule.forRoot(),
     AppRoutingModule,
-    ProgressBarModule
+    ProgressBarModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

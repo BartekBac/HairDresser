@@ -1,4 +1,4 @@
-import { UserData } from './UserData';
+import { UserData } from '../../shared/models/UserData';
 
 export class RegisterClientCredentials {
   firstName: string;

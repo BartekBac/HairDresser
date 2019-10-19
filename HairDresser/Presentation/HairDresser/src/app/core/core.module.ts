@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from '../authentication/services/auth.service';
 import { JwtInterceptor } from './interceptors/jwt-interceptor';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/primeng';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    HttpClientModule,
+    HttpClientModule
   ]
 })
 export class CoreModule {
@@ -24,7 +26,8 @@ export class CoreModule {
       ngModule: CoreModule,
       providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        AuthService
+        AuthService,
+        MessageService
       ]
     };
   }

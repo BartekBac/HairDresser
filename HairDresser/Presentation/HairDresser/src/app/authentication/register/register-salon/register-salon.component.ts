@@ -1,8 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RegisterSalonCredentials } from '../../models/RegisterSalonCredentials';
-import { SelectItem } from 'primeng/primeng';
+import { SelectItem, MessageService } from 'primeng/primeng';
 import { AuthService } from '../../services/auth.service';
 import { ValidationMessage } from 'src/app/shared/models/ValidationMessage';
+import { Salon } from 'src/app/shared/models/Salon';
 
 @Component({
   selector: 'app-register-salon',
@@ -78,15 +79,37 @@ export class RegisterSalonComponent implements OnInit {
     }
   };
 
+  protected salonData: Salon = {
+    name: '',
+    additionalInfo: '',
+    type: 0,
+    address: {
+      city: '',
+      zipCode: '',
+      street: '',
+      houseNumber: '',
+    }
+  };
+
   protected validationMessage: ValidationMessage = null;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private toastService: MessageService) { }
 
   ngOnInit() {
   }
 
+  private updateRegisterCredentials() {
+    this.registerCredentials.name = this.salonData.name;
+    this.registerCredentials.additionalInfo = this.salonData.additionalInfo;
+    this.registerCredentials.type = this.salonData.type;
+    this.registerCredentials.address = this.salonData.address;
+  }
+
   dataValid(): ValidationMessage {
-    let toReturn = new ValidationMessage(true, 'Success');
+    this.updateRegisterCredentials();
+    let toReturn = new ValidationMessage(true, 'Data valid');
     if (this.registerCredentials.userData.userName === '') {
       toReturn.update(false, "User name cannot by empty.");
     } else if (this.registerCredentials.userData.password === '') {
@@ -115,7 +138,11 @@ export class RegisterSalonComponent implements OnInit {
     this.validationMessage = this.dataValid();
     if (this.validationMessage.isValid) {
       this.authService.registerSalon(this.registerCredentials).subscribe(
-        res => setTimeout( () => this.closeDialog.emit(this.validationMessage.isValid), 2000 )
+        res => {
+          this.closeDialog.emit(this.validationMessage.isValid);
+          this.toastService.add({severity: 'success', summary: 'Register succeeded', detail: 'Salon account created'});
+        },
+        err => this.toastService.add({severity: 'error', summary: 'Register failed', detail: err.error})
       );
     }
   }

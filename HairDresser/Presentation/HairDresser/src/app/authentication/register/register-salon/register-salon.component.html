@@ -2,66 +2,13 @@
   <div class="ui-g-12">
     <p-tabView [activeIndex]="tabIndex">
       <p-tabPanel header="User Data">
-        <app-user-data [userData]="registerCredentials.userData"></app-user-data>
+        <app-form-user-data [userData]="registerCredentials.userData"></app-form-user-data>
       </p-tabPanel>
       <p-tabPanel header="Salon Data">
-        <div class="ui-g ui-fluid">
-          <div class="ui-g-12">
-            <h2>Salon data</h2>
-          </div>
-          <div class="ui-g-12">
-            <span class="ui-float-label">
-              <input id="float-input" [(ngModel)]="registerCredentials.name" type="text" size="30" pInputText>
-              <label for="float-input">Salon name</label>
-            </span>
-            <br>
-          </div>
-          <div class="ui-g-12">
-            <span class="ui-float-label">
-              <textarea id="float-input" [(ngModel)]="registerCredentials.additionalInfo" rows="3" cols="45"
-                pInputTextarea></textarea>
-              <label for="float-input">Additional info</label>
-            </span>
-          </div>
-          <div class="ui-g-12">
-            <label class="my-label">Type:</label>
-            <p-selectButton class="my-select-button" [options]="salonTypes" [(ngModel)]="registerCredentials.type">
-            </p-selectButton>
-          </div>
-          <div class="ui-g-12">
-            <h3>Address</h3>
-          </div>
-          <div class="ui-g-6">
-            <span class="ui-float-label">
-              <input id="float-input" [(ngModel)]="registerCredentials.address.street" type="text" size="30" pInputText>
-              <label for="float-input">Street</label>
-            </span>
-            <br>
-          </div>
-          <div class="ui-g-6">
-            <span class="ui-float-label">
-              <p-inputMask id="float-input" [(ngModel)]="registerCredentials.address.zipCode" mask="99-999" type="text"
-                size="30"></p-inputMask>
-              <label for="float-input">Zip code</label>
-            </span>
-          </div>
-          <div class="ui-g-6">
-            <span class="ui-float-label">
-              <input id="float-input" [(ngModel)]="registerCredentials.address.city" type="text" size="30" pInputText>
-              <label for="float-input">City</label>
-            </span>
-          </div>
-          <div class="ui-g-6">
-            <span class="ui-float-label">
-              <input id="float-input" [(ngModel)]="registerCredentials.address.houseNumber" type="text" size="30"
-                pInputText>
-              <label for="float-input">House number</label>
-            </span>
-          </div>
-        </div>
+        <app-form-salon-data [salon]="salonData"></app-form-salon-data>
       </p-tabPanel>
       <p-tabPanel header="Schedule">
-        <app-edit-schedule [schedule]="registerCredentials.schedule"></app-edit-schedule>
+        <app-form-schedule [schedule]="registerCredentials.schedule"></app-form-schedule>
       </p-tabPanel>
     </p-tabView>
   </div>
