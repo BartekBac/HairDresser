@@ -8,5 +8,6 @@ namespace Application.DTOs
     {
         public TimeDto Begin { get; set; }
         public TimeDto End { get; set; }
+        public Boolean IsActive { get; set; }
     }
 }

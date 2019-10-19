@@ -31,12 +31,15 @@ namespace Application.Services
                 throw new ApplicationException("Salon for user [id=" + admin.Id + "] already exists");
             }
 
+            var schedule = _mapper.Map<Schedule<Salon>>(salonCreation.Schedule);
+            
             var salon = new Salon(admin,
                                   salonCreation.Name,
                                   _mapper.Map<Address>(salonCreation.Address),
                                   salonCreation.AdditionalInfo,
-                                  salonCreation.Type);
-
+                                  salonCreation.Type,
+                                  schedule);
+            schedule.SetEntity(salon.Id, salon);
             _dbContext.Salons.Add(salon);
 
             if (_dbContext.SaveChanges() == 0)

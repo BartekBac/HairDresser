@@ -14,7 +14,7 @@ namespace Domain.Entities
         private ISet<Worker> _workers = new HashSet<Worker>();
         private ISet<ClientSalons> _clients = new HashSet<ClientSalons>();
 
-        public Salon(IdentityUser admin, string name, Address address, string additionalInfo, SalonType type) : base(Guid.Parse(admin.Id))
+        public Salon(IdentityUser admin, string name, Address address, string additionalInfo, SalonType type, Schedule<Salon> schedule) : base(Guid.Parse(admin.Id))
         {
             Admin = admin;
             Name = name;
@@ -23,7 +23,7 @@ namespace Domain.Entities
             AdditionalInfo = additionalInfo;
             Type = type;
             Image = new EntityImage<Salon>(Id, this);
-            Schedule = new Schedule<Salon>(Id, this, new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Schedule = schedule;//new Schedule<Salon>(Id, this, new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
         }
         public Salon(IdentityUser admin, string name, Address address, string additionalInfo, SalonType type, byte[] imageData) : base(Guid.Parse(admin.Id))
         {

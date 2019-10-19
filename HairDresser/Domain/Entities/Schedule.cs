@@ -44,7 +44,11 @@ namespace Domain.Entities
         {
 
         }
-
+        public void SetEntity(Guid entityId, T entity)
+        {
+            Entity = entity;
+            EntityId = entityId;
+        }
         public void SetMonday(int beginHour, int beginMinute, int endHour, int endMinute)
         {
             Monday = new Day(beginHour, beginMinute, endHour, endMinute);

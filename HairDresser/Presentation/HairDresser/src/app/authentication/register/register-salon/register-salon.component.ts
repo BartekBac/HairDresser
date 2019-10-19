@@ -35,30 +35,37 @@ export class RegisterSalonComponent implements OnInit {
       monday: {
         begin: { hour: 8, minute: 0, },
         end: { hour: 16, minute: 0, },
+        isActive: true,
       },
       tuesday: {
         begin: { hour: 8, minute: 0, },
         end: { hour: 16, minute: 0, },
+        isActive: true,
       },
       wednesday: {
         begin: { hour: 8, minute: 0, },
         end: { hour: 16, minute: 0, },
+        isActive: true,
       },
       thursday: {
         begin: { hour: 8, minute: 0, },
         end: { hour: 16, minute: 0, },
+        isActive: true,
       },
       friday: {
         begin: { hour: 8, minute: 0, },
         end: { hour: 16, minute: 0, },
+        isActive: true,
       },
       saturday: {
-        begin: { hour: 0, minute: 0, },
-        end: { hour: 0, minute: 0, },
+        begin: { hour: 8, minute: 0, },
+        end: { hour: 16, minute: 0, },
+        isActive: false,
       },
       sunday: {
-        begin: { hour: 0, minute: 0, },
-        end: { hour: 0, minute: 0, },
+        begin: { hour: 8, minute: 0, },
+        end: { hour: 16, minute: 0, },
+        isActive: false,
       }
     },
     userData: {

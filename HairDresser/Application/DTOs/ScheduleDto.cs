@@ -6,7 +6,6 @@ namespace Application.DTOs
 {
     public class ScheduleDto
     {
-        public string EntityId { get; set; }
         public DayDto Monday { get; set; }
         public DayDto Tuesday { get; set; }
         public DayDto Wednesday { get; set; }
