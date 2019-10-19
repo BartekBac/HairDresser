@@ -12,6 +12,7 @@ namespace Application.DTOs
         public string AdditionalInfo { get; set; }
         public SalonType Type { get; set; }
         public AddressDto Address { get; set; }
+        public ScheduleDto Schedule { get; set; }
         public UserCreationDto UserData { get; set; }
 
     }

@@ -31,6 +31,36 @@ export class RegisterSalonComponent implements OnInit {
       street: '',
       houseNumber: '',
     },
+    schedule: {
+      monday: {
+        begin: { hour: 8, minute: 0, },
+        end: { hour: 16, minute: 0, },
+      },
+      tuesday: {
+        begin: { hour: 8, minute: 0, },
+        end: { hour: 16, minute: 0, },
+      },
+      wednesday: {
+        begin: { hour: 8, minute: 0, },
+        end: { hour: 16, minute: 0, },
+      },
+      thursday: {
+        begin: { hour: 8, minute: 0, },
+        end: { hour: 16, minute: 0, },
+      },
+      friday: {
+        begin: { hour: 8, minute: 0, },
+        end: { hour: 16, minute: 0, },
+      },
+      saturday: {
+        begin: { hour: 0, minute: 0, },
+        end: { hour: 0, minute: 0, },
+      },
+      sunday: {
+        begin: { hour: 0, minute: 0, },
+        end: { hour: 0, minute: 0, },
+      }
+    },
     userData: {
       userName: '',
       password: '',

@@ -184,3 +184,4 @@ C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.
 C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.csproj.CopyComplete
 C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.dll
 C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.pdb
+C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\Properties\launchSettings.json

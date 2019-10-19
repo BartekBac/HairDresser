@@ -3,15 +3,33 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { SalonService } from './services/salon.service';
 import { SalonResolver } from './resolvers/salon.resolver';
+import { EditScheduleComponent } from './components/edit-schedule/edit-schedule.component';
+import { PanelModule, InputTextModule, ButtonModule, InputMaskModule, MessageModule, DialogModule, CheckboxModule } from 'primeng/primeng';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule, NgbTimepickerModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [EditScheduleComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    PanelModule,
+    InputTextModule,
+    ButtonModule,
+    InputMaskModule,
+    MessageModule,
+    DialogModule,
+    FormsModule,
+    HttpClientModule,
+    NgbModule,
+    NgbTimepickerModule,
+    NgbTooltipModule,
+    CheckboxModule
   ],
   exports: [
-    CommonModule
+    CommonModule,
+    EditScheduleComponent
   ]
 })
 export class SharedModule {

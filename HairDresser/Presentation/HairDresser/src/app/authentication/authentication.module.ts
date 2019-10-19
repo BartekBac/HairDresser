@@ -11,11 +11,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserDataComponent } from './register/user-data/user-data.component';
 import { RegisterClientComponent } from './register/register-client/register-client.component';
 import { RegisterSalonComponent } from './register/register-salon/register-salon.component';
+import { SharedModule } from '../shared/shared.module';
+import { NgbModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     AuthenticationRoutingModule,
     PasswordModule,
     PanelModule,
