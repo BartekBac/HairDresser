@@ -27,5 +27,9 @@ namespace Domain.Entities
         {
 
         }
+        public void SetImageData(byte[] imageData)
+        {
+            ImageData = imageData;
+        }
     }
 }

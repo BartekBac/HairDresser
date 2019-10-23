@@ -1,2 +1,4 @@
 <p>Salon home works!</p>
 <label *ngIf="salon">{{this.salon.additionalInfo}}</label>
+<app-form-upload-image [imageSrc]="salon.imageSource" (imageUploaded)="onImageUpload($event)"></app-form-upload-image>
+<button (click)="uploadImage()">Save</button>

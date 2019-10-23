@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Salon
 {
@@ -24,7 +25,7 @@ namespace Application.Handlers.Salon
         {
             Guid salonId = new Guid(request.Id.ToString());
 
-            var salon = _dbContext.Salons.FirstOrDefault(s => s.Id == salonId);
+            var salon = _dbContext.Salons.Include(s => s.Image).FirstOrDefault(s => s.Id == salonId);
 
             if (salon == null)
             {

@@ -3,7 +3,7 @@ import { RegisterSalonCredentials } from '../../models/RegisterSalonCredentials'
 import { SelectItem, MessageService } from 'primeng/primeng';
 import { AuthService } from '../../services/auth.service';
 import { ValidationMessage } from 'src/app/shared/models/ValidationMessage';
-import { Salon } from 'src/app/shared/models/Salon';
+import { SalonData } from 'src/app/shared/models/SalonData';
 
 @Component({
   selector: 'app-register-salon',
@@ -79,7 +79,7 @@ export class RegisterSalonComponent implements OnInit {
     }
   };
 
-  protected salonData: Salon = {
+  protected salonData: SalonData = {
     name: '',
     additionalInfo: '',
     type: 0,
@@ -88,7 +88,8 @@ export class RegisterSalonComponent implements OnInit {
       zipCode: '',
       street: '',
       houseNumber: '',
-    }
+    },
+    imageSource: null
   };
 
   protected validationMessage: ValidationMessage = null;

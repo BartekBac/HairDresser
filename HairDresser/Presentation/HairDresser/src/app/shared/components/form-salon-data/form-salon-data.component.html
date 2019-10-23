@@ -4,21 +4,21 @@
     </div>
     <div class="ui-g-12">
       <span class="ui-float-label">
-        <input id="float-input" [(ngModel)]="salon.name" type="text" size="30" pInputText>
-        <label for="float-input">Salon name</label>
+        <input id="input-name" [(ngModel)]="salon.name" type="text" size="30" pInputText>
+        <label for="input-name">Salon name</label>
       </span>
       <br>
     </div>
     <div class="ui-g-12">
       <span class="ui-float-label">
-        <textarea id="float-input" [(ngModel)]="salon.additionalInfo" rows="3" cols="45"
+        <textarea id="input-additionalinfo" [(ngModel)]="salon.additionalInfo" rows="3" cols="45"
           pInputTextarea></textarea>
-        <label for="float-input">Additional info</label>
+        <label for="input-additionalinfo">Additional info</label>
       </span>
     </div>
     <div class="ui-g-12">
       <label class="my-label">Type:</label>
-      <p-selectButton class="my-select-button" [options]="salonTypes" [(ngModel)]="salon.type">
+      <p-selectButton id="button-type" class="my-select-button" [options]="salonTypes" [(ngModel)]="salon.type">
       </p-selectButton>
     </div>
     <div class="ui-g-12">
@@ -26,29 +26,29 @@
     </div>
     <div class="ui-g-6">
       <span class="ui-float-label">
-        <input id="float-input" [(ngModel)]="salon.address.street" type="text" size="30" pInputText>
-        <label for="float-input">Street</label>
+        <input id="input-address-street" [(ngModel)]="salon.address.street" type="text" size="30" pInputText>
+        <label for="input-address-street">Street</label>
       </span>
       <br>
     </div>
     <div class="ui-g-6">
       <span class="ui-float-label">
-        <p-inputMask id="float-input" [(ngModel)]="salon.address.zipCode" mask="99-999" type="text"
+        <p-inputMask id="input-address-zipcode" [(ngModel)]="salon.address.zipCode" mask="99-999" type="text"
           size="30"></p-inputMask>
-        <label for="float-input">Zip code</label>
+        <label for="input-address-zipcode">Zip code</label>
       </span>
     </div>
     <div class="ui-g-6">
       <span class="ui-float-label">
-        <input id="float-input" [(ngModel)]="salon.address.city" type="text" size="30" pInputText>
-        <label for="float-input">City</label>
+        <input id="input-address-city" [(ngModel)]="salon.address.city" type="text" size="30" pInputText>
+        <label for="input-address-city">City</label>
       </span>
     </div>
     <div class="ui-g-6">
       <span class="ui-float-label">
-        <input id="float-input" [(ngModel)]="salon.address.houseNumber" type="text" size="30"
+        <input id="input-adrress-housenumber" [(ngModel)]="salon.address.houseNumber" type="text" size="30"
           pInputText>
-        <label for="float-input">House number</label>
+        <label for="input-adrress-housenumber">House number</label>
       </span>
     </div>
   </div>

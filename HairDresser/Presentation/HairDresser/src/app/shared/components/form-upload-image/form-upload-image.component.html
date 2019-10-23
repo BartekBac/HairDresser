@@ -1,0 +1,14 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <h4>Upload image</h4>
+  </div>
+  <div class="ui-g-12 my-center-content">
+    <p-fileUpload #uploadControl name="image[]" customUpload="true" accept="image/*" maxFileSize="1000000" [auto]="true"
+      (uploadHandler)="onUpload($event)" chooseLabel="Browse">
+      <ng-template pTemplate="content">
+        <br>
+        <img *ngIf="imageSrc" id="image" [src]="imageSrc" width="{{imgWidth}}">
+      </ng-template>
+    </p-fileUpload>
+  </div>
+</div>

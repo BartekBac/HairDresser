@@ -20,7 +20,8 @@ namespace WebAPI.Configurations
             CreateMap<AddressDto, Address>();
             CreateMap<Address, AddressDto>();
             CreateMap<Client, ClientDto>();
-            CreateMap<Salon, SalonDto>();
+            CreateMap<Salon, SalonDto>()
+                .ForMember(dest => dest.ImageSource, opt => opt.MapFrom(src => Convert.ToBase64String(src.Image.ImageData)));
             //    .ForPath(dest => dest.Address, opt => opt.MapFrom(src => src.Address));
             CreateMap<Day, DayDto>()
                 .ForPath(dest => dest.Begin.Hour, opt => opt.MapFrom(src => src.Begin.Hours))
