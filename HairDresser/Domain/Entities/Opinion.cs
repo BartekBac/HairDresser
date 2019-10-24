@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Domain.Entities
 {
-    public class Opinion : Entity
+    public class Opinion : EntityWithImage
     {
-        public Opinion(Guid clientId, Client client, Guid workerId, Worker worker, string description, float rate) : base()
+        public Opinion(Guid clientId, Client client, Guid workerId, Worker worker, string description, float rate) : base(Guid.NewGuid())
         {
             ClientId = clientId;
             Client = client;
@@ -15,9 +15,8 @@ namespace Domain.Entities
             Worker = worker;
             Description = description;
             Rate = rate;
-            Image = new EntityImage<Opinion>(Id, this);
         }
-        public Opinion(Guid clientId, Client client, Guid workerId, Worker worker, string description, float rate, byte[] imageData) : base()
+        public Opinion(Guid clientId, Client client, Guid workerId, Worker worker, string description, float rate, byte[] imageSource, string imageHeader) : base(Guid.NewGuid(), imageSource, imageHeader)
         {
             ClientId = clientId;
             Client = client;
@@ -25,7 +24,6 @@ namespace Domain.Entities
             Worker = worker;
             Description = description;
             Rate = rate;
-            Image = new EntityImage<Opinion>(Id, this, imageData);
         }
         private Opinion()
         {
@@ -38,6 +36,5 @@ namespace Domain.Entities
         public Worker Worker { get; private set; }
         public string Description { get; private set; }
         public float Rate { get; private set; }
-        public EntityImage<Opinion> Image { get; private set; }
     }
 }

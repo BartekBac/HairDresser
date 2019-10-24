@@ -51,7 +51,6 @@ namespace WebAPI.Controllers
         {
             try
             {
-                command.EntityType = "salon";
                 var result = await _mediator.Send(command);
                 return Ok();
             }

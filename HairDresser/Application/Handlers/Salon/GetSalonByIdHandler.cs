@@ -25,8 +25,10 @@ namespace Application.Handlers.Salon
         {
             Guid salonId = new Guid(request.Id.ToString());
 
-            var salon = _dbContext.Salons.Include(s => s.Image).FirstOrDefault(s => s.Id == salonId);
-
+            var salon = _dbContext.Salons.FirstOrDefault(s => s.Id == salonId);
+            var image = _dbContext.Images.FirstOrDefault(i => i.Id == salonId);
+            salon.Image = image;
+            //var salon = _dbContext.Salons.FirstOrDefault(s => s.Id == salonId);
             if (salon == null)
             {
                 throw new ApplicationException("Could not find salon with id="+salonId);

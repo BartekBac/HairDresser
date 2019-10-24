@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
 
   salon: SalonData = null;
   userId: string = null;
-  imageHeader = 'data:image/png;base64,';
 
   constructor(
     private salonService: SalonService,
@@ -27,7 +26,6 @@ export class HomeComponent implements OnInit {
     const decodedToken = jwt_decode(localStorage.getItem(Constants.LOCAL_STORAGE_AUTH_TOKEN));
     this.userId = decodedToken[Constants.DECODE_TOKEN_USER_ID];
     this.salon = this.route.snapshot.data.salon;
-    this.salon.imageSource = this.imageHeader + this.salon.imageSource;
     console.log(this.salon);
   }
 

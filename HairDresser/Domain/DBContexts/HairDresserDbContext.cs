@@ -13,7 +13,8 @@ namespace Domain.DbContexts
 
         }
         public DbSet<Client> Clients { get; set; }
-        //public DbSet<EntityImage<Entity>> EntityImages { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Opinion> Opinions { get; set; }
         public DbSet<Salon> Salons { get; set; }
         public DbSet<Service> Services { get; set; }
@@ -27,11 +28,10 @@ namespace Domain.DbContexts
         {
             builder.ApplyConfiguration(new ClientConfiguration());
             builder.ApplyConfiguration(new ClientSalonsConfiguration());
-            builder.ApplyConfiguration(new EntityImageConfiguration());
+            builder.ApplyConfiguration(new ImageConfiguration());
             builder.ApplyConfiguration(new OpinionConfiguration());
             builder.ApplyConfiguration(new SalonConfiguration());
-            builder.ApplyConfiguration(new ScheduleWorkerConfiguration());
-            builder.ApplyConfiguration(new ScheduleSalonConfiguration());
+            builder.ApplyConfiguration(new ScheduleConfiguration());
             builder.ApplyConfiguration(new ServiceConfiguration());
             builder.ApplyConfiguration(new VisitConfiguration());
             builder.ApplyConfiguration(new VisitServicesConfiguration());

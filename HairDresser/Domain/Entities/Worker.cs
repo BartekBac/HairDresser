@@ -8,32 +8,29 @@ using Domain.Entities.ManyToMany;
 
 namespace Domain.Entities
 {
-    public class Worker : Entity
+    public class Worker : EntityWithImage
     {
         private ISet<WorkerServices> _services = new HashSet<WorkerServices>();
         private ISet<Opinion> _opinions = new HashSet<Opinion>();
         private ISet<Visit> _visits = new HashSet<Visit>();
 
-        public Worker(IdentityUser user, string firstName, string lastName, Guid salonId): base(Guid.Parse(user.Id))
+        public Worker(IdentityUser user, string firstName, string lastName, Guid salonId, Schedule schedule): base(Guid.Parse(user.Id))
         {
             User = user;
             FirstName = firstName;
             LastName = lastName;
             SalonId = salonId;
             Rating = -1.0f;
-            Image = new EntityImage<Worker>(Id, this);
-            Schedule = new Schedule<Worker>(Id, this, new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Schedule = new Schedule(Guid.Parse(user.Id), schedule);
         }
-        public Worker(IdentityUser user, string firstName, string lastName, Guid salonId, Salon salon, byte[] imageData) : base(Guid.Parse(user.Id))
+        public Worker(IdentityUser user, string firstName, string lastName, Guid salonId, Schedule schedule, byte[] imageSource, string imageHeader) : base(Guid.Parse(user.Id), imageSource, imageHeader)
         {
             User = user;
             FirstName = firstName;
             LastName = lastName;
             SalonId = salonId;
-            Salon = salon;
             Rating = -1.0f;
-            Image = new EntityImage<Worker>(Id, this, imageData);
-            Schedule = new Schedule<Worker>(Id, this, new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Schedule = new Schedule(Guid.Parse(user.Id), schedule);
         }
         private Worker()
         {
@@ -46,8 +43,7 @@ namespace Domain.Entities
         public float Rating { get; private set; }
         public Guid SalonId { get; private set; }
         public Salon Salon { get; private set; }
-        public Schedule<Worker> Schedule { get; set; }
-        public EntityImage<Worker> Image { get; set; }
+        public Schedule Schedule { get; set; }
         public IEnumerable<WorkerServices> Services
         {
             get => _services;

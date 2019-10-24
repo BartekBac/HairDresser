@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public class Schedule<T> : Entity
+    public class Schedule : Entity
     {
-        public T Entity { get; private set; }
-        public Guid EntityId { get; private set; }
         public Day Monday { get; private set; }
         public Day Tuesday { get; private set; }
         public Day Wednesday { get; private set; }
@@ -16,10 +14,8 @@ namespace Domain.Entities
         public Day Saturday { get; private set; }
         public Day Sunday { get; private set; }
 
-        public Schedule(Guid entityId, T entity, TimeSpan beginDayTime, TimeSpan endDayTime)
+        /*public Schedule(Guid id, TimeSpan beginDayTime, TimeSpan endDayTime) : base(id)
         {
-            EntityId = entityId;
-            Entity = entity;
             Monday = new Day(beginDayTime, endDayTime);
             Tuesday = new Day(beginDayTime, endDayTime);
             Wednesday = new Day(beginDayTime, endDayTime);
@@ -28,10 +24,8 @@ namespace Domain.Entities
             Saturday = new Day(beginDayTime, endDayTime);
             Sunday = new Day(beginDayTime, endDayTime);
         }
-        public Schedule(Guid entityId, T entity, int beginHour, int beginMinute, int endHour, int endMinute)
+        public Schedule(Guid id, int beginHour, int beginMinute, int endHour, int endMinute) : base(id)
         {
-            EntityId = entityId;
-            Entity = entity;
             Monday = new Day(beginHour, beginMinute, endHour, endMinute);
             Tuesday = new Day(beginHour, beginMinute, endHour, endMinute);
             Wednesday = new Day(beginHour, beginMinute, endHour, endMinute);
@@ -39,15 +33,20 @@ namespace Domain.Entities
             Friday = new Day(beginHour, beginMinute, endHour, endMinute);
             Saturday = new Day(beginHour, beginMinute, endHour, endMinute);
             Sunday = new Day(beginHour, beginMinute, endHour, endMinute);
+        }*/
+        public Schedule(Guid id, Schedule schedule) : base(id)
+        {
+            Monday = schedule.Monday;
+            Tuesday = schedule.Tuesday;
+            Wednesday = schedule.Wednesday;
+            Thursday = schedule.Thursday;
+            Friday = schedule.Friday;
+            Saturday = schedule.Saturday;
+            Sunday = schedule.Sunday;
         }
         private Schedule()
         {
 
-        }
-        public void SetEntity(Guid entityId, T entity)
-        {
-            Entity = entity;
-            EntityId = entityId;
         }
         public void SetMonday(int beginHour, int beginMinute, int endHour, int endMinute)
         {
@@ -77,7 +76,7 @@ namespace Domain.Entities
         {
             Sunday = new Day(beginHour, beginMinute, endHour, endMinute);
         }
-        public void ResetSchedule()
+        /*public void ResetSchedule()
         {
             Monday = new Day(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
             Tuesday = new Day(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
@@ -86,6 +85,6 @@ namespace Domain.Entities
             Friday = new Day(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
             Saturday = new Day(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
             Sunday = new Day(new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
-        }
+        }*/
     }
 }

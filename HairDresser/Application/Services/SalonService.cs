@@ -31,7 +31,7 @@ namespace Application.Services
                 throw new ApplicationException("Salon for user [id=" + admin.Id + "] already exists");
             }
 
-            var schedule = _mapper.Map<Schedule<Salon>>(salonCreation.Schedule);
+            var schedule = _mapper.Map<Schedule>(salonCreation.Schedule);
             
             var salon = new Salon(admin,
                                   salonCreation.Name,
@@ -39,7 +39,8 @@ namespace Application.Services
                                   salonCreation.AdditionalInfo,
                                   salonCreation.Type,
                                   schedule);
-            schedule.SetEntity(salon.Id, salon);
+            //schedule.SetEntity(salon.Id, salon);
+            // TODO: _dbContext.Add(schedule)?
             _dbContext.Salons.Add(salon);
 
             if (_dbContext.SaveChanges() == 0)

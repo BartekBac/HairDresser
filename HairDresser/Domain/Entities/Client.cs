@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Domain.Entities
 {
-    public class Client : Entity
+    public class Client : EntityWithImage
     {
         private ISet<ClientSalons> _favoriteSalons = new HashSet<ClientSalons>();
         private ISet<Visit> _visits = new HashSet<Visit>();
@@ -18,15 +18,13 @@ namespace Domain.Entities
             User = user;
             FirstName = firstName;
             LastName = lastName;
-            Image = new EntityImage<Client>(Id, this);
         }
 
-        public Client(IdentityUser user, string firstName, string lastName, byte[] imageData) : base(Guid.Parse(user.Id))
+        public Client(IdentityUser user, string firstName, string lastName, byte[] imageSource, string imageHeade) : base(Guid.Parse(user.Id), imageSource, imageHeade)
         {
             User = user;
             FirstName = firstName;
             LastName = lastName;
-            Image = new EntityImage<Client>(Id, this, imageData);
         }
         private Client()
         {
@@ -36,7 +34,6 @@ namespace Domain.Entities
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public IdentityUser User { get; private set; }
-        public EntityImage<Client> Image { get; set; }
 
         public IEnumerable<ClientSalons> FavoriteSalons
         {

@@ -11,14 +11,6 @@ namespace Domain.Configuration
         {
             builder.HasKey(e => e.Id);
 
-            builder.HasOne(s => s.Image)
-                   .WithOne(ei => ei.Entity)
-                   .HasForeignKey<EntityImage<Salon>>(ei => ei.EntityId);
-
-            builder.HasOne(s => s.Schedule)
-                   .WithOne(sch => sch.Entity)
-                   .HasForeignKey<Schedule<Salon>>(sch => sch.EntityId);
-
             builder.HasMany(s => s.Services)
                    .WithOne(s => s.Salon)
                    .HasForeignKey(s => s.SalonId);
