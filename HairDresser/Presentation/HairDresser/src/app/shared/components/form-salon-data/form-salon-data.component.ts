@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
-import { Salon } from '../../models/Salon';
+import { SalonData } from '../../models/SalonData';
 
 @Component({
   selector: 'app-form-salon-data',
@@ -9,7 +9,7 @@ import { Salon } from '../../models/Salon';
 })
 export class FormSalonDataComponent implements OnInit {
 
-  @Input() salon: Salon;
+  @Input() salon: SalonData;
 
   salonTypes: SelectItem[] = [
     {label: 'Unisex', value: 0},

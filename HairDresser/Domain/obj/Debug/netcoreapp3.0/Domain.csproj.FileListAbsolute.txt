@@ -13,8 +13,8 @@ C:\rep\VII sem\v1\HairDresser\HairDresser\Domain\bin\Debug\netcoreapp3.0\Domain.
 C:\rep\VII sem\v1\HairDresser\HairDresser\Domain\bin\Debug\netcoreapp3.0\Domain.runtimeconfig.dev.json
 C:\rep\VII sem\v1\HairDresser\HairDresser\Domain\bin\Debug\netcoreapp3.0\Domain.dll
 C:\rep\VII sem\v1\HairDresser\HairDresser\Domain\bin\Debug\netcoreapp3.0\Domain.pdb
-C:\rep\VII sem\v1\HairDresser\HairDresser\Domain\obj\Debug\netcoreapp3.0\Domain.csprojAssemblyReference.cache
 C:\rep\VII sem\v1\HairDresser\HairDresser\Domain\obj\Debug\netcoreapp3.0\Domain.AssemblyInfoInputs.cache
 C:\rep\VII sem\v1\HairDresser\HairDresser\Domain\obj\Debug\netcoreapp3.0\Domain.AssemblyInfo.cs
 C:\rep\VII sem\v1\HairDresser\HairDresser\Domain\obj\Debug\netcoreapp3.0\Domain.dll
 C:\rep\VII sem\v1\HairDresser\HairDresser\Domain\obj\Debug\netcoreapp3.0\Domain.pdb
+C:\rep\VII sem\v1\HairDresser\HairDresser\Domain\obj\Debug\netcoreapp3.0\Domain.csprojAssemblyReference.cache

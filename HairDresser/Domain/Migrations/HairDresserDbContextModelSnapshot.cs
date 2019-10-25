@@ -28,6 +28,9 @@ namespace Domain.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("ImageId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -36,89 +39,28 @@ namespace Domain.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ImageId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("Domain.Entities.EntityImage<Domain.Entities.Client>", b =>
+            modelBuilder.Entity("Domain.Entities.Image", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("EntityId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Header")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("ImageData")
+                    b.Property<byte[]>("Source")
                         .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EntityId")
-                        .IsUnique();
-
-                    b.ToTable("EntityImage<Client>");
-                });
-
-            modelBuilder.Entity("Domain.Entities.EntityImage<Domain.Entities.Opinion>", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EntityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<byte[]>("ImageData")
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntityId")
-                        .IsUnique();
-
-                    b.ToTable("EntityImage<Opinion>");
-                });
-
-            modelBuilder.Entity("Domain.Entities.EntityImage<Domain.Entities.Salon>", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EntityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<byte[]>("ImageData")
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntityId")
-                        .IsUnique();
-
-                    b.ToTable("EntityImage<Salon>");
-                });
-
-            modelBuilder.Entity("Domain.Entities.EntityImage<Domain.Entities.Worker>", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EntityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<byte[]>("ImageData")
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntityId")
-                        .IsUnique();
-
-                    b.ToTable("EntityImage<Worker>");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Domain.Entities.ManyToMany.ClientSalons", b =>
@@ -178,6 +120,9 @@ namespace Domain.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("ImageId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<float>("Rate")
                         .HasColumnType("real");
 
@@ -187,6 +132,8 @@ namespace Domain.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("WorkerId");
 
@@ -205,11 +152,17 @@ namespace Domain.Migrations
                     b.Property<string>("AdminId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<Guid?>("ImageId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Rating")
                         .HasColumnType("real");
+
+                    b.Property<Guid?>("ScheduleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -218,41 +171,22 @@ namespace Domain.Migrations
 
                     b.HasIndex("AdminId");
 
+                    b.HasIndex("ImageId");
+
+                    b.HasIndex("ScheduleId");
+
                     b.ToTable("Salons");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Schedule<Domain.Entities.Salon>", b =>
+            modelBuilder.Entity("Domain.Entities.Schedule", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("EntityId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("EntityId")
-                        .IsUnique();
-
-                    b.ToTable("Schedule<Salon>");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Schedule<Domain.Entities.Worker>", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EntityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntityId")
-                        .IsUnique();
-
-                    b.ToTable("Schedule<Worker>");
+                    b.ToTable("Schedules");
                 });
 
             modelBuilder.Entity("Domain.Entities.Service", b =>
@@ -319,6 +253,9 @@ namespace Domain.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("ImageId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -328,12 +265,19 @@ namespace Domain.Migrations
                     b.Property<Guid>("SalonId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ScheduleId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ImageId");
+
                     b.HasIndex("SalonId");
+
+                    b.HasIndex("ScheduleId");
 
                     b.HasIndex("UserId");
 
@@ -542,45 +486,13 @@ namespace Domain.Migrations
 
             modelBuilder.Entity("Domain.Entities.Client", b =>
                 {
+                    b.HasOne("Domain.Entities.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Domain.Entities.EntityImage<Domain.Entities.Client>", b =>
-                {
-                    b.HasOne("Domain.Entities.Client", "Entity")
-                        .WithOne("Image")
-                        .HasForeignKey("Domain.Entities.EntityImage<Domain.Entities.Client>", "EntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.EntityImage<Domain.Entities.Opinion>", b =>
-                {
-                    b.HasOne("Domain.Entities.Opinion", "Entity")
-                        .WithOne("Image")
-                        .HasForeignKey("Domain.Entities.EntityImage<Domain.Entities.Opinion>", "EntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.EntityImage<Domain.Entities.Salon>", b =>
-                {
-                    b.HasOne("Domain.Entities.Salon", "Entity")
-                        .WithOne("Image")
-                        .HasForeignKey("Domain.Entities.EntityImage<Domain.Entities.Salon>", "EntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.EntityImage<Domain.Entities.Worker>", b =>
-                {
-                    b.HasOne("Domain.Entities.Worker", "Entity")
-                        .WithOne("Image")
-                        .HasForeignKey("Domain.Entities.EntityImage<Domain.Entities.Worker>", "EntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.ManyToMany.ClientSalons", b =>
@@ -636,6 +548,10 @@ namespace Domain.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
                     b.HasOne("Domain.Entities.Worker", "Worker")
                         .WithMany("Opinions")
                         .HasForeignKey("WorkerId")
@@ -648,6 +564,14 @@ namespace Domain.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Admin")
                         .WithMany()
                         .HasForeignKey("AdminId");
+
+                    b.HasOne("Domain.Entities.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.HasOne("Domain.Entities.Schedule", "Schedule")
+                        .WithMany()
+                        .HasForeignKey("ScheduleId");
 
                     b.OwnsOne("Domain.ValueObjects.Address", "Address", b1 =>
                         {
@@ -675,17 +599,11 @@ namespace Domain.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.Schedule<Domain.Entities.Salon>", b =>
+            modelBuilder.Entity("Domain.Entities.Schedule", b =>
                 {
-                    b.HasOne("Domain.Entities.Salon", "Entity")
-                        .WithOne("Schedule")
-                        .HasForeignKey("Domain.Entities.Schedule<Domain.Entities.Salon>", "EntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.OwnsOne("Domain.ValueObjects.Day", "Friday", b1 =>
                         {
-                            b1.Property<Guid>("Schedule<Salon>Id")
+                            b1.Property<Guid>("ScheduleId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<TimeSpan>("Begin")
@@ -697,17 +615,17 @@ namespace Domain.Migrations
                             b1.Property<bool>("IsActive")
                                 .HasColumnType("bit");
 
-                            b1.HasKey("Schedule<Salon>Id");
+                            b1.HasKey("ScheduleId");
 
-                            b1.ToTable("Schedule<Salon>");
+                            b1.ToTable("Schedules");
 
                             b1.WithOwner()
-                                .HasForeignKey("Schedule<Salon>Id");
+                                .HasForeignKey("ScheduleId");
                         });
 
                     b.OwnsOne("Domain.ValueObjects.Day", "Monday", b1 =>
                         {
-                            b1.Property<Guid>("Schedule<Salon>Id")
+                            b1.Property<Guid>("ScheduleId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<TimeSpan>("Begin")
@@ -719,17 +637,17 @@ namespace Domain.Migrations
                             b1.Property<bool>("IsActive")
                                 .HasColumnType("bit");
 
-                            b1.HasKey("Schedule<Salon>Id");
+                            b1.HasKey("ScheduleId");
 
-                            b1.ToTable("Schedule<Salon>");
+                            b1.ToTable("Schedules");
 
                             b1.WithOwner()
-                                .HasForeignKey("Schedule<Salon>Id");
+                                .HasForeignKey("ScheduleId");
                         });
 
                     b.OwnsOne("Domain.ValueObjects.Day", "Saturday", b1 =>
                         {
-                            b1.Property<Guid>("Schedule<Salon>Id")
+                            b1.Property<Guid>("ScheduleId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<TimeSpan>("Begin")
@@ -741,17 +659,17 @@ namespace Domain.Migrations
                             b1.Property<bool>("IsActive")
                                 .HasColumnType("bit");
 
-                            b1.HasKey("Schedule<Salon>Id");
+                            b1.HasKey("ScheduleId");
 
-                            b1.ToTable("Schedule<Salon>");
+                            b1.ToTable("Schedules");
 
                             b1.WithOwner()
-                                .HasForeignKey("Schedule<Salon>Id");
+                                .HasForeignKey("ScheduleId");
                         });
 
                     b.OwnsOne("Domain.ValueObjects.Day", "Sunday", b1 =>
                         {
-                            b1.Property<Guid>("Schedule<Salon>Id")
+                            b1.Property<Guid>("ScheduleId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<TimeSpan>("Begin")
@@ -763,17 +681,17 @@ namespace Domain.Migrations
                             b1.Property<bool>("IsActive")
                                 .HasColumnType("bit");
 
-                            b1.HasKey("Schedule<Salon>Id");
+                            b1.HasKey("ScheduleId");
 
-                            b1.ToTable("Schedule<Salon>");
+                            b1.ToTable("Schedules");
 
                             b1.WithOwner()
-                                .HasForeignKey("Schedule<Salon>Id");
+                                .HasForeignKey("ScheduleId");
                         });
 
                     b.OwnsOne("Domain.ValueObjects.Day", "Thursday", b1 =>
                         {
-                            b1.Property<Guid>("Schedule<Salon>Id")
+                            b1.Property<Guid>("ScheduleId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<TimeSpan>("Begin")
@@ -785,17 +703,17 @@ namespace Domain.Migrations
                             b1.Property<bool>("IsActive")
                                 .HasColumnType("bit");
 
-                            b1.HasKey("Schedule<Salon>Id");
+                            b1.HasKey("ScheduleId");
 
-                            b1.ToTable("Schedule<Salon>");
+                            b1.ToTable("Schedules");
 
                             b1.WithOwner()
-                                .HasForeignKey("Schedule<Salon>Id");
+                                .HasForeignKey("ScheduleId");
                         });
 
                     b.OwnsOne("Domain.ValueObjects.Day", "Tuesday", b1 =>
                         {
-                            b1.Property<Guid>("Schedule<Salon>Id")
+                            b1.Property<Guid>("ScheduleId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<TimeSpan>("Begin")
@@ -807,17 +725,17 @@ namespace Domain.Migrations
                             b1.Property<bool>("IsActive")
                                 .HasColumnType("bit");
 
-                            b1.HasKey("Schedule<Salon>Id");
+                            b1.HasKey("ScheduleId");
 
-                            b1.ToTable("Schedule<Salon>");
+                            b1.ToTable("Schedules");
 
                             b1.WithOwner()
-                                .HasForeignKey("Schedule<Salon>Id");
+                                .HasForeignKey("ScheduleId");
                         });
 
                     b.OwnsOne("Domain.ValueObjects.Day", "Wednesday", b1 =>
                         {
-                            b1.Property<Guid>("Schedule<Salon>Id")
+                            b1.Property<Guid>("ScheduleId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<TimeSpan>("Begin")
@@ -829,175 +747,12 @@ namespace Domain.Migrations
                             b1.Property<bool>("IsActive")
                                 .HasColumnType("bit");
 
-                            b1.HasKey("Schedule<Salon>Id");
+                            b1.HasKey("ScheduleId");
 
-                            b1.ToTable("Schedule<Salon>");
-
-                            b1.WithOwner()
-                                .HasForeignKey("Schedule<Salon>Id");
-                        });
-                });
-
-            modelBuilder.Entity("Domain.Entities.Schedule<Domain.Entities.Worker>", b =>
-                {
-                    b.HasOne("Domain.Entities.Worker", "Entity")
-                        .WithOne("Schedule")
-                        .HasForeignKey("Domain.Entities.Schedule<Domain.Entities.Worker>", "EntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.OwnsOne("Domain.ValueObjects.Day", "Friday", b1 =>
-                        {
-                            b1.Property<Guid>("Schedule<Worker>Id")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<TimeSpan>("Begin")
-                                .HasColumnType("time");
-
-                            b1.Property<TimeSpan>("End")
-                                .HasColumnType("time");
-
-                            b1.Property<bool>("IsActive")
-                                .HasColumnType("bit");
-
-                            b1.HasKey("Schedule<Worker>Id");
-
-                            b1.ToTable("Schedule<Worker>");
+                            b1.ToTable("Schedules");
 
                             b1.WithOwner()
-                                .HasForeignKey("Schedule<Worker>Id");
-                        });
-
-                    b.OwnsOne("Domain.ValueObjects.Day", "Monday", b1 =>
-                        {
-                            b1.Property<Guid>("Schedule<Worker>Id")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<TimeSpan>("Begin")
-                                .HasColumnType("time");
-
-                            b1.Property<TimeSpan>("End")
-                                .HasColumnType("time");
-
-                            b1.Property<bool>("IsActive")
-                                .HasColumnType("bit");
-
-                            b1.HasKey("Schedule<Worker>Id");
-
-                            b1.ToTable("Schedule<Worker>");
-
-                            b1.WithOwner()
-                                .HasForeignKey("Schedule<Worker>Id");
-                        });
-
-                    b.OwnsOne("Domain.ValueObjects.Day", "Saturday", b1 =>
-                        {
-                            b1.Property<Guid>("Schedule<Worker>Id")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<TimeSpan>("Begin")
-                                .HasColumnType("time");
-
-                            b1.Property<TimeSpan>("End")
-                                .HasColumnType("time");
-
-                            b1.Property<bool>("IsActive")
-                                .HasColumnType("bit");
-
-                            b1.HasKey("Schedule<Worker>Id");
-
-                            b1.ToTable("Schedule<Worker>");
-
-                            b1.WithOwner()
-                                .HasForeignKey("Schedule<Worker>Id");
-                        });
-
-                    b.OwnsOne("Domain.ValueObjects.Day", "Sunday", b1 =>
-                        {
-                            b1.Property<Guid>("Schedule<Worker>Id")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<TimeSpan>("Begin")
-                                .HasColumnType("time");
-
-                            b1.Property<TimeSpan>("End")
-                                .HasColumnType("time");
-
-                            b1.Property<bool>("IsActive")
-                                .HasColumnType("bit");
-
-                            b1.HasKey("Schedule<Worker>Id");
-
-                            b1.ToTable("Schedule<Worker>");
-
-                            b1.WithOwner()
-                                .HasForeignKey("Schedule<Worker>Id");
-                        });
-
-                    b.OwnsOne("Domain.ValueObjects.Day", "Thursday", b1 =>
-                        {
-                            b1.Property<Guid>("Schedule<Worker>Id")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<TimeSpan>("Begin")
-                                .HasColumnType("time");
-
-                            b1.Property<TimeSpan>("End")
-                                .HasColumnType("time");
-
-                            b1.Property<bool>("IsActive")
-                                .HasColumnType("bit");
-
-                            b1.HasKey("Schedule<Worker>Id");
-
-                            b1.ToTable("Schedule<Worker>");
-
-                            b1.WithOwner()
-                                .HasForeignKey("Schedule<Worker>Id");
-                        });
-
-                    b.OwnsOne("Domain.ValueObjects.Day", "Tuesday", b1 =>
-                        {
-                            b1.Property<Guid>("Schedule<Worker>Id")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<TimeSpan>("Begin")
-                                .HasColumnType("time");
-
-                            b1.Property<TimeSpan>("End")
-                                .HasColumnType("time");
-
-                            b1.Property<bool>("IsActive")
-                                .HasColumnType("bit");
-
-                            b1.HasKey("Schedule<Worker>Id");
-
-                            b1.ToTable("Schedule<Worker>");
-
-                            b1.WithOwner()
-                                .HasForeignKey("Schedule<Worker>Id");
-                        });
-
-                    b.OwnsOne("Domain.ValueObjects.Day", "Wednesday", b1 =>
-                        {
-                            b1.Property<Guid>("Schedule<Worker>Id")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<TimeSpan>("Begin")
-                                .HasColumnType("time");
-
-                            b1.Property<TimeSpan>("End")
-                                .HasColumnType("time");
-
-                            b1.Property<bool>("IsActive")
-                                .HasColumnType("bit");
-
-                            b1.HasKey("Schedule<Worker>Id");
-
-                            b1.ToTable("Schedule<Worker>");
-
-                            b1.WithOwner()
-                                .HasForeignKey("Schedule<Worker>Id");
+                                .HasForeignKey("ScheduleId");
                         });
                 });
 
@@ -1027,11 +782,19 @@ namespace Domain.Migrations
 
             modelBuilder.Entity("Domain.Entities.Worker", b =>
                 {
+                    b.HasOne("Domain.Entities.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
                     b.HasOne("Domain.Entities.Salon", "Salon")
                         .WithMany("Workers")
                         .HasForeignKey("SalonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Domain.Entities.Schedule", "Schedule")
+                        .WithMany()
+                        .HasForeignKey("ScheduleId");
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()

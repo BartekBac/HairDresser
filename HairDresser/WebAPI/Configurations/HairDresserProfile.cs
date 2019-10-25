@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.Services;
 using AutoMapper;
 using AutoMapper.Configuration;
 using Domain.Entities;
@@ -20,8 +21,10 @@ namespace WebAPI.Configurations
             CreateMap<AddressDto, Address>();
             CreateMap<Address, AddressDto>();
             CreateMap<Client, ClientDto>();
-            CreateMap<Salon, SalonDto>();
-            //    .ForPath(dest => dest.Address, opt => opt.MapFrom(src => src.Address));
+            CreateMap<Salon, SalonDto>()
+                .ForMember(dest => dest.ImageSource, opt => opt.MapFrom(src => ImageService.ConcatenateToString(src.Image)));
+            //.ForMember(dest => dest.ImageSource, opt => opt.MapFrom(src => src.Image.Header + Convert.ToBase64String(src.Image.Source)));
+
             CreateMap<Day, DayDto>()
                 .ForPath(dest => dest.Begin.Hour, opt => opt.MapFrom(src => src.Begin.Hours))
                 .ForPath(dest => dest.Begin.Minute, opt => opt.MapFrom(src => src.Begin.Minutes))
@@ -34,8 +37,8 @@ namespace WebAPI.Configurations
                 .ForPath(dest => dest.End.Hours, opt => opt.MapFrom(src => src.End.Hour))
                 .ForPath(dest => dest.End.Minutes, opt => opt.MapFrom(src => src.End.Minute));
 
-            CreateMap<Schedule<Salon>, ScheduleDto>();
-            CreateMap<ScheduleDto, Schedule<Salon>>();
+            CreateMap<Schedule, ScheduleDto>();
+            CreateMap<ScheduleDto, Schedule>();
         }
     }
 }

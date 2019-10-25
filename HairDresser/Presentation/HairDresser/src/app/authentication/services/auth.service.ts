@@ -91,8 +91,18 @@ export class AuthService {
     return Role[requiredRole] === decodedToken[Constants.DECODE_TOKEN_ROLE];
   }
 
+  navigateHome() {
+    if (this.isAuthenticated) {
+      const decodedToken = jwt_decode(localStorage.getItem(Constants.LOCAL_STORAGE_AUTH_TOKEN));
+      const role = decodedToken[Constants.DECODE_TOKEN_ROLE];
+      this.router.navigate([role]);
+    } else {
+      this.router.navigate(['/auth']);
+    }
+  }
+
   logout() {
     localStorage.removeItem(Constants.LOCAL_STORAGE_AUTH_TOKEN);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth']);
   }
 }

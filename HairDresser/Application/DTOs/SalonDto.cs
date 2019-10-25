@@ -12,5 +12,6 @@ namespace Application.DTOs
         public AddressDto Address { get; set; }
         public string AdditionalInfo { get; set; }
         public SalonType Type { get; set; }
+        public string ImageSource  {get; set;}
     }
 }

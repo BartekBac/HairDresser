@@ -1,4 +1,5 @@
-﻿using Application.DTOs;
+﻿using Application.Commands;
+using Application.DTOs;
 using Application.Queries.Salon;
 using Application.Services;
 using AutoMapper;
@@ -42,6 +43,21 @@ namespace WebAPI.Controllers
         {
             var result = await _mediator.Send(new GetSalonByIdQuery { Id = id });
             return Ok(result);
+        }
+
+        [Authorize(Roles = RoleString.Salon)]
+        [HttpPost("{id}/image")]
+        public async Task<IActionResult> UploadSalonImage(UploadImageCommand command)
+        {
+            try
+            {
+                var result = await _mediator.Send(command);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         /*[Authorize(Roles = RoleString.Salon)]

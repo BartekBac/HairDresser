@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Salon
 {
@@ -25,10 +26,15 @@ namespace Application.Handlers.Salon
             Guid salonId = new Guid(request.Id.ToString());
 
             var salon = _dbContext.Salons.FirstOrDefault(s => s.Id == salonId);
-
+            var image = _dbContext.Images.FirstOrDefault(i => i.Id == salonId);
+            salon.Image = image;
             if (salon == null)
             {
-                throw new ApplicationException("Could not find salon with id="+salonId);
+                throw new ApplicationException("Could not find salon with id=" + salonId);
+            }
+            if (image == null)
+            {
+                throw new ApplicationException("Could not find image for salon with id=" + salonId);
             }
 
             return _mapper.Map<SalonDto>(salon);

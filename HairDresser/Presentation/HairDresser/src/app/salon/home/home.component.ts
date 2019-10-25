@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Salon } from 'src/app/shared/models/Salon';
+import { SalonData } from 'src/app/shared/models/SalonData';
 import { SalonService } from 'src/app/shared/services/salon.service';
 import { ActivatedRoute } from '@angular/router';
+import { UploadImage } from 'src/app/shared/models/UploadImage';
+import { Constants } from 'src/app/shared/constants/Constants';
+import * as jwt_decode from 'jwt-decode';
+import { MessageService } from 'primeng/primeng';
 
 @Component({
   selector: 'app-home',
@@ -10,17 +14,37 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  salon: Salon = null;
+  salon: SalonData = null;
+  userId: string = null;
 
   constructor(
     private salonService: SalonService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private toastService: MessageService) { }
 
   ngOnInit() {
-    /*this.salonService.getSalon("3ad264a3-68ba-4220-aaff-729694d79a97").subscribe(
-      res => this.salon = res
-    );*/
+    const decodedToken = jwt_decode(localStorage.getItem(Constants.LOCAL_STORAGE_AUTH_TOKEN));
+    this.userId = decodedToken[Constants.DECODE_TOKEN_USER_ID];
     this.salon = this.route.snapshot.data.salon;
+    console.log(this.salon);
+  }
+
+  onImageUpload(imageSource: any) {
+    this.salon.imageSource = imageSource;
+    console.log(imageSource);
+  }
+
+  uploadImage() {
+    const uploadImage: UploadImage = {
+      entityId: this.userId,
+      imageSource: this.salon.imageSource,
+      entityType: null
+    };
+    console.log(uploadImage.imageSource);
+    this.salonService.uploadSalonImage(uploadImage).subscribe(
+      res => this.toastService.add({severity: 'success', summary: 'Image saved to database', detail: ''}),
+      err => console.log(err)//this.toastService.add({severity: 'error', summary: 'Cannot save image to database', detail: err.error})
+    );
   }
 
 }

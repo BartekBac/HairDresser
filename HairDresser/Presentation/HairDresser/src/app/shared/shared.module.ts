@@ -4,17 +4,18 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { SalonService } from './services/salon.service';
 import { SalonResolver } from './resolvers/salon.resolver';
 import { PanelModule, InputTextModule, ButtonModule, InputMaskModule, MessageModule,
-         DialogModule, CheckboxModule, PasswordModule, SelectButtonModule } from 'primeng/primeng';
+         DialogModule, CheckboxModule, PasswordModule, SelectButtonModule, FileUploadModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbTimepickerModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormSalonDataComponent } from './components/form-salon-data/form-salon-data.component';
 import { FormUserDataComponent } from './components/form-user-data/form-user-data.component';
 import { FormScheduleComponent } from './components/form-schedule/form-schedule.component';
+import { FormUploadImageComponent } from './components/form-upload-image/form-upload-image.component';
 
 
 @NgModule({
-  declarations: [FormSalonDataComponent, FormUserDataComponent, FormScheduleComponent],
+  declarations: [FormSalonDataComponent, FormUserDataComponent, FormScheduleComponent, FormUploadImageComponent],
   imports: [
     CommonModule,
     PanelModule,
@@ -30,13 +31,15 @@ import { FormScheduleComponent } from './components/form-schedule/form-schedule.
     NgbTooltipModule,
     CheckboxModule,
     PasswordModule,
-    SelectButtonModule
+    SelectButtonModule,
+    FileUploadModule
   ],
   exports: [
     CommonModule,
     FormSalonDataComponent,
     FormUserDataComponent,
-    FormScheduleComponent
+    FormScheduleComponent,
+    FormUploadImageComponent
   ]
 })
 export class SharedModule {

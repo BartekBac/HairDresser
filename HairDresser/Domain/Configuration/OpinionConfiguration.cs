@@ -11,9 +11,9 @@ namespace Domain.Configuration
         {
             builder.HasKey(e => e.Id);
 
-            builder.HasOne(o => o.Image)
+            /*builder.HasOne(o => o.Image)
                    .WithOne(ei => ei.Entity)
-                   .HasForeignKey<EntityImage<Opinion>>(ei => ei.EntityId);
+                   .HasForeignKey<EntityImage<Opinion>>(ei => ei.EntityId);*/
         }
     }
 }
