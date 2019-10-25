@@ -28,10 +28,13 @@ namespace Application.Handlers.Salon
             var salon = _dbContext.Salons.FirstOrDefault(s => s.Id == salonId);
             var image = _dbContext.Images.FirstOrDefault(i => i.Id == salonId);
             salon.Image = image;
-            //var salon = _dbContext.Salons.FirstOrDefault(s => s.Id == salonId);
             if (salon == null)
             {
-                throw new ApplicationException("Could not find salon with id="+salonId);
+                throw new ApplicationException("Could not find salon with id=" + salonId);
+            }
+            if (image == null)
+            {
+                throw new ApplicationException("Could not find image for salon with id=" + salonId);
             }
 
             return _mapper.Map<SalonDto>(salon);

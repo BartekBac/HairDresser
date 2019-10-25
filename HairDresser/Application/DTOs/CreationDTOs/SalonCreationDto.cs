@@ -14,6 +14,7 @@ namespace Application.DTOs
         public AddressDto Address { get; set; }
         public ScheduleDto Schedule { get; set; }
         public UserCreationDto UserData { get; set; }
+        public string ImageData { get; set; }
 
     }
 }

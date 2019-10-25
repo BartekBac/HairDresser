@@ -9,4 +9,5 @@ export class RegisterSalonCredentials {
   address: Address;
   schedule: Schedule;
   userData: UserData;
+  imageData: string;
 }

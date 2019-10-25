@@ -64,7 +64,7 @@ namespace WebAPI
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISalonService, SalonService>();
             services.AddScoped<IClientService, ClientService>();
-            
+
             services.AddAutoMapper(typeof(HairDresserProfile));
             services.AddMediatR(Assembly.Load(new AssemblyName("Application")));
 

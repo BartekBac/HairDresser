@@ -1,21 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationStart, NavigationEnd, Event, Router, NavigationCancel, NavigationError,
    RoutesRecognized, GuardsCheckStart, GuardsCheckEnd, ResolveStart, ResolveEnd} from '@angular/router';
+import { MenuItem } from 'primeng/primeng';
+import { AuthService } from './authentication/services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'HairDresser';
   showProgressBar = false;
   progressBarValue = 0;
 
-  constructor(private router: Router) {
+  menuItems: MenuItem[];
+
+  constructor(
+    private router: Router,
+    private authService: AuthService) {
     this.router.events.subscribe((event: Event) => {
       this.loadingBarInterceptor(event);
     });
+  }
+
+  ngOnInit() {
+    this.menuItems = [
+      {
+        label: 'Home',
+        icon: 'pi pi-home',
+        command: () => this.authService.navigateHome()
+      }
+    ]
   }
 
   private loadingBarInterceptor(event: Event) {
@@ -38,5 +54,13 @@ export class AppComponent {
       this.progressBarValue = 100;
       setTimeout( () => this.showProgressBar = false, 700 );
     }
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  userLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
   }
 }

@@ -25,18 +25,12 @@ export class FormUploadImageComponent implements OnInit {
     const self = this;
     reader.onload = function () {
         self.imageSrc = reader.result;
-        console.log(self.imageSrc);
         self.imageUploaded.emit(reader.result);
     };
-    console.log(self.imageSrc);
     this.imageUploaded.emit(this.imageSrc);
     this.toastService.add({severity: 'info', summary: 'Image Uploaded',
      detail: 'Name: ' + file.name + '\nSize: ' + (file.size / 1000) + ' KB', life: 5000 });
     this.uploadControl.clear();
-  }
-
-  onSelect(event) {
-    console.log(event);
   }
 
 }

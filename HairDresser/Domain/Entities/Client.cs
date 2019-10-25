@@ -42,7 +42,6 @@ namespace Domain.Entities
         }
         public IEnumerable<Visit> Visits
         {
-            //get => _visits.Where(v => v.Status == VisitStatus.Accepted); // TODO: sprawdzić czy coś takiego będzie działać a jak nie to ma być w serwisie
             get => _visits;
             set => _visits = new HashSet<Visit>(value);
         }

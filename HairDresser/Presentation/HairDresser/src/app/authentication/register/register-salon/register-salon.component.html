@@ -11,7 +11,7 @@
         <app-form-schedule [schedule]="registerCredentials.schedule"></app-form-schedule>
       </p-tabPanel>
       <p-tabPanel header="Image">
-        <app-form-upload-image></app-form-upload-image>
+        <app-form-upload-image [imageSrc]="registerCredentials.imageData" (imageUploaded)="onImageUpload($event)"></app-form-upload-image>
       </p-tabPanel>
     </p-tabView>
   </div>

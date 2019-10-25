@@ -36,7 +36,6 @@ namespace Domain.Entities
         {
 
         }
-
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public IdentityUser User { get; private set; }

@@ -22,7 +22,7 @@ namespace Domain.Entities
             Rating = -1.0f;
             AdditionalInfo = additionalInfo;
             Type = type;
-            Schedule = new Schedule(Guid.Parse(admin.Id), schedule);//new Schedule<Salon>(Id, this, new TimeSpan(0, 0, 0), new TimeSpan(23, 59, 0));
+            Schedule = new Schedule(Guid.Parse(admin.Id), schedule);
         }
         public Salon(IdentityUser admin, string name, Address address, string additionalInfo, SalonType type, Schedule schedule, byte[] imageSource, string imageHeader) : base(Guid.Parse(admin.Id), imageSource, imageHeader)
         {

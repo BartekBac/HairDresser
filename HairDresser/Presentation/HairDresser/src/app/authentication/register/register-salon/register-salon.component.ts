@@ -76,7 +76,8 @@ export class RegisterSalonComponent implements OnInit {
       email: '',
       phoneNumber: '',
       role: 'salon'
-    }
+    },
+    imageData: ''
   };
 
   protected salonData: SalonData = {
@@ -133,6 +134,10 @@ export class RegisterSalonComponent implements OnInit {
       toReturn.update(false, "Zip code cannot by empty.");
     }
     return toReturn;
+  }
+
+  onImageUpload(imageSource: any) {
+    this.registerCredentials.imageData = imageSource;
   }
 
   submit() {

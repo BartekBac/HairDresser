@@ -4,5 +4,8 @@
   [value]="progressBarValue"
   [style]="{'height': '6px'}">
 </p-progressBar>
+<p-menubar *ngIf="userLoggedIn()" [model]="menuItems">
+    <button pButton label="Logout" icon="pi pi-sign-out" (click)="logout()"></button>
+</p-menubar>
 <p-toast [style]="{marginTop: '80px'}"></p-toast>
 <router-outlet></router-outlet>

@@ -32,15 +32,18 @@ namespace Application.Services
             }
 
             var schedule = _mapper.Map<Schedule>(salonCreation.Schedule);
+
+            var resolvedImage = ImageService.ResolveToImage(salonCreation.ImageData);
             
             var salon = new Salon(admin,
                                   salonCreation.Name,
                                   _mapper.Map<Address>(salonCreation.Address),
                                   salonCreation.AdditionalInfo,
                                   salonCreation.Type,
-                                  schedule);
-            //schedule.SetEntity(salon.Id, salon);
-            // TODO: _dbContext.Add(schedule)?
+                                  schedule,
+                                  resolvedImage.Source,
+                                  resolvedImage.Header);
+
             _dbContext.Salons.Add(salon);
 
             if (_dbContext.SaveChanges() == 0)
