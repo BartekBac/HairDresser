@@ -9,6 +9,7 @@ namespace Application.Services
 {
     public interface IUserService
     {
-       Task<UserDto> CreateUserAsync(UserCreationDto userCreation);
+        Task<UserDto> CreateUserAsync(UserCreationDto userCreation);
+        Task UpdateUserAsync(string id, string email, string phoneNumber);
     }
 }

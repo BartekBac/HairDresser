@@ -13,10 +13,18 @@ import { FormUserDataComponent } from './components/form-user-data/form-user-dat
 import { FormScheduleComponent } from './components/form-schedule/form-schedule.component';
 import { FormUploadImageComponent } from './components/form-upload-image/form-upload-image.component';
 import { SalonTypePipe } from './pipes/salon-type.pipe';
+import { EditableDivComponent } from './components/editable-div/editable-div.component';
 
 
 @NgModule({
-  declarations: [FormSalonDataComponent, FormUserDataComponent, FormScheduleComponent, FormUploadImageComponent, SalonTypePipe],
+  declarations: [
+    FormSalonDataComponent,
+    FormUserDataComponent,
+    FormScheduleComponent,
+    FormUploadImageComponent,
+    SalonTypePipe,
+    EditableDivComponent
+  ],
   imports: [
     CommonModule,
     PanelModule,
@@ -41,7 +49,8 @@ import { SalonTypePipe } from './pipes/salon-type.pipe';
     FormUserDataComponent,
     FormScheduleComponent,
     FormUploadImageComponent,
-    SalonTypePipe
+    SalonTypePipe,
+    EditableDivComponent
   ]
 })
 export class SharedModule {

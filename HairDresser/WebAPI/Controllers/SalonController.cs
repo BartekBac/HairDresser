@@ -25,16 +25,19 @@ namespace WebAPI.Controllers
         private IMapper _mapper;
         private IMediator _mediator;
         private ISalonService _salonService;
+        private IUserService _userService;
 
         public SalonController(UserManager<IdentityUser> userManager,
                               IMapper mapper,
                               IMediator mediator,
-                              ISalonService salonService)
+                              ISalonService salonService,
+                              IUserService userService)
         {
             _userManager = userManager;
             _mapper = mapper;
             _mediator = mediator;
             _salonService = salonService;
+            _userService = userService;
         }
 
         [Authorize(Roles = RoleString.Salon)]
@@ -46,15 +49,63 @@ namespace WebAPI.Controllers
         }
 
         [Authorize(Roles = RoleString.Salon)]
-        [HttpPost("{id}/image")]
-        public async Task<IActionResult> UploadSalonImage(UploadImageCommand command)
+        [HttpPost("{id}/update-image")]
+        public async Task<IActionResult> UploadSalonImage(string id, [FromBody] UploadImageCommand command)
         {
             try
             {
+                command.Id = id;
                 var result = await _mediator.Send(command);
                 return Ok();
             }
             catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Authorize(Roles = RoleString.Salon)]
+        [HttpPut("{id}/update-salon-data")]
+        public async Task<IActionResult> UpdateSalonData(string id, [FromBody] UpdateSalonDataCommand command)
+        {
+            try
+            {
+                command.Id = id;
+                var result = await _mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Authorize(Roles = RoleString.Salon)]
+        [HttpPut("{id}/update-schedule")]
+        public async Task<IActionResult> UpdateSchedule(string id, [FromBody] UpdateScheduleCommand command)
+        {
+            try
+            {
+                command.Id = id;
+                var result = await _mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Authorize(Roles = RoleString.Salon)]
+        [HttpPut("{id}/update-user-data")]
+        public async Task<IActionResult> UpdateUserData(string id, [FromBody] UpdateUserDto user)
+        {
+            try
+            {
+                await _userService.UpdateUserAsync(id, user.Email, user.PhoneNumber);
+                return Ok();
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }

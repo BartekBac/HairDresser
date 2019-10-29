@@ -63,5 +63,33 @@ namespace Application.Services
 
             return _mapper.Map<UserDto>(user);
         }
+
+        public async Task UpdateUserAsync(string id, string email, string phoneNumber)
+        {
+            IdentityUser user = await _userManager.FindByIdAsync(id);
+            if(user == null)
+            {
+                throw new ApplicationException("Cannot find user with id=" + id);
+            }
+            if (user.Email != email && !string.IsNullOrEmpty(email))
+            {
+                user.Email = email;
+            }
+            if(user.PhoneNumber != phoneNumber && !string.IsNullOrEmpty(phoneNumber))
+            {
+                user.PhoneNumber = phoneNumber;
+            }
+            IdentityResult result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                var errorMessage = "Update Failed. Cannot change user data.";
+                foreach (var msg in result.Errors.ToArray())
+                {
+                    errorMessage += " [" + msg.Code + "] " + msg.Description;
+                }
+
+                throw new ApplicationException(errorMessage);
+            }
+        }
     }
 }

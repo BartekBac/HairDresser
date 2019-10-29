@@ -7,7 +7,7 @@ namespace Application.Commands
 {
     public class UploadImageCommand : IRequest
     {
-        public Guid EntityId { get; set; }
+        public string Id { get; set; }
         public string ImageSource { get; set; }
     }
 }

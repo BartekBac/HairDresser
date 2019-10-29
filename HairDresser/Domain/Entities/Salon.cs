@@ -60,5 +60,13 @@ namespace Domain.Entities
             get => _clients;
             set => _clients = new HashSet<ClientSalons>(value);
         }
+
+        public void UpdateData(string name, string additionalInfo, Address address, SalonType type)
+        {
+            Name = name;
+            AdditionalInfo = additionalInfo;
+            Address = address;
+            Type = type;
+        }
     }
 }

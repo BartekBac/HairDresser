@@ -56,5 +56,15 @@ namespace Domain.Entities
         {
             Sunday = new Day(beginHour, beginMinute, endHour, endMinute);
         }
+        public void Update(Schedule schedule)
+        {
+            Monday = schedule.Monday;
+            Tuesday = schedule.Tuesday;
+            Wednesday = schedule.Wednesday;
+            Thursday = schedule.Thursday;
+            Friday = schedule.Friday;
+            Saturday = schedule.Saturday;
+            Sunday = schedule.Sunday;
+        }
     }
 }

@@ -7,6 +7,12 @@ import { Constants } from 'src/app/shared/constants/Constants';
 import * as jwt_decode from 'jwt-decode';
 import { MessageService } from 'primeng/primeng';
 import { AuthService } from 'src/app/authentication/services/auth.service';
+import { SalonData } from 'src/app/shared/models/SalonData';
+import { UserData } from 'src/app/shared/models/UserData';
+import { Schedule } from 'src/app/shared/models/Schedule';
+import { UpdateUserData } from 'src/app/shared/models/UpdateUserData';
+import { UpdateSchedule } from 'src/app/shared/models/UpdateSchedule';
+import { Address } from 'src/app/shared/models/Address';
 
 @Component({
   selector: 'app-home',
@@ -18,8 +24,33 @@ export class HomeComponent implements OnInit {
   salon: Salon = null;
   userId: string = null;
 
-  editImageIconVisible = false;
   displayEditImage = false;
+  displayEditSalonData = false;
+  displayEditUserData = false;
+  displayEditSchedule = false;
+  displayAddWorker = false;
+
+  protected uploadedImageSource = '';
+  protected salonData: SalonData = {
+    name: '',
+    additionalInfo: '',
+    type: 0,
+    address: {
+      city: '',
+      zipCode: '',
+      street: '',
+      houseNumber: '',
+    }
+  };
+  protected userData: UserData = {
+    userName: '',
+    password: '',
+    confirmPassword: '',
+    email: '',
+    phoneNumber: '',
+    role: 'salon'
+  };
+  protected schedule: Schedule = null;
 
   constructor(
     private salonService: SalonService,
@@ -33,31 +64,96 @@ export class HomeComponent implements OnInit {
     this.userId = decodedToken[Constants.DECODE_TOKEN_USER_ID];
     this.salon = this.route.snapshot.data.salon;
     console.log(this.salon);
+    this.loadChildDataModels();
   }
 
-  toggleEditImageIcon(show: boolean) {
-    this.editImageIconVisible = show;
+  private loadChildDataModels() {
+    this.salonData.name = this.salon.name;
+    this.salonData.additionalInfo = this.salon.additionalInfo;
+    this.salonData.address.city = this.salon.address.city;
+    this.salonData.address.street = this.salon.address.street;
+    this.salonData.address.houseNumber = this.salon.address.houseNumber;
+    this.salonData.address.zipCode = this.salon.address.zipCode;
+    this.salonData.type = this.salon.type;
+    this.uploadedImageSource = this.salon.imageSource;
+    this.userData.userName = this.salon.admin.userName;
+    this.userData.email = this.salon.admin.email;
+    this.userData.phoneNumber = this.salon.admin.phoneNumber;
+    this.schedule = this.salon.schedule;
+  }
+
+  private updateSalonModel() {
+    this.salon.name = this.salonData.name;
+    this.salon.additionalInfo = this.salonData.additionalInfo;
+    this.salon.address.city = this.salonData.address.city;
+    this.salon.address.street = this.salonData.address.street;
+    this.salon.address.houseNumber = this.salonData.address.houseNumber;
+    this.salon.address.zipCode = this.salonData.address.zipCode;
+    this.salon.type = this.salonData.type;
+    this.salon.imageSource = this.uploadedImageSource;
+    this.salon.admin.userName = this.userData.userName;
+    this.salon.admin.email = this.userData.email;
+    this.salon.admin.phoneNumber = this.userData.phoneNumber;
+    this.salon.schedule = this.schedule;
   }
 
   onImageUpload(imageSource: any) {
-    this.salon.imageSource = imageSource;
-    console.log(imageSource);
-  }
-
-  showEditImageDialog() {
-    this.displayEditImage = true;
+    this.uploadedImageSource = imageSource;
   }
 
  saveImage() {
     const uploadImage: UploadImage = {
-      entityId: this.userId,
-      imageSource: this.salon.imageSource
+      imageSource: this.uploadedImageSource
     };
-    console.log(uploadImage.imageSource);
-    this.salonService.uploadSalonImage(uploadImage).subscribe(
-      res => this.toastService.add({severity: 'success', summary: 'Image saved to database', detail: ''}),
+    this.salonService.uploadSalonImage(this.userId, uploadImage).subscribe(
+      res => {
+        this.toastService.add({severity: 'success', summary: 'Image saved to database', detail: ''});
+        this.updateSalonModel();
+      },
       err => this.toastService.add({severity: 'error', summary: 'Cannot save image to database', detail: err.error})
     );
+  }
+
+  saveSalonData() {
+    this.salonService.updateSalonData(this.userId, this.salonData).subscribe(
+      res => {
+        this.toastService.add({severity: 'success', summary: 'Changes saved to database', detail: ''});
+        this.updateSalonModel();
+      },
+      err => this.toastService.add({severity: 'error', summary: 'Cannot save changes into database', detail: err.error})
+    );
+  }
+
+  saveUserData() {
+    const updateUserData: UpdateUserData = {
+      email: this.userData.email,
+      phoneNumber: this.userData.phoneNumber
+    };
+    this.salonService.updateUserData(this.userId, updateUserData).subscribe(
+      res => {
+        this.toastService.add({severity: 'success', summary: 'Changes saved to database', detail: ''});
+        this.updateSalonModel();
+      },
+      err => this.toastService.add({severity: 'error', summary: 'Cannot save changes into database', detail: err.error})
+    );
+  }
+
+  saveSchedule() {
+    const updateSchedule: UpdateSchedule = {
+      schedule: this.schedule
+    };
+    console.log(updateSchedule);
+    this.salonService.updateSchedule(this.userId, updateSchedule).subscribe(
+      res => {
+        this.toastService.add({severity: 'success', summary: 'Changes saved to database', detail: ''});
+        this.updateSalonModel();
+      },
+      err => this.toastService.add({severity: 'error', summary: 'Cannot save changes into database', detail: err.error})
+    );
+  }
+
+  showAddWorkerDialog() {
+    this.displayAddWorker = true;
   }
 
 }

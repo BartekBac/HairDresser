@@ -1,27 +1,5 @@
-.my-card-wrapper{
- width: 90%;
-}
-
-.my-edit-button{
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.my-edit-wrapper{
-  position: relative;
-}
-
-.my-hide-element{
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s linear 0.33s, opacity 0.33s linear;
-}
-.my-show-element{
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 0.33s linear;
-  transition-delay: 1s;
+.my-column-wrapper{
+  width: 90%;
 }
 
 .my-footer-button{
@@ -31,4 +9,12 @@
 .my-footer-wrapper{
   width: 100%;
   text-align: center;
+}
+
+.my-header-panel-button{
+  float: right;
+}
+
+.my-header-panel-title{
+  float: left;
 }
