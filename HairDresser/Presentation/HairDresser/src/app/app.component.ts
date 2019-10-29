@@ -3,6 +3,7 @@ import { NavigationStart, NavigationEnd, Event, Router, NavigationCancel, Naviga
    RoutesRecognized, GuardsCheckStart, GuardsCheckEnd, ResolveStart, ResolveEnd} from '@angular/router';
 import { MenuItem } from 'primeng/primeng';
 import { AuthService } from './authentication/services/auth.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -60,7 +61,7 @@ export class AppComponent implements OnInit {
     this.authService.logout();
   }
 
-  userLoggedIn(): boolean {
-    return this.authService.isAuthenticated();
+  showNavbar() {
+    return this.authService.getNavbarVisibility();
   }
 }

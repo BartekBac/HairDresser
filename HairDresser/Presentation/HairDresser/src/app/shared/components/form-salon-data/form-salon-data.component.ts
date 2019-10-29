@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
 import { SalonData } from '../../models/SalonData';
+import { SalonType } from '../../enums/SalonType';
 
 @Component({
   selector: 'app-form-salon-data',
@@ -12,9 +13,9 @@ export class FormSalonDataComponent implements OnInit {
   @Input() salon: SalonData;
 
   salonTypes: SelectItem[] = [
-    {label: 'Unisex', value: 0},
-    {label: 'Female', value: 1},
-    {label: 'Male', value: 2}
+    {label: 'Unisex', value: SalonType.Unisex},
+    {label: 'Female', value: SalonType.Female},
+    {label: 'Male', value: SalonType.Male}
   ];
 
   constructor() { }

@@ -1,11 +1,16 @@
-<p-progressBar
-  *ngIf="showProgressBar"
-  class="my-progress-bar"
-  [value]="progressBarValue"
-  [style]="{'height': '6px'}">
-</p-progressBar>
-<p-menubar *ngIf="userLoggedIn()" [model]="menuItems">
-    <button pButton label="Logout" icon="pi pi-sign-out" (click)="logout()"></button>
-</p-menubar>
-<p-toast [style]="{marginTop: '80px'}"></p-toast>
-<router-outlet></router-outlet>
+<div class="my-background">
+    <p-progressBar
+    *ngIf="showProgressBar"
+    class="my-progress-bar"
+    [value]="progressBarValue"
+    [style]="{'height': '6px'}">
+  </p-progressBar>
+  <p-menubar *ngIf="showNavbar()" [model]="menuItems">
+      <button pButton label="Logout" icon="pi pi-sign-out" (click)="logout()"></button>
+  </p-menubar>
+  <img class="my-background-img" src="../../../assets/images/background.jpg">
+  <p-scrollPanel [style]="{width: '100%', height: '93vh'}">
+  <p-toast [style]="{marginTop: '80px'}"></p-toast>
+  <router-outlet></router-outlet>
+  </p-scrollPanel>
+</div>

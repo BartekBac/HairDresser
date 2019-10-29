@@ -1,4 +1,75 @@
-<p>Salon home works!</p>
-<label *ngIf="salon">{{this.salon.additionalInfo}}</label>
-<app-form-upload-image [imageSrc]="salon.imageSource" (imageUploaded)="onImageUpload($event)"></app-form-upload-image>
-<button (click)="uploadImage()">Save</button>
+<div class="ui-g">
+  <div class="ui-g-12 ui-fluid p-grid p-align-center">
+    <div class="ui-g-12 ui-md-12 ui-lg-6">
+      <div class="ui-g-12 ui-md-8 ui-md-offset-1 my-card-wrapper">
+        <!--<app-form-upload-image [imageSrc]="salon.imageSource" (imageUploaded)="onImageUpload($event)"></app-form-upload-image>
+          <button (click)="uploadImage()">Save</button>-->
+        <p-card header="{{salon.name}}" subheader="{{salon.type | salonType}} hairdresser" styleClass="ui-card-shadow">
+          <p-header>
+            <div class="my-edit-wrapper" (mouseenter)="toggleEditImageIcon(true)"
+              (mouseleave)="toggleEditImageIcon(false)">
+              <img [src]="salon.imageSource">
+              <p-button (click)="showEditImageDialog()"
+                [ngClass]="(editImageIconVisible===true)?'my-show-element':'my-hide-element'" class="my-edit-button"
+                icon="pi pi-pencil"></p-button>
+            </div>
+          </p-header>
+          <p-accordion [multiple]="true">
+            <p-accordionTab header="Info" [selected]="true">
+              <div>{{salon.additionalInfo}}</div>
+            </p-accordionTab>
+            <p-accordionTab header="Schedule">
+              <div *ngIf="salon.schedule.monday.isActive">Mon:
+                {{salon.schedule.monday.begin.hour | number:'2.0'}}:{{salon.schedule.monday.begin.minute | number:'2.0'}}-{{salon.schedule.monday.end.hour | number:'2.0'}}:{{salon.schedule.monday.end.minute | number:'2.0'}}
+              </div>
+              <div *ngIf="salon.schedule.tuesday.isActive">Tue:
+                {{salon.schedule.tuesday.begin.hour | number:'2.0'}}:{{salon.schedule.tuesday.begin.minute | number:'2.0'}}-{{salon.schedule.tuesday.end.hour | number:'2.0'}}:{{salon.schedule.tuesday.end.minute | number:'2.0'}}
+              </div>
+              <div *ngIf="salon.schedule.wednesday.isActive">Wed:
+                {{salon.schedule.wednesday.begin.hour | number:'2.0'}}:{{salon.schedule.wednesday.begin.minute | number:'2.0'}}-{{salon.schedule.wednesday.end.hour | number:'2.0'}}:{{salon.schedule.wednesday.end.minute | number:'2.0'}}
+              </div>
+              <div *ngIf="salon.schedule.thursday.isActive">Thu:
+                {{salon.schedule.thursday.begin.hour | number:'2.0'}}:{{salon.schedule.thursday.begin.minute | number:'2.0'}}-{{salon.schedule.thursday.end.hour | number:'2.0'}}:{{salon.schedule.thursday.end.minute | number:'2.0'}}
+              </div>
+              <div *ngIf="salon.schedule.friday.isActive">Fri:
+                {{salon.schedule.friday.begin.hour | number:'2.0'}}:{{salon.schedule.friday.begin.minute | number:'2.0'}}-{{salon.schedule.friday.end.hour | number:'2.0'}}:{{salon.schedule.friday.end.minute | number:'2.0'}}
+              </div>
+              <div *ngIf="salon.schedule.saturday.isActive">Sat:
+                {{salon.schedule.saturday.begin.hour | number:'2.0'}}:{{salon.schedule.saturday.begin.minute | number:'2.0'}}-{{salon.schedule.saturday.end.hour | number:'2.0'}}:{{salon.schedule.saturday.end.minute | number:'2.0'}}
+              </div>
+              <div *ngIf="salon.schedule.sunday.isActive">Sun:
+                {{salon.schedule.sunday.begin.hour | number:'2.0'}}:{{salon.schedule.sunday.begin.minute | number:'2.0'}}-{{salon.schedule.sunday.end.hour | number:'2.0'}}:{{salon.schedule.sunday.end.minute | number:'2.0'}}
+              </div>
+            </p-accordionTab>
+            <p-accordionTab header="Contact">
+              <div>E-mail: {{salon.admin.email}}</div>
+              <div>Tel no: {{salon.admin.phoneNumber}}</div>
+            </p-accordionTab>
+            <p-accordionTab header="Address">
+              <div>{{salon.address.street}} {{salon.address.houseNumber}}</div>
+              <div>{{salon.address.zipCode}}, {{salon.address.city}}</div>
+            </p-accordionTab>
+          </p-accordion>
+          <p-footer>
+          </p-footer>
+        </p-card>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-12 ui-lg-6">
+      <div class="ui-g-12 ui-md-8 ui-md-offset-2">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Edit image" [(visible)]="displayEditImage" [style]="{width: '450px'}">
+  <app-form-upload-image [imageSrc]="salon.imageSource" (imageUploaded)="onImageUpload($event)"></app-form-upload-image>
+  <p-footer>
+    <div class="my-footer-wrapper">
+      <button pButton type="button" class="ui-button-raised my-footer-button" (click)="saveImage()" label="Save"
+        icon="pi pi-save" iconPos="left"></button>
+    </div>
+  </p-footer>
+
+</p-dialog>

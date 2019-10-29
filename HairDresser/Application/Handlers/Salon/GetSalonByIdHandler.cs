@@ -25,9 +25,11 @@ namespace Application.Handlers.Salon
         {
             Guid salonId = new Guid(request.Id.ToString());
 
-            var salon = _dbContext.Salons.FirstOrDefault(s => s.Id == salonId);
+            var salon = _dbContext.Salons.Include(s => s.Admin).FirstOrDefault(s => s.Id == salonId);
             var image = _dbContext.Images.FirstOrDefault(i => i.Id == salonId);
+            var schedule = _dbContext.Schedules.FirstOrDefault(i => i.Id == salonId);
             salon.Image = image;
+            salon.Schedule = schedule;
             if (salon == null)
             {
                 throw new ApplicationException("Could not find salon with id=" + salonId);
@@ -35,6 +37,10 @@ namespace Application.Handlers.Salon
             if (image == null)
             {
                 throw new ApplicationException("Could not find image for salon with id=" + salonId);
+            }
+            if (schedule == null)
+            {
+                throw new ApplicationException("Could not find schedule for salon with id=" + salonId);
             }
 
             return _mapper.Map<SalonDto>(salon);

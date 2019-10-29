@@ -12,10 +12,11 @@ import { FormSalonDataComponent } from './components/form-salon-data/form-salon-
 import { FormUserDataComponent } from './components/form-user-data/form-user-data.component';
 import { FormScheduleComponent } from './components/form-schedule/form-schedule.component';
 import { FormUploadImageComponent } from './components/form-upload-image/form-upload-image.component';
+import { SalonTypePipe } from './pipes/salon-type.pipe';
 
 
 @NgModule({
-  declarations: [FormSalonDataComponent, FormUserDataComponent, FormScheduleComponent, FormUploadImageComponent],
+  declarations: [FormSalonDataComponent, FormUserDataComponent, FormScheduleComponent, FormUploadImageComponent, SalonTypePipe],
   imports: [
     CommonModule,
     PanelModule,
@@ -39,7 +40,8 @@ import { FormUploadImageComponent } from './components/form-upload-image/form-up
     FormSalonDataComponent,
     FormUserDataComponent,
     FormScheduleComponent,
-    FormUploadImageComponent
+    FormUploadImageComponent,
+    SalonTypePipe
   ]
 })
 export class SharedModule {
