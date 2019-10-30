@@ -12,7 +12,7 @@ import { UserData } from 'src/app/shared/models/UserData';
 import { Schedule } from 'src/app/shared/models/Schedule';
 import { UpdateUserData } from 'src/app/shared/models/UpdateUserData';
 import { UpdateSchedule } from 'src/app/shared/models/UpdateSchedule';
-import { Address } from 'src/app/shared/models/Address';
+import { Functions } from 'src/app/shared/constants/Functions';
 
 @Component({
   selector: 'app-home',
@@ -68,33 +68,17 @@ export class HomeComponent implements OnInit {
   }
 
   private loadChildDataModels() {
-    this.salonData.name = this.salon.name;
-    this.salonData.additionalInfo = this.salon.additionalInfo;
-    this.salonData.address.city = this.salon.address.city;
-    this.salonData.address.street = this.salon.address.street;
-    this.salonData.address.houseNumber = this.salon.address.houseNumber;
-    this.salonData.address.zipCode = this.salon.address.zipCode;
-    this.salonData.type = this.salon.type;
+    this.salonData = Functions.copyObject(this.salon);
     this.uploadedImageSource = this.salon.imageSource;
-    this.userData.userName = this.salon.admin.userName;
-    this.userData.email = this.salon.admin.email;
-    this.userData.phoneNumber = this.salon.admin.phoneNumber;
-    this.schedule = this.salon.schedule;
+    this.userData = Functions.copyObject(this.salon.admin);
+    this.schedule = Functions.copyObject(this.salon.schedule);
   }
 
   private updateSalonModel() {
-    this.salon.name = this.salonData.name;
-    this.salon.additionalInfo = this.salonData.additionalInfo;
-    this.salon.address.city = this.salonData.address.city;
-    this.salon.address.street = this.salonData.address.street;
-    this.salon.address.houseNumber = this.salonData.address.houseNumber;
-    this.salon.address.zipCode = this.salonData.address.zipCode;
-    this.salon.type = this.salonData.type;
+    this.salon = Functions.copyObject(this.salonData);
     this.salon.imageSource = this.uploadedImageSource;
-    this.salon.admin.userName = this.userData.userName;
-    this.salon.admin.email = this.userData.email;
-    this.salon.admin.phoneNumber = this.userData.phoneNumber;
-    this.salon.schedule = this.schedule;
+    this.salon.admin = Functions.copyObject(this.userData);
+    this.salon.schedule = Functions.copyObject(this.schedule);
   }
 
   onImageUpload(imageSource: any) {
@@ -142,7 +126,6 @@ export class HomeComponent implements OnInit {
     const updateSchedule: UpdateSchedule = {
       schedule: this.schedule
     };
-    console.log(updateSchedule);
     this.salonService.updateSchedule(this.userId, updateSchedule).subscribe(
       res => {
         this.toastService.add({severity: 'success', summary: 'Changes saved to database', detail: ''});

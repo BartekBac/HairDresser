@@ -39,7 +39,7 @@ namespace Application.Services
         public static string ConcatenateToString(Image image)
         {
             string imageSource = null;
-            if(image != null)
+            if(image.Source != null)
             {
                 imageSource = image.Header + Convert.ToBase64String(image.Source);
             }

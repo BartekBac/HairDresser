@@ -7,6 +7,7 @@ import { delay } from 'rxjs/internal/operators';
 import { UploadImage } from '../models/UploadImage';
 import { UpdateUserData } from '../models/UpdateUserData';
 import { UpdateSchedule } from '../models/UpdateSchedule';
+import { Salon } from '../models/Salon';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class SalonService {
 
   constructor(private http: HttpClient) { }
 
-  getSalon(id: string): Observable<SalonData> {
-    return this.http.get<SalonData>(this.baseUrl + id).pipe(delay(1500));
+  getSalon(id: string): Observable<Salon> {
+    return this.http.get<Salon>(this.baseUrl + id).pipe(delay(1500));
   }
 
   uploadSalonImage(salonId: string, uploadImage: UploadImage) {

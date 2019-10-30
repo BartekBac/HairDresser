@@ -71,6 +71,7 @@
                       <p-button class="my-header-panel-button" icon="pi pi-plus" (click)="showAddWorkerDialog()" ></p-button>
                   </div>
               </p-header>
+            <app-worker-list [workers]="salon.workers"></app-worker-list>
           </p-panel>
       </div>
     </div>
@@ -119,5 +120,5 @@
 </p-dialog>
 
 <p-dialog header="Add worker" [(visible)]="displayAddWorker" [style]="{width: '500px'}">
-    <app-add-worker></app-add-worker>
+    <app-add-worker [salonId]="userId" [salonSchedule]="salon.schedule" ></app-add-worker>
 </p-dialog>

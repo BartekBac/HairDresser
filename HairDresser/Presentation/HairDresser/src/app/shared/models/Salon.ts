@@ -10,4 +10,5 @@ export class Salon {
   schedule: Schedule;
   admin: User;
   imageSource: string;
+  workers: Worker[];
 }

@@ -39,6 +39,7 @@ namespace WebAPI.Configurations
 
             CreateMap<Schedule, ScheduleDto>();
             CreateMap<ScheduleDto, Schedule>();
+            CreateMap<Worker, WorkerDto>();
         }
     }
 }

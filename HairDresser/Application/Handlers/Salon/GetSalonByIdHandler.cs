@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Application.Services;
 
 namespace Application.Handlers.Salon
 {
@@ -25,7 +26,10 @@ namespace Application.Handlers.Salon
         {
             Guid salonId = new Guid(request.Id.ToString());
 
-            var salon = _dbContext.Salons.Include(s => s.Admin).FirstOrDefault(s => s.Id == salonId);
+            var salon = _dbContext.Salons
+                .Include(s => s.Admin)
+                .Include(s => s.Workers).ThenInclude(w => w.User)
+                .FirstOrDefault(s => s.Id == salonId);
             var image = _dbContext.Images.FirstOrDefault(i => i.Id == salonId);
             var schedule = _dbContext.Schedules.FirstOrDefault(i => i.Id == salonId);
             salon.Image = image;
@@ -43,7 +47,38 @@ namespace Application.Handlers.Salon
                 throw new ApplicationException("Could not find schedule for salon with id=" + salonId);
             }
 
-            return _mapper.Map<SalonDto>(salon);
+            var result = _mapper.Map<SalonDto>(salon);
+
+            result.Workers = salon.Workers.Join(
+                _dbContext.Images.AsEnumerable(),
+                worker => worker.Id,
+                image => image.Id,
+                (worker, image) => new WorkerDto
+                {
+                    Id = worker.Id.ToString(),
+                    FirstName = worker.FirstName,
+                    LastName = worker.LastName,
+                    Rating = worker.Rating,
+                    Schedule = null,
+                    UserEmail = worker.User.Email,
+                    UserPhoneNumber = worker.User.PhoneNumber,
+                    ImageSource = ImageService.ConcatenateToString(image)
+                }).Join(
+                    _dbContext.Schedules.AsEnumerable(),
+                    worker => worker.Id,
+                    schedule => schedule.Id.ToString(),
+                    (worker, schedule) => new WorkerDto
+                    {
+                        Id = worker.Id,
+                        FirstName = worker.FirstName,
+                        LastName = worker.LastName,
+                        Rating = worker.Rating,
+                        Schedule = _mapper.Map<ScheduleDto>(schedule),
+                        UserEmail = worker.UserEmail,
+                        UserPhoneNumber = worker.UserPhoneNumber,
+                        ImageSource = worker.ImageSource
+                    });
+            return result;
         }
     }
 }
