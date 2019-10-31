@@ -60,5 +60,21 @@ namespace Domain.Entities
             set => _visits = new HashSet<Visit>(value);
         }
 
+        public bool UpdateData(string firstName, string lastName)
+        {
+            var updated = false;
+            if (FirstName != firstName)
+            {
+                this.FirstName = firstName;
+                updated = true;
+            }
+            if (LastName != lastName)
+            {
+                this.LastName = lastName;
+                updated = true;
+            }
+            return updated;
+        }
+
     }
 }

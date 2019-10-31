@@ -22,7 +22,7 @@ export class SalonService {
     return this.http.get<Salon>(this.baseUrl + id).pipe(delay(1500));
   }
 
-  uploadSalonImage(salonId: string, uploadImage: UploadImage) {
+  uploadImage(salonId: string, uploadImage: UploadImage) {
     return this.http.post(this.baseUrl + salonId + '/update-image', uploadImage);
   }
   updateSalonData(salonId: string, salonData: SalonData) {

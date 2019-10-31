@@ -5,6 +5,7 @@ import { Schedule } from 'src/app/shared/models/Schedule';
 import { Functions } from 'src/app/shared/constants/Functions';
 import { WorkerService } from 'src/app/shared/services/worker.service';
 import { MessageService } from 'primeng/primeng';
+import { Worker } from 'src/app/shared/models/Worker';
 
 @Component({
   selector: 'app-add-worker',
@@ -15,6 +16,8 @@ export class AddWorkerComponent implements OnInit {
 
   @Input() salonId: string;
   @Input() salonSchedule: Schedule;
+  @Input() editMode = false;
+  @Input() editWorker: Worker;
 
   worker: WorkerCreation = {
     firstName: '',
@@ -75,21 +78,32 @@ export class AddWorkerComponent implements OnInit {
     private toastService: MessageService) { }
 
   ngOnInit() {
-    this.worker.salonId = this.salonId;
-    this.worker.schedule = Functions.copyObject(this.salonSchedule);
+    if (this.editMode) {
+      console.log("is edit mode");
+      this.worker.firstName = this.editWorker.firstName;
+      this.worker.lastName = this.editWorker.lastName;
+      this.worker.imageData = this.editWorker.imageSource;
+      this.worker.userData.email = this.editWorker.userEmail;
+      this.worker.userData.phoneNumber = this.editWorker.userPhoneNumber;
+      this.worker.userData.userName = this.editWorker.userName;
+      this.worker.schedule = Functions.copyObject(this.editWorker.schedule);
+    } else {
+      this.worker.salonId = this.salonId;
+      this.worker.schedule = Functions.copyObject(this.salonSchedule);
+    }
   }
 
   dataValid(): ValidationMessage {
     let toReturn = new ValidationMessage(true, 'Data valid');
     if (this.worker.userData.userName === '') {
       toReturn.update(false, "User name cannot by empty.");
-    } else if (this.worker.userData.password === '') {
+    } else if (!this.editMode && this.worker.userData.password === '') {
       toReturn.update(false, "Password cannot by empty.");
     } else if (this.worker.userData.email === '') {
       toReturn.update(false, "Email cannot by empty.");
     } else if (this.worker.userData.phoneNumber === '') {
       toReturn.update(false, "Phone number cannot by empty.");
-    } else if (this.worker.userData.password !== this.worker.userData.confirmPassword) {
+    } else if (!this.editMode && this.worker.userData.password !== this.worker.userData.confirmPassword) {
       toReturn.update(false, "Confirm password don't match");
     } else if (!this.worker.userData.email.includes('@')) {
       toReturn.update(false, "E-mail don't include @");
@@ -108,13 +122,28 @@ export class AddWorkerComponent implements OnInit {
   submit() {
     this.validationMessage = this.dataValid();
     if (this.validationMessage.isValid) {
-      console.log(this.worker);
-      this.workerService.addWorker(this.worker).subscribe(
-        res => {
-          this.toastService.add({severity: 'success', summary: 'Register succeeded', detail: 'Worker account created'});
-        },
-        err => this.toastService.add({severity: 'error', summary: 'Register failed', detail: err.error})
-      );
+      if (!this.editMode) {
+        this.workerService.addWorker(this.worker).subscribe(
+          res => {
+            this.toastService.add({severity: 'success', summary: 'Register succeeded', detail: 'Worker account created'});
+          },
+          err => this.toastService.add({severity: 'error', summary: 'Register failed', detail: err.error})
+        );
+      } else {
+        this.editWorker.firstName = this.worker.firstName;
+        this.editWorker.lastName = this.worker.lastName;
+        this.editWorker.imageSource = this.worker.imageData;
+        this.editWorker.userEmail = this.worker.userData.email;
+        this.editWorker.userPhoneNumber = this.worker.userData.phoneNumber;
+        this.editWorker.userName = this.worker.userData.userName;
+        this.editWorker.schedule = Functions.copyObject(this.worker.schedule);
+        this.workerService.editWorker(this.editWorker).subscribe(
+          res => {
+            this.toastService.add({severity: 'success', summary: 'Edit succeeded', detail: 'Worker data changed'});
+          },
+          err => this.toastService.add({severity: 'error', summary: 'Edit failed', detail: err.error})
+        );
+      }
     }
   }
 }

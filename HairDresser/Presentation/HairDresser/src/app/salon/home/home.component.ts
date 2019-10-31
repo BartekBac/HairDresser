@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
     const uploadImage: UploadImage = {
       imageSource: this.uploadedImageSource
     };
-    this.salonService.uploadSalonImage(this.userId, uploadImage).subscribe(
+    this.salonService.uploadImage(this.userId, uploadImage).subscribe(
       res => {
         this.toastService.add({severity: 'success', summary: 'Image saved to database', detail: ''});
         this.updateSalonModel();

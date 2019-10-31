@@ -66,6 +66,7 @@ namespace Application.Services
 
         public async Task UpdateUserAsync(string id, string email, string phoneNumber)
         {
+            var saveFlag = false;
             IdentityUser user = await _userManager.FindByIdAsync(id);
             if(user == null)
             {
@@ -74,21 +75,26 @@ namespace Application.Services
             if (user.Email != email && !string.IsNullOrEmpty(email))
             {
                 user.Email = email;
+                saveFlag = true;
             }
             if(user.PhoneNumber != phoneNumber && !string.IsNullOrEmpty(phoneNumber))
             {
                 user.PhoneNumber = phoneNumber;
+                saveFlag = true;
             }
-            IdentityResult result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded)
+            if (saveFlag)
             {
-                var errorMessage = "Update Failed. Cannot change user data.";
-                foreach (var msg in result.Errors.ToArray())
+                IdentityResult result = await _userManager.UpdateAsync(user);
+                if (!result.Succeeded)
                 {
-                    errorMessage += " [" + msg.Code + "] " + msg.Description;
-                }
+                    var errorMessage = "Update Failed. Cannot change user data.";
+                    foreach (var msg in result.Errors.ToArray())
+                    {
+                        errorMessage += " [" + msg.Code + "] " + msg.Description;
+                    }
 
-                throw new ApplicationException(errorMessage);
+                    throw new ApplicationException(errorMessage);
+                }
             }
         }
     }

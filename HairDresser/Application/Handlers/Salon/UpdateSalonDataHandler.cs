@@ -33,16 +33,16 @@ namespace Application.Handlers.Salon
                 throw new ApplicationException("Could not find salon with id=" + salonId);
             }
 
-            salon.UpdateData(
+            if (salon.UpdateData(
                 request.Name,
                 request.AdditionalInfo,
                 _mapper.Map<Address>(request.Address),
-                request.Type);
-
-
-            if (_dbContext.SaveChanges() == 0)
+                request.Type))
             {
-                throw new Exception("Could not save salon data changes into database.");
+                if (_dbContext.SaveChanges() == 0)
+                {
+                    throw new Exception("Could not save salon data changes into database.");
+                }
             }
         }
     }

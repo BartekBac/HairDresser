@@ -1,7 +1,4 @@
-.my-details{
-  border: 1px solid #b3c2ca;
-  border-radius: 3px;
-  margin: 0.3em;
-  text-align: center;
-  padding: 2em 0 2.25em 0;
+:host ::ng-deep .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item{
+  border: none;
+  margin: 5px;
 }

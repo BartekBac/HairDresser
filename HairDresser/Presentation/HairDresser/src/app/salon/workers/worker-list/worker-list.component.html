@@ -1,24 +1,5 @@
 <p-carousel [value]="workers" styleClass="custom-carousel" [numVisible]="3" [circular]="true" [autoplayInterval]="3000">
   <ng-template let-worker pTemplate="item">
-        <!--<p>{{worker.firstName}} {{worker.lastName}}</p>
-        <p>{{worker.userEmail}}</p>
-        <p>{{worker.userPhoneNumber}}</p>-->
-        <div class="my-details">
-            <div class="p-grid p-nogutter">
-                <div class="p-col-12">
-                    <img [src]="worker.imageSource" />
-                </div>
-                <div class="p-col-12">
-                    <h5>{{worker.firstName}} {{worker.lastName}}</h5>
-                    <h6>Rating: {{worker.rating}}</h6>
-
-                    <div class="car-buttons">
-                        <button pButton type="button" class="ui-button-secondary" icon="pi pi-search"></button>
-                        <button pButton type="button" class="ui-button-secondary" icon="pi pi-star"></button>
-                        <button pButton type="button" class="ui-button-secondary" icon="pi pi-cog"></button>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-    </ng-template>
+    <app-worker-list-element-view [worker]="worker"></app-worker-list-element-view>
+  </ng-template>
 </p-carousel>

@@ -25,11 +25,12 @@ namespace Application.Handlers.Image
             {
                 throw new ApplicationException("Could not upload image. Not found refernce for this entity in Images table.");
             }
-            image.SetImageData(resolvedImage.Source, resolvedImage.Header);
-
-            if (_dbContext.SaveChanges() == 0)
+            if (image.Update(resolvedImage.Source, resolvedImage.Header))
             {
-                throw new Exception("Could not save image into database.");
+                if (_dbContext.SaveChanges() == 0)
+                {
+                    throw new Exception("Could not save image into database.");
+                }
             }
         }
     }

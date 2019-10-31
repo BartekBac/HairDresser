@@ -39,7 +39,8 @@ namespace WebAPI.Configurations
 
             CreateMap<Schedule, ScheduleDto>();
             CreateMap<ScheduleDto, Schedule>();
-            CreateMap<Worker, WorkerDto>();
+            CreateMap<Worker, WorkerDto>()
+                .ForPath(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
         }
     }
 }

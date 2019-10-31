@@ -62,6 +62,7 @@ namespace Application.Handlers.Salon
                     Schedule = null,
                     UserEmail = worker.User.Email,
                     UserPhoneNumber = worker.User.PhoneNumber,
+                    UserName = worker.User.UserName,
                     ImageSource = ImageService.ConcatenateToString(image)
                 }).Join(
                     _dbContext.Schedules.AsEnumerable(),
@@ -76,6 +77,7 @@ namespace Application.Handlers.Salon
                         Schedule = _mapper.Map<ScheduleDto>(schedule),
                         UserEmail = worker.UserEmail,
                         UserPhoneNumber = worker.UserPhoneNumber,
+                        UserName = worker.UserName,
                         ImageSource = worker.ImageSource
                     });
             return result;

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Application.Services;
 using AutoMapper;
 using Domain.Entities;
+using Application.DTOs;
 
 namespace Application.Handlers.Image
 {
@@ -30,11 +31,12 @@ namespace Application.Handlers.Image
                 throw new ApplicationException("Could not update schedule. Not found refernce for this entity in Schedules table.");
             }
             var newSchedule = _mapper.Map<Schedule>(request.Schedule);
-            schedule.Update(newSchedule);
-
-            if (_dbContext.SaveChanges() == 0)
-            {
-                throw new Exception("Could not save schedule changes into database.");
+            if(schedule.Update(newSchedule))
+            { 
+                if (_dbContext.SaveChanges() == 0)
+                {
+                    throw new Exception("Could not save schedule changes into database.");
+                }
             }
         }
     }
