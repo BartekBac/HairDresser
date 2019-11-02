@@ -3,8 +3,6 @@ import { Constants } from '../constants/Constants';
 import { HttpClient } from '@angular/common/http';
 import { WorkerCreation } from 'src/app/salon/models/WorkerCreation';
 import { UploadImage } from '../models/UploadImage';
-import { UpdateSchedule } from '../models/UpdateSchedule';
-import { UpdateUserData } from '../models/UpdateUserData';
 import { Worker } from '../models/Worker';
 
 @Injectable({

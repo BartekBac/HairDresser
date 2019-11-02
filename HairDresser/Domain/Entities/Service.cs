@@ -10,13 +10,12 @@ namespace Domain.Entities
         private ISet<WorkerServices> _workers = new HashSet<WorkerServices>();
         private ISet<VisitServices> _visitsHistory = new HashSet<VisitServices>();
 
-        public Service(string name, float price, int time, Guid salonId, Salon salon) : base()
+        public Service(string name, float price, int time, Guid salonId) : base()
         {
             Name = name;
             Price = price;
             Time = time;
             SalonId = salonId;
-            Salon = salon;
         }
         private Service()
         {
@@ -37,6 +36,27 @@ namespace Domain.Entities
         {
             get => _visitsHistory;
             set => _visitsHistory = new HashSet<VisitServices>(value);
+        }
+
+        public bool Update(string name, float price, int time)
+        {
+            var updated = false;
+            if(Name != name)
+            {
+                Name = name;
+                updated = true;
+            }
+            if (Price != price)
+            {
+                Price = price;
+                updated = true;
+            }
+            if (Time != time)
+            {
+                Time = time;
+                updated = true;
+            }
+            return updated;
         }
     }
 }

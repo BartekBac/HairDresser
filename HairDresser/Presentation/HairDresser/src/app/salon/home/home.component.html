@@ -73,6 +73,16 @@
               </p-header>
             <app-worker-list [workers]="salon.workers"></app-worker-list>
           </p-panel>
+          <br>
+          <p-panel>
+            <p-header>
+                <div class="ui-helper-clearfix">
+                    <h5 class="ui-panel-title my-header-panel-title">Services</h5>
+                    <p-button class="my-header-panel-button" icon="pi pi-plus" (click)="showAddServiceDialog()" ></p-button>
+                </div>
+            </p-header>
+          <app-service-list [services]="salon.services" (deleteService)="onDeleteService($event)"></app-service-list>
+        </p-panel>
       </div>
     </div>
   </div>
@@ -120,5 +130,9 @@
 </p-dialog>
 
 <p-dialog header="Add worker" [(visible)]="displayAddWorker" [style]="{width: '500px'}">
-    <app-add-worker [salonId]="userId" [salonSchedule]="salon.schedule" ></app-add-worker>
+    <app-add-worker [salonId]="userId" [salonSchedule]="salon.schedule" (addedWorker)="onAddedWorker($event)"></app-add-worker>
+</p-dialog>
+
+<p-dialog header="Add service" [(visible)]="displayAddService" [style]="{width: '450px'}">
+    <app-add-service [salonId]="userId" (addedService)="onAddedService($event)"></app-add-service>
 </p-dialog>

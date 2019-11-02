@@ -29,7 +29,7 @@ namespace Domain.Entities
         public bool Update(byte[] source, string header)
         {
             var updated = false;
-            if(!Source.SequenceEqual(source))
+            if((Source == null && source != null) || Source != null && source != null && !Source.SequenceEqual(source))
             {
                 Source = source;
                 updated = true;

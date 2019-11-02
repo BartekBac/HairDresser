@@ -28,6 +28,7 @@ namespace Application.Handlers.Salon
 
             var salon = _dbContext.Salons
                 .Include(s => s.Admin)
+                .Include(s => s.Services)
                 .Include(s => s.Workers).ThenInclude(w => w.User)
                 .FirstOrDefault(s => s.Id == salonId);
             var image = _dbContext.Images.FirstOrDefault(i => i.Id == salonId);

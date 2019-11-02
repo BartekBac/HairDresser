@@ -1,0 +1,7 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-fluid">
+    <div *ngFor="let service of services">
+      <app-service-list-element [service]="service" (deletedService)="onDelete($event)"></app-service-list-element>
+    </div>
+  </div>
+</div>

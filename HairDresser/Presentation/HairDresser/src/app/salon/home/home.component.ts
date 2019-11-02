@@ -13,6 +13,8 @@ import { Schedule } from 'src/app/shared/models/Schedule';
 import { UpdateUserData } from 'src/app/shared/models/UpdateUserData';
 import { UpdateSchedule } from 'src/app/shared/models/UpdateSchedule';
 import { Functions } from 'src/app/shared/constants/Functions';
+import { Worker } from 'src/app/shared/models/Worker';
+import { Service } from 'src/app/shared/models/Service';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +31,7 @@ export class HomeComponent implements OnInit {
   displayEditUserData = false;
   displayEditSchedule = false;
   displayAddWorker = false;
+  displayAddService = false;
 
   protected uploadedImageSource = '';
   protected salonData: SalonData = {
@@ -137,6 +140,22 @@ export class HomeComponent implements OnInit {
 
   showAddWorkerDialog() {
     this.displayAddWorker = true;
+  }
+
+  onAddedWorker(addedWorker: Worker) {
+    this.salon.workers.push(addedWorker);
+  }
+
+  showAddServiceDialog() {
+    this.displayAddService = true;
+  }
+
+  onAddedService(addedService: Service) {
+    this.salon.services.push(addedService);
+  }
+
+  onDeleteService(deletedService: Service) {
+    this.salon.services = this.salon.services.filter(s => s !== deletedService);
   }
 
 }

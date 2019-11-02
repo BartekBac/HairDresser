@@ -1,6 +1,8 @@
 import { Address } from './Address';
 import { Schedule } from './Schedule';
 import { User } from './User';
+import { Worker } from './Worker';
+import { Service } from './Service';
 
 export class Salon {
   name: string;
@@ -11,4 +13,5 @@ export class Salon {
   admin: User;
   imageSource: string;
   workers: Worker[];
+  services: Service[];
 }

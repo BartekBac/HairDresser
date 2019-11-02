@@ -1,0 +1,10 @@
+<div class="my-list-element-wrapper">
+  <label class="my-header my-label">{{service.name}}</label>
+  <label class="my-label">: {{service.price}}$ ({{service.time}} min)</label>
+  <button pButton (click)="showDeleteServiceDialog()" type="button" class="ui-button-danger my-header-panel-button" icon="pi pi-times"></button>
+  <button pButton (click)="showEditServiceDialog()" type="button" class="ui-button-secondary my-header-panel-button" icon="pi pi-cog"></button>
+</div>
+
+<p-dialog header="Add service" [(visible)]="displayEditService" [style]="{width: '450px'}">
+    <app-add-service [editMode]="true" [editService]="service"></app-add-service>
+</p-dialog>

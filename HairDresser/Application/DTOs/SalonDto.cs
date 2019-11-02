@@ -16,5 +16,6 @@ namespace Application.DTOs
         public UserDto Admin { get; set; }
         public string ImageSource { get; set; }
         public IEnumerable<WorkerDto> Workers { get; set; }
+        public IEnumerable<ServiceDto> Services { get; set; }
     }
 }

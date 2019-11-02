@@ -17,5 +17,6 @@ namespace Application.DTOs
         public string UserEmail { get; set; }
         public string UserName { get; set; }
         public string ImageSource  { get; set; }
+        public IEnumerable<ServiceDto> Services { get; set; }
     }
 }

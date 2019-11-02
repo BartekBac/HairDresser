@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { WorkerCreation } from '../../models/WorkerCreation';
 import { ValidationMessage } from 'src/app/shared/models/ValidationMessage';
 import { Schedule } from 'src/app/shared/models/Schedule';
@@ -18,6 +18,7 @@ export class AddWorkerComponent implements OnInit {
   @Input() salonSchedule: Schedule;
   @Input() editMode = false;
   @Input() editWorker: Worker;
+  @Output() addedWorker = new EventEmitter<Worker>();
 
   worker: WorkerCreation = {
     firstName: '',
@@ -79,7 +80,6 @@ export class AddWorkerComponent implements OnInit {
 
   ngOnInit() {
     if (this.editMode) {
-      console.log("is edit mode");
       this.worker.firstName = this.editWorker.firstName;
       this.worker.lastName = this.editWorker.lastName;
       this.worker.imageData = this.editWorker.imageSource;
@@ -119,29 +119,36 @@ export class AddWorkerComponent implements OnInit {
     this.worker.imageData = imageSource;
   }
 
+  private copyValuesToEditWorker() {
+    this.editWorker.firstName = this.worker.firstName;
+    this.editWorker.lastName = this.worker.lastName;
+    this.editWorker.imageSource = this.worker.imageData;
+    this.editWorker.userEmail = this.worker.userData.email;
+    this.editWorker.userPhoneNumber = this.worker.userData.phoneNumber;
+    this.editWorker.userName = this.worker.userData.userName;
+    this.editWorker.schedule = Functions.copyObject(this.worker.schedule);
+  }
+
   submit() {
     this.validationMessage = this.dataValid();
     if (this.validationMessage.isValid) {
       if (!this.editMode) {
+        this.editWorker = new Worker ();
+        this.copyValuesToEditWorker();
         this.workerService.addWorker(this.worker).subscribe(
           res => {
             this.toastService.add({severity: 'success', summary: 'Register succeeded', detail: 'Worker account created'});
+            this.addedWorker.emit(this.editWorker);
           },
           err => this.toastService.add({severity: 'error', summary: 'Register failed', detail: err.error})
         );
       } else {
-        this.editWorker.firstName = this.worker.firstName;
-        this.editWorker.lastName = this.worker.lastName;
-        this.editWorker.imageSource = this.worker.imageData;
-        this.editWorker.userEmail = this.worker.userData.email;
-        this.editWorker.userPhoneNumber = this.worker.userData.phoneNumber;
-        this.editWorker.userName = this.worker.userData.userName;
-        this.editWorker.schedule = Functions.copyObject(this.worker.schedule);
+        this.copyValuesToEditWorker();
         this.workerService.editWorker(this.editWorker).subscribe(
           res => {
-            this.toastService.add({severity: 'success', summary: 'Edit succeeded', detail: 'Worker data changed'});
+            this.toastService.add({severity: 'success', summary: 'Action succeeded', detail: 'Worker data changed'});
           },
-          err => this.toastService.add({severity: 'error', summary: 'Edit failed', detail: err.error})
+          err => this.toastService.add({severity: 'error', summary: 'Action failed', detail: err.error})
         );
       }
     }
