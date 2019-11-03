@@ -5,6 +5,7 @@ using System.Text;
 using System.Linq;
 using Domain.ValueObjects;
 using Domain.Entities.ManyToMany;
+using Domain.Exceptions;
 
 namespace Domain.Entities
 {
@@ -74,6 +75,21 @@ namespace Domain.Entities
                 updated = true;
             }
             return updated;
+        }
+
+        public void AssignService(Guid serviceId)
+        {
+            if(string.IsNullOrEmpty(serviceId.ToString()))
+            {
+                throw new DomainException("Could not assign null service.");
+            }
+
+            var alreadyAssignedService = _services.FirstOrDefault(s => s.ServiceId == serviceId);
+
+            if(alreadyAssignedService == null)
+            {
+                _services.Add(new WorkerServices { WorkerId = Id, ServiceId = serviceId });
+            }
         }
 
     }

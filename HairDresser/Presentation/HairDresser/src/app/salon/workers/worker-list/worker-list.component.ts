@@ -3,6 +3,7 @@ import { Worker } from 'src/app/shared/models/Worker';
 import { UploadImage } from 'src/app/shared/models/UploadImage';
 import { WorkerService } from 'src/app/shared/services/worker.service';
 import { MessageService } from 'primeng/primeng';
+import { Service } from 'src/app/shared/models/Service';
 
 @Component({
   selector: 'app-worker-list',
@@ -12,6 +13,7 @@ import { MessageService } from 'primeng/primeng';
 export class WorkerListComponent implements OnInit {
 
   @Input() workers: Worker[] = [];
+  @Input() salonServices: Service[] = [];
 
   constructor() { }
 

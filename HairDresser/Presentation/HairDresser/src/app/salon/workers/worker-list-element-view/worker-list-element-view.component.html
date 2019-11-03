@@ -3,13 +3,14 @@
   <p-header>
     <img *ngIf="worker.imageSource" class="my-img my-clickable" [src]="worker.imageSource" (click)="showEditImage()">
     <div *ngIf="worker.imageSource == null" class="my-image-deputy-div my-clickable" (click)="showEditImage()">
-        <p>Upload</p>
-        <p>Photo</p>
+      <p>Upload</p>
+      <p>Photo</p>
     </div>
   </p-header>
   <p-footer>
     <div class="my-buttons-wrapper">
-    <button pButton (click)="showEdit()" type="button" class="ui-button-secondary" icon="pi pi-cog"></button>
+      <button pButton (click)="showEdit()" type="button" class="ui-button-secondary" icon="pi pi-cog"></button>
+      <button pButton (click)="showAssignServices()" type="button" class="ui-button-secondary" icon="pi pi-list"></button>
     </div>
   </p-footer>
 </p-card>
@@ -25,6 +26,10 @@
   </p-footer>
 </p-dialog>
 
-<p-dialog header="Edit worker image" [(visible)]="displayEdit" [style]="{width: '500px'}">
-    <app-add-worker [editMode]="true" [editWorker]="worker" ></app-add-worker>
-  </p-dialog>
+<p-dialog header="Edit worker" [(visible)]="displayEdit" [style]="{width: '500px'}">
+  <app-add-worker [editMode]="true" [editWorker]="worker"></app-add-worker>
+</p-dialog>
+
+<p-dialog header="Assign worker services" [(visible)]="displayAssignServices" [style]="{width: '600px'}">
+  <app-assign-services [salonServices]="salonServices" [workerServices]="worker.services"></app-assign-services>
+</p-dialog>

@@ -64,12 +64,11 @@ export class AddServiceComponent implements OnInit {
     this.validationMessage = this.dataValid();
     if (this.validationMessage.isValid) {
       if (!this.editMode) {
-        this.editService = new Service ();
-        this.copyValuesToEditService();
         this.serviceService.addService(this.serviceCreation).subscribe(
           res => {
+            console.log(res);
             this.toastService.add({severity: 'success', summary: 'Action succeeded', detail: 'New service added to list'});
-            this.addedService.emit(this.editService);
+            this.addedService.emit(res);
           },
           err => this.toastService.add({severity: 'error', summary: 'Action failed', detail: err.error})
         );

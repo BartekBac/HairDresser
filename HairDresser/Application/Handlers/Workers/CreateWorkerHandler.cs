@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Domain.Entities;
 using AutoMapper;
+using Application.DTOs;
 
 namespace Application.Handlers.Workers
 {

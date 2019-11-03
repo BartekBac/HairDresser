@@ -3,6 +3,7 @@ import { Worker } from 'src/app/shared/models/Worker';
 import { WorkerService } from 'src/app/shared/services/worker.service';
 import { MessageService } from 'primeng/primeng';
 import { UploadImage } from 'src/app/shared/models/UploadImage';
+import { Service } from 'src/app/shared/models/Service';
 
 @Component({
   selector: 'app-worker-list-element-view',
@@ -12,10 +13,12 @@ import { UploadImage } from 'src/app/shared/models/UploadImage';
 export class WorkerListElementViewComponent implements OnInit {
 
   @Input() worker: Worker;
+  @Input() salonServices: Service[];
 
   uploadedImageSource: string;
   displayEditImage = false;
   displayEdit = false;
+  displayAssignServices = false;
 
   constructor(
     private workerService: WorkerService,
@@ -30,6 +33,10 @@ export class WorkerListElementViewComponent implements OnInit {
 
   showEdit() {
     this.displayEdit = true;
+  }
+
+  showAssignServices() {
+    this.displayAssignServices = true;
   }
 
   onImageUpload(imageSource: any) {

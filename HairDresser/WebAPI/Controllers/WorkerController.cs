@@ -42,6 +42,22 @@ namespace WebAPI.Controllers
             }
         }
 
+        [Authorize(Roles = RoleString.Salon)]
+        [HttpPost("{id}/assign-services")]
+        public async Task<IActionResult> AssignWorkerServices(string workerId, [FromBody] AssignWorkerServicesCommand command)
+        {
+            try
+            {
+                command.WorkerId = workerId;
+                var result = await _mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [Authorize(Roles = RoleString.Salon+","+RoleString.Worker)]
         [HttpPut("{id}/update-image")]
         public async Task<IActionResult> UploadWorkerImage(string id, [FromBody] UploadImageCommand command)

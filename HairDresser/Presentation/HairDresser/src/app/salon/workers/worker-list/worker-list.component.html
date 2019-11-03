@@ -1,5 +1,5 @@
 <p-carousel [value]="workers" styleClass="custom-carousel" [numVisible]="3" [circular]="true" [autoplayInterval]="3000">
   <ng-template let-worker pTemplate="item">
-    <app-worker-list-element-view [worker]="worker"></app-worker-list-element-view>
+    <app-worker-list-element-view [worker]="worker" [salonServices]="salonServices"></app-worker-list-element-view>
   </ng-template>
 </p-carousel>

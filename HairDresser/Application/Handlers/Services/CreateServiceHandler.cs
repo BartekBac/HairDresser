@@ -1,4 +1,5 @@
 ﻿using Application.Commands.Services;
+using Application.DTOs;
 using AutoMapper;
 using Domain.DbContexts;
 using Domain.Entities;
@@ -9,15 +10,17 @@ using System.Text;
 
 namespace Application.Handlers.Services
 {
-    public class CreateServiceHandler : RequestHandler<CreateServiceCommand>
+    public class CreateServiceHandler : RequestHandler<CreateServiceCommand, ServiceDto>
     {
         HairDresserDbContext _dbContext;
+        IMapper _mapper;
 
-        public CreateServiceHandler(HairDresserDbContext dbContext)
+        public CreateServiceHandler(HairDresserDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
-        protected override void Handle(CreateServiceCommand request)
+        protected override ServiceDto Handle(CreateServiceCommand request)
         {
 
             var service = new Service(
@@ -33,6 +36,8 @@ namespace Application.Handlers.Services
             {
                 throw new Exception("Could not save created service into database.");
             }
+
+            return _mapper.Map<ServiceDto>(service);
         }
     }
 }

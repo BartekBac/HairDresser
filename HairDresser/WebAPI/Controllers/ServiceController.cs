@@ -29,7 +29,7 @@ namespace WebAPI.Controllers
             try
             {
                 var result = await _mediator.Send(command);
-                return Ok();
+                return Ok(result);
             }
             catch (Exception e)
             {
