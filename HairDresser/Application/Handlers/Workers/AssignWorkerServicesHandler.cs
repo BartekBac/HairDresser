@@ -8,6 +8,8 @@ using Domain.DbContexts;
 using Application.Commands.Workers;
 using System.Linq;
 using Domain.Entities;
+using Domain.Entities.ManyToMany;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Workers
 {
@@ -23,21 +25,23 @@ namespace Application.Handlers.Workers
         }
         protected override void Handle(AssignWorkerServicesCommand request)
         {
-            var worker = _dbContext.Workers.FirstOrDefault(w => w.Id.ToString() == request.WorkerId);
+            var worker = _dbContext.Workers.Include(w => w.Services).FirstOrDefault(w => w.Id.ToString() == request.WorkerId);
 
             if(worker == null)
             {
                 throw new ApplicationException("Cannot assign services because worker with id=" + request.WorkerId + "do not exists.");
             }
 
-            foreach(var service in request.Services)
-            {
-                if(service == null)
-                {
-                    throw new ApplicationException("Cannot assign null service.");
-                }
+            worker.ClearAssignedServices();
 
-                worker.AssignService(new Guid(service.Id));
+            var servicesToAssign = _dbContext.Services.Where(ser => ser.SalonId == worker.SalonId && request.Services.Select(s => s.Id).Contains(ser.Id.ToString()));
+
+            if (servicesToAssign.Any())
+            {
+                foreach (var service in servicesToAssign)
+                {
+                    worker.AssignService(service);
+                }
             }
 
             if (_dbContext.SaveChanges() == 0)

@@ -77,19 +77,29 @@ namespace Domain.Entities
             return updated;
         }
 
-        public void AssignService(Guid serviceId)
+        public void AssignService(Service service)
         {
-            if(string.IsNullOrEmpty(serviceId.ToString()))
+            if(service == null || string.IsNullOrEmpty(service.Id.ToString()))
             {
                 throw new DomainException("Could not assign null service.");
             }
 
-            var alreadyAssignedService = _services.FirstOrDefault(s => s.ServiceId == serviceId);
+            if(service.SalonId != this.SalonId)
+            {
+                throw new DomainException("Could not assign foreign salon's service.");
+            }
+
+            var alreadyAssignedService = _services.FirstOrDefault(s => s.ServiceId == service.Id);
 
             if(alreadyAssignedService == null)
             {
-                _services.Add(new WorkerServices { WorkerId = Id, ServiceId = serviceId });
+                _services.Add(new WorkerServices { WorkerId = Id, ServiceId = service.Id });
             }
+        }
+
+        public void ClearAssignedServices()
+        {
+            _services.Clear();
         }
 
     }

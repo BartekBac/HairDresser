@@ -9,8 +9,9 @@
   </p-header>
   <p-footer>
     <div class="my-buttons-wrapper">
-      <button pButton (click)="showEdit()" type="button" class="ui-button-secondary" icon="pi pi-cog"></button>
-      <button pButton (click)="showAssignServices()" type="button" class="ui-button-secondary" icon="pi pi-list"></button>
+      <button pButton (click)="showEdit()" type="button" class="ui-button-secondary my-footer-button" icon="pi pi-cog"></button>
+      <button pButton (click)="showAssignServices()" type="button" class="ui-button-secondary my-footer-button" icon="pi pi-list"></button>
+      <button pButton (click)="showDeleteDialog()" type="button" class="ui-button-danger my-footer-button" icon="pi pi-times"></button>
     </div>
   </p-footer>
 </p-card>
@@ -31,5 +32,5 @@
 </p-dialog>
 
 <p-dialog header="Assign worker services" [(visible)]="displayAssignServices" [style]="{width: '600px'}">
-  <app-assign-services [salonServices]="salonServices" [workerServices]="worker.services"></app-assign-services>
+  <app-assign-services [salonServices]="salonServices" [workerServices]="worker.services" [workerId]="worker.id"></app-assign-services>
 </p-dialog>

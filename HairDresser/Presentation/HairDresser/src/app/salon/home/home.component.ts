@@ -156,6 +156,14 @@ export class HomeComponent implements OnInit {
 
   onDeleteService(deletedService: Service) {
     this.salon.services = this.salon.services.filter(s => s !== deletedService);
+    this.salon.workers.forEach(
+      w => {
+        w.services = w.services.filter(s => s.id !== deletedService.id);
+    });
+  }
+
+  onDeleteWorker(deletedWorker: Worker) {
+    this.salon.workers = this.salon.workers.filter(s => s.id !== deletedWorker.id);
   }
 
 }

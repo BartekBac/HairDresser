@@ -30,6 +30,7 @@ namespace Application.Handlers.Salon
                 .Include(s => s.Admin)
                 .Include(s => s.Services)
                 .Include(s => s.Workers).ThenInclude(w => w.User)
+                .Include(s => s.Workers).ThenInclude(w => w.Services)
                 .FirstOrDefault(s => s.Id == salonId);
             var image = _dbContext.Images.FirstOrDefault(i => i.Id == salonId);
             var schedule = _dbContext.Schedules.FirstOrDefault(i => i.Id == salonId);
@@ -61,6 +62,7 @@ namespace Application.Handlers.Salon
                     LastName = worker.LastName,
                     Rating = worker.Rating,
                     Schedule = null,
+                    Services = _mapper.Map<ServiceDto[]>(worker.Services),
                     UserEmail = worker.User.Email,
                     UserPhoneNumber = worker.User.PhoneNumber,
                     UserName = worker.User.UserName,
@@ -76,6 +78,7 @@ namespace Application.Handlers.Salon
                         LastName = worker.LastName,
                         Rating = worker.Rating,
                         Schedule = _mapper.Map<ScheduleDto>(schedule),
+                        Services = worker.Services,
                         UserEmail = worker.UserEmail,
                         UserPhoneNumber = worker.UserPhoneNumber,
                         UserName = worker.UserName,

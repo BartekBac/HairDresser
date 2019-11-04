@@ -28,22 +28,22 @@ export class ServiceListElementComponent implements OnInit {
   }
 
   showDeleteServiceDialog() {
-    console.log("confirm clicked");
     this.confirmationService.confirm({
-        message: 'Do you want to delete this service?',
+        message: 'Are you sure that you want to delete ' + this.service.name + ' service?',
         header: 'Delete Confirmation',
         icon: 'pi pi-info-circle',
         blockScroll: false,
         accept: () => {
           this.serviceService.deleteService(this.service.id).subscribe(
             res => {
-              this.toastService.add({severity: 'success', summary: 'Action succeeded', detail: 'Service deleted.'});
+              this.toastService.add({severity: 'success', summary: 'Action succeeded',
+               detail: 'Service ' + this.service.name + ' deleted.'});
               this.deletedService.emit(this.service);
             },
             err => this.toastService.add({severity: 'error', summary: 'Action failed', detail: err.error})
           );
         }
     });
-}
+  }
 
 }

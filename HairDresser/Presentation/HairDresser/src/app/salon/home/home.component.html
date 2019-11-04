@@ -71,7 +71,7 @@
                       <p-button class="my-header-panel-button" icon="pi pi-plus" (click)="showAddWorkerDialog()" ></p-button>
                   </div>
               </p-header>
-            <app-worker-list [workers]="salon.workers" [salonServices]="salon.services"></app-worker-list>
+            <app-worker-list [workers]="salon.workers" [salonServices]="salon.services" (deleteWorker)="onDeleteWorker($event)"></app-worker-list>
           </p-panel>
           <br>
           <p-panel>

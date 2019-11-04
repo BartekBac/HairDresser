@@ -1,6 +1,7 @@
 ﻿using Application.Commands;
 using Application.Commands.Workers;
 using Application.DTOs;
+using Application.Queries.Worker;
 using Application.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -28,6 +29,14 @@ namespace WebAPI.Controllers
         }
 
         [Authorize(Roles = RoleString.Salon)]
+        [HttpGet("{id}/services")]
+        public async Task<IActionResult> GetWorkerServices(string id)
+        {
+            var result = await _mediator.Send(new GetWorkerServicesQuery { Id = id });
+            return Ok(result);
+        }
+
+        [Authorize(Roles = RoleString.Salon)]
         [HttpPost]
         public async Task<IActionResult> CreateWorker([FromBody] CreateWorkerCommand command)
         {
@@ -44,11 +53,11 @@ namespace WebAPI.Controllers
 
         [Authorize(Roles = RoleString.Salon)]
         [HttpPost("{id}/assign-services")]
-        public async Task<IActionResult> AssignWorkerServices(string workerId, [FromBody] AssignWorkerServicesCommand command)
+        public async Task<IActionResult> AssignWorkerServices(string id, [FromBody] AssignWorkerServicesCommand command)
         {
             try
             {
-                command.WorkerId = workerId;
+                command.WorkerId = id;
                 var result = await _mediator.Send(command);
                 return Ok();
             }
@@ -100,6 +109,21 @@ namespace WebAPI.Controllers
                 };
                 result = await _mediator.Send(uploadImageCommand);
                 await _userService.UpdateUserAsync(id, worker.UserEmail, worker.UserPhoneNumber);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Authorize(Roles = RoleString.Salon)]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteWorker(string id)
+        {
+            try
+            {
+                var result = await _mediator.Send(new DeleteWorkerCommand { Id = id });
                 return Ok();
             }
             catch (Exception e)
