@@ -19,10 +19,12 @@ export class AuthService {
 
   private baseUrl = Constants.SERVER_BASE_URL + 'auth/';
 
+  private navbarVisible = false;
+
   constructor(
     private http: HttpClient,
     private router: Router
-  ) { }
+  ) {}
 
   login(loginCredential: LoginCredential) {
     return this.http.post<LoginResponse>(this.baseUrl + 'login', loginCredential)
@@ -103,6 +105,15 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(Constants.LOCAL_STORAGE_AUTH_TOKEN);
+    this.navbarVisible = false;
     this.router.navigate(['/auth']);
+  }
+
+  showNavbar() {
+    setTimeout(() => this.navbarVisible = true, 0);
+  }
+
+  getNavbarVisibility() {
+    return this.navbarVisible;
   }
 }

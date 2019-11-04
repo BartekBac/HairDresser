@@ -5,6 +5,7 @@ using System.Text;
 using System.Linq;
 using Domain.ValueObjects;
 using Domain.Entities.ManyToMany;
+using Domain.Exceptions;
 
 namespace Domain.Entities
 {
@@ -58,6 +59,47 @@ namespace Domain.Entities
             //get => _visits.Where(v => v.Status == VisitStatus.Accepted); // TODO: sprawdzić czy coś takiego będzie działać a jak nie to ma być w serwisie
             get => _visits;
             set => _visits = new HashSet<Visit>(value);
+        }
+
+        public bool UpdateData(string firstName, string lastName)
+        {
+            var updated = false;
+            if (FirstName != firstName)
+            {
+                this.FirstName = firstName;
+                updated = true;
+            }
+            if (LastName != lastName)
+            {
+                this.LastName = lastName;
+                updated = true;
+            }
+            return updated;
+        }
+
+        public void AssignService(Service service)
+        {
+            if(service == null || string.IsNullOrEmpty(service.Id.ToString()))
+            {
+                throw new DomainException("Could not assign null service.");
+            }
+
+            if(service.SalonId != this.SalonId)
+            {
+                throw new DomainException("Could not assign foreign salon's service.");
+            }
+
+            var alreadyAssignedService = _services.FirstOrDefault(s => s.ServiceId == service.Id);
+
+            if(alreadyAssignedService == null)
+            {
+                _services.Add(new WorkerServices { WorkerId = Id, ServiceId = service.Id });
+            }
+        }
+
+        public void ClearAssignedServices()
+        {
+            _services.Clear();
         }
 
     }

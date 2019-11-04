@@ -3,6 +3,7 @@ using Application.Services;
 using AutoMapper;
 using AutoMapper.Configuration;
 using Domain.Entities;
+using Domain.Entities.ManyToMany;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -39,6 +40,16 @@ namespace WebAPI.Configurations
 
             CreateMap<Schedule, ScheduleDto>();
             CreateMap<ScheduleDto, Schedule>();
+            CreateMap<Worker, WorkerDto>()
+                .ForPath(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
+
+            CreateMap<Service, ServiceDto>();
+
+            CreateMap<WorkerServices, ServiceDto>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Service.Name))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Service.Price))
+                .ForMember(dest => dest.Time, opt => opt.MapFrom(src => src.Service.Time))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Service.Id));
         }
     }
 }

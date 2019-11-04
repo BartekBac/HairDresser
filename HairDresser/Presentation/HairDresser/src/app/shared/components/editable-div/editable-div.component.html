@@ -1,0 +1,7 @@
+<div class="my-edit-wrapper" (mouseenter)="toggleEditIcon(true)" (mouseleave)="toggleEditIcon(false)">
+  <p-button (click)="showDialog()"
+    [ngClass]="(editIconVisible===true)?'my-show-element':'my-hide-element'" class="my-edit-button"
+    [ngStyle]="{'top': iconPaddingTop, 'right': iconPaddingRight}"
+    icon="pi pi-pencil"></p-button>
+  <ng-content></ng-content>
+</div>

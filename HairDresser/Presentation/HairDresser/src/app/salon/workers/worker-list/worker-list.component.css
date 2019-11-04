@@ -1,0 +1,4 @@
+:host ::ng-deep .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item{
+  border: none;
+  margin: 5px;
+}

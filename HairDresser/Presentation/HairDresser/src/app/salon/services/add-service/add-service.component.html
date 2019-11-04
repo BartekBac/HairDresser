@@ -1,0 +1,41 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <div class="ui-g-12">
+      <h4>Service data</h4>
+    </div>
+    <div class="ui-g-12">
+      <span class="ui-float-label">
+        <input id="input-name" [(ngModel)]="serviceCreation.name" type="text" size="30" pInputText>
+        <label for="input-name">Name</label>
+      </span>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-inputgroup my-input-margin">
+        <span class="ui-float-label">
+          <input id="input-price" [(ngModel)]="serviceCreation.price" pKeyFilter="money" type="text" size="60"
+            pInputText>
+          <label for="input-price">Price</label>
+        </span>
+        <span class="ui-inputgroup-addon">$</span>
+      </div>
+    </div>
+    <div class="ui-g-12">
+        <div class="ui-inputgroup my-input-margin">
+          <span class="ui-float-label">
+            <input id="input-time" [(ngModel)]="serviceCreation.time" pKeyFilter="money" type="text" size="50"
+              pInputText>
+            <label for="input-time">Time (in minutes)</label>
+          </span>
+          <span class="ui-inputgroup-addon">min</span>
+        </div>
+      </div>
+  </div>
+  <div class="ui-g-12">
+      <div class="ui-g-12">
+        <button pButton type="button" (click)="submit()" class="ui-button-raised" label="{{editMode ? 'Edit' : 'Add'}} service"></button>
+        <p-message severity="{{validationMessage?.isValid ? 'success' : 'error'}}" text="{{validationMessage?.message}}"
+          [ngStyle]="{'visibility': validationMessage ? 'visible' : 'hidden'}">
+        </p-message>
+      </div>
+    </div>
+</div>

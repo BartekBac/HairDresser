@@ -1,0 +1,45 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <p-tabView>
+      <p-tabPanel header="User Data">
+        <app-form-user-data [userData]="worker.userData" [editMode]="editMode"></app-form-user-data>
+      </p-tabPanel>
+      <p-tabPanel header="Worker Data">
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-12">
+            <h4>Personal data</h4>
+          </div>
+          <div class="ui-g-12">
+            <span class="ui-float-label">
+              <input pInputText id="input-firstname" [(ngModel)]="worker.firstName" type="text" size="30">
+              <label for="input-firstname">First name</label>
+            </span>
+            <br>
+          </div>
+          <div class="ui-g-12">
+            <span class="ui-float-label">
+              <input pInputText id="input-lastname" [(ngModel)]="worker.lastName" type="text" size="30">
+              <label for="input-lastname">Last name</label>
+            </span>
+          </div>
+          <br>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Schedule">
+        <app-form-schedule [schedule]="worker.schedule"></app-form-schedule>
+      </p-tabPanel>
+      <p-tabPanel header="Image">
+        <app-form-upload-image [imageSrc]="worker.imageData" (imageUploaded)="onImageUpload($event)">
+        </app-form-upload-image>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+  <div class="ui-g-12">
+    <div class="ui-g-12">
+      <button pButton type="button" (click)="submit()" class="ui-button-raised" label="{{editMode ? 'Edit' : 'Add'}} worker"></button>
+      <p-message severity="{{validationMessage?.isValid ? 'success' : 'error'}}" text="{{validationMessage?.message}}"
+        [ngStyle]="{'visibility': validationMessage ? 'visible' : 'hidden'}">
+      </p-message>
+    </div>
+  </div>
+</div>

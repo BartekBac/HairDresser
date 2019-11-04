@@ -56,5 +56,46 @@ namespace Domain.Entities
         {
             Sunday = new Day(beginHour, beginMinute, endHour, endMinute);
         }
+        public bool Update(Schedule schedule)
+        {
+            var updated = false;
+            if(Monday != schedule.Monday)
+            {
+                Monday = schedule.Monday;
+                updated = true;
+            }
+
+            if (Tuesday != schedule.Tuesday)
+            {
+                Tuesday = schedule.Tuesday;
+                updated = true;
+            }
+            if (Wednesday != schedule.Wednesday)
+            {
+                Wednesday = schedule.Wednesday;
+                updated = true;
+            }
+            if (Thursday != schedule.Thursday)
+            {
+                Thursday = schedule.Thursday;
+                updated = true;
+            }
+            if (Friday != schedule.Friday)
+            {
+                Friday = schedule.Friday;
+                updated = true;
+            }
+            if (Saturday != schedule.Saturday)
+            {
+                Saturday = schedule.Saturday;
+                updated = true;
+            }
+            if (Sunday != schedule.Sunday)
+            {
+                Sunday = schedule.Sunday;
+                updated = true;
+            }
+            return updated;
+        }
     }
 }

@@ -5,6 +5,7 @@ import { SalonData } from '../models/SalonData';
 import { SalonService } from '../services/salon.service';
 import { Constants } from '../constants/Constants';
 import * as jwt_decode from 'jwt-decode';
+import { Salon } from '../models/Salon';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class SalonResolver implements Resolve<SalonData> {
 
   constructor(private salonService: SalonService) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<SalonData> {
+  resolve(route: ActivatedRouteSnapshot): Observable<Salon> {
     const token = localStorage.getItem(Constants.LOCAL_STORAGE_AUTH_TOKEN);
     const decodedToken = jwt_decode(token);
     return this.salonService.getSalon(decodedToken[Constants.DECODE_TOKEN_USER_ID]);

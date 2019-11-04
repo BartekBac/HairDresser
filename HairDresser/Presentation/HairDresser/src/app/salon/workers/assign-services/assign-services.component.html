@@ -1,0 +1,12 @@
+<p-pickList [source]="salonServicesCopy" [target]="workerServices" sourceHeader="Available" targetHeader="Selected" [responsive]="true" dragdrop="true"
+showSourceFilter="false" showTargetFilter="false" [showSourceControls]="false" [showTargetControls]="false" [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+    <ng-template let-service pTemplate="item">
+        <div class="ui-helper-clearfix">
+            <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{service.name}}</div>
+        </div>
+    </ng-template>
+</p-pickList>
+<div class="my-footer-wrapper">
+  <button pButton type="button" class="ui-button-raised my-footer-button" (click)="saveChanges()" label="Save"
+    icon="pi pi-save" iconPos="left"></button>
+</div>

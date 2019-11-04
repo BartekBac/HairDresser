@@ -1,0 +1,20 @@
+.my-column-wrapper{
+  width: 90%;
+}
+
+.my-footer-button{
+  width: 40%;
+}
+
+.my-footer-wrapper{
+  width: 100%;
+  text-align: center;
+}
+
+.my-header-panel-button{
+  float: right;
+}
+
+.my-header-panel-title{
+  float: left;
+}

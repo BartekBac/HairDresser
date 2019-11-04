@@ -9,6 +9,7 @@ import { UserData } from '../../models/UserData';
 export class FormUserDataComponent implements OnInit {
 
   @Input() userData: UserData;
+  @Input() editMode = false;
 
   constructor() { }
 

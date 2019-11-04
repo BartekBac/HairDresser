@@ -89,8 +89,7 @@ export class RegisterSalonComponent implements OnInit {
       zipCode: '',
       street: '',
       houseNumber: '',
-    },
-    imageSource: null
+    }
   };
 
   protected validationMessage: ValidationMessage = null;

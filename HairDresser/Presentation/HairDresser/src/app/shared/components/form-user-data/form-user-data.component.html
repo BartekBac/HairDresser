@@ -4,19 +4,19 @@
     </div>
     <div class="ui-g-12">
       <span class="ui-float-label">
-        <input id="input-username" [(ngModel)]="userData.userName" type="text" size="30" pInputText>
+        <input id="input-username" [(ngModel)]="userData.userName" [disabled]="editMode" type="text" size="30" pInputText>
         <label for="input-username">Username</label>
       </span>
       <br>
     </div>
-    <div class="ui-g-12">
+    <div *ngIf="!editMode" class="ui-g-12">
       <span class="ui-float-label">
         <input id="input-passowrd" [(ngModel)]="userData.password" type="password" size="30" pPassword>
         <label for="input-passowrd">Password</label>
       </span>
       <br>
     </div>
-    <div class="ui-g-12">
+    <div *ngIf="!editMode" class="ui-g-12">
       <span class="ui-float-label">
         <input id="input-confirmpassorwd" [(ngModel)]="userData.confirmPassword" type="password" size="30" [feedback]="false" pPassword>
         <label for="input-confirmpassorwd">Confirm password</label>

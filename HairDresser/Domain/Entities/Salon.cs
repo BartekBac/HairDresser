@@ -60,5 +60,31 @@ namespace Domain.Entities
             get => _clients;
             set => _clients = new HashSet<ClientSalons>(value);
         }
+
+        public bool UpdateData(string name, string additionalInfo, Address address, SalonType type)
+        {
+            var updated = false;
+            if(Name != name)
+            {
+                Name = name;
+                updated = true;
+            }
+            if (AdditionalInfo != additionalInfo)
+            {
+                AdditionalInfo = additionalInfo;
+                updated = true;
+            }
+            if (Address != address)
+            {
+                Address = address;
+                updated = true;
+            }
+            if (Type != type)
+            {
+                Type = type;
+                updated = true;
+            }
+            return updated;
+        }
     }
 }

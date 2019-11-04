@@ -29,6 +29,7 @@ namespace Domain.ValueObjects
         {
             yield return Begin;
             yield return End;
+            yield return IsActive;
         }
     }
 }

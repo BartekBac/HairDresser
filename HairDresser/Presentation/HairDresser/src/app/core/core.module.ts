@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from '../authentication/services/auth.service';
 import { JwtInterceptor } from './interceptors/jwt-interceptor';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/primeng';
+import { MessageService, ConfirmationService } from 'primeng/primeng';
 
 
 @NgModule({
@@ -27,7 +26,8 @@ export class CoreModule {
       providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         AuthService,
-        MessageService
+        MessageService,
+        ConfirmationService
       ]
     };
   }

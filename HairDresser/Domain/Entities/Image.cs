@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Domain.Entities
 {
@@ -25,10 +26,20 @@ namespace Domain.Entities
 
         }
 
-        public void SetImageData(byte[] source, string header)
+        public bool Update(byte[] source, string header)
         {
-            Source = source;
-            Header = header;
+            var updated = false;
+            if((Source == null && source != null) || Source != null && source != null && !Source.SequenceEqual(source))
+            {
+                Source = source;
+                updated = true;
+            }
+            if(Header != header)
+            {
+                Header = header;
+                updated = true;
+            }
+            return updated;
         }
     }
 }
