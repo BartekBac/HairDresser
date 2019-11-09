@@ -10,6 +10,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Application.Services;
 using Domain.ValueObjects;
+using Domain.Entities;
 
 namespace Application.Handlers.Client
 {
@@ -53,7 +54,12 @@ namespace Application.Handlers.Client
 
             foreach(var clientSalon in clientSalons)
             {
-                var salon = _dbContext.Salons.Include(s => s.Admin).FirstOrDefault(s => s.Id == clientSalon.SalonId);
+                var salon = _dbContext.Salons
+                    .Include(s => s.Admin)
+                    .Include(s => s.Workers).ThenInclude(w => w.User)
+                    .Include(s => s.Workers).ThenInclude(w => w.Services).ThenInclude(ws => ws.Service)
+                    .Include(s => s.Services)
+                    .FirstOrDefault(s => s.Id == clientSalon.SalonId);
                 if(salon == null)
                 {
                     throw new ApplicationException("Could not find favorite salon with id=" + clientSalon.SalonId.ToString());
@@ -63,13 +69,21 @@ namespace Application.Handlers.Client
                 {
                     throw new ApplicationException("Could not find image for favorite salon with id=" + clientSalon.SalonId.ToString());
                 }
-                var salonSchedule = _dbContext.Schedules.FirstOrDefault(i => i.Id == salon.Id);
-                if (salonImage == null)
+                var salonSchedule = _dbContext.Schedules.FirstOrDefault(s => s.Id == salon.Id);
+                if (salonSchedule == null)
                 {
                     throw new ApplicationException("Could not find schedule for favorite salon with id=" + clientSalon.SalonId.ToString());
                 }
                 salon.Image = salonImage;
                 salon.Schedule = salonSchedule;
+
+                foreach(var worker in salon.Workers)
+                {
+                    var workerImage = _dbContext.Images.FirstOrDefault(i => i.Id == worker.Id);
+                    var workerSchedule = _dbContext.Schedules.FirstOrDefault(s => s.Id == worker.Id);
+                    worker.Image = workerImage;
+                    worker.Schedule = workerSchedule;
+                }
 
                 result.FavoriteSalons = result.FavoriteSalons.AsEnumerable().Concat(new SalonDto[] { _mapper.Map<SalonDto>(salon) });
             };
