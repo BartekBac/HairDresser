@@ -5,6 +5,7 @@ import { Worker } from './Worker';
 import { Service } from './Service';
 
 export class Salon {
+  id: string;
   name: string;
   address: Address;
   additionalInfo: string;

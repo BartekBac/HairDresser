@@ -14,6 +14,8 @@ import { FormScheduleComponent } from './components/form-schedule/form-schedule.
 import { FormUploadImageComponent } from './components/form-upload-image/form-upload-image.component';
 import { SalonTypePipe } from './pipes/salon-type.pipe';
 import { EditableDivComponent } from './components/editable-div/editable-div.component';
+import { ClientService } from './services/client.service';
+import { ClientResolver } from './resolvers/client.resolver';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         SalonService,
-        SalonResolver
+        SalonResolver,
+        ClientService,
+        ClientResolver
       ]
     };
   }

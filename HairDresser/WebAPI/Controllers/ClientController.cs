@@ -1,8 +1,8 @@
 ﻿using Application.DTOs;
-using Application.Services;
+using Application.Queries.Client;
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,40 +17,19 @@ namespace WebAPI.Controllers
     [Route("api/client")]
     public class ClientController : Controller
     {
-        UserManager<IdentityUser> _userManager;
-        IClientService _clientService;
+        IMediator _mediator;
 
-        public ClientController(UserManager<IdentityUser> userManager,
-                              IClientService clientService)
+        public ClientController(IMediator mediator)
         {
-            _userManager = userManager;
-            _clientService = clientService;
+            _mediator = mediator;
         }
 
-        /*[Authorize(Roles = RoleString.Client)]
-        [HttpPost]
-        public async Task<IActionResult> CreateClientAsync(ClientCreationDto clientCreation)
+        [Authorize(Roles = RoleString.Client)]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetClientById(string id)
         {
-
-            IdentityUser user = await _userManager.FindByIdAsync(clientCreation.userId);
-
-            if (user == null)
-            {
-                var errorMessage = "Failed. Cannot find user with given ID (" + clientCreation.userId + ")";
-                return BadRequest(errorMessage);
-            }
-
-            try
-            {
-                var client = _clientService.CreateClient(clientCreation, user);
-                return Created("Client", client);
-            } 
-            catch(Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-
-            
-        }*/
+            var result = await _mediator.Send(new GetClientByIdQuery { Id = id });
+            return Ok(result);
+        }
     }
 }
