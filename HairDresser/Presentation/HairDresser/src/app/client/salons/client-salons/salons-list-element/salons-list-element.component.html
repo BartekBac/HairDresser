@@ -1,0 +1,7 @@
+<div class="my-list-element-wrapper" [ngClass]="{'my-list-element-wrapper-selected': isSelected}">
+  <label class="my-header my-label">{{salon.name}}</label>
+</div>
+<div class="my-item-hooked-div" [hidden]="!isSelected">
+  <button pButton type="button" label="Make an appointment" class="my-appoint-button"></button>
+  <button pButton type="button" icon="pi pi-times" class="ui-button-danger my-delete-button"></button>
+</div>

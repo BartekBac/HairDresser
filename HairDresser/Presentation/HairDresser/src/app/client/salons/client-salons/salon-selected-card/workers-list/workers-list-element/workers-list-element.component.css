@@ -1,0 +1,22 @@
+.my-list-element-wrapper{
+  border-bottom: 1px solid black;
+  padding: 5px;
+  margin-bottom: 2px;
+}
+.my-list-element-wrapper:hover{
+  border-color: gold;
+  background-color: #424242;
+  cursor: pointer;
+}
+.my-list-element-wrapper-selected{
+  border: 1.5px solid gold;
+  margin-bottom: 0px;
+}
+.my-header{
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+.my-label{
+  margin-top: 5px;
+}

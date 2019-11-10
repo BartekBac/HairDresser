@@ -11,6 +11,8 @@ export class ClientSalonsComponent implements OnInit {
   @Input() salons: Salon[];
   @Output() removedSalon = new EventEmitter<Salon>();
 
+  selectedSalon: Salon = null;
+
   constructor() { }
 
   ngOnInit() {
@@ -22,6 +24,10 @@ export class ClientSalonsComponent implements OnInit {
 
   onRemovedSalon(removedSalon: Salon) {
     this.removedSalon.emit(removedSalon);
+  }
+
+  onSalonSelected(selectedSalon: Salon) {
+    this.selectedSalon = selectedSalon;
   }
 
 }
