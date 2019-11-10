@@ -1,4 +1,5 @@
-<p-card *ngIf="salon" header="{{salon.name}}" subheader="{{salon.type | salonType}} hairdresser" class="my-card-background" styleClass="ui-card-shadow">
+<p-card *ngIf="salon" header="{{salon.name}}" subheader="{{salon.type | salonType}} hairdresser"
+  class="my-card-background" styleClass="ui-card-shadow">
   <p-header>
     <img [src]="salon.imageSource">
   </p-header>
@@ -7,27 +8,7 @@
       <div>{{salon.additionalInfo}}</div>
     </p-accordionTab>
     <p-accordionTab header="Schedule">
-      <div *ngIf="salon.schedule.monday.isActive">Mon:
-        {{salon.schedule.monday.begin.hour | number:'2.0'}}:{{salon.schedule.monday.begin.minute | number:'2.0'}}-{{salon.schedule.monday.end.hour | number:'2.0'}}:{{salon.schedule.monday.end.minute | number:'2.0'}}
-      </div>
-      <div *ngIf="salon.schedule.tuesday.isActive">Tue:
-        {{salon.schedule.tuesday.begin.hour | number:'2.0'}}:{{salon.schedule.tuesday.begin.minute | number:'2.0'}}-{{salon.schedule.tuesday.end.hour | number:'2.0'}}:{{salon.schedule.tuesday.end.minute | number:'2.0'}}
-      </div>
-      <div *ngIf="salon.schedule.wednesday.isActive">Wed:
-        {{salon.schedule.wednesday.begin.hour | number:'2.0'}}:{{salon.schedule.wednesday.begin.minute | number:'2.0'}}-{{salon.schedule.wednesday.end.hour | number:'2.0'}}:{{salon.schedule.wednesday.end.minute | number:'2.0'}}
-      </div>
-      <div *ngIf="salon.schedule.thursday.isActive">Thu:
-        {{salon.schedule.thursday.begin.hour | number:'2.0'}}:{{salon.schedule.thursday.begin.minute | number:'2.0'}}-{{salon.schedule.thursday.end.hour | number:'2.0'}}:{{salon.schedule.thursday.end.minute | number:'2.0'}}
-      </div>
-      <div *ngIf="salon.schedule.friday.isActive">Fri:
-        {{salon.schedule.friday.begin.hour | number:'2.0'}}:{{salon.schedule.friday.begin.minute | number:'2.0'}}-{{salon.schedule.friday.end.hour | number:'2.0'}}:{{salon.schedule.friday.end.minute | number:'2.0'}}
-      </div>
-      <div *ngIf="salon.schedule.saturday.isActive">Sat:
-        {{salon.schedule.saturday.begin.hour | number:'2.0'}}:{{salon.schedule.saturday.begin.minute | number:'2.0'}}-{{salon.schedule.saturday.end.hour | number:'2.0'}}:{{salon.schedule.saturday.end.minute | number:'2.0'}}
-      </div>
-      <div *ngIf="salon.schedule.sunday.isActive">Sun:
-        {{salon.schedule.sunday.begin.hour | number:'2.0'}}:{{salon.schedule.sunday.begin.minute | number:'2.0'}}-{{salon.schedule.sunday.end.hour | number:'2.0'}}:{{salon.schedule.sunday.end.minute | number:'2.0'}}
-      </div>
+      <app-view-schedule [schedule]="salon.schedule"></app-view-schedule>
     </p-accordionTab>
     <p-accordionTab header="Contact">
       <div>E-mail: {{salon.admin.email}}</div>
@@ -40,11 +21,29 @@
     <p-accordionTab header="Workers">
       <app-client-salon-workers-list [workers]="salon.workers"></app-client-salon-workers-list>
     </p-accordionTab>
+    <p-accordionTab header="Services">
+      <p-table [value]="salon.services">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Service</th>
+            <th>Cost</th>
+            <th>Time</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-service>
+          <tr>
+            <td>{{service.name}}</td>
+            <td>{{service.price}}$</td>
+            <td>{{service.time}} min</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-accordionTab>
   </p-accordion>
   <p-footer>
   </p-footer>
 </p-card>
 
 <div *ngIf="!salon" class="my-any-salon-selected-div p-grid p-align-center">
-    <label class="my-label">(Select salon from list)</label>
-  </div>
+  <label class="my-label">(Select salon from list)</label>
+</div>

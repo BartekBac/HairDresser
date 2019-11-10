@@ -5,6 +5,6 @@
     </div>
   </div>
   <div class="ui-g-12 ui-md-12 ui-lg-7 ui-fluid">
-    <app-client-salon-worker-selected-card [worker]="selectedWorker"></app-client-salon-worker-selected-card>
+    <app-client-salon-worker-selected-card *ngIf="workers && workers.length > 0" [worker]="selectedWorker"></app-client-salon-worker-selected-card>
   </div>
 </div>

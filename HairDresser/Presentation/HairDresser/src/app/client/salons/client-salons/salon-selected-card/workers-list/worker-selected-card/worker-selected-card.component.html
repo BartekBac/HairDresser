@@ -1,2 +1,18 @@
-<p>{{worker.firstName}}</p>
-<p>{{worker.lastName}}</p>
+<div *ngIf="worker" class="ui-fluid my-card-wrapper">
+  <div class="ui-g-12 ui-md-6 ui-lg-6 my-img-container">
+    <img [src]="worker.imageSource" class="my-img">
+  </div>
+  <div class="ui-g-12 ui-md-6 ui-lg-6">
+    <p class="my-paragraph">Schedule:</p>
+    <app-view-schedule [schedule]="worker.schedule"></app-view-schedule>
+  </div>
+  <div class="ui-g-12 ui-md-12 ui-lg-12">
+    <p class="my-paragraph">Contact:</p>
+    <p>E-mail: {{worker.userEmail}}</p>
+    <p>Tel no: {{worker.userPhoneNumber}}</p>
+  </div>
+</div>
+
+<div *ngIf="!worker" class="my-any-salon-selected-div p-grid p-align-center">
+  <label class="my-label">(Select worker from list)</label>
+</div>

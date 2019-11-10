@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Worker } from 'src/app/shared/models/Worker';
 
 @Component({
@@ -6,7 +6,7 @@ import { Worker } from 'src/app/shared/models/Worker';
   templateUrl: './workers-list.component.html',
   styleUrls: ['./workers-list.component.css']
 })
-export class ClientSalonWorkersListComponent implements OnInit {
+export class ClientSalonWorkersListComponent implements OnInit, OnChanges {
 
   @Input() workers: Worker[];
 
@@ -19,6 +19,10 @@ export class ClientSalonWorkersListComponent implements OnInit {
 
   onWorkerSelected(selectedWorker: Worker) {
     this.selectedWorker = selectedWorker;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.selectedWorker = null;
   }
 
 }

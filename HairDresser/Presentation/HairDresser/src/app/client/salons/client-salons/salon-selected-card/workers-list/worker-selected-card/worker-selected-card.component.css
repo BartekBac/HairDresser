@@ -1,0 +1,31 @@
+.my-any-salon-selected-div{
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.my-card-wrapper{
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  background-color: #424242;
+}
+
+.my-label{
+  width: 100%;
+  font-size: large;
+}
+
+.my-img-container{
+  width: 50%;
+}
+
+.my-img{
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 12px;
+}
+
+.my-paragraph{
+  font-weight: bold;
+}

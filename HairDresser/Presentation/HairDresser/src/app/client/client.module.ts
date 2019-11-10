@@ -12,6 +12,7 @@ import { ClientSalonSelectedCardComponent } from './salons/client-salons/salon-s
 import { ClientSalonWorkersListComponent } from './salons/client-salons/salon-selected-card/workers-list/workers-list.component';
 import { WorkersListElementComponent } from './salons/client-salons/salon-selected-card/workers-list/workers-list-element/workers-list-element.component';
 import { WorkerSelectedCardComponent } from './salons/client-salons/salon-selected-card/workers-list/worker-selected-card/worker-selected-card.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { WorkerSelectedCardComponent } from './salons/client-salons/salon-select
     ButtonModule,
     PanelModule,
     AccordionModule,
-    CardModule
+    CardModule,
+    TableModule
   ]
 })
 export class ClientModule { }

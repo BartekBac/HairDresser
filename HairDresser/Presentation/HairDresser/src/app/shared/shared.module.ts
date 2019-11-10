@@ -16,6 +16,7 @@ import { SalonTypePipe } from './pipes/salon-type.pipe';
 import { EditableDivComponent } from './components/editable-div/editable-div.component';
 import { ClientService } from './services/client.service';
 import { ClientResolver } from './resolvers/client.resolver';
+import { ViewScheduleComponent } from './components/view-schedule/view-schedule.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ClientResolver } from './resolvers/client.resolver';
     FormScheduleComponent,
     FormUploadImageComponent,
     SalonTypePipe,
-    EditableDivComponent
+    EditableDivComponent,
+    ViewScheduleComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +54,8 @@ import { ClientResolver } from './resolvers/client.resolver';
     FormScheduleComponent,
     FormUploadImageComponent,
     SalonTypePipe,
-    EditableDivComponent
+    EditableDivComponent,
+    ViewScheduleComponent
   ]
 })
 export class SharedModule {
