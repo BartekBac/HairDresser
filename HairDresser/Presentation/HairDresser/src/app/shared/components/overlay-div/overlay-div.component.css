@@ -1,0 +1,19 @@
+.my-overlay-button{
+  position: absolute;
+}
+
+.my-overlay-panel{
+  z-index: auto;
+  position: absolute;
+}
+
+.my-hide-element{
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.33s, opacity 0.33s linear;
+}
+.my-show-element{
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.33s linear;
+}

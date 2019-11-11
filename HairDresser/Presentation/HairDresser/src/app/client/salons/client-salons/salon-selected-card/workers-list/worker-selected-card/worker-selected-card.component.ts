@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Worker } from 'src/app/shared/models/Worker';
+import { OverlayPanel } from 'primeng/primeng';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-client-salon-worker-selected-card',

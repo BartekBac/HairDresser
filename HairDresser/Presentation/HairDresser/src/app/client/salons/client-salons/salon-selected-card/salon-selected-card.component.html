@@ -22,22 +22,7 @@
       <app-client-salon-workers-list [workers]="salon.workers"></app-client-salon-workers-list>
     </p-accordionTab>
     <p-accordionTab header="Services">
-      <p-table [value]="salon.services">
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Service</th>
-            <th>Cost</th>
-            <th>Time</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-service>
-          <tr>
-            <td>{{service.name}}</td>
-            <td>{{service.price}}$</td>
-            <td>{{service.time}} min</td>
-          </tr>
-        </ng-template>
-      </p-table>
+      <app-view-services-table [services]="salon.services"></app-view-services-table>
     </p-accordionTab>
   </p-accordion>
   <p-footer>

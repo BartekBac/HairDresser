@@ -17,7 +17,9 @@
 }
 
 .my-img-container{
-  width: 50%;
+  width: 100%;
+  text-align: center;
+  position: relative;
 }
 
 .my-img{
@@ -29,3 +31,16 @@
 .my-paragraph{
   font-weight: bold;
 }
+
+.my-worker-schedule-container{
+  background-color: #323232;
+  text-align: left;
+  border-radius: 12px;
+  padding: 8px;
+  font-size: 16px;
+}
+.my-worker-schedule-label{
+  font-weight: bold;
+}
+
+

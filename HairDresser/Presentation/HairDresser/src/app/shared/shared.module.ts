@@ -17,7 +17,9 @@ import { EditableDivComponent } from './components/editable-div/editable-div.com
 import { ClientService } from './services/client.service';
 import { ClientResolver } from './resolvers/client.resolver';
 import { ViewScheduleComponent } from './components/view-schedule/view-schedule.component';
-
+import { ViewServicesTableComponent } from './components/view-services-table/view-services-table.component';
+import { TableModule } from 'primeng/table';
+import { OverlayDivComponent } from './components/overlay-div/overlay-div.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ViewScheduleComponent } from './components/view-schedule/view-schedule.
     FormUploadImageComponent,
     SalonTypePipe,
     EditableDivComponent,
-    ViewScheduleComponent
+    ViewScheduleComponent,
+    ViewServicesTableComponent,
+    OverlayDivComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +49,8 @@ import { ViewScheduleComponent } from './components/view-schedule/view-schedule.
     CheckboxModule,
     PasswordModule,
     SelectButtonModule,
-    FileUploadModule
+    FileUploadModule,
+    TableModule
   ],
   exports: [
     CommonModule,
@@ -55,7 +60,9 @@ import { ViewScheduleComponent } from './components/view-schedule/view-schedule.
     FormUploadImageComponent,
     SalonTypePipe,
     EditableDivComponent,
-    ViewScheduleComponent
+    ViewScheduleComponent,
+    ViewServicesTableComponent,
+    OverlayDivComponent
   ]
 })
 export class SharedModule {
