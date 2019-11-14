@@ -12,6 +12,9 @@ import { ClientSalonSelectedCardComponent } from './salons/client-salons/salon-s
 import { ClientSalonWorkersListComponent } from './salons/client-salons/salon-selected-card/workers-list/workers-list.component';
 import { WorkersListElementComponent } from './salons/client-salons/salon-selected-card/workers-list/workers-list-element/workers-list-element.component';
 import { WorkerSelectedCardComponent } from './salons/client-salons/salon-selected-card/workers-list/worker-selected-card/worker-selected-card.component';
+import { AddSalonComponent } from './salons/add-salon/add-salon.component';
+import { DataViewModule } from 'primeng/dataview';
+import { SalonListElementComponent } from './salons/add-salon/salon-list-element/salon-list-element.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { WorkerSelectedCardComponent } from './salons/client-salons/salon-select
     ClientSalonSelectedCardComponent,
     ClientSalonWorkersListComponent,
     WorkersListElementComponent,
-    WorkerSelectedCardComponent
+    WorkerSelectedCardComponent,
+    AddSalonComponent,
+    SalonListElementComponent
   ],
   imports: [
     SharedModule,
@@ -33,7 +38,8 @@ import { WorkerSelectedCardComponent } from './salons/client-salons/salon-select
     PanelModule,
     AccordionModule,
     CardModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    DataViewModule
   ]
 })
 export class ClientModule { }

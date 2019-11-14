@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Salon } from 'src/app/shared/models/Salon';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-salons',
@@ -13,13 +14,15 @@ export class ClientSalonsComponent implements OnInit {
 
   selectedSalon: Salon = null;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
   redirectAddSalon() {
-    console.log('redirect');
+    this.router.navigate(['/client/add-salon']);
   }
 
   onRemovedSalon(removedSalon: Salon) {

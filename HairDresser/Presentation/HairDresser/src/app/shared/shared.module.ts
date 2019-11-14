@@ -20,6 +20,7 @@ import { ViewScheduleComponent } from './components/view-schedule/view-schedule.
 import { ViewServicesTableComponent } from './components/view-services-table/view-services-table.component';
 import { TableModule } from 'primeng/table';
 import { OverlayDivComponent } from './components/overlay-div/overlay-div.component';
+import { ClientAddSalonResolver } from './resolvers/client-add-salon.resolver';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ export class SharedModule {
         SalonService,
         SalonResolver,
         ClientService,
-        ClientResolver
+        ClientResolver,
+        ClientAddSalonResolver
       ]
     };
   }

@@ -1,0 +1,51 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-fluid p-grid p-align-start">
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-g-12 ui-md-8 ui-md-offset-1 my-column-wrapper">
+        <p-dataView #dv [value]="salons" [paginator]="true" [rows]="6" paginatorPosition="both" filterBy="brand"
+          [sortField]="sortField" [sortOrder]="sortOrder">
+          <p-header>
+            <div class="ui-helper-clearfix">
+              <div class="ui-g">
+                <div class="ui-g-12 ui-md-4">
+                  <!--<p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>-->
+                </div>
+                <div class="ui-g-6 ui-md-4 filter-container">
+                  <div style="position:relative">
+                    <input type="search" pInputText placeholder="Search by brand"
+                      (keyup)="dv.filter($event.target.value)">
+                  </div>
+                </div>
+                <div class="ui-g-6 ui-md-4" style="text-align:right">
+                  <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                </div>
+              </div>
+            </div>
+          </p-header>
+          <ng-template let-salon pTemplate="listItem">
+            <div class="ui-g-12">
+              <app-add-salon-list-element [salon]="salon"></app-add-salon-list-element>
+            </div>
+            <!--<div class="ui-g-12">
+                <div class="car-details">
+                    <div>
+                        <img [src]="salon.imageSource">
+                        <div class="ui-g">
+                            <div class="ui-g-12">Name: <b>{{salon.name}}</b></div>
+                        </div>
+                    </div>
+                    <button pButton type="button" icon="pi pi-search"></button>
+                </div>
+            </div>-->
+          </ng-template>
+          <ng-template let-salon pTemplate="gridItem">
+            <div style="padding:.5em;" class="ui-g-12 ui-md-4">
+              <app-client-salon-selected-card [salon]="salon" [withWorkersMode]="false">
+              </app-client-salon-selected-card>
+            </div>
+          </ng-template>
+        </p-dataView>
+      </div>
+    </div>
+  </div>
+</div>

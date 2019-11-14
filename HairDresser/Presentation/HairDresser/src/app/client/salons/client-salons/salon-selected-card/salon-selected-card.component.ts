@@ -9,6 +9,7 @@ import { Salon } from 'src/app/shared/models/Salon';
 export class ClientSalonSelectedCardComponent implements OnInit {
 
   @Input() salon: Salon;
+  @Input() withWorkersMode = true;
 
   constructor() { }
 

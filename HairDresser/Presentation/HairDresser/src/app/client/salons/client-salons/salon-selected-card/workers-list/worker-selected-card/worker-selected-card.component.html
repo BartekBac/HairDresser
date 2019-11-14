@@ -23,10 +23,6 @@
       </div>
     </app-overlay-div>
   </div>
-  <!--<div class="ui-g-12 ui-md-6 ui-lg-6">
-    <p class="my-paragraph">Schedule:</p>
-    <app-view-schedule [schedule]="worker.schedule"></app-view-schedule>
-  </div>-->
   <div class="ui-g-12 ui-md-12 ui-lg-12">
     <p class="my-paragraph">Contact:</p>
     <p>E-mail: {{worker.userEmail}}</p>
@@ -37,7 +33,3 @@
 <div *ngIf="!worker" class="my-any-salon-selected-div p-grid p-align-center">
   <label class="my-label">(Select worker from list)</label>
 </div>
-
-<!--<p-overlayPanel #overlayServices class="my-overlay-panel" [showCloseIcon]="true" [dismissable]="false">
-  <app-view-services-table [services]="worker?.services"></app-view-services-table>
-</p-overlayPanel>-->
