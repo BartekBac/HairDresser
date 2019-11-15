@@ -1,0 +1,16 @@
+<button
+  type="button" pButton
+  class="my-overlay-button"
+  [ngClass]="buttonClasses"
+  [ngStyle]="{'top': buttonPaddingTop, 'right': buttonPaddingRight, 'left': buttonPaddingLeft}"
+  (mouseenter)="displayOverlay = true"
+  (mouseleave)="displayOverlay = false"
+  icon="{{buttonIcon}}"
+  (click)="raiseClick($event)">
+</button>
+<div
+  class="my-overlay-panel"
+  [ngStyle]="{'top': contentPaddingTop, 'right': contentPaddingRight, 'left': contentPaddingLeft, 'width': contentWidth}"
+  [ngClass]="(displayOverlay===true)?'my-show-element':'my-hide-element'">
+  <ng-content></ng-content>
+</div>

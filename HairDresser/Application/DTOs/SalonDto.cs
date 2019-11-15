@@ -8,10 +8,12 @@ namespace Application.DTOs
 {
     public class SalonDto
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public AddressDto Address { get; set; }
         public string AdditionalInfo { get; set; }
         public SalonType Type { get; set; }
+        public float Rating { get; set; }
         public ScheduleDto Schedule { get; set; }
         public UserDto Admin { get; set; }
         public string ImageSource { get; set; }

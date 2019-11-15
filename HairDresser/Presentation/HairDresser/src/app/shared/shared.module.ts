@@ -14,7 +14,13 @@ import { FormScheduleComponent } from './components/form-schedule/form-schedule.
 import { FormUploadImageComponent } from './components/form-upload-image/form-upload-image.component';
 import { SalonTypePipe } from './pipes/salon-type.pipe';
 import { EditableDivComponent } from './components/editable-div/editable-div.component';
-
+import { ClientService } from './services/client.service';
+import { ClientResolver } from './resolvers/client.resolver';
+import { ViewScheduleComponent } from './components/view-schedule/view-schedule.component';
+import { ViewServicesTableComponent } from './components/view-services-table/view-services-table.component';
+import { TableModule } from 'primeng/table';
+import { OverlayDivComponent } from './components/overlay-div/overlay-div.component';
+import { ClientAddSalonResolver } from './resolvers/client-add-salon.resolver';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,10 @@ import { EditableDivComponent } from './components/editable-div/editable-div.com
     FormScheduleComponent,
     FormUploadImageComponent,
     SalonTypePipe,
-    EditableDivComponent
+    EditableDivComponent,
+    ViewScheduleComponent,
+    ViewServicesTableComponent,
+    OverlayDivComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +50,8 @@ import { EditableDivComponent } from './components/editable-div/editable-div.com
     CheckboxModule,
     PasswordModule,
     SelectButtonModule,
-    FileUploadModule
+    FileUploadModule,
+    TableModule
   ],
   exports: [
     CommonModule,
@@ -50,7 +60,10 @@ import { EditableDivComponent } from './components/editable-div/editable-div.com
     FormScheduleComponent,
     FormUploadImageComponent,
     SalonTypePipe,
-    EditableDivComponent
+    EditableDivComponent,
+    ViewScheduleComponent,
+    ViewServicesTableComponent,
+    OverlayDivComponent
   ]
 })
 export class SharedModule {
@@ -59,7 +72,10 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         SalonService,
-        SalonResolver
+        SalonResolver,
+        ClientService,
+        ClientResolver,
+        ClientAddSalonResolver
       ]
     };
   }

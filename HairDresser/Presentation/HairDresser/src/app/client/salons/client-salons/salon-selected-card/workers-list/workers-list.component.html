@@ -1,0 +1,10 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-md-12 ui-lg-5 ui-fluid">
+    <div *ngFor="let worker of workers">
+      <app-client-salon-workers-list-element [worker]="worker" (click)="onWorkerSelected(worker)" [isSelected]="selectedWorker===worker"></app-client-salon-workers-list-element>
+    </div>
+  </div>
+  <div class="ui-g-12 ui-md-12 ui-lg-7 ui-fluid">
+    <app-client-salon-worker-selected-card *ngIf="workers && workers.length > 0" [worker]="selectedWorker"></app-client-salon-worker-selected-card>
+  </div>
+</div>

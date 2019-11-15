@@ -18,9 +18,18 @@ export class SalonService {
 
   constructor(private http: HttpClient) { }
 
+  getSalons(): Observable<Salon[]> {
+    return this.http.get<Salon[]>(this.baseUrl);
+  }
+
+  getAvaiableSalons(clientId: string): Observable<Salon[]> {
+    return this.http.get<Salon[]>(this.baseUrl + 'available/' + clientId);
+  }
+
   getSalon(id: string): Observable<Salon> {
     return this.http.get<Salon>(this.baseUrl + id).pipe(delay(1500));
   }
+
 
   uploadImage(salonId: string, uploadImage: UploadImage) {
     return this.http.post(this.baseUrl + salonId + '/update-image', uploadImage);

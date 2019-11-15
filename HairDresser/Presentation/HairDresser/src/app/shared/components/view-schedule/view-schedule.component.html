@@ -1,0 +1,26 @@
+<div *ngIf="schedule">
+  <div *ngIf="schedule.monday.isActive">Mon:
+    {{schedule.monday.begin.hour | number:'2.0'}}:{{schedule.monday.begin.minute | number:'2.0'}}-{{schedule.monday.end.hour | number:'2.0'}}:{{schedule.monday.end.minute | number:'2.0'}}
+  </div>
+  <div *ngIf="schedule.tuesday.isActive">Tue:
+    {{schedule.tuesday.begin.hour | number:'2.0'}}:{{schedule.tuesday.begin.minute | number:'2.0'}}-{{schedule.tuesday.end.hour | number:'2.0'}}:{{schedule.tuesday.end.minute | number:'2.0'}}
+  </div>
+  <div *ngIf="schedule.wednesday.isActive">Wed:
+    {{schedule.wednesday.begin.hour | number:'2.0'}}:{{schedule.wednesday.begin.minute | number:'2.0'}}-{{schedule.wednesday.end.hour | number:'2.0'}}:{{schedule.wednesday.end.minute | number:'2.0'}}
+  </div>
+  <div *ngIf="schedule.thursday.isActive">Thu:
+    {{schedule.thursday.begin.hour | number:'2.0'}}:{{schedule.thursday.begin.minute | number:'2.0'}}-{{schedule.thursday.end.hour | number:'2.0'}}:{{schedule.thursday.end.minute | number:'2.0'}}
+  </div>
+  <div *ngIf="schedule.friday.isActive">Fri:
+    {{schedule.friday.begin.hour | number:'2.0'}}:{{schedule.friday.begin.minute | number:'2.0'}}-{{schedule.friday.end.hour | number:'2.0'}}:{{schedule.friday.end.minute | number:'2.0'}}
+  </div>
+  <div *ngIf="schedule.saturday.isActive">Sat:
+    {{schedule.saturday.begin.hour | number:'2.0'}}:{{schedule.saturday.begin.minute | number:'2.0'}}-{{schedule.saturday.end.hour | number:'2.0'}}:{{schedule.saturday.end.minute | number:'2.0'}}
+  </div>
+  <div *ngIf="schedule.sunday.isActive">Sun:
+    {{schedule.sunday.begin.hour | number:'2.0'}}:{{schedule.sunday.begin.minute | number:'2.0'}}-{{schedule.sunday.end.hour | number:'2.0'}}:{{schedule.sunday.end.minute | number:'2.0'}}
+  </div>
+</div>
+<div *ngIf="!schedule" class="my-any-salon-selected-div p-grid p-align-center">
+  <label class="my-label">(Schedule not defined)</label>
+</div>

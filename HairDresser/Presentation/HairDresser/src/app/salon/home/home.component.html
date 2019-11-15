@@ -19,27 +19,7 @@
             <p-accordionTab header="Schedule">
               <app-editable-div [(openDialogFlag)]="displayEditSchedule" [iconPaddingTop]="'-7px'"
                 [iconPaddingRight]="'-12px'">
-                <div *ngIf="salon.schedule.monday.isActive">Mon:
-                  {{salon.schedule.monday.begin.hour | number:'2.0'}}:{{salon.schedule.monday.begin.minute | number:'2.0'}}-{{salon.schedule.monday.end.hour | number:'2.0'}}:{{salon.schedule.monday.end.minute | number:'2.0'}}
-                </div>
-                <div *ngIf="salon.schedule.tuesday.isActive">Tue:
-                  {{salon.schedule.tuesday.begin.hour | number:'2.0'}}:{{salon.schedule.tuesday.begin.minute | number:'2.0'}}-{{salon.schedule.tuesday.end.hour | number:'2.0'}}:{{salon.schedule.tuesday.end.minute | number:'2.0'}}
-                </div>
-                <div *ngIf="salon.schedule.wednesday.isActive">Wed:
-                  {{salon.schedule.wednesday.begin.hour | number:'2.0'}}:{{salon.schedule.wednesday.begin.minute | number:'2.0'}}-{{salon.schedule.wednesday.end.hour | number:'2.0'}}:{{salon.schedule.wednesday.end.minute | number:'2.0'}}
-                </div>
-                <div *ngIf="salon.schedule.thursday.isActive">Thu:
-                  {{salon.schedule.thursday.begin.hour | number:'2.0'}}:{{salon.schedule.thursday.begin.minute | number:'2.0'}}-{{salon.schedule.thursday.end.hour | number:'2.0'}}:{{salon.schedule.thursday.end.minute | number:'2.0'}}
-                </div>
-                <div *ngIf="salon.schedule.friday.isActive">Fri:
-                  {{salon.schedule.friday.begin.hour | number:'2.0'}}:{{salon.schedule.friday.begin.minute | number:'2.0'}}-{{salon.schedule.friday.end.hour | number:'2.0'}}:{{salon.schedule.friday.end.minute | number:'2.0'}}
-                </div>
-                <div *ngIf="salon.schedule.saturday.isActive">Sat:
-                  {{salon.schedule.saturday.begin.hour | number:'2.0'}}:{{salon.schedule.saturday.begin.minute | number:'2.0'}}-{{salon.schedule.saturday.end.hour | number:'2.0'}}:{{salon.schedule.saturday.end.minute | number:'2.0'}}
-                </div>
-                <div *ngIf="salon.schedule.sunday.isActive">Sun:
-                  {{salon.schedule.sunday.begin.hour | number:'2.0'}}:{{salon.schedule.sunday.begin.minute | number:'2.0'}}-{{salon.schedule.sunday.end.hour | number:'2.0'}}:{{salon.schedule.sunday.end.minute | number:'2.0'}}
-                </div>
+                <app-view-schedule [schedule]="salon.schedule"></app-view-schedule>
               </app-editable-div>
             </p-accordionTab>
             <p-accordionTab header="Contact">

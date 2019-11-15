@@ -37,5 +37,6 @@ namespace Domain.Entities
         public VisitStatus Status { get; private set; }
         public DateTime Term { get; private set; }
         public int TotalTime { get; private set; }
+        public string Info { get; private set; }
     }
 }

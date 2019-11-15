@@ -1,0 +1,34 @@
+<p-card *ngIf="salon" header="{{salon.name}}" subheader="{{salon.type | salonType}} hairdresser"
+  class="my-card-background" styleClass="ui-card-shadow">
+  <p-header>
+    <img [src]="salon.imageSource" [ngClass]="{'my-grid-element-img': withWorkersMode === false}">
+  </p-header>
+  <p-accordion [multiple]="withWorkersMode">
+    <p-accordionTab header="Info" [selected]="withWorkersMode">
+      <div>{{salon.additionalInfo}}</div>
+    </p-accordionTab>
+    <p-accordionTab header="Schedule">
+      <app-view-schedule [schedule]="salon.schedule"></app-view-schedule>
+    </p-accordionTab>
+    <p-accordionTab header="Contact">
+      <div>E-mail: {{salon.admin.email}}</div>
+      <div>Tel no: {{salon.admin.phoneNumber}}</div>
+    </p-accordionTab>
+    <p-accordionTab header="Address">
+      <div>{{salon.address.street}} {{salon.address.houseNumber}}</div>
+      <div>{{salon.address.zipCode}}, {{salon.address.city}}</div>
+    </p-accordionTab>
+    <p-accordionTab header="Services">
+        <app-view-services-table [services]="salon.services"></app-view-services-table>
+      </p-accordionTab>
+    <p-accordionTab *ngIf="withWorkersMode" header="Workers">
+      <app-client-salon-workers-list [workers]="salon.workers"></app-client-salon-workers-list>
+    </p-accordionTab>
+  </p-accordion>
+  <p-footer>
+  </p-footer>
+</p-card>
+
+<div *ngIf="!salon" class="my-any-salon-selected-div p-grid p-align-center">
+  <label class="my-label">(Select salon from list)</label>
+</div>

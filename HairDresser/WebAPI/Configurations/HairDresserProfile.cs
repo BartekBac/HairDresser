@@ -21,7 +21,9 @@ namespace WebAPI.Configurations
             CreateMap<IdentityUser, UserDto>();
             CreateMap<AddressDto, Address>();
             CreateMap<Address, AddressDto>();
-            CreateMap<Client, ClientDto>();
+            CreateMap<Client, ClientDto>()
+                .ForPath(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
+
             CreateMap<Salon, SalonDto>()
                 .ForMember(dest => dest.ImageSource, opt => opt.MapFrom(src => ImageService.ConcatenateToString(src.Image)));
             //.ForMember(dest => dest.ImageSource, opt => opt.MapFrom(src => src.Image.Header + Convert.ToBase64String(src.Image.Source)));
@@ -41,7 +43,8 @@ namespace WebAPI.Configurations
             CreateMap<Schedule, ScheduleDto>();
             CreateMap<ScheduleDto, Schedule>();
             CreateMap<Worker, WorkerDto>()
-                .ForPath(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
+                .ForPath(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
+                .ForMember(dest => dest.ImageSource, opt => opt.MapFrom(src => ImageService.ConcatenateToString(src.Image)));
 
             CreateMap<Service, ServiceDto>();
 
@@ -50,6 +53,13 @@ namespace WebAPI.Configurations
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Service.Price))
                 .ForMember(dest => dest.Time, opt => opt.MapFrom(src => src.Service.Time))
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Service.Id));
+
+            CreateMap<ClientSalons, SalonDto>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Salon.Name))
+                .ForMember(dest => dest.AdditionalInfo, opt => opt.MapFrom(src => src.Salon.AdditionalInfo))
+                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.Salon.Type))
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Salon.Address))
+                .ForMember(dest => dest.Admin, opt => opt.MapFrom(src => src.Salon.Admin));
         }
     }
 }

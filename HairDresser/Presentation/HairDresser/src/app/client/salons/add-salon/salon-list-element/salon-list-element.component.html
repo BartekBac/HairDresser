@@ -1,0 +1,54 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-fluid p-grid p-align-center my-overlay-container">
+    <div class="ui-g-6">
+      <img [src]="salon.imageSource" class='my-list-element-img'>
+    </div>
+    <div class="ui-g-6 ">
+      <h2>{{salon.name}}</h2>
+      <div class="my-label-header">Type:</div>
+      <p>{{salon.type | salonType}} hairdresser</p>
+      <div class="my-label-header">Contact:</div>
+      <div>E-mail: {{salon.admin.email}}</div>
+      <div>Tel no: {{salon.admin.phoneNumber}}</div>
+      <div class="my-label-header">Address:</div>
+      <div>{{salon.address.street}} {{salon.address.houseNumber}}</div>
+      <div>{{salon.address.zipCode}}, {{salon.address.city}}</div>
+      <app-overlay-div
+      [buttonPaddingRight]="'15px'"
+      [buttonPaddingTop]="'15px'"
+      [contentPaddingRight]="'55px'"
+      [contentPaddingTop]="'15px'"
+      [contentWidth]="'50%'"
+      [buttonIcon]="'pi pi-list'">
+      <app-view-services-table [services]="salon.services"></app-view-services-table>
+    </app-overlay-div>
+    <app-overlay-div
+      [buttonPaddingRight]="'15px'"
+      [buttonPaddingTop]="'55px'"
+      [contentPaddingRight]="'55px'"
+      [contentPaddingTop]="'55px'"
+      [contentWidth]="'40%'"
+      [buttonIcon]="'pi pi-calendar'">
+      <div class="my-overlay-content-container">
+        <p class="my-label-header">Schedule:</p>
+        <app-view-schedule [schedule]="salon.schedule"></app-view-schedule>
+      </div>
+    </app-overlay-div>
+    <app-overlay-div
+    [buttonPaddingRight]="'15px'"
+    [buttonPaddingTop]="'95px'"
+    [contentPaddingRight]="'55px'"
+    [contentPaddingTop]="'95px'"
+    [contentWidth]="'40%'"
+    [buttonIcon]="'pi pi-info-circle'">
+    <div class="my-overlay-content-container">
+      <p class="my-label-header">Info:</p>
+      <div>{{salon.additionalInfo}}</div>
+    </div>
+  </app-overlay-div>
+      <!--<div>Services:
+        <app-view-services-table [services]="salon.services"></app-view-services-table>
+      </div>-->
+    </div>
+  </div>
+</div>

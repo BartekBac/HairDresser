@@ -1,0 +1,20 @@
+:host ::ng-deep .ui-card-shadow{
+  background-color: #424242;
+}
+
+.my-any-salon-selected-div{
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.my-label{
+  width: 100%;
+  font-size: large;
+}
+
+.my-grid-element-img{
+  object-fit: cover;
+  object-position: center;
+  height: 150px;
+}
