@@ -38,7 +38,6 @@ namespace Application.Handlers.Client
                 .Include(c => c.SendOpinions)
                 .FirstOrDefault(c => c.Id == clientId);*/
             var image = _dbContext.Images.FirstOrDefault(i => i.Id == clientId);
-            client.Image = image;
             if (client == null)
             {
                 throw new ApplicationException("Could not find client with id=" + clientId);
@@ -47,7 +46,7 @@ namespace Application.Handlers.Client
             {
                 throw new ApplicationException("Could not find image for client with id=" + clientId);
             }
-
+            client.Image = image;
             var result = _mapper.Map<ClientDto>(client);
 
             var clientSalons = _dbContext.ClientSalons.Where(cs => cs.ClientId == clientId).ToArray();

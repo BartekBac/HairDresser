@@ -1,4 +1,5 @@
-﻿using Application.DTOs;
+﻿using Application.Commands.Client;
+using Application.DTOs;
 using Application.Queries.Client;
 using AutoMapper;
 using MediatR;
@@ -29,6 +30,24 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> GetClientById(string id)
         {
             var result = await _mediator.Send(new GetClientByIdQuery { Id = id });
+            return Ok(result);
+        }
+
+        [Authorize(Roles = RoleString.Client)]
+        [HttpPost("{id}/add-salon")]
+        public async Task<IActionResult> AddFavouriteSalon(string id, [FromBody] AddFavouriteSalonCommand command)
+        {
+            command.clientId = id;
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [Authorize(Roles = RoleString.Client)]
+        [HttpPost("{id}/remove-salon")]
+        public async Task<IActionResult> RemoveFavouriteSalon(string id, [FromBody] RemoveFavouriteSalonCommand command)
+        {
+            command.clientId = id;
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
     }

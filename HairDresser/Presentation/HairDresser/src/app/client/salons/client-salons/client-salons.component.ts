@@ -26,6 +26,7 @@ export class ClientSalonsComponent implements OnInit {
   }
 
   onRemovedSalon(removedSalon: Salon) {
+    this.selectedSalon = null;
     this.removedSalon.emit(removedSalon);
   }
 

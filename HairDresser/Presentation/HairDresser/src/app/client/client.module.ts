@@ -3,7 +3,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ClientRoutingModule } from './client-routing.module';
 import { HomeComponent } from './home/home.component';
-import { TabMenuModule, ButtonModule, PanelModule, AccordionModule, CardModule, OverlayPanelModule } from 'primeng/primeng';
+import { TabMenuModule, ButtonModule, PanelModule, AccordionModule, CardModule, OverlayPanelModule, DropdownModule, SelectButtonModule, AutoCompleteModule } from 'primeng/primeng';
 import { ClientSalonsComponent } from './salons/client-salons/client-salons.component';
 import { ClientVisitsComponent } from './visits/client-visits/client-visits.component';
 import { ClientOpinionsComponent } from './opinions/client-opinions/client-opinions.component';
@@ -15,6 +15,9 @@ import { WorkerSelectedCardComponent } from './salons/client-salons/salon-select
 import { AddSalonComponent } from './salons/add-salon/add-salon.component';
 import { DataViewModule } from 'primeng/dataview';
 import { SalonListElementComponent } from './salons/add-salon/salon-list-element/salon-list-element.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MakeAppointmentComponent } from './salons/make-appointment/make-appointment.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { SalonListElementComponent } from './salons/add-salon/salon-list-element
     WorkersListElementComponent,
     WorkerSelectedCardComponent,
     AddSalonComponent,
-    SalonListElementComponent
+    SalonListElementComponent,
+    MakeAppointmentComponent
   ],
   imports: [
     SharedModule,
@@ -39,7 +43,11 @@ import { SalonListElementComponent } from './salons/add-salon/salon-list-element
     AccordionModule,
     CardModule,
     OverlayPanelModule,
-    DataViewModule
+    DataViewModule,
+    DropdownModule,
+    FormsModule,
+    SelectButtonModule,
+    AutoCompleteModule
   ]
 })
 export class ClientModule { }

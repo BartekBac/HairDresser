@@ -22,6 +22,10 @@ export class SalonService {
     return this.http.get<Salon[]>(this.baseUrl);
   }
 
+  getAvaiableSalons(clientId: string): Observable<Salon[]> {
+    return this.http.get<Salon[]>(this.baseUrl + 'available/' + clientId);
+  }
+
   getSalon(id: string): Observable<Salon> {
     return this.http.get<Salon>(this.baseUrl + id).pipe(delay(1500));
   }

@@ -48,6 +48,14 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = RoleString.Client)]
+        [HttpGet("available/{clientId}")]
+        public async Task<IActionResult> GetAvailableSalons(string clientId)
+        {
+            var result = await _mediator.Send(new GetAvailableSalonsQuery { clientId = clientId});
+            return Ok(result);
+        }
+
         [Authorize(Roles = RoleString.Salon)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSalonById(string id)

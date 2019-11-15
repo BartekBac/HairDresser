@@ -1,8 +1,10 @@
 ﻿using Domain.Entities.ManyToMany;
+using Domain.Exceptions;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Domain.Entities
@@ -49,6 +51,42 @@ namespace Domain.Entities
         {
             get => _sendOpinions;
             set => _sendOpinions = new HashSet<Opinion>(value);
+        }
+
+        public bool AddFavouriteSalon(Salon salon)
+        {
+            bool updated = false;
+            if (salon == null || string.IsNullOrEmpty(salon.Id.ToString()))
+            {
+                throw new DomainException("Could not add null salon.");
+            }
+
+            var alreadyAddedSalon = _favoriteSalons.FirstOrDefault(s => s.SalonId == salon.Id);
+
+            if (alreadyAddedSalon == null)
+            {
+                _favoriteSalons.Add(new ClientSalons { ClientId = Id, SalonId = salon.Id });
+                updated = true;
+            }
+            return updated;
+        }
+
+        public bool RemoveFavouriteSalon(Salon salon)
+        {
+            bool updated = false;
+            if (salon == null || string.IsNullOrEmpty(salon.Id.ToString()))
+            {
+                throw new DomainException("Could not remove null salon.");
+            }
+
+            var alreadyAddedSalon = _favoriteSalons.FirstOrDefault(s => s.SalonId == salon.Id);
+
+            if (alreadyAddedSalon != null)
+            {
+                _favoriteSalons.Remove(alreadyAddedSalon);
+                updated = true;
+            }
+            return updated;
         }
     }
 }

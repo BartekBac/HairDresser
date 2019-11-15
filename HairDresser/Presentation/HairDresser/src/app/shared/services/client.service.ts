@@ -16,4 +16,10 @@ export class ClientService {
   getClient(id: string): Observable<Client> {
     return this.http.get<Client>(this.baseUrl + id);
   }
+  addFavouriteSalon(id: string, salonId: string) {
+    return this.http.post(this.baseUrl + id + '/add-salon', {salonId: salonId});
+  }
+  removeFavouriteSalon(id: string, salonId: string) {
+    return this.http.post(this.baseUrl + id + '/remove-salon', {salonId: salonId});
+  }
 }

@@ -8,7 +8,7 @@
   <div class="ui-g">
     <div class="ui-g-12 ui-md-12 ui-lg-5 ui-fluid">
       <div *ngFor="let salon of salons">
-        <app-client-salons-list-element [salon]="salon" (salonRemoved)="onRemovedSalon($event)"
+        <app-client-salons-list-element [salon]="salon" (removedSalon)="onRemovedSalon($event)"
           (click)="onSalonSelected(salon)" [isSelected]="selectedSalon===salon"></app-client-salons-list-element>
       </div>
     </div>
