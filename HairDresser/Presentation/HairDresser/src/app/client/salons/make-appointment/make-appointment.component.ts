@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Salon } from 'src/app/shared/models/Salon';
 import { Worker } from 'src/app/shared/models/Worker';
 import { Service } from 'src/app/shared/models/Service';
+import { Time } from 'src/app/shared/models/Time';
+import { Functions } from 'src/app/shared/constants/Functions';
 
 @Component({
   selector: 'app-make-appointment',
@@ -54,8 +56,12 @@ export class MakeAppointmentComponent implements OnInit {
   }
 
   showCalendar() {
+    //dodać if selectedDate == null geta do api dopiero
     this.showCalendarFlag = true;
     setTimeout(() => this.calendarLoadedFlag = true, 1);
+  }
+  showVisitDetails() {
+    this.showCalendarFlag = false;
   }
 
 }

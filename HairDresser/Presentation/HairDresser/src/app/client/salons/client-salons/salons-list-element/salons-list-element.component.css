@@ -33,3 +33,11 @@
   float: right;
   border-radius: 0px;
 }
+
+:host ::ng-deep .ui-dialog .ui-dialog-content{
+  height: 520px !important;
+}
+
+:host ::ng-deep .ui-dialog {
+  max-width: 650px;
+}

@@ -1,7 +1,7 @@
 <div class="ui-g">
   <div class="ui-g-12 ui-fluid p-grid p-align-center">
     <div class="ui-g-12 ui-md-12 ui-lg-12">
-      <p-scrollPanel [style]="{width: '100%', 'height': '500px'}">
+      <p-scrollPanel [style]="{width: '100%', 'height': '550px'}">
         <p-accordion *ngIf="!showCalendarFlag">
           <p-accordionTab header="Selected salon: {{salon.name}}" [disabled]="true">
           </p-accordionTab>
@@ -38,7 +38,8 @@
         </p-accordion>
         <div *ngIf="showCalendarFlag" class="ui-g-12 ui-fluid p-grid p-align-center my-calendar-container">
           <p-progressSpinner *ngIf="!calendarLoadedFlag"></p-progressSpinner>
-          <app-make-appointment-calendar *ngIf="calendarLoadedFlag" [worker]="selectedWorker"></app-make-appointment-calendar>
+          <app-make-appointment-calendar *ngIf="calendarLoadedFlag" [worker]="selectedWorker" [visitDuration]="selectedServicesTotalTime"></app-make-appointment-calendar>
+          <p-button class="my-wide-button" (click)="showVisitDetails()" icon="pi pi-arrow-left" iconPos="left" label="Change visit details"></p-button>
         </div>
       </p-scrollPanel>
     </div>
