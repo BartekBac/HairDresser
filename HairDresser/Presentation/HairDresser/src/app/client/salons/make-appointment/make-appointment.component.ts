@@ -19,6 +19,8 @@ export class MakeAppointmentComponent implements OnInit {
   selectedServicesTotalPrice = 0;
   selectedServicesTotalTime = 0;
   selectServicesTab = false;
+  showCalendarFlag = false;
+  calendarLoadedFlag = false;
 
   constructor() { }
 
@@ -49,6 +51,11 @@ export class MakeAppointmentComponent implements OnInit {
 
   onWorkerAccordionTabHeaderClick() {
     this.selectServicesTab = false;
+  }
+
+  showCalendar() {
+    this.showCalendarFlag = true;
+    setTimeout(() => this.calendarLoadedFlag = true, 1);
   }
 
 }

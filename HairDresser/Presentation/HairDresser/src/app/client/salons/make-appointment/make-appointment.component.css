@@ -5,3 +5,9 @@
 .my-wide-button{
   width: 100%;
 }
+
+.my-calendar-container {
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+}

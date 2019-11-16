@@ -1,7 +1,7 @@
 import { Service } from './Service';
-import { Worker } from 'cluster';
 import { Client } from './Client';
 import { VisitStatus } from '../enums/VisitStatus';
+import { Worker } from './Worker';
 
 export class Visit {
   id: string;

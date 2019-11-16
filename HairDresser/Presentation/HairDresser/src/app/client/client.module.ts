@@ -17,6 +17,9 @@ import { DataViewModule } from 'primeng/dataview';
 import { SalonListElementComponent } from './salons/add-salon/salon-list-element/salon-list-element.component';
 import { FormsModule } from '@angular/forms';
 import { MakeAppointmentComponent } from './salons/make-appointment/make-appointment.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CalendarComponent } from './salons/make-appointment/calendar/calendar.component';
+import { FullCalendarModule } from 'primeng/fullcalendar';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { MakeAppointmentComponent } from './salons/make-appointment/make-appoint
     WorkerSelectedCardComponent,
     AddSalonComponent,
     SalonListElementComponent,
-    MakeAppointmentComponent
+    MakeAppointmentComponent,
+    CalendarComponent
   ],
   imports: [
     SharedModule,
@@ -49,7 +53,9 @@ import { MakeAppointmentComponent } from './salons/make-appointment/make-appoint
     AutoCompleteModule,
     DialogModule,
     ListboxModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    ProgressSpinnerModule,
+    FullCalendarModule
   ]
 })
 export class ClientModule { }

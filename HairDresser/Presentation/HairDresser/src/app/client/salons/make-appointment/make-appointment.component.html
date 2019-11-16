@@ -2,8 +2,7 @@
   <div class="ui-g-12 ui-fluid p-grid p-align-center">
     <div class="ui-g-12 ui-md-12 ui-lg-12">
       <p-scrollPanel [style]="{width: '100%', 'height': '500px'}">
-
-        <p-accordion>
+        <p-accordion *ngIf="!showCalendarFlag">
           <p-accordionTab header="Selected salon: {{salon.name}}" [disabled]="true">
           </p-accordionTab>
           <p-accordionTab
@@ -33,10 +32,14 @@
               <p *ngFor="let service of selectedServices">{{service.name}}: {{service.price}}$ {{service.time}} min</p>
               <p><label class="my-header-label">Total price: </label> {{selectedServicesTotalPrice}}$, <label
                   class="my-header-label">Total time: </label> {{selectedServicesTotalTime}} min</p>
-              <p-button class="my-wide-button" icon="pi pi-arrow-right" iconPos="right" label="Select date"></p-button>
+              <p-button class="my-wide-button" (click)="showCalendar()" icon="pi pi-arrow-right" iconPos="right" label="Select date"></p-button>
             </div>
           </p-accordionTab>
         </p-accordion>
+        <div *ngIf="showCalendarFlag" class="ui-g-12 ui-fluid p-grid p-align-center my-calendar-container">
+          <p-progressSpinner *ngIf="!calendarLoadedFlag"></p-progressSpinner>
+          <app-make-appointment-calendar *ngIf="calendarLoadedFlag" [worker]="selectedWorker"></app-make-appointment-calendar>
+        </div>
       </p-scrollPanel>
     </div>
   </div>
