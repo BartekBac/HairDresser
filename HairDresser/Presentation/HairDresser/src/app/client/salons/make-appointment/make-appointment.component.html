@@ -1,1 +1,43 @@
-<p>make-appointment works!</p>
+<div class="ui-g">
+  <div class="ui-g-12 ui-fluid p-grid p-align-center">
+    <div class="ui-g-12 ui-md-12 ui-lg-12">
+      <p-scrollPanel [style]="{width: '100%', 'height': '500px'}">
+
+        <p-accordion>
+          <p-accordionTab header="Selected salon: {{salon.name}}" [disabled]="true">
+          </p-accordionTab>
+          <p-accordionTab
+            header="Selected worker: {{selectedWorker === null ? '(none)' : selectedWorker?.firstName}} {{selectedWorker?.lastName}}"
+            [selected]="!selectServicesTab" (selectedChange)="onWorkerAccordionTabHeaderClick()">
+            <div *ngFor="let worker of salon.workers">
+              <app-client-salon-workers-list-element [worker]="worker" (click)="onWorkerSelected(worker)"
+                [isSelected]="selectedWorker===worker"></app-client-salon-workers-list-element>
+            </div>
+          </p-accordionTab>
+          <p-accordionTab
+            header="Selected services: {{selectedServicesString === '' ? '(none)' : selectedServicesString}}"
+            [disabled]="selectedWorker === null" [selected]="selectServicesTab">
+            <div (click)="onServicesSelect()">
+              <p-listbox [options]="selectedWorker?.services" [(ngModel)]="selectedServices" multiple="multiple"
+                checkbox="checkbox" optionLabel="name">
+              </p-listbox>
+            </div>
+          </p-accordionTab>
+          <p-accordionTab header="Summary" [disabled]="true" [selected]="selectedServicesString !== ''">
+            <div *ngIf="selectedServicesString !== ''">
+              <h5>Visit details:</h5>
+              <p><label class="my-header-label">Salon: </label> {{salon.name}}</p>
+              <p><label class="my-header-label">Worker: </label> {{selectedWorker.firstName}}
+                {{selectedWorker.lastName}}</p>
+              <label class="my-header-label">Services: </label>
+              <p *ngFor="let service of selectedServices">{{service.name}}: {{service.price}}$ {{service.time}} min</p>
+              <p><label class="my-header-label">Total price: </label> {{selectedServicesTotalPrice}}$, <label
+                  class="my-header-label">Total time: </label> {{selectedServicesTotalTime}} min</p>
+              <p-button class="my-wide-button" icon="pi pi-arrow-right" iconPos="right" label="Select date"></p-button>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </p-scrollPanel>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,10 @@
   <label class="my-header my-label">{{salon.name}}</label>
 </div>
 <div class="my-item-hooked-div" [hidden]="!isSelected">
-  <button pButton type="button" label="Make an appointment" class="my-appoint-button"></button>
+  <button pButton type="button" label="Make an appointment" class="my-appoint-button" (click)="showAppointmentDialog()"></button>
   <button pButton type="button" icon="pi pi-times" class="ui-button-danger my-delete-button" (click)="removeFromFavourites()"></button>
 </div>
+
+<p-dialog header="Make an appointment" [(visible)]="displayAppointmentDialog" [style]="{width: '80%'}">
+  <app-make-appointment [salon]="salon" [userId]="userId"></app-make-appointment>
+</p-dialog>

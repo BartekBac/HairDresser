@@ -16,6 +16,7 @@ export class ClientSalonsListElementComponent implements OnInit {
   @Input() isSelected = false;
   @Output() removedSalon = new EventEmitter<Salon>();
   userId: string;
+  displayAppointmentDialog = false;
 
   constructor(
     private clientService: ClientService,
@@ -45,6 +46,10 @@ export class ClientSalonsListElementComponent implements OnInit {
           );
         }
     });
+  }
+
+  showAppointmentDialog() {
+    this.displayAppointmentDialog = true;
   }
 
 }
