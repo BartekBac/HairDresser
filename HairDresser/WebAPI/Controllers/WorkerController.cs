@@ -36,6 +36,13 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{id}/visits-active")]
+        public async Task<IActionResult> GetWorkerActiveVisits(string id)
+        {
+            var result = await _mediator.Send(new GetWorkerActiveVisitsQuery { Id = id });
+            return Ok(result);
+        }
+
         [Authorize(Roles = RoleString.Salon)]
         [HttpPost]
         public async Task<IActionResult> CreateWorker([FromBody] CreateWorkerCommand command)

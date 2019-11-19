@@ -1,0 +1,18 @@
+.my-header-label{
+  font-weight: bold;
+}
+
+.my-wide-button{
+  width: 100%;
+}
+
+.my-half-wide-button{
+  width: 50%;
+  margin-top: 2px;
+}
+
+.my-calendar-container {
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+}

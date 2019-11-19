@@ -60,6 +60,8 @@ namespace WebAPI.Configurations
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.Salon.Type))
                 .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Salon.Address))
                 .ForMember(dest => dest.Admin, opt => opt.MapFrom(src => src.Salon.Admin));
+
+            CreateMap<Visit, VisitDto>();
         }
     }
 }

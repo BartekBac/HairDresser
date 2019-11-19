@@ -10,16 +10,22 @@ namespace Domain.Entities
     {
         private ISet<VisitServices> _services = new HashSet<VisitServices>();
 
-        public Visit(Guid clientId, Client client, Guid workerId, Worker worker, ISet<VisitServices> services, DateTime term, int totalTime) : base()
+        public Visit(Guid clientId, Guid workerId, Service[] services, DateTime term, int totalTime, float totalPrice) : base()
         {
             ClientId = clientId;
-            Client = client;
             WorkerId = workerId;
-            Worker = worker;
-            _services = services;
             Status = VisitStatus.Pending;
             Term = term;
             TotalTime = totalTime;
+            TotalPrice = totalPrice;
+            Info = "";
+            foreach (var service in services)
+            {
+                if (service != null)
+                {
+                    _services.Add(new VisitServices { VisitId = Id, ServiceId = service.Id });
+                }
+            }
         }
         private Visit()
         {
@@ -37,6 +43,7 @@ namespace Domain.Entities
         public VisitStatus Status { get; private set; }
         public DateTime Term { get; private set; }
         public int TotalTime { get; private set; }
+        public float TotalPrice { get; private set; }
         public string Info { get; private set; }
     }
 }

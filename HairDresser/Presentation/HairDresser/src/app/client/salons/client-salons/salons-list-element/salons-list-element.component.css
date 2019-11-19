@@ -14,6 +14,10 @@
   border-bottom: none;
   margin-bottom: 0px;
 }
+.my-list-element-wrapper-selection-mode{
+  border: 1.5px solid gold;
+  margin-bottom: 0px;
+}
 .my-header{
   font-size: 16px;
   font-weight: bold;
@@ -32,4 +36,12 @@
   width: 10% !important;
   float: right;
   border-radius: 0px;
+}
+
+:host ::ng-deep .ui-dialog .ui-dialog-content{
+  height: 520px !important;
+}
+
+:host ::ng-deep .ui-dialog {
+  max-width: 650px;
 }

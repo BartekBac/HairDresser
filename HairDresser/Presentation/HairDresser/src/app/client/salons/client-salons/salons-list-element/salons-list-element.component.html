@@ -1,7 +1,11 @@
-<div class="my-list-element-wrapper" [ngClass]="{'my-list-element-wrapper-selected': isSelected}">
+<div class="my-list-element-wrapper" [ngClass]="{'my-list-element-wrapper-selected': isSelected && !onlySelectMode, 'my-list-element-wrapper-selection-mode': isSelected && onlySelectMode}">
   <label class="my-header my-label">{{salon.name}}</label>
 </div>
-<div class="my-item-hooked-div" [hidden]="!isSelected">
-  <button pButton type="button" label="Make an appointment" class="my-appoint-button"></button>
+<div *ngIf="!onlySelectMode" class="my-item-hooked-div" [hidden]="!isSelected">
+  <button pButton type="button" label="Make an appointment" class="my-appoint-button" (click)="showAppointmentDialog()"></button>
   <button pButton type="button" icon="pi pi-times" class="ui-button-danger my-delete-button" (click)="removeFromFavourites()"></button>
 </div>
+
+<p-dialog header="Make an appointment" [(visible)]="displayAppointmentDialog" [style]="{width: '80%'}">
+  <app-make-appointment *ngIf="displayAppointmentDialog" [selectedSalon]="salon" [salons]="favSalons" [userId]="userId" (closeDialog)="onDialogClose($event)"></app-make-appointment>
+</p-dialog>
