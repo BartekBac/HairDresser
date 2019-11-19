@@ -13,7 +13,9 @@ import { Constants } from 'src/app/shared/constants/Constants';
 export class ClientSalonsListElementComponent implements OnInit {
 
   @Input() salon: Salon;
+  @Input() favSalons: Salon[];
   @Input() isSelected = false;
+  @Input() onlySelectMode = false;
   @Output() removedSalon = new EventEmitter<Salon>();
   userId: string;
   displayAppointmentDialog = false;
@@ -50,6 +52,10 @@ export class ClientSalonsListElementComponent implements OnInit {
 
   showAppointmentDialog() {
     this.displayAppointmentDialog = true;
+  }
+
+  onDialogClose(close: boolean) {
+    this.displayAppointmentDialog = !close;
   }
 
 }

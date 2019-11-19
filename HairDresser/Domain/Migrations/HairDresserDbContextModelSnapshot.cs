@@ -232,8 +232,8 @@ namespace Domain.Migrations
                     b.Property<DateTime>("Term")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TotalPrice")
-                        .HasColumnType("int");
+                    b.Property<float>("TotalPrice")
+                        .HasColumnType("real");
 
                     b.Property<int>("TotalTime")
                         .HasColumnType("int");

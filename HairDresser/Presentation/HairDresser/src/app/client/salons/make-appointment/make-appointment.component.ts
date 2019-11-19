@@ -1,9 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Salon } from 'src/app/shared/models/Salon';
 import { Worker } from 'src/app/shared/models/Worker';
 import { Service } from 'src/app/shared/models/Service';
-import { Time } from 'src/app/shared/models/Time';
-import { Functions } from 'src/app/shared/constants/Functions';
+import { VisitCreation } from '../../models/VisitCreation';
+import { MessageService } from 'primeng/primeng';
+import { VisitService } from 'src/app/shared/services/visit.service';
+import { WorkerService } from 'src/app/shared/services/worker.service';
+import { VisitStatus } from 'src/app/shared/enums/VisitStatus';
 
 @Component({
   selector: 'app-make-appointment',
@@ -12,21 +15,43 @@ import { Functions } from 'src/app/shared/constants/Functions';
 })
 export class MakeAppointmentComponent implements OnInit {
 
-  @Input() salon: Salon;
+  @Input() salons: Salon[] = [];
+  @Input() selectedSalon: Salon;
   @Input() userId: string;
+  @Output() closeDialog = new EventEmitter<boolean>();
 
   selectedWorker: Worker = null;
   selectedServices: Service[] = [];
+  workerActiveVisitsEvents: any[] = [];
   selectedServicesString = '';
   selectedServicesTotalPrice = 0;
   selectedServicesTotalTime = 0;
+  visitDate: Date = null;
+  selectWorkerTab = true;
   selectServicesTab = false;
+  selectSalonTab = false;
   showCalendarFlag = false;
   calendarLoadedFlag = false;
 
-  constructor() { }
+  constructor(
+    private toastService: MessageService,
+    private visitService: VisitService,
+    private workerService: WorkerService
+  ) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  onSalonSelected(selectedSalon: Salon) {
+    this.selectedSalon = selectedSalon;
+    this.selectedWorker = null;
+    this.selectedServices = [];
+    this.selectedServicesString = '';
+    this.selectedServicesTotalPrice = 0;
+    this.selectedServicesTotalTime = 0;
+    this.selectSalonTab = false;
+    this.selectWorkerTab = true;
+    this.selectServicesTab = false;
+    this.calendarLoadedFlag = false;
   }
 
   onWorkerSelected(selectedWorker: Worker) {
@@ -35,8 +60,10 @@ export class MakeAppointmentComponent implements OnInit {
     this.selectedServicesString = '';
     this.selectedServicesTotalPrice = 0;
     this.selectedServicesTotalTime = 0;
+    this.selectSalonTab = false;
+    this.selectWorkerTab = false;
     this.selectServicesTab = true;
-
+    this.calendarLoadedFlag = false;
   }
 
   onServicesSelect() {
@@ -51,17 +78,95 @@ export class MakeAppointmentComponent implements OnInit {
     this.selectedServicesString = this.selectedServicesString.slice(0, this.selectedServicesString.length - 2);
   }
 
+  onSalonAccordionTabHeaderClick() {
+    this.selectSalonTab = true;
+    this.selectWorkerTab = false;
+    this.selectServicesTab = false;
+  }
+
   onWorkerAccordionTabHeaderClick() {
+    this.selectSalonTab = false;
+    this.selectWorkerTab = true;
     this.selectServicesTab = false;
   }
 
   showCalendar() {
-    //dodać if selectedDate == null geta do api dopiero
     this.showCalendarFlag = true;
-    setTimeout(() => this.calendarLoadedFlag = true, 1);
+    if(this.calendarLoadedFlag === false) {
+      this.workerService.getWorkerActiveVisits(this.selectedWorker.id).subscribe(
+        res => {
+          this.workerActiveVisitsEvents = [];
+          res.forEach(v => {
+              this.workerActiveVisitsEvents.push({
+                title: v.status === VisitStatus.Accepted ? 'Accepted' : 'Pending',
+                start: v.term,
+                end: new Date(new Date(v.term).getTime() + (1000 * 60 * v.totalTime)),
+                color: v.status === VisitStatus.Accepted ? 'lightcoral' : '#ffff55',
+                textColor: 'black'
+              });
+            }
+          );
+          this.calendarLoadedFlag = true;
+        },
+        err => {
+          this.toastService.add({severity: 'error', summary: 'Action failed', detail: err.error});
+          this.showCalendarFlag = false;
+          console.log(err);
+        }
+      );
+    }
   }
+
   showVisitDetails() {
     this.showCalendarFlag = false;
+    this.visitDate = null;
+  }
+
+  setVisitDate(date: Date) {
+    this.visitDate = date;
+  }
+
+  confirmVisit() {
+    const newVisit = new VisitCreation();
+    newVisit.clientId = this.userId;
+    if (!this.selectedWorker) {
+      this.toastService.add({severity: 'error', summary: 'Making appointment failed', detail: 'Worker not selected.'})
+      return;
+    }
+    newVisit.workerId = this.selectedWorker.id;
+    if (this.selectedServices.length === 0) {
+      this.toastService.add({severity: 'error', summary: 'Making appointment failed', detail: 'Services not selected.'})
+      return;
+    }
+    newVisit.serviceIds = [];
+    this.selectedServices.forEach(s => newVisit.serviceIds.push(s.id));
+    newVisit.totalPrice = this.selectedServicesTotalPrice;
+    newVisit.totalTime = this.selectedServicesTotalTime;
+    if (!this.visitDate) {
+      this.toastService.add({severity: 'error', summary: 'Making appointment failed', detail: 'Date not selected.'})
+      return;
+    }
+    const minDate = new Date(Date.now() + (1000 * 60 * 30));
+    if (this.visitDate < minDate) {
+      this.toastService.add({severity: 'error', summary: 'Making appointment failed',
+       detail: 'Appointment should be done at least 30 minutes before visit.'})
+      return;
+    }
+    newVisit.term = this.visitDate;
+    this.visitService.addVisit(newVisit).subscribe(
+      res => {
+        this.toastService.add({severity: 'success', summary: 'Action succeeded', detail: 'Visit request has been sent.'});
+        this.rejectVisit();
+      },
+      err => {
+        this.toastService.add({severity: 'error', summary: 'Action failed', detail: err.error});
+        console.log(err);
+      }
+    );
+  }
+
+  rejectVisit() {
+    this.closeDialog.emit(true);
   }
 
 }

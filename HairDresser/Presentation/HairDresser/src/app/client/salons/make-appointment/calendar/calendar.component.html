@@ -1,1 +1,6 @@
-<p-fullCalendar [events]="events" [options]="options"></p-fullCalendar>
+<p-fullCalendar #fc [events]="events" [options]="options"></p-fullCalendar>
+<div id='draggable-el' class="my-draggable" [hidden]="visitMovedToCalendar">
+  <i class="pi pi-arrow-up"></i>
+  (Drag me over day timeline to select visit date time)
+  <i class="pi pi-arrow-up"></i>
+</div>

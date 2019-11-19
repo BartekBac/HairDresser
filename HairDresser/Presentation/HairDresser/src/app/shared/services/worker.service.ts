@@ -6,6 +6,7 @@ import { UploadImage } from '../models/UploadImage';
 import { Worker } from '../models/Worker';
 import { Service } from '../models/Service';
 import { Observable } from 'rxjs';
+import { Visit } from '../models/Visit';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class WorkerService {
 
   getWorkerServices(workerId: string): Observable<Service[]> {
     return this.http.get<Service[]>(this.baseUrl + workerId + '/services');
+  }
+
+  getWorkerActiveVisits(workerId: string): Observable<Visit[]> {
+    return this.http.get<Visit[]>(this.baseUrl + workerId + '/visits-active');
   }
 
   assignWorkerServices(workerId: string, services: Service[]) {

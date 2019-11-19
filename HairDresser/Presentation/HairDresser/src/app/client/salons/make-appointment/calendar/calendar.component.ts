@@ -1,10 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
+import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import { Worker } from 'src/app/shared/models/Worker';
-import { Day } from 'src/app/shared/models/Day';
-import { strictEqual } from 'assert';
 import { Time } from 'src/app/shared/models/Time';
 import { Functions } from 'src/app/shared/constants/Functions';
 
@@ -17,13 +15,24 @@ export class CalendarComponent implements OnInit {
 
   @Input() worker: Worker = null;
   @Input() visitDuration: number;
+  @Input() events: any[] = [];
+  @Output() selectedVisitDate = new EventEmitter<Date>();
 
-  events: any[] = [];
+  visitDate: Date;
+  myDraggable = null;
+  visitMovedToCalendar = false;
   options: any;
 
   constructor() { }
 
   ngOnInit() {
+    this.myDraggable = new Draggable(document.getElementById('draggable-el'), {
+      eventData: {
+        title: 'My visit',
+        duration: {minutes: this.visitDuration},
+        startEditable: true
+      }
+    });
     const workerBusinessHours = [
       {
         daysOfWeek: [ 1 ],
@@ -61,9 +70,6 @@ export class CalendarComponent implements OnInit {
         endTime: Functions.dayToString(this.worker.schedule.sunday, 'end')
       }
     ];
-    /*console.log(this.getMinTime().hour+':'+this.getMinTime().minute);
-    console.log(this.getMaxTime().hour+':'+this.getMaxTime().minute);*/
-    console.log(Functions.dayToString(this.worker.schedule.monday, 'end'));
     this.options = {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       header: {
@@ -76,6 +82,7 @@ export class CalendarComponent implements OnInit {
         minute: '2-digit',
         hour12: false
       },
+      events: this.events,
       slotDuration: '00:15:00',
       allDaySlot: false,
       timeZone: 'local',
@@ -85,19 +92,23 @@ export class CalendarComponent implements OnInit {
       maxTime: Functions.timeToString(this.getMaxTime()),
       navLinks: true,
       businessHours: workerBusinessHours,
+      selectConstraint: 'businessHours',
       views: {
         timeGridDay: {
           selectable: true,
-          /*selectMirror: true,*/
-          selectOverlap: false,
-          constraint: workerBusinessHours
+          selectConstraint: workerBusinessHours
         }
       },
-      editable: true
+      editable: false,
+      eventOverlap: false,
+      eventConstraint: 'businessHours',
+      eventReceive: (info) => {
+        this.visitMovedToCalendar = true;
+        this.setVisitDate(info.event.start.toISOString());
+      },
+      eventDrop: (info) => this.setVisitDate(info.event.start.toISOString())
     };
   }
-
-
 
   private getMinTime(): Time {
     let minTime = new Time();
@@ -125,6 +136,11 @@ export class CalendarComponent implements OnInit {
     maxTime = Functions.compareTime(maxTime, this.worker.schedule.sunday.end, 'greater');
     if (maxTime.hour < 24) {maxTime.hour += 1;}
     return maxTime;
+  }
+
+  private setVisitDate(date: any) {
+    this.visitDate = new Date(date);
+    this.selectedVisitDate.emit(this.visitDate);
   }
 
 }
