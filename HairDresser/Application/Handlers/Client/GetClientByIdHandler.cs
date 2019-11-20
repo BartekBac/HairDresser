@@ -31,12 +31,7 @@ namespace Application.Handlers.Client
             var client = _dbContext.Clients
                 .Include(c => c.User)
                 .FirstOrDefault(c => c.Id == clientId);
-            /*var client = _dbContext.Clients
-                .Include(c => c.User)
-                .Include(c => c.Visits)
-                .Include(c => c.FavoriteSalons).ThenInclude(cs => cs.Salon).ThenInclude(s => s.Address)
-                .Include(c => c.SendOpinions)
-                .FirstOrDefault(c => c.Id == clientId);*/
+
             var image = _dbContext.Images.FirstOrDefault(i => i.Id == clientId);
             if (client == null)
             {
@@ -86,6 +81,12 @@ namespace Application.Handlers.Client
 
                 result.FavoriteSalons = result.FavoriteSalons.AsEnumerable().Concat(new SalonDto[] { _mapper.Map<SalonDto>(salon) });
             };
+
+            var visits = _dbContext.Visits
+                .Include(v => v.Services).ThenInclude(vs => vs.Service)
+                .Where(v => v.ClientId == clientId);
+ 
+            result.Visits = _mapper.Map<VisitDto[]>(visits);
 
             return result;
         }

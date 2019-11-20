@@ -10,7 +10,7 @@ namespace Application.DTOs
         public string Id { get; set; }
         public ClientDto Client { get; set; }
         public WorkerDto Worker { get; set; }
-        public ServiceDto[] Services { get; set; }
+        public IEnumerable<ServiceDto> Services { get; set; }
         public VisitStatus Status { get; set; }
         public DateTime Term { get; set; }
         public int TotalTime { get; set; }

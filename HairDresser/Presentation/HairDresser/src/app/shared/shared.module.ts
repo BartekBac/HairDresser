@@ -21,6 +21,8 @@ import { ViewServicesTableComponent } from './components/view-services-table/vie
 import { TableModule } from 'primeng/table';
 import { OverlayDivComponent } from './components/overlay-div/overlay-div.component';
 import { ClientAddSalonResolver } from './resolvers/client-add-salon.resolver';
+import { VisitStatusPipe } from './pipes/visit-status.pipe';
+import { VisitStatusIconPipe } from './pipes/visit-status-icon.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ClientAddSalonResolver } from './resolvers/client-add-salon.resolver';
     EditableDivComponent,
     ViewScheduleComponent,
     ViewServicesTableComponent,
-    OverlayDivComponent
+    OverlayDivComponent,
+    VisitStatusPipe,
+    VisitStatusIconPipe
   ],
   imports: [
     CommonModule,
@@ -63,7 +67,9 @@ import { ClientAddSalonResolver } from './resolvers/client-add-salon.resolver';
     EditableDivComponent,
     ViewScheduleComponent,
     ViewServicesTableComponent,
-    OverlayDivComponent
+    OverlayDivComponent,
+    VisitStatusPipe,
+    VisitStatusIconPipe
   ]
 })
 export class SharedModule {

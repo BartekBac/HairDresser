@@ -7,5 +7,5 @@
 </div>
 
 <p-dialog header="Make an appointment" [(visible)]="displayAppointmentDialog" [style]="{width: '80%'}">
-  <app-make-appointment *ngIf="displayAppointmentDialog" [selectedSalon]="salon" [salons]="favSalons" [userId]="userId" (closeDialog)="onDialogClose($event)"></app-make-appointment>
+  <app-make-appointment *ngIf="displayAppointmentDialog" [selectedSalon]="salon" [salons]="favSalons" [userId]="userId" (closeDialog)="onDialogClose($event)" (addedVisit)="onAddedVisit($event)"></app-make-appointment>
 </p-dialog>

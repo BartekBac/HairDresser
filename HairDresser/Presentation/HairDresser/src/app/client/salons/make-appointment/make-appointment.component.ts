@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/primeng';
 import { VisitService } from 'src/app/shared/services/visit.service';
 import { WorkerService } from 'src/app/shared/services/worker.service';
 import { VisitStatus } from 'src/app/shared/enums/VisitStatus';
+import { Visit } from 'src/app/shared/models/Visit';
 
 @Component({
   selector: 'app-make-appointment',
@@ -19,6 +20,7 @@ export class MakeAppointmentComponent implements OnInit {
   @Input() selectedSalon: Salon;
   @Input() userId: string;
   @Output() closeDialog = new EventEmitter<boolean>();
+  @Output() addedVisit = new EventEmitter<Visit>();
 
   selectedWorker: Worker = null;
   selectedServices: Service[] = [];
@@ -156,7 +158,8 @@ export class MakeAppointmentComponent implements OnInit {
     this.visitService.addVisit(newVisit).subscribe(
       res => {
         this.toastService.add({severity: 'success', summary: 'Action succeeded', detail: 'Visit request has been sent.'});
-        this.rejectVisit();
+        this.addedVisit.emit(res);
+        this.closeDialog.emit(true);
       },
       err => {
         this.toastService.add({severity: 'error', summary: 'Action failed', detail: err.error});

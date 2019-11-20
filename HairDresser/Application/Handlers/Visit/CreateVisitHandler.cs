@@ -6,18 +6,23 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Domain.Entities;
+using Application.DTOs;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Handlers.Visit
 {
-    public class CreateVisitHandler: RequestHandler<CreateVisitCommand>
+    public class CreateVisitHandler: RequestHandler<CreateVisitCommand, VisitDto>
     {
         HairDresserDbContext _dbContext;
+        IMapper _mapper;
 
-        public CreateVisitHandler(HairDresserDbContext dbContext)
+        public CreateVisitHandler(HairDresserDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
-        protected override void Handle(CreateVisitCommand request)
+        protected override VisitDto Handle(CreateVisitCommand request)
         {
             var services = _dbContext.Services.Where(s => request.ServiceIds.Contains(s.Id.ToString())).ToArray();
             if(services == null)
@@ -39,6 +44,12 @@ namespace Application.Handlers.Visit
             {
                 throw new Exception("Could not save created visit into database.");
             }
+
+            var worker = _dbContext.Workers.Include(w => w.User).FirstOrDefault(w => w.Id.ToString() == request.WorkerId);
+            var result = _mapper.Map<VisitDto>(visit);
+            result.Worker = _mapper.Map<WorkerDto>(worker);
+
+            return result;
         }
     }
 }

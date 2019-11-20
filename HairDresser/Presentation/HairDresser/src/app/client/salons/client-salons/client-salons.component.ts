@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Salon } from 'src/app/shared/models/Salon';
 import { Router } from '@angular/router';
+import { Visit } from 'src/app/shared/models/Visit';
 
 @Component({
   selector: 'app-client-salons',
@@ -11,6 +12,7 @@ export class ClientSalonsComponent implements OnInit {
 
   @Input() salons: Salon[];
   @Output() removedSalon = new EventEmitter<Salon>();
+  @Output() addedVisit = new EventEmitter<Visit>();
 
   selectedSalon: Salon = null;
 
@@ -32,6 +34,10 @@ export class ClientSalonsComponent implements OnInit {
 
   onSalonSelected(selectedSalon: Salon) {
     this.selectedSalon = selectedSalon;
+  }
+
+  onAddedVisit(visit: Visit) {
+    this.addedVisit.emit(visit);
   }
 
 }

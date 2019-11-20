@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace WebAPI.Configurations
@@ -54,6 +55,12 @@ namespace WebAPI.Configurations
                 .ForMember(dest => dest.Time, opt => opt.MapFrom(src => src.Service.Time))
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Service.Id));
 
+            CreateMap<VisitServices, ServiceDto>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Service.Name))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Service.Price))
+                .ForMember(dest => dest.Time, opt => opt.MapFrom(src => src.Service.Time))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Service.Id));
+
             CreateMap<ClientSalons, SalonDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Salon.Name))
                 .ForMember(dest => dest.AdditionalInfo, opt => opt.MapFrom(src => src.Salon.AdditionalInfo))
@@ -61,7 +68,14 @@ namespace WebAPI.Configurations
                 .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Salon.Address))
                 .ForMember(dest => dest.Admin, opt => opt.MapFrom(src => src.Salon.Admin));
 
-            CreateMap<Visit, VisitDto>();
+            CreateMap<Visit, VisitDto>()
+                .AfterMap((src, dest) => 
+                {
+                    if(dest.Client != null)
+                    {
+                        dest.Client.Visits = null;
+                    }
+                });
         }
     }
 }

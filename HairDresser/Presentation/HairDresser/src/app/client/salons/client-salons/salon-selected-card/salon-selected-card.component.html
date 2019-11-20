@@ -1,7 +1,7 @@
 <p-card *ngIf="salon" header="{{salon.name}}" subheader="{{salon.type | salonType}} hairdresser"
   class="my-card-background" styleClass="ui-card-shadow">
   <p-header>
-    <img [src]="salon.imageSource" [ngClass]="{'my-grid-element-img': withWorkersMode === false}">
+    <img [src]="salon.imageSource" [ngClass]="{'my-grid-element-img': withWorkersMode === false, 'my-grid-element-img-300': withWorkersMode === true}">
   </p-header>
   <p-accordion [multiple]="withWorkersMode">
     <p-accordionTab header="Info" [selected]="withWorkersMode">

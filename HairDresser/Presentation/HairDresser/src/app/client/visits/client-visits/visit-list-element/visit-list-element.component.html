@@ -1,0 +1,38 @@
+<div class="my-list-element-wrapper" [ngStyle]="{'background-color': backgroundColor, 'color': textColor}">
+  <i class="my-icon {{visit.status | visitStatusIcon}}" ngbTooltip="{{visit.status | visitStatus}}" placement="top"></i>
+  <label class="my-header">{{getServicesString()}}</label>
+  <div>
+    <label class="my-subheader"> on: </label>
+    <label class="my-label" [ngbTooltip]="dateTooltip" tooltipClass="my-calendar-tooltip" placement="right"
+      openDelay="500">{{visit.term | date: 'd MMMM y (EEEE)'}}</label>
+  </div>
+  <div>
+    <label class="my-subheader"> at: </label>
+    <label class="my-label">{{visit.term | date: 'H:mm'}}</label>
+  </div>
+  <div>
+    <label class="my-subheader"> to: </label>
+    <label class="my-label" [ngbTooltip]="workerTooltip" placement="right" closeDelay="2500"
+      openDelay="500">{{visit.worker.firstName}}
+      {{visit.worker.lastName}}</label>
+  </div>
+  <div>
+    <label class="my-subheader"> cost: </label>
+    <label class="my-label">{{visit.totalPrice}}$</label>
+  </div>
+  <div>
+    <label class="my-subheader"> duration: </label>
+    <label class="my-label">{{visit.totalTime}} min</label>
+  </div>
+</div>
+
+<ng-template #dateTooltip>
+  <p-calendar [(ngModel)]="date" [inline]="true" [defaultDate]="date" [disabled]="false"></p-calendar>
+</ng-template>
+
+<ng-template #workerTooltip>
+  <label class="my-tooltip-label">{{visit.worker.userEmail}}</label>
+  <button type="button" pButton class="ui-button-secondary my-copy-button" icon="pi pi-copy"
+    (click)="copyToClipboard(visit.worker.userEmail)"></button>
+  <p>{{visit.worker.userPhoneNumber}}</p>
+</ng-template>

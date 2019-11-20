@@ -18,3 +18,9 @@
   object-position: center;
   height: 150px;
 }
+
+.my-grid-element-img-300{
+  object-fit: cover;
+  object-position: center;
+  height: 300px;
+}

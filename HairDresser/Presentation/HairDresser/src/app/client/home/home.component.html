@@ -13,8 +13,8 @@
             </ng-template>
         </p-tabMenu>
 
-        <app-client-salons *ngIf="activeMenuItem == tabMenuItems[0]" [salons]="client.favoriteSalons" (removedSalon)="onRemoveSalon($event)"></app-client-salons>
-        <app-client-visits *ngIf="activeMenuItem == tabMenuItems[1]"></app-client-visits>
+        <app-client-salons *ngIf="activeMenuItem == tabMenuItems[0]" [salons]="client.favoriteSalons" (removedSalon)="onRemoveSalon($event)" (addedVisit)="onAddVisit($event)"></app-client-salons>
+        <app-client-visits *ngIf="activeMenuItem == tabMenuItems[1]" [visits]="client.visits" [userId]="userId"></app-client-visits>
         <app-client-opinions *ngIf="activeMenuItem == tabMenuItems[2]"></app-client-opinions>
       </div>
     </div>

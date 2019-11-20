@@ -3,7 +3,9 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ClientRoutingModule } from './client-routing.module';
 import { HomeComponent } from './home/home.component';
-import { TabMenuModule, ButtonModule, PanelModule, AccordionModule, CardModule, OverlayPanelModule, DropdownModule, SelectButtonModule, AutoCompleteModule, DialogModule, ListboxModule, ScrollPanelModule } from 'primeng/primeng';
+import { TabMenuModule, ButtonModule, PanelModule, AccordionModule, CardModule,
+         OverlayPanelModule, DropdownModule, SelectButtonModule, AutoCompleteModule,
+         DialogModule, ListboxModule, ScrollPanelModule, TooltipModule, CalendarModule, CheckboxModule } from 'primeng/primeng';
 import { ClientSalonsComponent } from './salons/client-salons/client-salons.component';
 import { ClientVisitsComponent } from './visits/client-visits/client-visits.component';
 import { ClientOpinionsComponent } from './opinions/client-opinions/client-opinions.component';
@@ -20,6 +22,8 @@ import { MakeAppointmentComponent } from './salons/make-appointment/make-appoint
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CalendarComponent } from './salons/make-appointment/calendar/calendar.component';
 import { FullCalendarModule } from 'primeng/fullcalendar';
+import { VisitListElementComponent } from './visits/client-visits/visit-list-element/visit-list-element.component';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,8 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
     AddSalonComponent,
     SalonListElementComponent,
     MakeAppointmentComponent,
-    CalendarComponent
+    CalendarComponent,
+    VisitListElementComponent
   ],
   imports: [
     SharedModule,
@@ -55,7 +60,11 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
     ListboxModule,
     ScrollPanelModule,
     ProgressSpinnerModule,
-    FullCalendarModule
+    FullCalendarModule,
+    TooltipModule,
+    CalendarModule,
+    NgbTooltipModule,
+    CheckboxModule
   ]
 })
 export class ClientModule { }
