@@ -17,10 +17,10 @@
                     (onChange)="onSortChange($event)"></p-dropdown>
                 </div>
                 <div class="ui-g-6 ui-md-8">
-                    <p-selectButton [options]="filterOptions" [(ngModel)]="selectedFilters" [multiple]="true" (onChange)="filterVisits($event.value)"></p-selectButton>
+                    <p-selectButton [options]="filterOptions" [(ngModel)]="selectedFilters" [multiple]="true" (onChange)="refreshFilters(selectedFilters, showHistoryFlag)"></p-selectButton>
                  </div>
                  <div class="ui-g-12 ui-md-2">
-                    <p-checkbox label="Show history" [(ngModel)]="showHistoryFlag" binary="true" (onChange)="showHistory(showHistoryFlag)"></p-checkbox>
+                    <p-checkbox label="Show history" [(ngModel)]="showHistoryFlag" binary="true" (onChange)="refreshFilters(selectedFilters, showHistoryFlag)"></p-checkbox>
                   </div>
               </div>
             </div>

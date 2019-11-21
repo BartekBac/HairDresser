@@ -1,29 +1,39 @@
-<div class="my-list-element-wrapper" [ngStyle]="{'background-color': backgroundColor, 'color': textColor}">
-  <i class="my-icon {{visit.status | visitStatusIcon}}" ngbTooltip="{{visit.status | visitStatus}}" placement="top"></i>
-  <label class="my-header">{{getServicesString()}}</label>
-  <div>
-    <label class="my-subheader"> on: </label>
-    <label class="my-label" [ngbTooltip]="dateTooltip" tooltipClass="my-calendar-tooltip" placement="right"
-      openDelay="500">{{visit.term | date: 'd MMMM y (EEEE)'}}</label>
+<div class="ui-g-12 ui-fluid my-list-element-wrapper"
+  [ngStyle]="{'background-color': backgroundColor, 'color': textColor}">
+  <div class="ui-g-12 ui-md-12 ui-lg-6">
+    <i class="my-icon {{visit.status | visitStatusIcon}}" ngbTooltip="{{visit.status | visitStatus}}"
+      placement="top"></i>
+    <label class="my-header">{{getServicesString()}}</label>
+    <div>
+      <label class="my-subheader"> on: </label>
+      <label class="my-label" [ngbTooltip]="dateTooltip" tooltipClass="my-calendar-tooltip" placement="right"
+        openDelay="500">{{visit.term | date: 'd MMMM y (EEEE)'}}</label>
+    </div>
+    <div>
+      <label class="my-subheader"> at: </label>
+      <label class="my-label">{{visit.term | date: 'H:mm'}}</label>
+    </div>
+    <div>
+      <label class="my-subheader"> to: </label>
+      <label class="my-label" [ngbTooltip]="workerTooltip" placement="right" closeDelay="2500"
+        openDelay="500">{{visit.worker.firstName}}
+        {{visit.worker.lastName}}</label>
+    </div>
+    <div>
+      <label class="my-subheader"> cost: </label>
+      <label class="my-label">{{visit.totalPrice}}$</label>
+    </div>
+    <div>
+      <label class="my-subheader"> duration: </label>
+      <label class="my-label">{{visit.totalTime}} min</label>
+    </div>
   </div>
-  <div>
-    <label class="my-subheader"> at: </label>
-    <label class="my-label">{{visit.term | date: 'H:mm'}}</label>
-  </div>
-  <div>
-    <label class="my-subheader"> to: </label>
-    <label class="my-label" [ngbTooltip]="workerTooltip" placement="right" closeDelay="2500"
-      openDelay="500">{{visit.worker.firstName}}
-      {{visit.worker.lastName}}</label>
-  </div>
-  <div>
-    <label class="my-subheader"> cost: </label>
-    <label class="my-label">{{visit.totalPrice}}$</label>
-  </div>
-  <div>
-    <label class="my-subheader"> duration: </label>
-    <label class="my-label">{{visit.totalTime}} min</label>
-  </div>
+  <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+    <label *ngIf="visit.info" class="my-label">{{visit.info}}</label>
+    <button *ngIf="showRejectedButton()" pButton class="ui-button-secondary my-button" (click)="changeVisitTerm()" icon="pi pi-calendar-times" label="Change term"></button>
+    <button *ngIf="showConfirmButton()" pButton class="ui-button-success my-button" (click)="confirmVisit()" icon="pi pi-check" label="Confirm"></button>
+    <button *ngIf="showRejectedButton()" pButton class="ui-button-danger my-button" (click)="rejectVisit()" icon="pi pi-times" label="Reject"></button>
+   </div>
 </div>
 
 <ng-template #dateTooltip>

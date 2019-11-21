@@ -45,5 +45,18 @@ namespace Domain.Entities
         public int TotalTime { get; private set; }
         public float TotalPrice { get; private set; }
         public string Info { get; private set; }
+
+        public void SetTerm(DateTime term)
+        {
+            Term = term;
+        }
+        public void SetStatus(VisitStatus status)
+        {
+            Status = status;
+        }
+        public void SetInfo(string info)
+        {
+            Info = info;
+        }
     }
 }

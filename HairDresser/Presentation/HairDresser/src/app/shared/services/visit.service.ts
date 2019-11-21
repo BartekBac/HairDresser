@@ -18,4 +18,25 @@ export class VisitService {
     return this.http.post<Visit>(this.baseUrl, visit);
   }
 
+  confirmVisit(id: string): Observable<Visit> {
+    return this.http.put<Visit>(this.baseUrl + id + '/confirm', null);
+  }
+
+  rejectVisit(id: string, isWorkerRejecting: boolean): Observable<Visit>  {
+    return this.http.put<Visit>(this.baseUrl + id + '/reject',
+      {
+        id: '',
+        isWorkerRejecting: isWorkerRejecting
+      });
+  }
+
+  changeVisitTerm(id: string, isWorkerRequesting: boolean, newTerm: Date): Observable<Visit>  {
+    return this.http.put<Visit>(this.baseUrl + id + '/change-term',
+      {
+        visitId: '',
+        isWorkerRequesting: isWorkerRequesting,
+        term: newTerm
+      });
+  }
+
 }

@@ -22,11 +22,13 @@ export class ClientVisitsComponent implements OnInit {
 
   filterOptions: SelectItem[] = [
     {label: 'Accepted', icon: 'pi pi-check-circle', value: VisitStatus.Accepted},
-    {label: 'Change requested', icon: 'pi pi-question-circle', value: VisitStatus.ChangeRequested},
+    {label: 'My requested', icon: 'pi pi-question-circle', value: VisitStatus.ClientChangeRequested},
+    {label: 'HD requested', icon: 'pi pi-question-circle', value: VisitStatus.WorkerChangeRequested},
     {label: 'Pending', icon: 'pi pi-clock', value: VisitStatus.Pending},
     {label: 'Rejected', icon: 'pi pi-times-circle', value: VisitStatus.Rejected}
   ];
-  selectedFilters: VisitStatus[] = [VisitStatus.Accepted, VisitStatus.ChangeRequested, VisitStatus.Pending, VisitStatus.Rejected];
+  selectedFilters: VisitStatus[] = [VisitStatus.Accepted, VisitStatus.ClientChangeRequested,
+     VisitStatus.WorkerChangeRequested, VisitStatus.Pending, VisitStatus.Rejected];
   showHistoryFlag = false;
 
   sortKey: string;
@@ -36,7 +38,8 @@ export class ClientVisitsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.showHistory(false);
+    //this.showHistory(false);
+    this.refreshFilters(this.selectedFilters, this.showHistoryFlag);
   }
 
   onSortChange(event) {
@@ -55,14 +58,16 @@ export class ClientVisitsComponent implements OnInit {
   }
 
   showHistory(show: boolean) {
-    this.filterVisits(this.selectedFilters);
-    console.log(this.selectedFilters);
-    console.log(this.displayingVisits);
+    //this.filterVisits(this.selectedFilters);
     if (!show) {
       const now = new Date();
-      console.log(now);
       this.displayingVisits = this.displayingVisits.filter(v => new Date(v.term) > now);
     }
+  }
+
+  refreshFilters(filters: VisitStatus[], showHistory: boolean) {
+    this.filterVisits(filters);
+    this.showHistory(showHistory);
   }
 
 }
