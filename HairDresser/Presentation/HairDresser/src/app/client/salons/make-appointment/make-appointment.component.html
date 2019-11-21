@@ -44,9 +44,9 @@
         </p-accordion>
         <div *ngIf="showCalendarFlag" class="ui-g-12 ui-fluid p-grid p-align-center my-calendar-container">
           <p-progressSpinner *ngIf="!calendarLoadedFlag"></p-progressSpinner>
-          <app-make-appointment-calendar *ngIf="calendarLoadedFlag" [worker]="selectedWorker"
+          <app-select-calendar *ngIf="calendarLoadedFlag" [worker]="selectedWorker"
             [visitDuration]="selectedServicesTotalTime" [events]="workerActiveVisitsEvents"
-            (selectedVisitDate)="setVisitDate($event)"></app-make-appointment-calendar>
+            (selectedVisitDate)="setVisitDate($event)"></app-select-calendar>
           <p-button class="my-wide-button" (click)="showVisitDetails()" icon="pi pi-arrow-left" iconPos="left"
             label="Change visit details"></p-button>
           <button pButton class="ui-button-success my-half-wide-button" (click)="confirmVisit()" icon="pi pi-check"

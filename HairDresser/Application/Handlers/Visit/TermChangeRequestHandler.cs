@@ -35,19 +35,22 @@ namespace Application.Handlers.Visit
                 throw new ApplicationException("Could not change old visits");
             }
 
+            request.Term = new DateTimeOffset(request.Term).LocalDateTime;
+
             if (request.Term < DateTime.Now)
             {
                 throw new ApplicationException("Could not change visit date to past date");
             }
 
-            var thisDayWorkerVisits = _dbContext.Visits.
+            var thisOtherDayWorkerVisits = _dbContext.Visits.
                 Where(v => v.Worker.Id == visit.Worker.Id 
                       && v.Status != VisitStatus.Rejected
-                      && v.Term.Date == request.Term.Date);
+                      && v.Term.Date == request.Term.Date
+                      && v.Id != visit.Id);
 
-            if (thisDayWorkerVisits.Any())
+            if (thisOtherDayWorkerVisits.Any())
             {
-                var collidingVisits = thisDayWorkerVisits.
+                var collidingVisits = thisOtherDayWorkerVisits.
                     Where(v => (v.Term <= request.Term && v.Term.AddMinutes(v.TotalTime) > request.Term) 
                             || (v.Term > request.Term && v.Term < request.Term.AddMinutes(visit.TotalTime)));
 

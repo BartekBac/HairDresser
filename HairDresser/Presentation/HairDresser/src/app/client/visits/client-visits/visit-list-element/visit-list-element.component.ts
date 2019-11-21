@@ -16,6 +16,7 @@ export class VisitListElementComponent implements OnInit {
   date: Date;
   backgroundColor: string;
   textColor: string;
+  displayChangeVisitTermDialog = false;
 
   constructor(
     private toastService: MessageService,
@@ -24,11 +25,11 @@ export class VisitListElementComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.date = new Date(this.visit.term);
-    this.setColors();
+    this.resetProperties();
   }
 
-  private setColors() {
+  private resetProperties() {
+    this.date = new Date(this.visit.term);
     switch (this.visit.status) {
       case VisitStatus.Accepted: this.backgroundColor = '#55ff55'; break;
       case VisitStatus.ClientChangeRequested: this.backgroundColor = '#8888ff'; break;
@@ -77,13 +78,18 @@ export class VisitListElementComponent implements OnInit {
     return (this.date > now && this.visit.status !== VisitStatus.Rejected);
   }
 
+  showChangeTermButton() {
+    const now = new Date();
+    return (this.date > now && this.visit.status !== VisitStatus.Rejected);
+  }
+
   confirmVisit() {
     this.visitService.confirmVisit(this.visit.id).subscribe(
       res => {
         this.toastService.add({severity: 'success', summary: 'Action succeeded', detail: 'Visit confirmed.'});
         this.visit.status = res.status;
         this.visit.info = res.info;
-        this.setColors();
+        this.resetProperties();
       },
       err => {
         this.toastService.add({severity: 'error', summary: 'Action failed', detail: err.error});
@@ -104,7 +110,7 @@ export class VisitListElementComponent implements OnInit {
             this.toastService.add({severity: 'success', summary: 'Action succeeded', detail: 'Visit rejected.'});
             this.visit.status = res.status;
             this.visit.info = res.info;
-            this.setColors();
+            this.resetProperties();
           },
           err => {
             this.toastService.add({severity: 'error', summary: 'Action failed', detail: err.error});
@@ -115,21 +121,19 @@ export class VisitListElementComponent implements OnInit {
     });
   }
 
-  changeVisitTerm(newTerm: Date) {
-    newTerm = new Date(2019, 26, 11, 12, 15);
-    this.visitService.changeVisitTerm(this.visit.id, !this.isClient, newTerm).subscribe(
-      res => {
-        this.toastService.add({severity: 'success', summary: 'Action succeeded', detail: 'Visit change term request sent.'});
-        this.visit.status = res.status;
-        this.visit.info = res.info;
-        this.visit.term = res.term;
-        this.setColors();
-      },
-      err => {
-        this.toastService.add({severity: 'error', summary: 'Action failed', detail: err.error});
-        console.log(err);
-      }
-    );
+  showChangeVisitTermDialog() {
+    this.displayChangeVisitTermDialog = true;
+  }
+
+  onCloseChangeVisitTermDialog(close: boolean) {
+    this.displayChangeVisitTermDialog = !close;
+  }
+
+  onVisitUpdated(updatedVisit: Visit) {
+    this.visit.status = updatedVisit.status;
+    this.visit.info = updatedVisit.info;
+    this.visit.term = updatedVisit.term;
+    this.resetProperties();
   }
 
 }

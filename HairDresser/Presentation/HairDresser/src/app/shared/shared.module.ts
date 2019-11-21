@@ -4,7 +4,7 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { SalonService } from './services/salon.service';
 import { SalonResolver } from './resolvers/salon.resolver';
 import { PanelModule, InputTextModule, ButtonModule, InputMaskModule, MessageModule,
-         DialogModule, CheckboxModule, PasswordModule, SelectButtonModule, FileUploadModule } from 'primeng/primeng';
+         DialogModule, CheckboxModule, PasswordModule, SelectButtonModule, FileUploadModule, ProgressSpinnerModule, ScrollPanelModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbTimepickerModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
@@ -23,6 +23,9 @@ import { OverlayDivComponent } from './components/overlay-div/overlay-div.compon
 import { ClientAddSalonResolver } from './resolvers/client-add-salon.resolver';
 import { VisitStatusPipe } from './pipes/visit-status.pipe';
 import { VisitStatusIconPipe } from './pipes/visit-status-icon.pipe';
+import { SelectCalendarComponent } from './components/select-calendar/select-calendar.component';
+import { FullCalendarModule } from 'primeng/fullcalendar';
+import { FormVisitChangeTermComponent } from './components/form-visit-change-term/form-visit-change-term.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import { VisitStatusIconPipe } from './pipes/visit-status-icon.pipe';
     ViewServicesTableComponent,
     OverlayDivComponent,
     VisitStatusPipe,
-    VisitStatusIconPipe
+    VisitStatusIconPipe,
+    SelectCalendarComponent,
+    FormVisitChangeTermComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +60,10 @@ import { VisitStatusIconPipe } from './pipes/visit-status-icon.pipe';
     PasswordModule,
     SelectButtonModule,
     FileUploadModule,
-    TableModule
+    TableModule,
+    FullCalendarModule,
+    ProgressSpinnerModule,
+    ScrollPanelModule
   ],
   exports: [
     CommonModule,
@@ -69,7 +77,9 @@ import { VisitStatusIconPipe } from './pipes/visit-status-icon.pipe';
     ViewServicesTableComponent,
     OverlayDivComponent,
     VisitStatusPipe,
-    VisitStatusIconPipe
+    VisitStatusIconPipe,
+    SelectCalendarComponent,
+    FormVisitChangeTermComponent
   ]
 })
 export class SharedModule {

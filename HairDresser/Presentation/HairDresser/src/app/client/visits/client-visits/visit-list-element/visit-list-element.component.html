@@ -30,10 +30,13 @@
   </div>
   <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
     <label *ngIf="visit.info" class="my-label">{{visit.info}}</label>
-    <button *ngIf="showRejectedButton()" pButton class="ui-button-secondary my-button" (click)="changeVisitTerm()" icon="pi pi-calendar-times" label="Change term"></button>
-    <button *ngIf="showConfirmButton()" pButton class="ui-button-success my-button" (click)="confirmVisit()" icon="pi pi-check" label="Confirm"></button>
-    <button *ngIf="showRejectedButton()" pButton class="ui-button-danger my-button" (click)="rejectVisit()" icon="pi pi-times" label="Reject"></button>
-   </div>
+    <button *ngIf="showChangeTermButton()" pButton class="ui-button-secondary my-button"
+      (click)="showChangeVisitTermDialog()" icon="pi pi-calendar-times" label="Change term"></button>
+    <button *ngIf="showConfirmButton()" pButton class="ui-button-success my-button" (click)="confirmVisit()"
+      icon="pi pi-check" label="Confirm"></button>
+    <button *ngIf="showRejectedButton()" pButton class="ui-button-danger my-button" (click)="rejectVisit()"
+      icon="pi pi-times" label="Reject"></button>
+  </div>
 </div>
 
 <ng-template #dateTooltip>
@@ -46,3 +49,8 @@
     (click)="copyToClipboard(visit.worker.userEmail)"></button>
   <p>{{visit.worker.userPhoneNumber}}</p>
 </ng-template>
+
+<p-dialog *ngIf="showChangeTermButton()" header="Change visit term" [(visible)]="displayChangeVisitTermDialog" [style]="{width: '80%'}">
+  <app-form-visit-change-term [visit]="visit" [isClient]="true" [isOpened]="displayChangeVisitTermDialog" (visitUpdated)="onVisitUpdated($event)"
+    (closeDialog)="onCloseChangeVisitTermDialog($event)"></app-form-visit-change-term>
+</p-dialog>

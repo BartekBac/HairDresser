@@ -45,7 +45,14 @@ namespace Application.Handlers.Visit
                 throw new Exception("Could not save created visit into database.");
             }
 
-            var worker = _dbContext.Workers.Include(w => w.User).FirstOrDefault(w => w.Id.ToString() == request.WorkerId);
+            var worker = _dbContext.Workers
+                .Include(w => w.User)
+                .Include(w => w.Visits)
+                .FirstOrDefault(w => w.Id.ToString() == request.WorkerId);
+            var workerSchedule = _dbContext.Schedules
+                .FirstOrDefault(s => s.Id.ToString() == request.WorkerId);
+            worker.Schedule = workerSchedule;
+
             var result = _mapper.Map<VisitDto>(visit);
             result.Worker = _mapper.Map<WorkerDto>(worker);
 
