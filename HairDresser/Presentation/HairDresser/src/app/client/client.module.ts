@@ -20,7 +20,6 @@ import { SalonListElementComponent } from './salons/add-salon/salon-list-element
 import { FormsModule } from '@angular/forms';
 import { MakeAppointmentComponent } from './salons/make-appointment/make-appointment.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { VisitListElementComponent } from './visits/client-visits/visit-list-element/visit-list-element.component';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -36,8 +35,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     WorkerSelectedCardComponent,
     AddSalonComponent,
     SalonListElementComponent,
-    MakeAppointmentComponent,
-    VisitListElementComponent
+    MakeAppointmentComponent
   ],
   imports: [
     SharedModule,
@@ -57,7 +55,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     ListboxModule,
     ScrollPanelModule,
     ProgressSpinnerModule,
-    CalendarModule,
+    //CalendarModule,
     NgbTooltipModule,
     CheckboxModule
   ]

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Domain.Enums;
 using Application.DTOs;
 using AutoMapper;
+using System.Globalization;
 
 namespace Application.Handlers.Visit
 {
@@ -60,20 +61,27 @@ namespace Application.Handlers.Visit
                 }
             }
 
+            var visitTermString = visit.Term.ToString(new CultureInfo("pl-PL"));
+            visitTermString = visitTermString.Substring(0, visitTermString.Length - 3);
+            var requestTermString = request.Term.ToString(new CultureInfo("pl-PL"));
+            requestTermString = requestTermString.Substring(0, requestTermString.Length - 3);
+            var info = "requests to change date of the visit"
+                         + " from: " + visitTermString
+                         + " to: " + requestTermString;
             visit.SetTerm(request.Term);
-            var info = " requests to change date of the visit to: " + request.Term.ToLongTimeString();
-            if(request.IsWorkerRequesting)
+            if (request.IsWorkerRequesting)
             {
                 visit.SetStatus(VisitStatus.WorkerChangeRequested);
-                info = "Hairdresser" + info;
+                visit.SetInfo("Hairdresser " + info);
             } 
             else
             {
-                visit.SetStatus(VisitStatus.ClientChangeRequested);
-                info = "Client" + info;
-            }
-
-            visit.SetInfo(info);
+                if (visit.Status != VisitStatus.Pending)
+                {
+                    visit.SetStatus(VisitStatus.ClientChangeRequested);
+                    visit.SetInfo("Client " + info);
+                }
+            }            
 
             if (_dbContext.SaveChanges() == 0)
             {

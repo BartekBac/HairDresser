@@ -4,34 +4,5 @@
       <h5 class="ui-panel-title my-header-panel-title">My visits</h5>
     </div>
   </p-header>
-  <div class="ui-g">
-    <div class="ui-g-12 ui-fluid p-grid p-align-start">
-      <div class="ui-g-12 ui-md-12">
-        <p-dataView #dv [value]="displayingVisits" [paginator]="true" [rows]="10" filterBy="status"
-          [sortField]="sortField" [sortOrder]="sortOrder">
-          <p-header>
-            <div class="ui-helper-clearfix">
-              <div class="ui-g">
-                <div class="ui-g-12 ui-md-2">
-                  <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By"
-                    (onChange)="onSortChange($event.value)"></p-dropdown>
-                </div>
-                <div class="ui-g-6 ui-md-8">
-                    <p-selectButton [options]="filterOptions" [(ngModel)]="selectedFilters" [multiple]="true" (onChange)="refreshFilters(selectedFilters, showHistoryFlag)"></p-selectButton>
-                 </div>
-                 <div class="ui-g-12 ui-md-2">
-                    <p-checkbox label="Show history" [(ngModel)]="showHistoryFlag" binary="true" (onChange)="refreshFilters(selectedFilters, showHistoryFlag)"></p-checkbox>
-                  </div>
-              </div>
-            </div>
-          </p-header>
-          <ng-template let-visit pTemplate="listItem">
-            <div class="ui-g-12" style="position: relative;">
-              <app-visit-list-element [visit]="visit"></app-visit-list-element>
-            </div>
-          </ng-template>
-        </p-dataView>
-      </div>
-    </div>
-  </div>
+  <app-view-visits-list [visits]="visits"></app-view-visits-list>
 </p-panel>

@@ -11,6 +11,11 @@ import { VisitStatus } from 'src/app/shared/enums/VisitStatus';
 export class ClientVisitsComponent implements OnInit {
 
   @Input() visits: Visit[] = [];
+
+  constructor() {}
+
+  ngOnInit() {}
+ /* @Input() visits: Visit[] = [];
   @Input() userId: string = null;
   displayingVisits: Visit[] = [];
 
@@ -93,6 +98,6 @@ export class ClientVisitsComponent implements OnInit {
     this.filterVisits(filters);
     this.showHistory(showHistory);
     this.sortDisplayingVisits(this.sortKey);
-  }
+  }*/
 
 }

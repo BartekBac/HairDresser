@@ -8,15 +8,15 @@ export class Functions {
   public static compareTime(a: Time, b: Time, compareFlag = 'less'): Time {
     if (compareFlag === 'less') {
       if ((a.hour < b.hour) || ((a.hour === b.hour) && (a.minute < b.minute))) {
-        return a;
+        return this.copyObject(a);
       } else {
-        return b;
+        return this.copyObject(b);
       }
     } else if (compareFlag === 'greater') {
       if ((a.hour > b.hour) || ((a.hour === b.hour) && (a.minute > b.minute))) {
-        return a;
+        return this.copyObject(a);
       } else {
-        return b;
+        return this.copyObject(b);
       }
     }
   }
