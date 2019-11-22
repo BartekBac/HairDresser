@@ -10,7 +10,7 @@ export class VisitStatusIconPipe implements PipeTransform {
     switch (value) {
       case VisitStatus.Accepted: return 'pi pi-check-circle';
       case VisitStatus.ClientChangeRequested: return 'pi pi-question-circle';
-      case VisitStatus.WorkerChangeRequested: return 'pi pi-question-circle';
+      case VisitStatus.WorkerChangeRequested: return 'pi pi-exclamation-circle';
       case VisitStatus.Pending: return 'pi pi-clock';
       case VisitStatus.Rejected: return 'pi pi-times-circle';
       default: return '';

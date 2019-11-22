@@ -14,7 +14,7 @@
               <div class="ui-g">
                 <div class="ui-g-12 ui-md-2">
                   <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By"
-                    (onChange)="onSortChange($event)"></p-dropdown>
+                    (onChange)="onSortChange($event.value)"></p-dropdown>
                 </div>
                 <div class="ui-g-6 ui-md-8">
                     <p-selectButton [options]="filterOptions" [(ngModel)]="selectedFilters" [multiple]="true" (onChange)="refreshFilters(selectedFilters, showHistoryFlag)"></p-selectButton>

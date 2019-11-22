@@ -15,15 +15,16 @@ export class ClientVisitsComponent implements OnInit {
   displayingVisits: Visit[] = [];
 
   sortOptions: SelectItem[] = [
-    {label: 'Status', value: 'status'},
-    {label: 'Term ascending', value: 'term'},
-    {label: 'Term descending', value: '!term'}
+    {label: 'Status info', value: 'status'},
+    {label: 'Status warn', value: '!status'},
+    {label: 'Incoming', value: 'term'},
+    {label: 'Far in time', value: '!term'}
   ];
 
   filterOptions: SelectItem[] = [
     {label: 'Accepted', icon: 'pi pi-check-circle', value: VisitStatus.Accepted},
     {label: 'My requested', icon: 'pi pi-question-circle', value: VisitStatus.ClientChangeRequested},
-    {label: 'HD requested', icon: 'pi pi-question-circle', value: VisitStatus.WorkerChangeRequested},
+    {label: 'HD requested', icon: 'pi pi-exclamation-circle', value: VisitStatus.WorkerChangeRequested},
     {label: 'Pending', icon: 'pi pi-clock', value: VisitStatus.Pending},
     {label: 'Rejected', icon: 'pi pi-times-circle', value: VisitStatus.Rejected}
   ];
@@ -38,18 +39,42 @@ export class ClientVisitsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    //this.showHistory(false);
+    this.sortKey = this.sortOptions[2].value;
     this.refreshFilters(this.selectedFilters, this.showHistoryFlag);
   }
 
   onSortChange(event) {
-    const value = event.value;
+    this.sortDisplayingVisits(event);
+  }
+
+  private sortDisplayingVisits(sortOption: string) {
+    let descendig = false;
+    let value = sortOption;
     if (value.indexOf('!') === 0) {
-        this.sortOrder = -1;
-        this.sortField = value.substring(1, value.length);
-    } else {
-        this.sortOrder = 1;
-        this.sortField = value;
+        descendig = true;
+        value = value.slice(1, value.length);
+    }
+    if (value === 'status') {
+      this.displayingVisits.sort((v1, v2) => {
+        if (v1.status > v2.status) {
+          if (descendig) { return -1; } else { return 1; }
+        }
+        if (v1.status < v2.status) {
+          if (descendig) { return 1; } else { return -1; }
+        }
+        return 0;
+      });
+    }
+    if (value === 'term') {
+      this.displayingVisits.sort((v1, v2) => {
+        if (v1.term > v2.term) {
+          if (descendig) { return -1; } else { return 1; }
+        }
+        if (v1.term < v2.term) {
+          if (descendig) { return 1; } else { return -1; }
+        }
+        return 0;
+      });
     }
   }
 
@@ -58,7 +83,6 @@ export class ClientVisitsComponent implements OnInit {
   }
 
   showHistory(show: boolean) {
-    //this.filterVisits(this.selectedFilters);
     if (!show) {
       const now = new Date();
       this.displayingVisits = this.displayingVisits.filter(v => new Date(v.term) > now);
@@ -68,6 +92,7 @@ export class ClientVisitsComponent implements OnInit {
   refreshFilters(filters: VisitStatus[], showHistory: boolean) {
     this.filterVisits(filters);
     this.showHistory(showHistory);
+    this.sortDisplayingVisits(this.sortKey);
   }
 
 }

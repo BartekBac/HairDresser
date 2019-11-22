@@ -1,6 +1,6 @@
 <div class="ui-g-12 ui-fluid my-list-element-wrapper"
   [ngStyle]="{'background-color': backgroundColor, 'color': textColor}">
-  <div class="ui-g-12 ui-md-12 ui-lg-6">
+  <div class="ui-g-12 ui-md-12 ui-lg-7">
     <i class="my-icon {{visit.status | visitStatusIcon}}" ngbTooltip="{{visit.status | visitStatus}}"
       placement="top"></i>
     <label class="my-header">{{getServicesString()}}</label>
@@ -28,8 +28,10 @@
       <label class="my-label">{{visit.totalTime}} min</label>
     </div>
   </div>
-  <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+  <div class="ui-g-12 ui-md-12 ui-lg-5 ui-fluid">
     <label *ngIf="visit.info" class="my-label">{{visit.info}}</label>
+    <button *ngIf="showOpinionButton()" pButton class="ui-button-secondary my-button"
+    (click)="showOpinionDialog()" icon="pi pi-comment" label="Send opinion"></button>
     <button *ngIf="showChangeTermButton()" pButton class="ui-button-secondary my-button"
       (click)="showChangeVisitTermDialog()" icon="pi pi-calendar-times" label="Change term"></button>
     <button *ngIf="showConfirmButton()" pButton class="ui-button-success my-button" (click)="confirmVisit()"
@@ -51,6 +53,6 @@
 </ng-template>
 
 <p-dialog *ngIf="showChangeTermButton()" header="Change visit term" [(visible)]="displayChangeVisitTermDialog" [style]="{width: '80%'}">
-  <app-form-visit-change-term [visit]="visit" [isClient]="true" [isOpened]="displayChangeVisitTermDialog" (visitUpdated)="onVisitUpdated($event)"
+  <app-form-visit-change-term [visit]="visit" [isClient]="isClient" [isOpened]="displayChangeVisitTermDialog" (visitUpdated)="onVisitUpdated($event)"
     (closeDialog)="onCloseChangeVisitTermDialog($event)"></app-form-visit-change-term>
 </p-dialog>

@@ -13,4 +13,5 @@ export class Visit {
   totalTime: number;
   totalPrice: number;
   info: string;
+  opinionSent: boolean;
 }

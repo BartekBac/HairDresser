@@ -83,6 +83,15 @@ export class VisitListElementComponent implements OnInit {
     return (this.date > now && this.visit.status !== VisitStatus.Rejected);
   }
 
+  showOpinionButton() {
+    const now = new Date();
+    if (this.date < now && this.isClient) {
+      return !this.visit.opinionSent;
+    } else {
+      return false;
+    }
+  }
+
   confirmVisit() {
     this.visitService.confirmVisit(this.visit.id).subscribe(
       res => {
@@ -134,6 +143,10 @@ export class VisitListElementComponent implements OnInit {
     this.visit.info = updatedVisit.info;
     this.visit.term = updatedVisit.term;
     this.resetProperties();
+  }
+
+  showOpinionDialog() {
+    console.log('Opinion dialog opened');
   }
 
 }

@@ -226,6 +226,9 @@ namespace Domain.Migrations
                     b.Property<string>("Info")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("OpinionSent")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 

@@ -16,5 +16,6 @@ namespace Application.DTOs
         public int TotalTime { get; set; }
         public float TotalPrice { get; set; }
         public string Info { get; set; }
+        public bool OpinionSent { get; set; }
     }
 }
