@@ -67,7 +67,7 @@ namespace Application.Handlers.Visit
             requestTermString = requestTermString.Substring(0, requestTermString.Length - 3);
             var info = "requests to change date of the visit"
                          + " from: " + visitTermString
-                         + " to: " + requestTermString;
+                         + " to: " + requestTermString + ".";
             visit.SetTerm(request.Term);
             if (request.IsWorkerRequesting)
             {

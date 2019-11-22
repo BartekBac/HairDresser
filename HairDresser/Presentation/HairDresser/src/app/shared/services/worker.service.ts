@@ -21,6 +21,10 @@ export class WorkerService {
     return this.http.post(this.baseUrl, worker);
   }
 
+  getWorker(id: string): Observable<Worker> {
+    return this.http.get<Worker>(this.baseUrl + id);
+  }
+
   getWorkerServices(workerId: string): Observable<Service[]> {
     return this.http.get<Service[]>(this.baseUrl + workerId + '/services');
   }

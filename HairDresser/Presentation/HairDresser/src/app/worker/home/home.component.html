@@ -1,1 +1,21 @@
-<p>Worker home works!</p>
+<div class="ui-g">
+  <div class="ui-g-12 ui-fluid p-grid p-align-start">
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-g-12 ui-md-8 ui-md-offset-1 my-column-wrapper">
+        <p-tabMenu [model]="tabMenuItems" [activeItem]="activeMenuItem">
+            <ng-template pTemplate="item" let-item let-i="index">
+                <div (click)="toggleMenu(i)">
+                    <div class="ui-menuitem-icon" [ngClass]="item.icon" *ngIf="item.icon"></div>
+                    <div class="ui-menuitem-text my-menuitem-text">
+                        {{item.label}}
+                    </div>
+                </div>
+            </ng-template>
+        </p-tabMenu>
+
+        <app-worker-visits *ngIf="activeMenuItem == tabMenuItems[0]"></app-worker-visits>
+        <app-worker-calendar *ngIf="activeMenuItem == tabMenuItems[1]"></app-worker-calendar>
+      </div>
+    </div>
+  </div>
+</div>

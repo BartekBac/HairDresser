@@ -76,6 +76,8 @@ namespace WebAPI.Configurations
                         dest.Client.Visits = null;
                     }
                 });
+
+            CreateMap<Opinion, OpinionDto>();
         }
     }
 }
