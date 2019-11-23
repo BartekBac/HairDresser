@@ -10,6 +10,7 @@ import { VisitStatus } from 'src/app/shared/enums/VisitStatus';
 export class ViewVisitsListComponent implements OnInit {
 
   @Input() visits: Visit[] = [];
+  @Input() isClient = true;
   displayingVisits: Visit[] = [];
 
   sortOptions: SelectItem[] = [
@@ -21,7 +22,7 @@ export class ViewVisitsListComponent implements OnInit {
 
   filterOptions: SelectItem[] = [
     {label: 'Accepted', icon: 'pi pi-check-circle', value: VisitStatus.Accepted},
-    {label: 'My requested', icon: 'pi pi-question-circle', value: VisitStatus.ClientChangeRequested},
+    {label: 'CL requested', icon: 'pi pi-question-circle', value: VisitStatus.ClientChangeRequested},
     {label: 'HD requested', icon: 'pi pi-exclamation-circle', value: VisitStatus.WorkerChangeRequested},
     {label: 'Pending', icon: 'pi pi-clock', value: VisitStatus.Pending},
     {label: 'Rejected', icon: 'pi pi-times-circle', value: VisitStatus.Rejected}

@@ -69,13 +69,12 @@ namespace WebAPI.Configurations
                 .ForMember(dest => dest.Admin, opt => opt.MapFrom(src => src.Salon.Admin));
 
             CreateMap<Visit, VisitDto>()
-                .AfterMap((src, dest) => 
-                {
-                    if(dest.Client != null)
-                    {
-                        dest.Client.Visits = null;
-                    }
-                });
+                .ForPath(dest => dest.ClientEmail, opt => opt.MapFrom(src => src.Client.User.Email))
+                .ForPath(dest => dest.ClientPhoneNumber, opt => opt.MapFrom(src => src.Client.User.PhoneNumber))
+                .ForPath(dest => dest.ClientUserName, opt => opt.MapFrom(src => src.Client.User.UserName))
+                .ForPath(dest => dest.WorkerEmail, opt => opt.MapFrom(src => src.Worker.User.Email))
+                .ForPath(dest => dest.WorkerPhoneNumber, opt => opt.MapFrom(src => src.Worker.User.PhoneNumber))
+                .ForPath(dest => dest.WorkerUserName, opt => opt.MapFrom(src => src.Worker.User.UserName));
 
             CreateMap<Opinion, OpinionDto>();
         }

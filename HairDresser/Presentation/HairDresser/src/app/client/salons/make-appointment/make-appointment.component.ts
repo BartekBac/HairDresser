@@ -100,10 +100,10 @@ export class MakeAppointmentComponent implements OnInit {
           this.workerActiveVisitsEvents = [];
           res.forEach(v => {
               this.workerActiveVisitsEvents.push({
-                title: v.status === VisitStatus.Accepted ? 'Accepted' : 'Pending',
+                title: v.status === VisitStatus.Accepted ? 'Confirmed' : 'Pending',
                 start: v.term,
                 end: new Date(new Date(v.term).getTime() + (1000 * 60 * v.totalTime)),
-                color: v.status === VisitStatus.Accepted ? 'lightcoral' : '#ffff55',
+                color: v.status === VisitStatus.Accepted ? '#ff5555' : '#ffff55',
                 textColor: 'black'
               });
             }

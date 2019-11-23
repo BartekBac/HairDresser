@@ -47,14 +47,16 @@ namespace Application.Handlers.Visit
 
             var worker = _dbContext.Workers
                 .Include(w => w.User)
-                .Include(w => w.Visits)
                 .FirstOrDefault(w => w.Id.ToString() == request.WorkerId);
-            var workerSchedule = _dbContext.Schedules
-                .FirstOrDefault(s => s.Id.ToString() == request.WorkerId);
-            worker.Schedule = workerSchedule;
 
             var result = _mapper.Map<VisitDto>(visit);
-            result.Worker = _mapper.Map<WorkerDto>(worker);
+            result.WorkerEmail = worker.User.Email;
+            result.WorkerFirstName = worker.FirstName;
+            result.WorkerId = worker.Id.ToString();
+            result.WorkerLastName = worker.LastName;
+            result.WorkerPhoneNumber = worker.User.PhoneNumber;
+            result.WorkerRating = worker.Rating;
+            result.WorkerUserName = worker.User.UserName;
 
             return result;
         }

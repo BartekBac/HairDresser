@@ -89,6 +89,9 @@ import { VisitListElementComponent } from './components/view-visits-list/visit-l
     SelectCalendarComponent,
     FormVisitChangeTermComponent,
     ViewVisitsListComponent
+  ],
+  providers: [
+    VisitStatusPipe
   ]
 })
 export class SharedModule {
@@ -100,7 +103,8 @@ export class SharedModule {
         SalonResolver,
         ClientService,
         ClientResolver,
-        ClientAddSalonResolver
+        ClientAddSalonResolver,
+        VisitStatusPipe
       ]
     };
   }

@@ -5,7 +5,7 @@
         <div class="ui-g-12 ui-fluid p-grid p-align-center my-calendar-container">
           <p-progressSpinner *ngIf="!calendarLoadedFlag"></p-progressSpinner>
           <div *ngIf="calendarLoadedFlag">
-            <app-select-calendar [worker]="visit.worker" [visitDuration]="visit.totalTime"
+            <app-select-calendar [workerSchedule]="workerSchedule" [visitDuration]="visit.totalTime"
               [events]="workerActiveVisitsEvents" (selectedVisitDate)="setVisitDate($event)"></app-select-calendar>
             <button pButton class="ui-button-success my-half-wide-button" (click)="confirmChange()" icon="pi pi-check"
               label="Confirm"></button>

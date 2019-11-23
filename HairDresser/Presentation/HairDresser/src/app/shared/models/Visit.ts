@@ -5,8 +5,19 @@ import { Worker } from './Worker';
 
 export class Visit {
   id: string;
-  client: Client;
-  worker: Worker;
+  clientId: string;
+  clientFirstName: string;
+  clientLastName: string;
+  clientUserName: string;
+  clientEmail: string;
+  clientPhoneNumber: string;
+  workerId: string;
+  workerFirstName: string;
+  workerLastName: string;
+  workerRating: number;
+  workerUserName: string;
+  workerEmail: string;
+  workerPhoneNumber: string;
   services: Service[];
   status: VisitStatus;
   term: Date;

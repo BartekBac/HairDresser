@@ -21,7 +21,7 @@
         </p-header>
         <ng-template let-visit pTemplate="listItem">
           <div class="ui-g-12" style="position: relative;">
-            <app-visit-list-element [visit]="visit"></app-visit-list-element>
+            <app-visit-list-element [visit]="visit" [isClient]="isClient"></app-visit-list-element>
           </div>
         </ng-template>
       </p-dataView>

@@ -44,6 +44,13 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{id}/schedule")]
+        public async Task<IActionResult> GetWorkerSchedule(string id)
+        {
+            var result = await _mediator.Send(new GetWorkerScheduleQuery { Id = id });
+            return Ok(result);
+        }
+
         [HttpGet("{id}/visits-active")]
         public async Task<IActionResult> GetWorkerActiveVisits(string id)
         {

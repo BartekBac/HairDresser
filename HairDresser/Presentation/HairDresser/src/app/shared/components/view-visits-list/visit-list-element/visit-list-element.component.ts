@@ -3,6 +3,7 @@ import { Visit } from 'src/app/shared/models/Visit';
 import { VisitStatus } from 'src/app/shared/enums/VisitStatus';
 import { MessageService, ConfirmationService } from 'primeng/primeng';
 import { VisitService } from 'src/app/shared/services/visit.service';
+import { Functions } from 'src/app/shared/constants/Functions';
 
 @Component({
   selector: 'app-visit-list-element',
@@ -30,24 +31,8 @@ export class VisitListElementComponent implements OnInit {
 
   private resetProperties() {
     this.date = new Date(this.visit.term);
-    switch (this.visit.status) {
-      case VisitStatus.Accepted: this.backgroundColor = '#55ff55'; break;
-      case VisitStatus.ClientChangeRequested: this.backgroundColor = '#8888ff'; break;
-      case VisitStatus.WorkerChangeRequested: this.backgroundColor = '#3333ff'; break;
-      case VisitStatus.Pending: this.backgroundColor = '#ffff55'; break;
-      case VisitStatus.Rejected: this.backgroundColor = '#ff5555'; break;
-      default: this.backgroundColor = '#555555';
-    }
-    const now = new Date();
-    if (this.date < now) {
-      this.backgroundColor = '#555555';
-    }
-
-    if (this.backgroundColor === '#555555') {
-      this.textColor = '#dedede';
-    } else {
-      this.textColor = '#212121';
-    }
+    this.backgroundColor = Functions.getVisitBackgroundColor(this.visit);
+    this.textColor = Functions.getVisitTextColor(this.visit);
   }
 
   getServicesString(): string {
@@ -70,7 +55,11 @@ export class VisitListElementComponent implements OnInit {
 
   showConfirmButton() {
     const now = new Date();
-    return this.date > now && this.visit.status === VisitStatus.WorkerChangeRequested;
+    if (this.isClient) {
+      return this.date > now && this.visit.status === VisitStatus.WorkerChangeRequested;
+    } else {
+      return this.date > now && (this.visit.status === VisitStatus.Pending || this.visit.status === VisitStatus.ClientChangeRequested);
+    }
   }
 
   showRejectedButton() {
@@ -145,7 +134,7 @@ export class VisitListElementComponent implements OnInit {
     this.resetProperties();
   }
 
-  showOpinionDialog() {
+  public showOpinionDialog() {
     console.log('Opinion dialog opened');
   }
 

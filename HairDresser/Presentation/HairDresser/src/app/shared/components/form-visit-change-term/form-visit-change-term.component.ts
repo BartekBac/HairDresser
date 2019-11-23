@@ -4,6 +4,7 @@ import { WorkerService } from '../../services/worker.service';
 import { VisitStatus } from '../../enums/VisitStatus';
 import { MessageService } from 'primeng/primeng';
 import { VisitService } from '../../services/visit.service';
+import { Schedule } from '../../models/Schedule';
 
 @Component({
   selector: 'app-form-visit-change-term',
@@ -21,6 +22,7 @@ export class FormVisitChangeTermComponent implements OnInit {
   calendarLoadedFlag = false;
   newTerm: Date = null;
   workerActiveVisitsEvents: any[] = [];
+  workerSchedule: Schedule;
 
   constructor(
     private workerService: WorkerService,
@@ -33,7 +35,7 @@ export class FormVisitChangeTermComponent implements OnInit {
   }
 
   getEvents() {
-    this.workerService.getWorkerActiveVisits(this.visit.worker.id).subscribe(
+    this.workerService.getWorkerActiveVisits(this.visit.workerId).subscribe(
       res => {
         this.workerActiveVisitsEvents = [];
         res.forEach(v => {
@@ -42,12 +44,21 @@ export class FormVisitChangeTermComponent implements OnInit {
               title: v.status === VisitStatus.Accepted ? 'Confirmed' : 'Pending',
               start: v.term,
               end: new Date(new Date(v.term).getTime() + (1000 * 60 * v.totalTime)),
-              color: v.status === VisitStatus.Accepted ? 'lightcoral' : '#ffff55',
+              color: v.status === VisitStatus.Accepted ? '#ff5555' : '#ffff55',
               textColor: 'black'
             });
           }
         });
-        this.calendarLoadedFlag = true;
+        this.workerService.getWorkerSchedule(this.visit.workerId).subscribe(
+          resSchedule => {
+            this.workerSchedule = resSchedule;
+            this.calendarLoadedFlag = true;
+          },
+          err => {
+            this.toastService.add({severity: 'error', summary: 'Action failed', detail: err.error});
+            console.log(err);
+          }
+        );
       },
       err => {
         this.toastService.add({severity: 'error', summary: 'Action failed', detail: err.error});

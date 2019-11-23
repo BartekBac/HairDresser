@@ -1,0 +1,7 @@
+:host ::ng-deep .fc-view-container{
+  background-color: #424242;
+}
+
+:host ::ng-deep .fc-today{
+  background-color: #ab9352 !important;
+}

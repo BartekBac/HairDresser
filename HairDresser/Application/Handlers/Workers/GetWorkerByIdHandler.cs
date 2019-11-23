@@ -27,8 +27,8 @@ namespace Application.Handlers.Workers
 
             var worker = _dbContext.Workers
                 .Include(w => w.User)
-                //.Include(w => w.Visits).ThenInclude(v => v.Client)
-                //.Include(w => w.Visits).ThenInclude(v => v.Services).ThenInclude(vs => vs.Service)
+                .Include(w => w.Visits).ThenInclude(v => v.Client).ThenInclude(c =>c.User)
+                .Include(w => w.Visits).ThenInclude(v => v.Services).ThenInclude(vs => vs.Service)
                 .Include(w => w.Services).ThenInclude(ws => ws.Service)
                 .FirstOrDefault(w => w.Id == workerId);
 
@@ -48,15 +48,8 @@ namespace Application.Handlers.Workers
             }
             worker.Image = image;
             worker.Schedule = schedule;
-            var result = _mapper.Map<WorkerDto>(worker);
 
-            /*var visits = _dbContext.Visits
-                .Include(v => v.Services).ThenInclude(vs => vs.Service)
-                .Where(v => v.WorkerId == workerId);
-
-            result.Visits = _mapper.Map<VisitDto[]>(visits);*/
-
-            return result;
+            return _mapper.Map<WorkerDto>(worker);
         }
     }
 }

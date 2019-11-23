@@ -13,11 +13,17 @@
       <label class="my-subheader"> at: </label>
       <label class="my-label">{{visit.term | date: 'H:mm'}}</label>
     </div>
-    <div>
+    <div *ngIf="isClient">
       <label class="my-subheader"> to: </label>
       <label class="my-label" [ngbTooltip]="workerTooltip" placement="right" closeDelay="2500"
-        openDelay="500">{{visit.worker.firstName}}
-        {{visit.worker.lastName}}</label>
+        openDelay="500">{{visit.workerFirstName}}
+        {{visit.workerLastName}}</label>
+    </div>
+    <div *ngIf="!isClient">
+      <label class="my-subheader"> who: </label>
+      <label class="my-label" [ngbTooltip]="clientTooltip" placement="right" closeDelay="2500"
+        openDelay="500">{{visit.clientFirstName}}
+        {{visit.clientLastName}}</label>
     </div>
     <div>
       <label class="my-subheader"> cost: </label>
@@ -46,10 +52,17 @@
 </ng-template>
 
 <ng-template #workerTooltip>
-  <label class="my-tooltip-label">{{visit.worker.userEmail}}</label>
+  <label class="my-tooltip-label">{{visit.workerEmail}}</label>
   <button type="button" pButton class="ui-button-secondary my-copy-button" icon="pi pi-copy"
-    (click)="copyToClipboard(visit.worker.userEmail)"></button>
-  <p>{{visit.worker.userPhoneNumber}}</p>
+    (click)="copyToClipboard(visit.workerEmail)"></button>
+  <p>{{visit.workerPhoneNumber}}</p>
+</ng-template>
+
+<ng-template #clientTooltip>
+  <label class="my-tooltip-label">{{visit.clientEmail}}</label>
+  <button type="button" pButton class="ui-button-secondary my-copy-button" icon="pi pi-copy"
+    (click)="copyToClipboard(visit.clientEmail)"></button>
+  <p>{{visit.clientPhoneNumber}}</p>
 </ng-template>
 
 <p-dialog *ngIf="showChangeTermButton()" header="Change visit term" [(visible)]="displayChangeVisitTermDialog" [style]="{width: '80%'}">

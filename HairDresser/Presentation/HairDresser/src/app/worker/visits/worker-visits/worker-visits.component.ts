@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Visit } from 'src/app/shared/models/Visit';
 
 @Component({
   selector: 'app-worker-visits',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./worker-visits.component.css']
 })
 export class WorkerVisitsComponent implements OnInit {
+
+  @Input() visits: Visit[] = [];
 
   constructor() { }
 

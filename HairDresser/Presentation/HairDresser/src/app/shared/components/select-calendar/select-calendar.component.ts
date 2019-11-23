@@ -2,9 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
-import { Worker } from 'src/app/shared/models/Worker';
 import { Time } from 'src/app/shared/models/Time';
 import { Functions } from 'src/app/shared/constants/Functions';
+import { Schedule } from '../../models/Schedule';
 
 @Component({
   selector: 'app-select-calendar',
@@ -13,7 +13,7 @@ import { Functions } from 'src/app/shared/constants/Functions';
 })
 export class SelectCalendarComponent implements OnInit {
 
-  @Input() worker: Worker = null;
+  @Input() workerSchedule: Schedule = null;
   @Input() visitDuration: number;
   @Input() events: any[] = [];
   @Output() selectedVisitDate = new EventEmitter<Date>();
@@ -36,38 +36,38 @@ export class SelectCalendarComponent implements OnInit {
     const workerBusinessHours = [
       {
         daysOfWeek: [ 1 ],
-        startTime: Functions.dayToString(this.worker.schedule.monday, 'begin'),
-        endTime: Functions.dayToString(this.worker.schedule.monday, 'end')
+        startTime: Functions.dayToString(this.workerSchedule.monday, 'begin'),
+        endTime: Functions.dayToString(this.workerSchedule.monday, 'end')
       },
       {
         daysOfWeek: [ 2 ],
-        startTime: Functions.dayToString(this.worker.schedule.tuesday, 'begin'),
-        endTime: Functions.dayToString(this.worker.schedule.tuesday, 'end')
+        startTime: Functions.dayToString(this.workerSchedule.tuesday, 'begin'),
+        endTime: Functions.dayToString(this.workerSchedule.tuesday, 'end')
       },
       {
         daysOfWeek: [ 3 ],
-        startTime: Functions.dayToString(this.worker.schedule.wednesday, 'begin'),
-        endTime: Functions.dayToString(this.worker.schedule.wednesday, 'end')
+        startTime: Functions.dayToString(this.workerSchedule.wednesday, 'begin'),
+        endTime: Functions.dayToString(this.workerSchedule.wednesday, 'end')
       },
       {
         daysOfWeek: [ 4 ],
-        startTime: Functions.dayToString(this.worker.schedule.thursday, 'begin'),
-        endTime: Functions.dayToString(this.worker.schedule.thursday, 'end')
+        startTime: Functions.dayToString(this.workerSchedule.thursday, 'begin'),
+        endTime: Functions.dayToString(this.workerSchedule.thursday, 'end')
       },
       {
         daysOfWeek: [ 5 ],
-        startTime: Functions.dayToString(this.worker.schedule.friday, 'begin'),
-        endTime: Functions.dayToString(this.worker.schedule.friday, 'end')
+        startTime: Functions.dayToString(this.workerSchedule.friday, 'begin'),
+        endTime: Functions.dayToString(this.workerSchedule.friday, 'end')
       },
       {
         daysOfWeek: [ 6 ],
-        startTime: Functions.dayToString(this.worker.schedule.saturday, 'begin'),
-        endTime: Functions.dayToString(this.worker.schedule.saturday, 'end')
+        startTime: Functions.dayToString(this.workerSchedule.saturday, 'begin'),
+        endTime: Functions.dayToString(this.workerSchedule.saturday, 'end')
       },
       {
         daysOfWeek: [ 7 ],
-        startTime: Functions.dayToString(this.worker.schedule.sunday, 'begin'),
-        endTime: Functions.dayToString(this.worker.schedule.sunday, 'end')
+        startTime: Functions.dayToString(this.workerSchedule.sunday, 'begin'),
+        endTime: Functions.dayToString(this.workerSchedule.sunday, 'end')
       }
     ];
     this.options = {
@@ -113,13 +113,13 @@ export class SelectCalendarComponent implements OnInit {
   private getMinTime(): Time {
     let minTime = new Time();
     minTime.hour = 24; minTime.minute = 59;
-    minTime = Functions.compareTime(minTime, this.worker.schedule.monday.begin, 'less');
-    minTime = Functions.compareTime(minTime, this.worker.schedule.tuesday.begin, 'less');
-    minTime = Functions.compareTime(minTime, this.worker.schedule.wednesday.begin, 'less');
-    minTime = Functions.compareTime(minTime, this.worker.schedule.thursday.begin, 'less');
-    minTime = Functions.compareTime(minTime, this.worker.schedule.friday.begin, 'less');
-    minTime = Functions.compareTime(minTime, this.worker.schedule.saturday.begin, 'less');
-    minTime = Functions.compareTime(minTime, this.worker.schedule.sunday.begin, 'less');
+    minTime = Functions.compareTime(minTime, this.workerSchedule.monday.begin, 'less');
+    minTime = Functions.compareTime(minTime, this.workerSchedule.tuesday.begin, 'less');
+    minTime = Functions.compareTime(minTime, this.workerSchedule.wednesday.begin, 'less');
+    minTime = Functions.compareTime(minTime, this.workerSchedule.thursday.begin, 'less');
+    minTime = Functions.compareTime(minTime, this.workerSchedule.friday.begin, 'less');
+    minTime = Functions.compareTime(minTime, this.workerSchedule.saturday.begin, 'less');
+    minTime = Functions.compareTime(minTime, this.workerSchedule.sunday.begin, 'less');
     if (minTime.hour > 0) {minTime.hour -= 1;}
     return minTime;
   }
@@ -127,13 +127,13 @@ export class SelectCalendarComponent implements OnInit {
   private getMaxTime(): Time {
     let maxTime = new Time();
     maxTime.hour = 0; maxTime.minute = 0;
-    maxTime = Functions.compareTime(maxTime, this.worker.schedule.monday.end, 'greater');
-    maxTime = Functions.compareTime(maxTime, this.worker.schedule.tuesday.end, 'greater');
-    maxTime = Functions.compareTime(maxTime, this.worker.schedule.wednesday.end, 'greater');
-    maxTime = Functions.compareTime(maxTime, this.worker.schedule.thursday.end, 'greater');
-    maxTime = Functions.compareTime(maxTime, this.worker.schedule.friday.end, 'greater');
-    maxTime = Functions.compareTime(maxTime, this.worker.schedule.saturday.end, 'greater');
-    maxTime = Functions.compareTime(maxTime, this.worker.schedule.sunday.end, 'greater');
+    maxTime = Functions.compareTime(maxTime, this.workerSchedule.monday.end, 'greater');
+    maxTime = Functions.compareTime(maxTime, this.workerSchedule.tuesday.end, 'greater');
+    maxTime = Functions.compareTime(maxTime, this.workerSchedule.wednesday.end, 'greater');
+    maxTime = Functions.compareTime(maxTime, this.workerSchedule.thursday.end, 'greater');
+    maxTime = Functions.compareTime(maxTime, this.workerSchedule.friday.end, 'greater');
+    maxTime = Functions.compareTime(maxTime, this.workerSchedule.saturday.end, 'greater');
+    maxTime = Functions.compareTime(maxTime, this.workerSchedule.sunday.end, 'greater');
     if (maxTime.hour < 24) {maxTime.hour += 1;}
     return maxTime;
   }
