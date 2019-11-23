@@ -29,7 +29,55 @@ namespace WebAPI.Controllers
             try
             {
                 var result = await _mediator.Send(command);
-                return Ok();
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Authorize(Roles = RoleString.Client+","+RoleString.Worker)]
+        [HttpPut("{id}/change-term")]
+        public async Task<IActionResult> TermChangeRequest(string id, [FromBody] TermChangeRequestCommand command)
+        {
+            try
+            {
+                command.VisitId = id;
+                var result = await _mediator.Send(command);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Authorize(Roles = RoleString.Client + "," + RoleString.Worker)]
+        [HttpPut("{id}/reject")]
+        public async Task<IActionResult> RejectVisit(string id, [FromBody] RejectVisitCommand command)
+        {
+            try
+            {
+                command.Id = id;
+                var result = await _mediator.Send(command);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Authorize(Roles = RoleString.Client + "," + RoleString.Worker)]
+        [HttpPut("{id}/confirm")]
+        public async Task<IActionResult> ConfirmVisit(string id)
+        {
+            try
+            {
+                var command = new ConfirmVisitCommand { Id = id };
+                var result = await _mediator.Send(command);
+                return Ok(result);
             }
             catch (Exception e)
             {

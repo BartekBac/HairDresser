@@ -19,6 +19,7 @@ namespace Domain.Entities
             TotalTime = totalTime;
             TotalPrice = totalPrice;
             Info = "";
+            OpinionSent = false;
             foreach (var service in services)
             {
                 if (service != null)
@@ -45,5 +46,23 @@ namespace Domain.Entities
         public int TotalTime { get; private set; }
         public float TotalPrice { get; private set; }
         public string Info { get; private set; }
+        public bool OpinionSent { get; private set; }
+
+        public void SetTerm(DateTime term)
+        {
+            Term = term;
+        }
+        public void SetStatus(VisitStatus status)
+        {
+            Status = status;
+        }
+        public void SetInfo(string info)
+        {
+            Info = info;
+        }
+        public void SetOpinionSent(bool opinionSent)
+        {
+            OpinionSent = opinionSent;
+        }
     }
 }

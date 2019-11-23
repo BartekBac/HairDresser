@@ -8,3 +8,9 @@
   width: 100%;
   font-size: medium;
 }
+
+.my-header{
+  width: 40px;
+  text-align: right;
+  margin-bottom: 1px;
+}

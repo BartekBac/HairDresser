@@ -32,7 +32,7 @@ namespace Application.Handlers.Workers
                 throw new ApplicationException("Could not find worker with id=" + workerId);
             }
 
-            var visitsToReturn = worker.Visits.Where(v => (v.Status == Domain.Enums.VisitStatus.Accepted || v.Status == Domain.Enums.VisitStatus.Pending) && v.Term > DateTime.Now);
+            var visitsToReturn = worker.Visits.Where(v => (v.Status != Domain.Enums.VisitStatus.Rejected) && v.Term > DateTime.Now);
 
             return _mapper.Map<VisitDto[]>(visitsToReturn);
         }

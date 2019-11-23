@@ -1,0 +1,71 @@
+<div class="ui-g-12 ui-fluid my-list-element-wrapper"
+  [ngStyle]="{'background-color': backgroundColor, 'color': textColor}">
+  <div class="ui-g-12 ui-md-12 ui-lg-7">
+    <i class="my-icon {{visit.status | visitStatusIcon}}" ngbTooltip="{{visit.status | visitStatus}}"
+      placement="top"></i>
+    <label class="my-header">{{getServicesString()}}</label>
+    <div>
+      <label class="my-subheader"> on: </label>
+      <label class="my-label" [ngbTooltip]="dateTooltip" tooltipClass="my-calendar-tooltip" placement="right"
+        openDelay="500">{{visit.term | date: 'd MMMM y (EEEE)'}}</label>
+    </div>
+    <div>
+      <label class="my-subheader"> at: </label>
+      <label class="my-label">{{visit.term | date: 'H:mm'}}</label>
+    </div>
+    <div *ngIf="isClient">
+      <label class="my-subheader"> to: </label>
+      <label class="my-label" [ngbTooltip]="workerTooltip" placement="right" closeDelay="2500"
+        openDelay="500">{{visit.workerFirstName}}
+        {{visit.workerLastName}}</label>
+    </div>
+    <div *ngIf="!isClient">
+      <label class="my-subheader"> who: </label>
+      <label class="my-label" [ngbTooltip]="clientTooltip" placement="right" closeDelay="2500"
+        openDelay="500">{{visit.clientFirstName}}
+        {{visit.clientLastName}}</label>
+    </div>
+    <div>
+      <label class="my-subheader"> cost: </label>
+      <label class="my-label">{{visit.totalPrice}}$</label>
+    </div>
+    <div>
+      <label class="my-subheader"> duration: </label>
+      <label class="my-label">{{visit.totalTime}} min</label>
+    </div>
+  </div>
+  <div class="ui-g-12 ui-md-12 ui-lg-5 ui-fluid">
+    <label *ngIf="visit.info" class="my-label">{{visit.info}}</label>
+    <button *ngIf="showOpinionButton()" pButton class="ui-button-secondary my-button"
+    (click)="showOpinionDialog()" icon="pi pi-comment" label="Send opinion"></button>
+    <button *ngIf="showChangeTermButton()" pButton class="ui-button-secondary my-button"
+      (click)="showChangeVisitTermDialog()" icon="pi pi-calendar-times" label="Change term"></button>
+    <button *ngIf="showConfirmButton()" pButton class="ui-button-success my-button" (click)="confirmVisit()"
+      icon="pi pi-check" label="Confirm"></button>
+    <button *ngIf="showRejectedButton()" pButton class="ui-button-danger my-button" (click)="rejectVisit()"
+      icon="pi pi-times" label="Reject"></button>
+  </div>
+</div>
+
+<ng-template #dateTooltip>
+  <p-calendar [(ngModel)]="date" [inline]="true" [defaultDate]="date" [disabled]="false"></p-calendar>
+</ng-template>
+
+<ng-template #workerTooltip>
+  <label class="my-tooltip-label">{{visit.workerEmail}}</label>
+  <button type="button" pButton class="ui-button-secondary my-copy-button" icon="pi pi-copy"
+    (click)="copyToClipboard(visit.workerEmail)"></button>
+  <p>{{visit.workerPhoneNumber}}</p>
+</ng-template>
+
+<ng-template #clientTooltip>
+  <label class="my-tooltip-label">{{visit.clientEmail}}</label>
+  <button type="button" pButton class="ui-button-secondary my-copy-button" icon="pi pi-copy"
+    (click)="copyToClipboard(visit.clientEmail)"></button>
+  <p>{{visit.clientPhoneNumber}}</p>
+</ng-template>
+
+<p-dialog *ngIf="showChangeTermButton()" header="Change visit term" [(visible)]="displayChangeVisitTermDialog" [style]="{width: '80%'}">
+  <app-form-visit-change-term [visit]="visit" [isClient]="isClient" [isOpened]="displayChangeVisitTermDialog" (visitUpdated)="onVisitUpdated($event)"
+    (closeDialog)="onCloseChangeVisitTermDialog($event)"></app-form-visit-change-term>
+</p-dialog>

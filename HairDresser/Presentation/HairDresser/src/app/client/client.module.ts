@@ -3,7 +3,9 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ClientRoutingModule } from './client-routing.module';
 import { HomeComponent } from './home/home.component';
-import { TabMenuModule, ButtonModule, PanelModule, AccordionModule, CardModule, OverlayPanelModule, DropdownModule, SelectButtonModule, AutoCompleteModule, DialogModule, ListboxModule, ScrollPanelModule } from 'primeng/primeng';
+import { TabMenuModule, ButtonModule, PanelModule, AccordionModule, CardModule,
+         OverlayPanelModule, DropdownModule, SelectButtonModule, AutoCompleteModule,
+         DialogModule, ListboxModule, ScrollPanelModule, CalendarModule, CheckboxModule } from 'primeng/primeng';
 import { ClientSalonsComponent } from './salons/client-salons/client-salons.component';
 import { ClientVisitsComponent } from './visits/client-visits/client-visits.component';
 import { ClientOpinionsComponent } from './opinions/client-opinions/client-opinions.component';
@@ -18,8 +20,7 @@ import { SalonListElementComponent } from './salons/add-salon/salon-list-element
 import { FormsModule } from '@angular/forms';
 import { MakeAppointmentComponent } from './salons/make-appointment/make-appointment.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { CalendarComponent } from './salons/make-appointment/calendar/calendar.component';
-import { FullCalendarModule } from 'primeng/fullcalendar';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,8 +35,7 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
     WorkerSelectedCardComponent,
     AddSalonComponent,
     SalonListElementComponent,
-    MakeAppointmentComponent,
-    CalendarComponent
+    MakeAppointmentComponent
   ],
   imports: [
     SharedModule,
@@ -55,7 +55,9 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
     ListboxModule,
     ScrollPanelModule,
     ProgressSpinnerModule,
-    FullCalendarModule
+    //CalendarModule,
+    NgbTooltipModule,
+    CheckboxModule
   ]
 })
 export class ClientModule { }

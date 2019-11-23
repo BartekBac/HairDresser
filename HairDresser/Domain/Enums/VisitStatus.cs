@@ -9,6 +9,7 @@ namespace Domain.Enums
         Accepted,
         Pending,
         Rejected,
-        ChangeRequested
+        ClientChangeRequested,
+        WorkerChangeRequested
     }
 }

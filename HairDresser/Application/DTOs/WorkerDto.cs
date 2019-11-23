@@ -18,5 +18,7 @@ namespace Application.DTOs
         public string UserName { get; set; }
         public string ImageSource  { get; set; }
         public IEnumerable<ServiceDto> Services { get; set; }
+        public IEnumerable<VisitDto> Visits { get; set; }
+        public IEnumerable<OpinionDto> Opinions { get; set; }
     }
 }

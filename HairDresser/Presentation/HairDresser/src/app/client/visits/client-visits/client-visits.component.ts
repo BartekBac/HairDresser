@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Visit } from 'src/app/shared/models/Visit';
 
 @Component({
   selector: 'app-client-visits',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientVisitsComponent implements OnInit {
 
-  constructor() { }
+  @Input() visits: Visit[] = [];
 
-  ngOnInit() {
-  }
+  constructor() {}
+
+  ngOnInit() {}
 
 }

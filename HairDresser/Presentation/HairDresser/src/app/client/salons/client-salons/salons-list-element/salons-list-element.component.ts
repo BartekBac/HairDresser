@@ -4,6 +4,7 @@ import * as jwt_decode from 'jwt-decode';
 import { ClientService } from 'src/app/shared/services/client.service';
 import { MessageService, ConfirmationService } from 'primeng/primeng';
 import { Constants } from 'src/app/shared/constants/Constants';
+import { Visit } from 'src/app/shared/models/Visit';
 
 @Component({
   selector: 'app-client-salons-list-element',
@@ -17,6 +18,7 @@ export class ClientSalonsListElementComponent implements OnInit {
   @Input() isSelected = false;
   @Input() onlySelectMode = false;
   @Output() removedSalon = new EventEmitter<Salon>();
+  @Output() addedVisit = new EventEmitter<Visit>();
   userId: string;
   displayAppointmentDialog = false;
 
@@ -56,6 +58,10 @@ export class ClientSalonsListElementComponent implements OnInit {
 
   onDialogClose(close: boolean) {
     this.displayAppointmentDialog = !close;
+  }
+
+  onAddedVisit(visit: Visit) {
+    this.addedVisit.emit(visit);
   }
 
 }

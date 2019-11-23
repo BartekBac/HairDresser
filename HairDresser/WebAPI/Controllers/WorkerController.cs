@@ -28,11 +28,26 @@ namespace WebAPI.Controllers
             _userService = userService;
         }
 
+        [Authorize(Roles = RoleString.Worker)]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetWorkerById(string id)
+        {
+            var result = await _mediator.Send(new GetWorkerByIdQuery { Id = id });
+            return Ok(result);
+        }
+
         [Authorize(Roles = RoleString.Salon)]
         [HttpGet("{id}/services")]
         public async Task<IActionResult> GetWorkerServices(string id)
         {
             var result = await _mediator.Send(new GetWorkerServicesQuery { Id = id });
+            return Ok(result);
+        }
+
+        [HttpGet("{id}/schedule")]
+        public async Task<IActionResult> GetWorkerSchedule(string id)
+        {
+            var result = await _mediator.Send(new GetWorkerScheduleQuery { Id = id });
             return Ok(result);
         }
 

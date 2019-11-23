@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace WebAPI.Configurations
@@ -54,6 +55,12 @@ namespace WebAPI.Configurations
                 .ForMember(dest => dest.Time, opt => opt.MapFrom(src => src.Service.Time))
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Service.Id));
 
+            CreateMap<VisitServices, ServiceDto>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Service.Name))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Service.Price))
+                .ForMember(dest => dest.Time, opt => opt.MapFrom(src => src.Service.Time))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Service.Id));
+
             CreateMap<ClientSalons, SalonDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Salon.Name))
                 .ForMember(dest => dest.AdditionalInfo, opt => opt.MapFrom(src => src.Salon.AdditionalInfo))
@@ -61,7 +68,15 @@ namespace WebAPI.Configurations
                 .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Salon.Address))
                 .ForMember(dest => dest.Admin, opt => opt.MapFrom(src => src.Salon.Admin));
 
-            CreateMap<Visit, VisitDto>();
+            CreateMap<Visit, VisitDto>()
+                .ForPath(dest => dest.ClientEmail, opt => opt.MapFrom(src => src.Client.User.Email))
+                .ForPath(dest => dest.ClientPhoneNumber, opt => opt.MapFrom(src => src.Client.User.PhoneNumber))
+                .ForPath(dest => dest.ClientUserName, opt => opt.MapFrom(src => src.Client.User.UserName))
+                .ForPath(dest => dest.WorkerEmail, opt => opt.MapFrom(src => src.Worker.User.Email))
+                .ForPath(dest => dest.WorkerPhoneNumber, opt => opt.MapFrom(src => src.Worker.User.PhoneNumber))
+                .ForPath(dest => dest.WorkerUserName, opt => opt.MapFrom(src => src.Worker.User.UserName));
+
+            CreateMap<Opinion, OpinionDto>();
         }
     }
 }

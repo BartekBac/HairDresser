@@ -6,6 +6,7 @@ import { Client } from 'src/app/shared/models/Client';
 import { AuthService } from 'src/app/authentication/services/auth.service';
 import { MenuItem } from 'primeng/primeng';
 import { Salon } from 'src/app/shared/models/Salon';
+import { Visit } from 'src/app/shared/models/Visit';
 
 @Component({
   selector: 'app-home',
@@ -45,6 +46,10 @@ export class HomeComponent implements OnInit {
 
   onRemoveSalon(removedSalon: Salon) {
     this.client.favoriteSalons = this.client.favoriteSalons.filter(s => s.id !== removedSalon.id);
+  }
+
+  onAddVisit(visit: Visit) {
+    this.client.visits.push(visit);
   }
 
 }

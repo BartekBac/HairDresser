@@ -1,11 +1,12 @@
-﻿using MediatR;
+﻿using Application.DTOs;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.Commands.Visit
 {
-    public class CreateVisitCommand : IRequest
+    public class CreateVisitCommand : IRequest<VisitDto>
     {
         public string ClientId { get; set; }
         public string WorkerId { get; set; }

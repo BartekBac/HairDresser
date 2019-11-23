@@ -4,7 +4,7 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { SalonService } from './services/salon.service';
 import { SalonResolver } from './resolvers/salon.resolver';
 import { PanelModule, InputTextModule, ButtonModule, InputMaskModule, MessageModule,
-         DialogModule, CheckboxModule, PasswordModule, SelectButtonModule, FileUploadModule } from 'primeng/primeng';
+         DialogModule, CheckboxModule, PasswordModule, SelectButtonModule, FileUploadModule, ProgressSpinnerModule, ScrollPanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbTimepickerModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +21,14 @@ import { ViewServicesTableComponent } from './components/view-services-table/vie
 import { TableModule } from 'primeng/table';
 import { OverlayDivComponent } from './components/overlay-div/overlay-div.component';
 import { ClientAddSalonResolver } from './resolvers/client-add-salon.resolver';
+import { VisitStatusPipe } from './pipes/visit-status.pipe';
+import { VisitStatusIconPipe } from './pipes/visit-status-icon.pipe';
+import { SelectCalendarComponent } from './components/select-calendar/select-calendar.component';
+import { FullCalendarModule } from 'primeng/fullcalendar';
+import { FormVisitChangeTermComponent } from './components/form-visit-change-term/form-visit-change-term.component';
+import { ViewVisitsListComponent } from './components/view-visits-list/view-visits-list.component';
+import { DataViewModule } from 'primeng/dataview';
+import { VisitListElementComponent } from './components/view-visits-list/visit-list-element/visit-list-element.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +40,13 @@ import { ClientAddSalonResolver } from './resolvers/client-add-salon.resolver';
     EditableDivComponent,
     ViewScheduleComponent,
     ViewServicesTableComponent,
-    OverlayDivComponent
+    OverlayDivComponent,
+    VisitStatusPipe,
+    VisitStatusIconPipe,
+    SelectCalendarComponent,
+    FormVisitChangeTermComponent,
+    VisitListElementComponent,
+    ViewVisitsListComponent
   ],
   imports: [
     CommonModule,
@@ -51,7 +65,13 @@ import { ClientAddSalonResolver } from './resolvers/client-add-salon.resolver';
     PasswordModule,
     SelectButtonModule,
     FileUploadModule,
-    TableModule
+    TableModule,
+    FullCalendarModule,
+    ProgressSpinnerModule,
+    ScrollPanelModule,
+    DataViewModule,
+    DropdownModule,
+    CalendarModule
   ],
   exports: [
     CommonModule,
@@ -63,7 +83,15 @@ import { ClientAddSalonResolver } from './resolvers/client-add-salon.resolver';
     EditableDivComponent,
     ViewScheduleComponent,
     ViewServicesTableComponent,
-    OverlayDivComponent
+    OverlayDivComponent,
+    VisitStatusPipe,
+    VisitStatusIconPipe,
+    SelectCalendarComponent,
+    FormVisitChangeTermComponent,
+    ViewVisitsListComponent
+  ],
+  providers: [
+    VisitStatusPipe
   ]
 })
 export class SharedModule {
@@ -75,7 +103,8 @@ export class SharedModule {
         SalonResolver,
         ClientService,
         ClientResolver,
-        ClientAddSalonResolver
+        ClientAddSalonResolver,
+        VisitStatusPipe
       ]
     };
   }
