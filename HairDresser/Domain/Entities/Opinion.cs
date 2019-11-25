@@ -7,21 +7,17 @@ namespace Domain.Entities
 {
     public class Opinion : EntityWithImage
     {
-        public Opinion(Guid clientId, Client client, Guid workerId, Worker worker, string description, float rate) : base(Guid.NewGuid())
+        public Opinion(Guid clientId, Guid workerId, string description, float rate) : base(Guid.NewGuid())
         {
             ClientId = clientId;
-            Client = client;
             WorkerId = workerId;
-            Worker = worker;
             Description = description;
             Rate = rate;
         }
-        public Opinion(Guid clientId, Client client, Guid workerId, Worker worker, string description, float rate, byte[] imageSource, string imageHeader) : base(Guid.NewGuid(), imageSource, imageHeader)
+        public Opinion(Guid clientId, Guid workerId, string description, float rate, byte[] imageSource, string imageHeader) : base(Guid.NewGuid(), imageSource, imageHeader)
         {
             ClientId = clientId;
-            Client = client;
             WorkerId = workerId;
-            Worker = worker;
             Description = description;
             Rate = rate;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Domain.Entities.ManyToMany;
 using Domain.Enums;
+using Domain.Exceptions;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.Identity;
 
@@ -85,6 +86,23 @@ namespace Domain.Entities
                 updated = true;
             }
             return updated;
+        }
+
+        public void UpdateRating(float newRating)
+        {
+            // TODO tutaj liczenie ze średniej pracowników
+            if (newRating < 0 || newRating > 5)
+            {
+                throw new DomainException("Rating value has to be in range from 0 to 5.");
+            }
+            if (Rating == -1)
+            {
+                Rating = newRating;
+            }
+            else
+            {
+                Rating = (Rating + newRating) / 2f;
+            }
         }
     }
 }

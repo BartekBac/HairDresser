@@ -22,6 +22,7 @@ namespace Domain.Entities
             LastName = lastName;
             SalonId = salonId;
             Rating = -1.0f;
+            RatingCount = 0;
             Schedule = new Schedule(Guid.Parse(user.Id), schedule);
         }
         public Worker(IdentityUser user, string firstName, string lastName, Guid salonId, Schedule schedule, byte[] imageSource, string imageHeader) : base(Guid.Parse(user.Id), imageSource, imageHeader)
@@ -31,6 +32,7 @@ namespace Domain.Entities
             LastName = lastName;
             SalonId = salonId;
             Rating = -1.0f;
+            RatingCount = 0;
             Schedule = new Schedule(Guid.Parse(user.Id), schedule);
         }
         private Worker()
@@ -41,6 +43,7 @@ namespace Domain.Entities
         public string LastName { get; private set; }
         public IdentityUser User { get; private set; }
         public float Rating { get; private set; }
+        public int RatingCount { get; private set; }
         public Guid SalonId { get; private set; }
         public Salon Salon { get; private set; }
         public Schedule Schedule { get; set; }
@@ -100,6 +103,23 @@ namespace Domain.Entities
         public void ClearAssignedServices()
         {
             _services.Clear();
+        }
+
+        public void UpdateRating(float newRating)
+        {
+            // TODO liczenie ze wzory s = (n * sp + nR) / (n + 1) 
+            if(newRating < 0 || newRating > 5)
+            {
+                throw new DomainException("Rating value has to be in range from 0 to 5.");
+            }
+            if(Rating == -1)
+            {
+                Rating = newRating;
+            } 
+            else
+            {
+                Rating = (Rating + newRating) / 2f;
+            }
         }
 
     }

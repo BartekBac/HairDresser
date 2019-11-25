@@ -271,6 +271,9 @@ namespace Domain.Migrations
                     b.Property<float>("Rating")
                         .HasColumnType("real");
 
+                    b.Property<int>("RatingCount")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("SalonId")
                         .HasColumnType("uniqueidentifier");
 
