@@ -45,7 +45,6 @@ export class Functions {
     if (date < now) {
       return '#555555';
     }
-
     switch (visit.status) {
       case VisitStatus.Accepted: return '#55ff55';
       case VisitStatus.ClientChangeRequested: return '#8888ff';
@@ -63,6 +62,20 @@ export class Functions {
       return '#dedede';
     } else {
       return '#212121';
+    }
+  }
+
+  public static getOpinionRateColor(rate: number) {
+    if (rate >= 4.45) {
+      return '#44ff44';
+    } else if (rate >= 3.5) {
+      return '#aaff44';
+    } else if (rate >= 2.5) {
+      return '#ffff55';
+    } else if (rate >= 1.5) {
+      return '#ffaa44';
+    } else {
+      return '#ff4444';
     }
   }
 }

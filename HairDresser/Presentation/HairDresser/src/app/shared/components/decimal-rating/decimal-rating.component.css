@@ -1,0 +1,27 @@
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 20px;
+  color: #d3d3d3;
+}
+.full {
+  color: red;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: red;
+}
+
+.my-rate-label{
+  line-height: 20px;
+  vertical-align: super;
+  margin-left: 5px;
+}
+
+.my-rate-header{
+  font-weight: bold;
+  line-height: 20px;
+  vertical-align: super;
+}

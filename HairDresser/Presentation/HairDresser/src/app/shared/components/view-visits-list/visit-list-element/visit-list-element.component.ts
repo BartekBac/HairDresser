@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Visit } from 'src/app/shared/models/Visit';
 import { VisitStatus } from 'src/app/shared/enums/VisitStatus';
 import { MessageService, ConfirmationService } from 'primeng/primeng';
 import { VisitService } from 'src/app/shared/services/visit.service';
 import { Functions } from 'src/app/shared/constants/Functions';
+import { Opinion } from 'src/app/shared/models/Opinion';
 
 @Component({
   selector: 'app-visit-list-element',
@@ -14,10 +15,12 @@ export class VisitListElementComponent implements OnInit {
 
   @Input() visit: Visit;
   @Input() isClient = true;
+  @Output() addedOpinion = new EventEmitter<Opinion>();
   date: Date;
   backgroundColor: string;
   textColor: string;
   displayChangeVisitTermDialog = false;
+  displaySendOpinionDialog = false;
 
   constructor(
     private toastService: MessageService,
@@ -134,8 +137,17 @@ export class VisitListElementComponent implements OnInit {
     this.resetProperties();
   }
 
-  public showOpinionDialog() {
-    console.log('Opinion dialog opened');
+  showSendOpinionDialog() {
+    this.displaySendOpinionDialog = true;
+  }
+
+  onCloseSendOpinionDialog(close: boolean) {
+    this.displaySendOpinionDialog = !close;
+  }
+
+  onAddedOpinion(opinion: Opinion) {
+    this.visit.opinionSent = true;
+    this.addedOpinion.emit(opinion);
   }
 
 }

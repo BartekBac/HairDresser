@@ -24,3 +24,23 @@
   object-position: center;
   height: 300px;
 }
+
+.my-header-wrapper{
+  position: relative;
+}
+
+.my-rating-wrapper{
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  height: 40px;
+  width: auto;
+  text-align: center;
+  padding-top: 6px;
+  padding-left: 5px;
+  padding-right: 8px;
+  border-radius: 8px;
+}
+.my-rating-wrapper:hover{
+  background-color: #525252;
+}

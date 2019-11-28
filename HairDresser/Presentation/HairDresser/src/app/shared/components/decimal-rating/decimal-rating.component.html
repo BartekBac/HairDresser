@@ -1,0 +1,9 @@
+<ng-template #t let-fill="fill">
+  <span class="star" [class.full]="fill === 100">
+    <span class="half" [style.color]="getRateColor()" [style.width.%]="fill"><i class="pi pi-star"></i></span><i
+      class="pi pi-star"></i>
+  </span>
+</ng-template>
+<label *ngIf="showHeader" class="my-rate-header"> Rate: </label>
+<ngb-rating [(rate)]="rate" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
+<label *ngIf="showFooter" class="my-rate-label"> - </label><label *ngIf="showFooter" class="my-rate-label" [ngStyle]="{'color': getRateColor()}"> {{rate | rating}} </label>

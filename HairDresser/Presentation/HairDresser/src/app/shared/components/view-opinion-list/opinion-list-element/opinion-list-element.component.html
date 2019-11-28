@@ -1,0 +1,42 @@
+<div class="ui-g-12 ui-fluid my-list-element-wrapper">
+  <div class="ui-g-12 ui-md-12 ui-lg-6">
+    <div>
+      <div>
+        <label class="my-bold-label" [ngbTooltip]="clientTooltip" placement="right-top" closeDelay="2500"
+        openDelay="500"> {{opinion.clientFirstName}} {{opinion.clientLastName}} </label>
+      </div>
+      <div>
+          <label class="my-italic-label"> rate: </label>
+        <p-rating class="my-rate-label" [ngModel]="opinion.rate" readonly="true" stars="5" [cancel]="false"
+          [iconOnStyle]="{'color': getRateColor()}"></p-rating>
+        <label>(</label><label [ngStyle]="{'color': getRateColor()}"> {{opinion.rate | rating}} </label><label>)</label>
+      </div>
+      <div>
+        <label class="my-italic-label"> on: </label>
+        <label> {{opinion.date | date: 'd MMMM y H:mm'}} </label>
+      </div>
+      <div *ngIf="opinion.imageSource">
+          <label class="my-italic-label"> wrote: </label>
+          <label> {{opinion.description}} </label>
+        </div>
+    </div>
+  </div>
+  <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+    <img *ngIf="opinion.imageSource" [src]="opinion.imageSource" class="my-img" (click)="opImage.toggle($event)">
+    <div *ngIf="!opinion.imageSource">
+      <label class="my-italic-label"> wrote: </label>
+      <label> {{opinion.description}} </label>
+    </div>
+  </div>
+</div>
+
+<p-overlayPanel #opImage [appendTo]="'body'" showCloseIcon="true">
+  <img [src]="opinion.imageSource" />
+</p-overlayPanel>
+
+<ng-template #clientTooltip>
+    <label class="my-tooltip-label">{{opinion.clientEmail}}</label>
+    <button type="button" pButton class="ui-button-secondary my-copy-button" icon="pi pi-copy"
+      (click)="copyToClipboard(opinion.clientEmail)"></button>
+    <p>{{opinion.clientPhoneNumber}}</p>
+  </ng-template>

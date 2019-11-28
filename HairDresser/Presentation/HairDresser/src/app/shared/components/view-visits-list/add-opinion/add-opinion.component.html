@@ -1,0 +1,28 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-fluid p-grid p-align-center my-div-container">
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-g-12">
+        <h4 for="input-description">Description</h4>
+        <textarea id="input-additionalinfo" [(ngModel)]="opinionCreation.description" rows="3" cols="60"
+          pInputTextarea></textarea>
+      </div>
+      <div class="ui-g-12">
+        <h4 for="input-rate">Rate</h4>
+        <div class="my-rating-container">
+          <p-rating id="input-rate" class="my-rating" [(ngModel)]="opinionCreation.rate" [cancel]="false" [iconOnStyle]="{'color': getRateColor()}"></p-rating>
+          <label class="my-rating-head-label my-rating-label">(</label><label class="my-rating-label" [ngStyle]="{'color': getRateColor()}">{{opinionCreation.rate}}</label><label class="my-rating-label">)</label>
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <app-form-upload-image [imageSrc]="opinionCreation.imageSource" (imageUploaded)="onImageUpload($event)">
+        </app-form-upload-image>
+      </div>
+      <div class="ui-g-12 ui-fluid">
+        <button pButton class="ui-button-success my-half-wide-button" (click)="sendOpinion()" icon="pi pi-check"
+          label="Send"></button>
+        <button pButton class="ui-button-danger my-half-wide-button" (click)="cancel()" icon="pi pi-times"
+          iconPos="right" label="Cancel"></button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Domain.Entities.ManyToMany;
 using Domain.Enums;
+using Domain.Exceptions;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.Identity;
 
@@ -85,6 +86,28 @@ namespace Domain.Entities
                 updated = true;
             }
             return updated;
+        }
+
+        public void UpdateRating()
+        {
+            float sum = 0;
+            int workersWithRatingCount = 0;
+            foreach(var worker in _workers)
+            {
+                if(worker.Rating != -1f)
+                {
+                    sum += worker.Rating;
+                    workersWithRatingCount++;
+                }
+            }
+            if (workersWithRatingCount > 0)
+            {
+                Rating = sum / (float)workersWithRatingCount;
+            } 
+            else
+            {
+                Rating = -1f;
+            }
         }
     }
 }

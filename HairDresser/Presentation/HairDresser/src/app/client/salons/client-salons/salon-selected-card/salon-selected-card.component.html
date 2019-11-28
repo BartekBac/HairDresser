@@ -1,7 +1,13 @@
 <p-card *ngIf="salon" header="{{salon.name}}" subheader="{{salon.type | salonType}} hairdresser"
   class="my-card-background" styleClass="ui-card-shadow">
   <p-header>
-    <img [src]="salon.imageSource" [ngClass]="{'my-grid-element-img': withWorkersMode === false, 'my-grid-element-img-300': withWorkersMode === true}">
+    <div class="my-header-wrapper">
+      <img [src]="salon.imageSource" [ngClass]="{'my-grid-element-img': withWorkersMode === false, 'my-grid-element-img-300': withWorkersMode === true}">
+      <div class="my-rating-wrapper p-grid p-align-center" [ngStyle]="{'left': withWorkersMode === false ? '55px' : '15px'}"
+       (mouseenter)="displayRatingFooter=true" (mouseleave)="displayRatingFooter=false">
+        <app-decimal-rating [rate]="salon.rating" [showFooter]="displayRatingFooter"></app-decimal-rating>
+      </div>
+    </div>
   </p-header>
   <p-accordion [multiple]="withWorkersMode">
     <p-accordionTab header="Info" [selected]="withWorkersMode">

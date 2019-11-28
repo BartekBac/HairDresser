@@ -15,6 +15,7 @@
 
         <app-worker-visits *ngIf="activeMenuItem == tabMenuItems[0]" [visits]="worker.visits"></app-worker-visits>
         <app-worker-calendar *ngIf="activeMenuItem == tabMenuItems[1]" [visits]="worker.visits" [workerSchedule]="worker.schedule"></app-worker-calendar>
+        <app-worker-opinions *ngIf="activeMenuItem == tabMenuItems[2]" [opinions]="worker.opinions"></app-worker-opinions>
       </div>
     </div>
   </div>

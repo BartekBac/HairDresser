@@ -8,6 +8,7 @@ export class Worker {
   firstName: string;
   lastName: string;
   rating: number;
+  ratingCount: number;
   schedule: Schedule;
   services: Service[];
   visits: Visit[];

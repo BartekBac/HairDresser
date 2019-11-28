@@ -36,8 +36,8 @@
   </div>
   <div class="ui-g-12 ui-md-12 ui-lg-5 ui-fluid">
     <label *ngIf="visit.info" class="my-label">{{visit.info}}</label>
-    <button *ngIf="showOpinionButton()" pButton class="ui-button-secondary my-button"
-    (click)="showOpinionDialog()" icon="pi pi-comment" label="Send opinion"></button>
+    <button *ngIf="showOpinionButton()" pButton class="ui-button-secondary my-button" (click)="showSendOpinionDialog()"
+      icon="pi pi-comment" label="Send opinion"></button>
     <button *ngIf="showChangeTermButton()" pButton class="ui-button-secondary my-button"
       (click)="showChangeVisitTermDialog()" icon="pi pi-calendar-times" label="Change term"></button>
     <button *ngIf="showConfirmButton()" pButton class="ui-button-success my-button" (click)="confirmVisit()"
@@ -65,7 +65,15 @@
   <p>{{visit.clientPhoneNumber}}</p>
 </ng-template>
 
-<p-dialog *ngIf="showChangeTermButton()" header="Change visit term" [(visible)]="displayChangeVisitTermDialog" [style]="{width: '80%'}">
-  <app-form-visit-change-term [visit]="visit" [isClient]="isClient" [isOpened]="displayChangeVisitTermDialog" (visitUpdated)="onVisitUpdated($event)"
-    (closeDialog)="onCloseChangeVisitTermDialog($event)"></app-form-visit-change-term>
+<p-dialog *ngIf="showChangeTermButton()" header="Change visit term" [(visible)]="displayChangeVisitTermDialog"
+  [style]="{width: '80%'}">
+  <app-form-visit-change-term [visit]="visit" [isClient]="isClient" [isOpened]="displayChangeVisitTermDialog"
+    (visitUpdated)="onVisitUpdated($event)" (closeDialog)="onCloseChangeVisitTermDialog($event)">
+  </app-form-visit-change-term>
+</p-dialog>
+
+<p-dialog *ngIf="showOpinionButton()" header="Send opinion" [(visible)]="displaySendOpinionDialog"
+  [style]="{width: '500px'}">
+  <app-add-opinion [workerId]="visit.workerId" [visitId]="visit.id" (addedOpinion)="onAddedOpinion($event)"
+    (closeDialog)="onCloseSendOpinionDialog($event)"></app-add-opinion>
 </p-dialog>

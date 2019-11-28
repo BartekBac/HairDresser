@@ -10,6 +10,7 @@ export class ClientSalonSelectedCardComponent implements OnInit {
 
   @Input() salon: Salon;
   @Input() withWorkersMode = true;
+  displayRatingFooter = false;
 
   constructor() { }
 

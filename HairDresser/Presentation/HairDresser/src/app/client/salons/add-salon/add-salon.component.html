@@ -11,8 +11,15 @@
                   <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)"></p-dropdown>
                 </div>
                 <div class="ui-g-6 ui-md-4 filter-container">
-                    <p-autoComplete [(ngModel)]="searchValue" [suggestions]="filteredSearchValues" (completeMethod)="filterSearchValues($event)" [size]="30"
-                      placeholder="Search by {{selectedFilterLabel}}" [minLength]="1" (keyup)="dv.filter($event.target.value)"></p-autoComplete>
+                    <p-autoComplete [(ngModel)]="searchValue" [suggestions]="filteredSearchValues"
+                    (completeMethod)="filterSearchValues($event)" [size]="30"
+                    placeholder="Search by {{selectedFilterLabel}}" [minLength]="0"
+                    [dropdown]="true"
+                    [autoHighlight]='true'
+                    [emptyMessage]="'No salons found'"
+                    (onSelect)="dv.filter(searchValue)"
+                    (click)="dv.filter($event.target.value)"
+                    (keyup)="dv.filter($event.target.value)"></p-autoComplete>
                 </div>
                 <div class="ui-g-6 ui-md-4 filter-container">
                    <p-selectButton [options]="filterOptions" [(ngModel)]="selectedFilterValue" (onChange)="onSelectFilterChange($event)"></p-selectButton>

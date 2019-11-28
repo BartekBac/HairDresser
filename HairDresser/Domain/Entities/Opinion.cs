@@ -7,23 +7,21 @@ namespace Domain.Entities
 {
     public class Opinion : EntityWithImage
     {
-        public Opinion(Guid clientId, Client client, Guid workerId, Worker worker, string description, float rate) : base(Guid.NewGuid())
+        public Opinion(Guid clientId, Guid workerId, string description, float rate) : base(Guid.NewGuid())
         {
             ClientId = clientId;
-            Client = client;
             WorkerId = workerId;
-            Worker = worker;
             Description = description;
             Rate = rate;
+            Date = new DateTimeOffset(DateTime.Now).LocalDateTime;
         }
-        public Opinion(Guid clientId, Client client, Guid workerId, Worker worker, string description, float rate, byte[] imageSource, string imageHeader) : base(Guid.NewGuid(), imageSource, imageHeader)
+        public Opinion(Guid clientId, Guid workerId, string description, float rate, byte[] imageSource, string imageHeader) : base(Guid.NewGuid(), imageSource, imageHeader)
         {
             ClientId = clientId;
-            Client = client;
             WorkerId = workerId;
-            Worker = worker;
             Description = description;
             Rate = rate;
+            Date = new DateTimeOffset(DateTime.Now).LocalDateTime;
         }
         private Opinion()
         {
@@ -36,5 +34,6 @@ namespace Domain.Entities
         public Worker Worker { get; private set; }
         public string Description { get; private set; }
         public float Rate { get; private set; }
+        public DateTime Date { get; private set; }
     }
 }

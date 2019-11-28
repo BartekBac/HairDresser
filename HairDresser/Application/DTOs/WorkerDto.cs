@@ -12,6 +12,7 @@ namespace Application.DTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public float Rating { get; set; }
+        public int RatingCount { get; set; }
         public ScheduleDto Schedule { get; set; }
         public string UserPhoneNumber { get; set; }
         public string UserEmail { get; set; }

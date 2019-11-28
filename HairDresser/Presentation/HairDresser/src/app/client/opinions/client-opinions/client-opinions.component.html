@@ -1,1 +1,8 @@
-<p>client-opinions works!</p>
+<p-panel>
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <h5 class="ui-panel-title my-header-panel-title">Send opinions</h5>
+    </div>
+  </p-header>
+  <app-view-opinion-list [opinions]="opinions" [sendOpinionsMode]="true" (deletedOpinion)="onDeleteOpinion($event)"></app-view-opinion-list>
+</p-panel>
