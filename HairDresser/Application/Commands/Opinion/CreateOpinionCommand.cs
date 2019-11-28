@@ -10,6 +10,7 @@ namespace Application.Commands.Opinion
     {
         public string ClientId { get; set; }
         public string WorkerId { get; set; }
+        public string VisitId { get; set; }
         public string Description { get; set; }
         public float Rate { get; set; }
         public string ImageSource { get; set; }

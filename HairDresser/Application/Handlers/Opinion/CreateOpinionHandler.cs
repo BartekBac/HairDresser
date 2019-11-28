@@ -4,6 +4,7 @@ using Application.Services;
 using AutoMapper;
 using Domain.DbContexts;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,11 +29,20 @@ namespace Application.Handlers.Opinion
             {
                 throw new ApplicationException("Could not add opinion, client with id="+request.ClientId+" not found.");
             }
-            var worker = _dbContext.Clients.FirstOrDefault(w => w.Id.ToString() == request.WorkerId);
+            var worker = _dbContext.Workers
+                .FirstOrDefault(w => w.Id.ToString() == request.WorkerId);
+            var workerSalon = _dbContext.Salons.Include(s => s.Workers).FirstOrDefault(s => s.Id == worker.SalonId);
+            worker.Salon = workerSalon;
             if (worker == null)
             {
                 throw new ApplicationException("Could not add opinion, worker with id=" + request.WorkerId + " not found.");
             }
+            var visit = _dbContext.Visits.FirstOrDefault(v => v.Id.ToString() == request.VisitId);
+            if (visit == null)
+            {
+                throw new ApplicationException("Could not add opinion, visit with id=" + request.VisitId + " not found.");
+            }
+            visit.SetOpinionSent(true);
 
             var resolvedImage = ImageService.ResolveToImage(request.ImageSource);
 
@@ -44,6 +54,7 @@ namespace Application.Handlers.Opinion
                 resolvedImage.Source,
                 resolvedImage.Header);
 
+            worker.UpdateRating(request.Rate);
             _dbContext.Opinions.Add(opinion);
 
             if (_dbContext.SaveChanges() == 0)

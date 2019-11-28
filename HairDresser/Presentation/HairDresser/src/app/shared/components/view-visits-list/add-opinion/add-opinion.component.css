@@ -1,0 +1,32 @@
+.my-div-container{
+  width: 100%;
+  height: 100%;
+}
+
+.my-half-wide-button{
+  width: 50%;
+  margin-top: 2px;
+}
+
+.my-rating-container{
+  width: 100%;
+  text-align: center;
+}
+
+.my-rating-head-label{
+  margin-left: 15px;
+}
+.my-rating-label{
+  float: left;
+  margin-left: 3px;
+  font-size: 26px;
+}
+
+:host ::ng-deep .ui-rating a .ui-rating-icon{
+  font-size: 40px;
+}
+
+:host ::ng-deep .ui-rating{
+  float: left;
+  margin-left: 25%;
+}

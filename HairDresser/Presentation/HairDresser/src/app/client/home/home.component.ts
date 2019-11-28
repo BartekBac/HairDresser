@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/authentication/services/auth.service';
 import { MenuItem } from 'primeng/primeng';
 import { Salon } from 'src/app/shared/models/Salon';
 import { Visit } from 'src/app/shared/models/Visit';
+import { Opinion } from 'src/app/shared/models/Opinion';
+import { ClientService } from 'src/app/shared/services/client.service';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +30,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private clientService: ClientService
     ) { }
 
   ngOnInit() {
@@ -50,6 +53,20 @@ export class HomeComponent implements OnInit {
 
   onAddVisit(visit: Visit) {
     this.client.visits.push(visit);
+  }
+
+  onAddOpinion(opinion: Opinion) {
+    this.client.sendOpinions.push(opinion);
+    this.clientService.getClient(this.userId).subscribe(
+      res => this.client = res
+    );
+  }
+
+  onDeleteOpinion(deletedOpinion: Opinion) {
+    this.client.sendOpinions = this.client.sendOpinions.filter(o => o.id !== deletedOpinion.id);
+    this.clientService.getClient(this.userId).subscribe(
+      res => {this.client = res; console.log(res);}
+    );
   }
 
 }

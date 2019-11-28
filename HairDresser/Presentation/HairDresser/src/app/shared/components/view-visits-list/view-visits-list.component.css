@@ -1,3 +1,64 @@
 .my-header-panel-title{
   float: left;
 }
+
+:host ::ng-deep .my-accepted-button.ui-button.ui-state-active{
+  background-color: #55ff55;
+  border-color: #55ff55;
+}
+:host ::ng-deep .my-accepted-button.ui-button.ui-state-active:not(.ui-state-disabled):hover{
+  background-color: #33ff33;
+  border-color: #33ff33;
+}
+:host ::ng-deep .my-accepted-button.ui-button.ui-state-active.ui-state-focus{
+  background-color: #44ff44;
+  border-color: #44ff44;
+}
+:host ::ng-deep .my-client-change-button.ui-button.ui-state-active{
+  background-color: #8888ff;
+  border-color: #8888ff;
+}
+:host ::ng-deep .my-client-change-button.ui-button.ui-state-active:not(.ui-state-disabled):hover{
+  background-color: #6666ff;
+  border-color: #6666ff;
+}
+:host ::ng-deep .my-client-change-button.ui-button.ui-state-active.ui-state-focus{
+  background-color: #7777ff;
+  border-color: #7777ff;
+}
+:host ::ng-deep .my-worker-change-button.ui-button.ui-state-active{
+  background-color: #3333ff;
+  border-color: #3333ff;
+}
+:host ::ng-deep .my-worker-change-button.ui-button.ui-state-active:not(.ui-state-disabled):hover{
+  background-color: #1111ff;
+  border-color: #1111ff;
+}
+:host ::ng-deep .my-worker-change-button.ui-button.ui-state-active.ui-state-focus{
+  background-color: #2222ff;
+  border-color: #2222ff;
+}
+:host ::ng-deep .my-pending-button.ui-button.ui-state-active{
+  background-color: #ffff55;
+  border-color: #ffff55;
+}
+:host ::ng-deep .my-pending-button.ui-button.ui-state-active:not(.ui-state-disabled):hover{
+  background-color: #ffff33;
+  border-color: #ffff33;
+}
+:host ::ng-deep .my-pending-button.ui-button.ui-state-active.ui-state-focus{
+  background-color: #ffff44;
+  border-color: #ffff44;
+}
+:host ::ng-deep .my-rejected-button.ui-button.ui-state-active{
+  background-color: #ff5555;
+  border-color: #ff5555;
+}
+:host ::ng-deep .my-rejected-button.ui-button.ui-state-active:not(.ui-state-disabled):hover{
+  background-color: #ff3333;
+  border-color: #ff3333;
+}
+:host ::ng-deep .my-rejected-button.ui-button.ui-state-active.ui-state-focus{
+  background-color: #ff4444;
+  border-color: #ff4444;
+}

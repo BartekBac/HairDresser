@@ -77,7 +77,9 @@ namespace WebAPI.Configurations
                 .ForPath(dest => dest.WorkerUserName, opt => opt.MapFrom(src => src.Worker.User.UserName));
 
             CreateMap<Opinion, OpinionDto>()
-                .ForMember(dest => dest.ImageSource, opt => opt.MapFrom(src => ImageService.ConcatenateToString(src.Image)));
+                .ForMember(dest => dest.ImageSource, opt => opt.MapFrom(src => ImageService.ConcatenateToString(src.Image)))
+                .ForPath(dest => dest.ClientEmail, opt => opt.MapFrom(src => src.Client.User.Email))
+                .ForPath(dest => dest.ClientPhoneNumber, opt => opt.MapFrom(src => src.Client.User.PhoneNumber));
         }
     }
 }

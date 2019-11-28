@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Visit } from 'src/app/shared/models/Visit';
 import { SelectItem } from 'primeng/primeng';
 import { VisitStatus } from 'src/app/shared/enums/VisitStatus';
+import { Opinion } from '../../models/Opinion';
 @Component({
   selector: 'app-view-visits-list',
   templateUrl: './view-visits-list.component.html',
@@ -11,6 +12,7 @@ export class ViewVisitsListComponent implements OnInit {
 
   @Input() visits: Visit[] = [];
   @Input() isClient = true;
+  @Output() addedOpinion = new EventEmitter<Opinion>();
   displayingVisits: Visit[] = [];
 
   sortOptions: SelectItem[] = [
@@ -21,11 +23,16 @@ export class ViewVisitsListComponent implements OnInit {
   ];
 
   filterOptions: SelectItem[] = [
-    {label: 'Accepted', icon: 'pi pi-check-circle', value: VisitStatus.Accepted},
-    {label: 'CL requested', icon: 'pi pi-question-circle', value: VisitStatus.ClientChangeRequested},
-    {label: 'HD requested', icon: 'pi pi-exclamation-circle', value: VisitStatus.WorkerChangeRequested},
-    {label: 'Pending', icon: 'pi pi-clock', value: VisitStatus.Pending},
-    {label: 'Rejected', icon: 'pi pi-times-circle', value: VisitStatus.Rejected}
+    {label: 'Accepted', icon: 'pi pi-check-circle', value: VisitStatus.Accepted,
+     styleClass: 'my-accepted-button'},
+    {label: 'CL requested', icon: 'pi pi-question-circle', value: VisitStatus.ClientChangeRequested,
+     styleClass: 'my-client-change-button'},
+    {label: 'HD requested', icon: 'pi pi-exclamation-circle', value: VisitStatus.WorkerChangeRequested,
+     styleClass: 'my-worker-change-button'},
+    {label: 'Pending', icon: 'pi pi-clock', value: VisitStatus.Pending,
+     styleClass: 'my-pending-button'},
+    {label: 'Rejected', icon: 'pi pi-times-circle', value: VisitStatus.Rejected,
+     styleClass: 'my-rejected-button'}
   ];
   selectedFilters: VisitStatus[] = [VisitStatus.Accepted, VisitStatus.ClientChangeRequested,
      VisitStatus.WorkerChangeRequested, VisitStatus.Pending, VisitStatus.Rejected];
@@ -82,9 +89,15 @@ export class ViewVisitsListComponent implements OnInit {
   }
 
   showHistory(show: boolean) {
+    const now = new Date();
     if (!show) {
-      const now = new Date();
       this.displayingVisits = this.displayingVisits.filter(v => new Date(v.term) > now);
+      this.sortOptions[2].label = 'Incoming';
+      this.sortOptions[3].label = 'Far in time';
+    } else {
+      this.displayingVisits = this.displayingVisits.filter(v => new Date(v.term) <= now);
+      this.sortOptions[2].label = 'Oldest';
+      this.sortOptions[3].label = 'Latest';
     }
   }
 
@@ -92,6 +105,10 @@ export class ViewVisitsListComponent implements OnInit {
     this.filterVisits(filters);
     this.showHistory(showHistory);
     this.sortDisplayingVisits(this.sortKey);
+  }
+
+  onAddedOpinion(opinion: Opinion) {
+    this.addedOpinion.emit(opinion);
   }
 
 

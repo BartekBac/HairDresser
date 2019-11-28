@@ -33,6 +33,30 @@
 
 .my-paragraph{
   font-weight: bold;
+  font-size: 14px;
+}
+
+.my-rate-count-header{
+  margin-left: 5px;
+  line-height: 24px;
+  vertical-align: super;
+}
+
+.my-rate-count-label{
+  line-height: 24px;
+  vertical-align: super;
+}
+
+.my-rate{
+  float: left;
+  height: 32px;
+}
+.my-apostrophe{
+  color: gold;
+  text-decoration-line: underline;
+  line-height: 24px;
+  vertical-align: super;
+  cursor: pointer;
 }
 
 .my-worker-schedule-container{

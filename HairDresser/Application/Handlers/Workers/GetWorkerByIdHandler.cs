@@ -30,6 +30,7 @@ namespace Application.Handlers.Workers
                 .Include(w => w.Visits).ThenInclude(v => v.Client).ThenInclude(c =>c.User)
                 .Include(w => w.Visits).ThenInclude(v => v.Services).ThenInclude(vs => vs.Service)
                 .Include(w => w.Services).ThenInclude(ws => ws.Service)
+                .Include(w => w.Opinions).ThenInclude(o => o.Client).ThenInclude(c => c.User)
                 .FirstOrDefault(w => w.Id == workerId);
 
             if (worker == null)
@@ -49,7 +50,17 @@ namespace Application.Handlers.Workers
             worker.Image = image;
             worker.Schedule = schedule;
 
-            return _mapper.Map<WorkerDto>(worker);
+            foreach (var opinion in worker.Opinions)
+            {
+                var opinionImage = _dbContext.Images.FirstOrDefault(i => i.Id == opinion.Id);
+                opinion.Image = opinionImage;
+            }
+
+            var result = _mapper.Map<WorkerDto>(worker);
+
+            result.Opinions = _mapper.Map<OpinionDto[]>(worker.Opinions);
+
+            return result;
         }
     }
 }

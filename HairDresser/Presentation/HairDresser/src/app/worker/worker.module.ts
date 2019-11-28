@@ -7,13 +7,15 @@ import { WorkerVisitsComponent } from './visits/worker-visits/worker-visits.comp
 import { TabMenuModule, PanelModule } from 'primeng/primeng';
 import { WorkerCalendarComponent } from './visits/worker-calendar/worker-calendar.component';
 import { FullCalendarModule } from 'primeng/fullcalendar';
+import { WorkerOpinionsComponent } from './opinions/worker-opinions/worker-opinions.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
      WorkerVisitsComponent,
-     WorkerCalendarComponent
+     WorkerCalendarComponent,
+     WorkerOpinionsComponent
   ],
   imports: [
     SharedModule,

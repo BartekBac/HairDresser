@@ -14,14 +14,14 @@
                   <p-selectButton [options]="filterOptions" [(ngModel)]="selectedFilters" [multiple]="true" (onChange)="refreshFilters(selectedFilters, showHistoryFlag)"></p-selectButton>
                </div>
                <div class="ui-g-12 ui-md-2">
-                  <p-checkbox label="Show history" [(ngModel)]="showHistoryFlag" binary="true" (onChange)="refreshFilters(selectedFilters, showHistoryFlag)"></p-checkbox>
+                  <p-checkbox label="History" [(ngModel)]="showHistoryFlag" binary="true" (onChange)="refreshFilters(selectedFilters, showHistoryFlag)"></p-checkbox>
                 </div>
             </div>
           </div>
         </p-header>
         <ng-template let-visit pTemplate="listItem">
           <div class="ui-g-12" style="position: relative;">
-            <app-visit-list-element [visit]="visit" [isClient]="isClient"></app-visit-list-element>
+            <app-visit-list-element [visit]="visit" [isClient]="isClient" (addedOpinion)="onAddedOpinion($event)"></app-visit-list-element>
           </div>
         </ng-template>
       </p-dataView>

@@ -88,20 +88,25 @@ namespace Domain.Entities
             return updated;
         }
 
-        public void UpdateRating(float newRating)
+        public void UpdateRating()
         {
-            // TODO tutaj liczenie ze średniej pracowników
-            if (newRating < 0 || newRating > 5)
+            float sum = 0;
+            int workersWithRatingCount = 0;
+            foreach(var worker in _workers)
             {
-                throw new DomainException("Rating value has to be in range from 0 to 5.");
+                if(worker.Rating != -1f)
+                {
+                    sum += worker.Rating;
+                    workersWithRatingCount++;
+                }
             }
-            if (Rating == -1)
+            if (workersWithRatingCount > 0)
             {
-                Rating = newRating;
-            }
+                Rating = sum / (float)workersWithRatingCount;
+            } 
             else
             {
-                Rating = (Rating + newRating) / 2f;
+                Rating = -1f;
             }
         }
     }

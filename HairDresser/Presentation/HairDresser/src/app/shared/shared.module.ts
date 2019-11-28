@@ -4,10 +4,10 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { SalonService } from './services/salon.service';
 import { SalonResolver } from './resolvers/salon.resolver';
 import { PanelModule, InputTextModule, ButtonModule, InputMaskModule, MessageModule,
-         DialogModule, CheckboxModule, PasswordModule, SelectButtonModule, FileUploadModule, ProgressSpinnerModule, ScrollPanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
+         DialogModule, CheckboxModule, PasswordModule, SelectButtonModule, FileUploadModule, ProgressSpinnerModule, ScrollPanelModule, DropdownModule, CalendarModule, RatingModule, OverlayPanelModule, AutoCompleteModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbModule, NgbTimepickerModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTimepickerModule, NgbTooltipModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormSalonDataComponent } from './components/form-salon-data/form-salon-data.component';
 import { FormUserDataComponent } from './components/form-user-data/form-user-data.component';
 import { FormScheduleComponent } from './components/form-schedule/form-schedule.component';
@@ -29,6 +29,13 @@ import { FormVisitChangeTermComponent } from './components/form-visit-change-ter
 import { ViewVisitsListComponent } from './components/view-visits-list/view-visits-list.component';
 import { DataViewModule } from 'primeng/dataview';
 import { VisitListElementComponent } from './components/view-visits-list/visit-list-element/visit-list-element.component';
+import { AddOpinionComponent } from './components/view-visits-list/add-opinion/add-opinion.component';
+import { ViewOpinionListComponent } from './components/view-opinion-list/view-opinion-list.component';
+import { OpinionListElementComponent } from './components/view-opinion-list/opinion-list-element/opinion-list-element.component';
+import { VirtualScrollerModule } from 'primeng/virtualscroller';
+import { RatingPipe } from './pipes/rating.pipe';
+import { SendOpinionListElementComponent } from './components/view-opinion-list/send-opinion-list-element/send-opinion-list-element.component';
+import { DecimalRatingComponent } from './components/decimal-rating/decimal-rating.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +53,13 @@ import { VisitListElementComponent } from './components/view-visits-list/visit-l
     SelectCalendarComponent,
     FormVisitChangeTermComponent,
     VisitListElementComponent,
-    ViewVisitsListComponent
+    ViewVisitsListComponent,
+    AddOpinionComponent,
+    ViewOpinionListComponent,
+    OpinionListElementComponent,
+    RatingPipe,
+    SendOpinionListElementComponent,
+    DecimalRatingComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +84,12 @@ import { VisitListElementComponent } from './components/view-visits-list/visit-l
     ScrollPanelModule,
     DataViewModule,
     DropdownModule,
-    CalendarModule
+    CalendarModule,
+    RatingModule,
+    VirtualScrollerModule,
+    OverlayPanelModule,
+    AutoCompleteModule,
+    NgbRatingModule
   ],
   exports: [
     CommonModule,
@@ -88,10 +106,14 @@ import { VisitListElementComponent } from './components/view-visits-list/visit-l
     VisitStatusIconPipe,
     SelectCalendarComponent,
     FormVisitChangeTermComponent,
-    ViewVisitsListComponent
+    ViewVisitsListComponent,
+    RatingPipe,
+    ViewOpinionListComponent,
+    DecimalRatingComponent
   ],
   providers: [
-    VisitStatusPipe
+    VisitStatusPipe,
+    RatingPipe
   ]
 })
 export class SharedModule {
@@ -104,7 +126,8 @@ export class SharedModule {
         ClientService,
         ClientResolver,
         ClientAddSalonResolver,
-        VisitStatusPipe
+        VisitStatusPipe,
+        RatingPipe
       ]
     };
   }

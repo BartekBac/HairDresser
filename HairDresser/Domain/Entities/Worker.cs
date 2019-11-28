@@ -45,7 +45,7 @@ namespace Domain.Entities
         public float Rating { get; private set; }
         public int RatingCount { get; private set; }
         public Guid SalonId { get; private set; }
-        public Salon Salon { get; private set; }
+        public Salon Salon { get; set; }
         public Schedule Schedule { get; set; }
         public IEnumerable<WorkerServices> Services
         {
@@ -107,7 +107,6 @@ namespace Domain.Entities
 
         public void UpdateRating(float newRating)
         {
-            // TODO liczenie ze wzory s = (n * sp + nR) / (n + 1) 
             if(newRating < 0 || newRating > 5)
             {
                 throw new DomainException("Rating value has to be in range from 0 to 5.");
@@ -118,8 +117,28 @@ namespace Domain.Entities
             } 
             else
             {
-                Rating = (Rating + newRating) / 2f;
+                Rating = ((Rating * (float)RatingCount) + newRating) / (float)(RatingCount + 1);
             }
+            RatingCount++;
+            Salon.UpdateRating();
+        }
+
+        public void RevertRating(float oldRating)
+        {
+            if (RatingCount == 0)
+            {
+                throw new DomainException("Worker with id=" + Id + " has already any opinion to remove");
+            }
+            if (RatingCount == 1)
+            {
+                Rating = -1f;
+            }
+            else
+            {
+                Rating = ((Rating * (float)RatingCount) - oldRating) / (float)(RatingCount - 1);
+            }
+            RatingCount--;
+            Salon.UpdateRating();
         }
 
     }

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Worker } from 'src/app/shared/models/Worker';
-import { OverlayPanel } from 'primeng/primeng';
 import * as $ from 'jquery';
 
 @Component({
@@ -11,10 +10,14 @@ import * as $ from 'jquery';
 export class WorkerSelectedCardComponent implements OnInit {
 
   @Input() worker: Worker;
+  displayOpinionsDialog = false;
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  showOpinionsDialog() {
+    this.displayOpinionsDialog = true;
   }
 
 }

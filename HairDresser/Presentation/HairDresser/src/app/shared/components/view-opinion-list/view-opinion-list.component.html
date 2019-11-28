@@ -1,0 +1,33 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-fluid p-grid p-align-start">
+    <div class="ui-g-12 ui-md-12">
+      <p-virtualScroller [value]="displayingOpinions" scrollHeight="500px">
+        <p-header>
+          <div class="ui-g">
+            <div [ngClass]="{'ui-g-6': sendOpinionsMode === true, 'ui-g-12': sendOpinionsMode === false}">
+              <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By"
+                (onChange)="onSortChange($event.value)" [style]="{'min-width':'140px'}"></p-dropdown>
+            </div>
+            <div *ngIf="sendOpinionsMode" class="ui-g-6">
+              <p-autoComplete [(ngModel)]="searchValue" [suggestions]="filteredSearchValues"
+                (completeMethod)="filterSearchValues($event)" [size]="30" placeholder="Search by worker name"
+                [minLength]="0" [dropdown]="true" [autoHighlight]='true' [emptyMessage]="'No workers found'"
+                (click)="refreshFilters(sortKey, searchValue)" (keyup)="refreshFilters(sortKey, $event.target.value)">
+              </p-autoComplete>
+            </div>
+          </div>
+        </p-header>
+        <ng-template let-opinion pTemplate="item" let-i="index">
+          <div class="ui-g">
+            <div class="ui-g-12">
+              <app-send-opinion-list-element *ngIf="sendOpinionsMode" [opinion]="opinion"
+                (deletedOpinion)="onDeleteOpinion($event)"></app-send-opinion-list-element>
+              <app-opinion-list-element *ngIf="!sendOpinionsMode" [opinion]="opinion">
+              </app-opinion-list-element>
+            </div>
+          </div>
+        </ng-template>
+      </p-virtualScroller>
+    </div>
+  </div>
+</div>

@@ -2,20 +2,14 @@
   <div class="ui-g-12 ui-md-12 ui-lg-12 my-img-container">
     <img [src]="worker.imageSource" class="my-img">
     <app-overlay-div
-      [buttonPaddingRight]="'15px'"
-      [buttonPaddingTop]="'15px'"
-      [contentPaddingRight]="'55px'"
-      [contentPaddingTop]="'15px'"
-      [contentWidth]="'80%'"
+      [buttonPaddingRight]="'15px'" [buttonPaddingTop]="'15px'"
+      [contentPaddingRight]="'55px'" [contentPaddingTop]="'15px'" [contentWidth]="'80%'"
       [buttonIcon]="'pi pi-list'">
       <app-view-services-table [services]="worker.services"></app-view-services-table>
     </app-overlay-div>
     <app-overlay-div
-      [buttonPaddingRight]="'15px'"
-      [buttonPaddingTop]="'55px'"
-      [contentPaddingRight]="'55px'"
-      [contentPaddingTop]="'55px'"
-      [contentWidth]="'80%'"
+      [buttonPaddingRight]="'15px'" [buttonPaddingTop]="'55px'"
+      [contentPaddingRight]="'55px'" [contentPaddingTop]="'55px'" [contentWidth]="'80%'"
       [buttonIcon]="'pi pi-calendar'">
       <div class="my-worker-schedule-container">
         <p class="my-worker-schedule-label">Schedule:</p>
@@ -24,12 +18,27 @@
     </app-overlay-div>
   </div>
   <div class="ui-g-12 ui-md-12 ui-lg-12">
-    <p class="my-paragraph">Contact:</p>
-    <p>E-mail: {{worker.userEmail}}</p>
-    <p>Tel no: {{worker.userPhoneNumber}}</p>
+    <div class="my-rate" [ngStyle]="{'width': worker.ratingCount > 0 ? 'auto' : '100%' }">
+    <app-decimal-rating [rate]="worker.rating" [showHeader]="true"></app-decimal-rating>
+    </div>
+    <div  *ngIf="worker.ratingCount > 0">
+      <label class="my-rate-count-header">(</label>
+      <label class="my-apostrophe" (click)="showOpinionsDialog()">{{worker.ratingCount}} opinion</label>
+      <label *ngIf="worker.ratingCount > 1" class="my-apostrophe" (click)="showOpinionsDialog()">s</label>
+      <label class="my-rate-count-label">)</label>
+    </div>
+    <div>
+      <p class="my-paragraph">Contact:</p>
+      <p>E-mail: {{worker.userEmail}}</p>
+      <p>Tel no: {{worker.userPhoneNumber}}</p>
+    </div>
   </div>
 </div>
 
 <div *ngIf="!worker" class="my-any-salon-selected-div p-grid p-align-center">
   <label class="my-label">(Select worker from list)</label>
 </div>
+
+<p-dialog *ngIf="worker" header="Opinions about {{worker.firstName}} {{worker.lastName}}" [(visible)]="displayOpinionsDialog" [style]="{width: '80%'}">
+    <app-view-opinion-list *ngIf="displayOpinionsDialog" [opinions]="worker.opinions" [sendOpinionsMode]="false"></app-view-opinion-list>
+</p-dialog>

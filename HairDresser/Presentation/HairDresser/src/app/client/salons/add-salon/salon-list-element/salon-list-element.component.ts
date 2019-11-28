@@ -9,6 +9,7 @@ import { Salon } from 'src/app/shared/models/Salon';
 export class SalonListElementComponent implements OnInit {
 
   @Input() salon: Salon;
+  displayRatingFooter = false;
 
   constructor() { }
 

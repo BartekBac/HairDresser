@@ -18,8 +18,8 @@ export class AddSalonComponent implements OnInit {
   userId: string = null;
 
   sortOptions: SelectItem[] = [
-    {label: 'Name ascending', value: 'name'},
-    {label: 'Name descending', value: '!name'},
+    {label: 'Name', value: 'name'},
+    {label: 'Rating', value: '!rating'},
     {label: 'Type', value: 'type'},
   ];
   sortKey: string;
@@ -74,10 +74,20 @@ export class AddSalonComponent implements OnInit {
 
   filterSearchValues(event) {
     const query = event.query;
+    if (query && query.length > 0) {
     if (this.selectedFilterValue === this.filterOptions[0].value) {
-      this.filteredSearchValues = this.salons.filter(s => s.name.startsWith(query)).map(s => s.name);
-    } else if (this.selectedFilterValue === this.filterOptions[1].value) {
-      this.filteredSearchValues = this.salons.filter(s => s.address.city.startsWith(query)).map(s => s.address.city);
+        this.filteredSearchValues = this.salons.filter(s =>
+           s.name.toLowerCase().startsWith(query.toLowerCase())).map(s => s.name);
+      } else if (this.selectedFilterValue === this.filterOptions[1].value) {
+        this.filteredSearchValues = this.salons.filter(s =>
+           s.address.city.toLowerCase().startsWith(query.toLowerCase())).map(s => s.address.city);
+      }
+    } else {
+      if (this.selectedFilterValue === this.filterOptions[0].value) {
+        this.filteredSearchValues = this.salons.map(s => s.name);
+      } else if (this.selectedFilterValue === this.filterOptions[1].value) {
+        this.filteredSearchValues = this.salons.map(s => s.address.city);
+      }
     }
     this.filteredSearchValues = this.filteredSearchValues.filter(this.unique);
   }

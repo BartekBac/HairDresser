@@ -17,7 +17,8 @@ export class HomeComponent implements OnInit {
 
   tabMenuItems: MenuItem[] = [
     {label: 'Visits', icon: 'pi pi-list'},
-    {label: 'Calendar', icon: 'pi pi-calendar'}
+    {label: 'Calendar', icon: 'pi pi-calendar'},
+    {label: 'Opinions', icon: 'pi pi-comments'}
   ];
 
   activeMenuItem: MenuItem;

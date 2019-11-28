@@ -13,6 +13,7 @@ namespace Domain.Entities
             WorkerId = workerId;
             Description = description;
             Rate = rate;
+            Date = new DateTimeOffset(DateTime.Now).LocalDateTime;
         }
         public Opinion(Guid clientId, Guid workerId, string description, float rate, byte[] imageSource, string imageHeader) : base(Guid.NewGuid(), imageSource, imageHeader)
         {
@@ -20,6 +21,7 @@ namespace Domain.Entities
             WorkerId = workerId;
             Description = description;
             Rate = rate;
+            Date = new DateTimeOffset(DateTime.Now).LocalDateTime;
         }
         private Opinion()
         {
@@ -32,5 +34,6 @@ namespace Domain.Entities
         public Worker Worker { get; private set; }
         public string Description { get; private set; }
         public float Rate { get; private set; }
+        public DateTime Date { get; private set; }
     }
 }

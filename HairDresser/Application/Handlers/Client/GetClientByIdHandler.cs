@@ -30,6 +30,7 @@ namespace Application.Handlers.Client
 
             var client = _dbContext.Clients
                 .Include(c => c.User)
+                .Include(c => c.SendOpinions).ThenInclude(o => o.Worker)
                 .FirstOrDefault(c => c.Id == clientId);
 
             var image = _dbContext.Images.FirstOrDefault(i => i.Id == clientId);
@@ -51,6 +52,7 @@ namespace Application.Handlers.Client
                 var salon = _dbContext.Salons
                     .Include(s => s.Admin)
                     .Include(s => s.Workers).ThenInclude(w => w.User)
+                    .Include(s => s.Workers).ThenInclude(w => w.Opinions)
                     .Include(s => s.Workers).ThenInclude(w => w.Services).ThenInclude(ws => ws.Service)
                     .Include(s => s.Services)
                     .FirstOrDefault(s => s.Id == clientSalon.SalonId);
@@ -77,10 +79,24 @@ namespace Application.Handlers.Client
                     var workerSchedule = _dbContext.Schedules.FirstOrDefault(s => s.Id == worker.Id);
                     worker.Image = workerImage;
                     worker.Schedule = workerSchedule;
+
+                    foreach(var opinion in worker.Opinions)
+                    {
+                        var opinionImage = _dbContext.Images.FirstOrDefault(i => i.Id == opinion.Id);
+                        opinion.Image = opinionImage;
+                    }
                 }
 
                 result.FavoriteSalons = result.FavoriteSalons.AsEnumerable().Concat(new SalonDto[] { _mapper.Map<SalonDto>(salon) });
             };
+
+            foreach (var opinion in client.SendOpinions)
+            {
+                var opinionImage = _dbContext.Images.FirstOrDefault(i => i.Id == opinion.Id);
+                opinion.Image = opinionImage;
+            }
+
+            result.SendOpinions = _mapper.Map<OpinionDto[]>(client.SendOpinions);
 
             var visits = _dbContext.Visits
                 .Include(v => v.Services).ThenInclude(vs => vs.Service)
