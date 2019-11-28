@@ -9,11 +9,11 @@ using System.Text;
 
 namespace Application.Handlers.Opinion
 {
-    public class DeleteServiceHandler : RequestHandler<DeleteOpinionCommand>
+    public class DeleteOpinionHandler : RequestHandler<DeleteOpinionCommand>
     {
         private HairDresserDbContext _dbContext;
 
-        public DeleteServiceHandler(HairDresserDbContext dbContext)
+        public DeleteOpinionHandler(HairDresserDbContext dbContext)
         {
             _dbContext = dbContext;
         }

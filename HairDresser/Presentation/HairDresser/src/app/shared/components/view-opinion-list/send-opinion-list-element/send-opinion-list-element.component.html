@@ -1,39 +1,53 @@
 <div class="ui-g-12 ui-fluid my-list-element-wrapper" style="position: relative;">
-  <app-overlay-div
-    [buttonPaddingRight]="'15px'" [buttonPaddingTop]="'10px'"
-    [contentPaddingRight]="'55px'" [contentPaddingTop]="'10px'" [contentWidth]="'150px'"
-    [buttonIcon]="'pi pi-times'" [buttonClasses]="'ui-button-danger'"
-    (buttonClicked)="deleteOpinion()">
+  <app-overlay-div [buttonPaddingRight]="'15px'" [buttonPaddingTop]="'10px'" [contentPaddingRight]="'55px'"
+    [contentPaddingTop]="'10px'" [contentWidth]="'150px'" [buttonIcon]="'pi pi-times'"
+    [buttonClasses]="'ui-button-danger'" (buttonClicked)="deleteOpinion()">
     <button pButton class="ui-button-danger" label="Delete opinion"></button>
   </app-overlay-div>
-  <div class="ui-g-12 ui-md-12"
-    [ngClass]="{'ui-lg-6': opinion.imageSource !== null,'ui-lg-12': opinion.imageSource === null}">
+  <div class="ui-g-12 ui-md-12 ui-lg-6">
     <div>
       <div>
         <label class="my-head-label"> About: </label>
-        <label class="my-bold-label"> {{opinion.workerFirstName}} {{opinion.workerLastName}} </label>
+        <label class="my-bold-label my-zero-bottom-margin"> {{opinion.workerFirstName}} {{opinion.workerLastName}} </label>
       </div>
       <div>
         <label class="my-head-label"> Rate: </label>
         <p-rating [ngModel]="opinion.rate" readonly="true" stars="5" [cancel]="false"
           [iconOnStyle]="{'color': getRateColor()}"></p-rating>
-        <label>(</label><label [ngStyle]="{'color': getRateColor()}"> {{opinion.rate | rating}} </label><label>)</label>
+        <label class="my-zero-bottom-margin">(</label><label class="my-zero-bottom-margin"
+          [ngStyle]="{'color': getRateColor()}"> {{opinion.rate | rating}} </label><label
+          class="my-zero-bottom-margin">)</label>
       </div>
       <div>
         <label class="my-head-label"> On: </label>
-        <label> {{opinion.date | date: 'd MMMM y H:mm'}} </label>
+        <label class="my-zero-bottom-margin"> {{opinion.date | date: 'd MMMM y H:mm'}} </label>
       </div>
-      <div>
-        <label class="my-head-label"> Wrote: </label>
-        <label>{{opinion.description}}</label>
+      <div *ngIf="opinion.imageSource">
+        <ng-container *ngTemplateOutlet="descriptionContent"></ng-container>
       </div>
     </div>
   </div>
   <div *ngIf="opinion.imageSource" class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
     <img [src]="opinion.imageSource" class="my-img" (click)="opImage.toggle($event)">
   </div>
+  <div *ngIf="!opinion.imageSource" class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+    <ng-container *ngTemplateOutlet="descriptionContent"></ng-container>
+  </div>
 </div>
 
 <p-overlayPanel #opImage [appendTo]="'body'" showCloseIcon="true">
   <img [src]="opinion.imageSource" />
 </p-overlayPanel>
+
+<ng-template #descriptionContent>
+  <label class="my-italic-label">{{opinion.description}}</label>
+  <div>
+    <div *ngIf="opinion.answer" class="my-answer-wrapper">
+      <p>
+        <label class="my-bold-label"> {{opinion.workerFirstName}} {{opinion.workerLastName}} </label>
+        answered:
+      </p>
+      <p> {{opinion.answer}} </p>
+    </div>
+  </div>
+</ng-template>

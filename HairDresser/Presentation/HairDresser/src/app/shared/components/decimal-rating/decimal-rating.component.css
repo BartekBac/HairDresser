@@ -18,10 +18,12 @@
   line-height: 20px;
   vertical-align: super;
   margin-left: 5px;
+  margin-bottom: 0px;
 }
 
 .my-rate-header{
   font-weight: bold;
   line-height: 20px;
   vertical-align: super;
+  margin-bottom: 0px;
 }

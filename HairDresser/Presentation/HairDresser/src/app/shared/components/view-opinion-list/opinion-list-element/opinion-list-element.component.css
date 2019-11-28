@@ -10,12 +10,16 @@
   font-weight: bold;
 }
 
-.my-italic-label{
+.my-italic-header{
   font-style: italic;
   margin-right: 8px;
   width: 50px;
   text-align: right;
   float: left;
+}
+.my-italic-label{
+  font-style: italic;
+  margin-left: 3px;
 }
 
 .my-rate-label{
@@ -48,4 +52,43 @@
 .my-tooltip-label{
   height: 25px;
   line-height: 25px;
+}
+
+.my-answer-wrapper{
+  float: left;
+  width: 80%;
+  min-height: 32px;
+  border-radius: 10px;
+  background-color: #525252;
+}
+
+.my-answer-read-wrapper{
+  padding: 5px;
+  padding-left: 8px;
+}
+
+.my-answer-label{
+  line-height: 34px;
+}
+
+.my-centered-warpper{
+  text-align: center;
+}
+
+.my-clickable-wrapper{
+  width: 100%;
+  height: 100%;
+}
+
+.my-icon-button{
+  border-right: 1px solid none;
+}
+
+:host ::ng-deep .ui-inplace .ui-inplace-display{
+  display: block;
+  /*text-align: center;*/
+}
+
+:host ::ng-deep .ui-button .ui-widget .ui-state-default .ui-corner-all .ui-button-icon-only .ng-star-inserted{
+  line-height: 0px;
 }

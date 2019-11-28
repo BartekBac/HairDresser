@@ -10,6 +10,7 @@ export class Salon {
   address: Address;
   additionalInfo: string;
   type: number;
+  rating: number;
   schedule: Schedule;
   admin: User;
   imageSource: string;

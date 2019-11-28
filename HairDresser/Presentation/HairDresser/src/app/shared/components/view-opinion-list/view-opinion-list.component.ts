@@ -12,6 +12,7 @@ export class ViewOpinionListComponent implements OnInit {
 
   @Input() opinions: Opinion[] = [];
   @Input() sendOpinionsMode = false;
+  @Input() recivedOpinionsMode = false;
   @Output() deletedOpinion = new EventEmitter<Opinion>();
   displayingOpinions: Opinion[];
   sortKey: string;

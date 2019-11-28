@@ -22,7 +22,7 @@
             <div class="ui-g-12">
               <app-send-opinion-list-element *ngIf="sendOpinionsMode" [opinion]="opinion"
                 (deletedOpinion)="onDeleteOpinion($event)"></app-send-opinion-list-element>
-              <app-opinion-list-element *ngIf="!sendOpinionsMode" [opinion]="opinion">
+              <app-opinion-list-element *ngIf="!sendOpinionsMode" [answerEditMode]="recivedOpinionsMode" [opinion]="opinion">
               </app-opinion-list-element>
             </div>
           </div>
