@@ -10,13 +10,17 @@
   font-weight: bold;
 }
 
-.my-italic-header{
+.my-description{
+  margin-top: 5px;
   font-style: italic;
-  margin-right: 8px;
-  width: 50px;
-  text-align: right;
-  float: left;
+  margin-left: 5%;
+  font-size: 16px;
 }
+
+.my-zero-bottom-margin{
+  margin-bottom: 0px;
+}
+
 .my-italic-label{
   font-style: italic;
   margin-left: 3px;
@@ -56,10 +60,11 @@
 
 .my-answer-wrapper{
   float: left;
-  width: 80%;
+  width: 90%;
   min-height: 32px;
   border-radius: 10px;
   background-color: #525252;
+  margin-left: 5%;
 }
 
 .my-answer-read-wrapper{
@@ -84,11 +89,18 @@
   border-right: 1px solid none;
 }
 
-:host ::ng-deep .ui-inplace .ui-inplace-display{
-  display: block;
-  /*text-align: center;*/
+:host ::ng-deep .ui-rating{
+  float: left;
+  margin-right: 8px;
+  margin-bottom: 0px;
+  height: 10px;
 }
 
-:host ::ng-deep .ui-button .ui-widget .ui-state-default .ui-corner-all .ui-button-icon-only .ng-star-inserted{
-  line-height: 0px;
+:host ::ng-deep .ui-inplace .ui-inplace-display{
+  display: block;
+  text-align: center;
+}
+
+.my-inplace-display{
+  width: 100%;
 }

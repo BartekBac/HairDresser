@@ -32,7 +32,7 @@ namespace Application.Handlers.Opinion
             worker.Salon = workerSalon;
             if (worker == null)
             {
-                throw new ApplicationException("Could not find worker with id=" + opinion.WorkerId + " not found.");
+                throw new ApplicationException("Could not find worker with id=" + opinion.WorkerId);
             }
             worker.RevertRating(opinion.Rate);
             var image = _dbContext.Images.FirstOrDefault(i => i.Id == opinion.Id);

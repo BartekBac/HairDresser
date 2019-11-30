@@ -31,6 +31,7 @@ namespace Application.Handlers.Salon
                 .Include(s => s.Services)
                 .Include(s => s.Workers).ThenInclude(w => w.User)
                 .Include(s => s.Workers).ThenInclude(w => w.Services)
+                .Include(s => s.Workers).ThenInclude(w => w.Opinions).ThenInclude(o => o.Client).ThenInclude(c => c.User)
                 .FirstOrDefault(s => s.Id == salonId);
             var image = _dbContext.Images.FirstOrDefault(i => i.Id == salonId);
             var schedule = _dbContext.Schedules.FirstOrDefault(i => i.Id == salonId);
@@ -49,9 +50,23 @@ namespace Application.Handlers.Salon
                 throw new ApplicationException("Could not find schedule for salon with id=" + salonId);
             }
 
+            foreach (var worker in salon.Workers)
+            {
+                var workerImage = _dbContext.Images.FirstOrDefault(i => i.Id == worker.Id);
+                var workerSchedule = _dbContext.Schedules.FirstOrDefault(s => s.Id == worker.Id);
+                worker.Image = workerImage;
+                worker.Schedule = workerSchedule;
+
+                foreach (var opinion in worker.Opinions)
+                {
+                    var opinionImage = _dbContext.Images.FirstOrDefault(i => i.Id == opinion.Id);
+                    opinion.Image = opinionImage;
+                }
+            }
+
             var result = _mapper.Map<SalonDto>(salon);
 
-            result.Workers = salon.Workers.Join(
+            /*result.Workers = salon.Workers.Join(
                 _dbContext.Images.AsEnumerable(),
                 worker => worker.Id,
                 image => image.Id,
@@ -83,7 +98,7 @@ namespace Application.Handlers.Salon
                         UserPhoneNumber = worker.UserPhoneNumber,
                         UserName = worker.UserName,
                         ImageSource = worker.ImageSource
-                    });
+                    });*/
             return result;
         }
     }

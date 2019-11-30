@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Application.Handlers.Services
+namespace Application.Handlers.Workers
 {
     public class DeleteWorkerHandler : RequestHandler<DeleteWorkerCommand>
     {
@@ -23,11 +23,43 @@ namespace Application.Handlers.Services
 
             var worker = _dbContext.Workers
                 .Include(w => w.User)
+                /*.Include(w => w.Salon).ThenInclude(s => s.Workers)*/
                 .Include(w => w.Services)
+                .Include(w => w.Visits)
+                .Include(w => w.Opinions)
                 .FirstOrDefault(s => s.Id == workerId);
             if (worker == null)
             {
                 throw new ApplicationException("Could not find worker with id=" + workerId);
+            }
+
+            var activeVisits = worker.Visits.Where(v => (v.Status != Domain.Enums.VisitStatus.Rejected) && v.Term > DateTime.Now);
+            if(activeVisits.Any())
+            {
+                throw new ApplicationException("Before delete worker, he has to reject all his pending/accpeted/change-requested upcoming visits");
+            }
+
+            //var workerSalon = _dbContext.Salons.FirstOrDefault(s => s.Id == worker.SalonId);
+
+            if(worker.Opinions.Any())
+            {
+                var workerSalon = _dbContext.Salons.Include(s => s.Workers).FirstOrDefault(s => s.Id == worker.SalonId);
+                worker.Salon = workerSalon;
+                foreach (var opinion in worker.Opinions)
+                {
+                    worker.RevertRating(opinion.Rate);
+                    var opinionImage = _dbContext.Images.FirstOrDefault(i => i.Id == opinion.Id);
+                    if (opinionImage != null)
+                    {
+                        _dbContext.Images.Remove(opinionImage);
+                    }
+                    _dbContext.Opinions.Remove(opinion);
+                }
+            }
+
+            if(worker.Visits.Any())
+            {
+                _dbContext.Visits.RemoveRange(worker.Visits);
             }
 
             var image = _dbContext.Images.FirstOrDefault(i => i.Id == workerId);

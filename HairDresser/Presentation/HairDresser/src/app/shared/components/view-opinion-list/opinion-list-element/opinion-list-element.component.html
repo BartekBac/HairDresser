@@ -2,78 +2,26 @@
   <div class="ui-g-12 ui-md-12 ui-lg-6">
     <div>
       <div>
-        <label class="my-bold-label" [ngbTooltip]="clientTooltip" placement="right-top" closeDelay="2500"
+        <label class="my-bold-label my-zero-bottom-margin" [ngbTooltip]="clientTooltip" placement="right-top" closeDelay="2500"
           openDelay="500"> {{opinion.clientFirstName}} {{opinion.clientLastName}} </label>
       </div>
       <div>
-        <label class="my-italic-header"> rate: </label>
         <p-rating class="my-rate-label" [ngModel]="opinion.rate" readonly="true" stars="5" [cancel]="false"
           [iconOnStyle]="{'color': getRateColor()}"></p-rating>
-        <label>(</label><label [ngStyle]="{'color': getRateColor()}"> {{opinion.rate | rating}} </label><label>)</label>
+        <label class="my-zero-bottom-margin">(</label><label class="my-zero-bottom-margin" [ngStyle]="{'color': getRateColor()}"> {{opinion.rate | rating}} </label><label class="my-zero-bottom-margin">)</label>
       </div>
       <div>
-        <label class="my-italic-header"> on: </label>
-        <label> {{opinion.date | date: 'd MMMM y H:mm'}} </label>
+        <label class="my-zero-bottom-margin"> {{opinion.date | date: 'd MMMM y H:mm'}} </label>
       </div>
       <div *ngIf="opinion.imageSource">
-        <label class="my-italic-header"> wrote: </label>
-        <label> {{opinion.description}} </label>
-        <div *ngIf="!answerEditMode && opinion.answer" class="my-answer-wrapper my-answer-read-wrapper">
-          <p> <label class="my-bold-label"> {{opinion.workerFirstName}} {{opinion.workerLastName}} </label> answered:
-          </p>
-          <p> {{opinion.answer}} </p>
-        </div>
-        <div>
-          <p *ngIf="answerEditMode" class="my-italic-header my-answer-label"> answer: </p>
-        </div>
-        <div *ngIf="answerEditMode" class="my-answer-wrapper">
-          <p-inplace #ipAnswer [active]="openedAnswerEdit" class="my-clickable-wrapper"
-            [ngStyle]="{'text-align': opinion.answer !== null ? 'left' : 'center'}">
-            <span pInplaceDisplay>
-              {{opinion.answer !== null ? opinion.answer : '(click to add answer)'}}
-            </span>
-            <span pInplaceContent>
-              <div class="ui-inputgroup my-input-group">
-                <input type="text" [(ngModel)]="opinion.answer" pInputText>
-                <button pButton class="my-icon-button" (click)="updateAnswer()" type="button"
-                  icon="pi pi-save"></button>
-                <button pButton class="ui-button-danger" (click)="closeAnswerEdit()" type="button"
-                  icon="pi pi-times"></button>
-              </div>
-            </span>
-          </p-inplace>
-        </div>
+        <ng-container *ngTemplateOutlet="descriptionContent"></ng-container>
       </div>
     </div>
   </div>
   <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
     <img *ngIf="opinion.imageSource" [src]="opinion.imageSource" class="my-img" (click)="opImage.toggle($event)">
     <div *ngIf="!opinion.imageSource">
-      <label class="my-italic-header"> wrote: </label>
-      <label> {{opinion.description}} </label>
-      <div *ngIf="!answerEditMode && opinion.answer" class="my-answer-wrapper my-answer-read-wrapper">
-        <p> <label class="my-bold-label"> {{opinion.workerFirstName}} {{opinion.workerLastName}} </label> answered: </p>
-        <p> {{opinion.answer}} </p>
-      </div>
-      <div>
-        <p *ngIf="answerEditMode" class="my-italic-header my-answer-label"> answer: </p>
-      </div>
-      <div *ngIf="answerEditMode" class="my-answer-wrapper">
-        <p-inplace #ipAnswer [active]="openedAnswerEdit" class="my-clickable-wrapper"
-          [ngStyle]="{'text-align': opinion.answer !== null ? 'left' : 'center'}">
-          <span pInplaceDisplay>
-            {{opinion.answer !== null ? opinion.answer : '(click to add answer)'}}
-          </span>
-          <span pInplaceContent>
-            <div class="ui-inputgroup my-input-group">
-              <input type="text" [(ngModel)]="opinion.answer" pInputText>
-              <button pButton class="my-icon-button" (click)="updateAnswer()" type="button" icon="pi pi-save"></button>
-              <button pButton class="ui-button-danger" (click)="closeAnswerEdit()" type="button"
-                icon="pi pi-times"></button>
-            </div>
-          </span>
-        </p-inplace>
-      </div>
+      <ng-container *ngTemplateOutlet="descriptionContent"></ng-container>
     </div>
   </div>
 </div>
@@ -87,4 +35,27 @@
   <button type="button" pButton class="ui-button-secondary my-copy-button" icon="pi pi-copy"
     (click)="copyToClipboard(opinion.clientEmail)"></button>
   <p>{{opinion.clientPhoneNumber}}</p>
+</ng-template>
+
+<ng-template #descriptionContent>
+  <label class="my-description"> {{opinion.description}} </label>
+  <div *ngIf="!answerEditMode && opinion.answer" class="my-answer-wrapper my-answer-read-wrapper">
+    <p> <label class="my-bold-label"> {{opinion.workerFirstName}} {{opinion.workerLastName}} </label> answered: </p>
+    <p> {{opinion.answer}} </p>
+  </div>
+  <div *ngIf="answerEditMode" class="my-answer-wrapper">
+    <p-inplace #ipAnswer [active]="openedAnswerEdit" class="my-clickable-wrapper">
+      <div pInplaceDisplay class="my-inplace-display" [ngStyle]="{'text-align': opinion.answer !== null ? 'left' : 'center'}">
+        {{opinion.answer !== null ? opinion.answer : '(click to add answer)'}}
+      </div>
+      <div pInplaceContent>
+        <div class="ui-inputgroup my-input-group">
+          <input type="text" [(ngModel)]="opinion.answer" pInputText>
+          <button pButton class="my-icon-button" (click)="updateAnswer()" type="button" icon="pi pi-save"></button>
+          <button pButton class="ui-button-danger" (click)="closeAnswerEdit()" type="button"
+            icon="pi pi-times"></button>
+        </div>
+      </div>
+    </p-inplace>
+  </div>
 </ng-template>

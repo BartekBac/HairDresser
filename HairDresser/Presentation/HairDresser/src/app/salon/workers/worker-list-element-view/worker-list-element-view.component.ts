@@ -22,6 +22,7 @@ export class WorkerListElementViewComponent implements OnInit {
   displayEditImage = false;
   displayEdit = false;
   displayAssignServices = false;
+  displayOpinionsDialog = false;
 
   constructor(
     private workerService: WorkerService,
@@ -77,6 +78,10 @@ export class WorkerListElementViewComponent implements OnInit {
           );
         }
     });
-}
+  }
+
+  showOpinionsDialog() {
+    this.displayOpinionsDialog = true;
+  }
 
 }
