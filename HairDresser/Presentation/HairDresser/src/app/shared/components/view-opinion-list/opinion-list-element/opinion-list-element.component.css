@@ -10,12 +10,20 @@
   font-weight: bold;
 }
 
+.my-description{
+  margin-top: 5px;
+  font-style: italic;
+  margin-left: 5%;
+  font-size: 16px;
+}
+
+.my-zero-bottom-margin{
+  margin-bottom: 0px;
+}
+
 .my-italic-label{
   font-style: italic;
-  margin-right: 8px;
-  width: 50px;
-  text-align: right;
-  float: left;
+  margin-left: 3px;
 }
 
 .my-rate-label{
@@ -48,4 +56,51 @@
 .my-tooltip-label{
   height: 25px;
   line-height: 25px;
+}
+
+.my-answer-wrapper{
+  float: left;
+  width: 90%;
+  min-height: 32px;
+  border-radius: 10px;
+  background-color: #525252;
+  margin-left: 5%;
+}
+
+.my-answer-read-wrapper{
+  padding: 5px;
+  padding-left: 8px;
+}
+
+.my-answer-label{
+  line-height: 34px;
+}
+
+.my-centered-warpper{
+  text-align: center;
+}
+
+.my-clickable-wrapper{
+  width: 100%;
+  height: 100%;
+}
+
+.my-icon-button{
+  border-right: 1px solid none;
+}
+
+:host ::ng-deep .ui-rating{
+  float: left;
+  margin-right: 8px;
+  margin-bottom: 0px;
+  height: 10px;
+}
+
+:host ::ng-deep .ui-inplace .ui-inplace-display{
+  display: block;
+  text-align: center;
+}
+
+.my-inplace-display{
+  width: 100%;
 }

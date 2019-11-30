@@ -4,7 +4,7 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { SalonService } from './services/salon.service';
 import { SalonResolver } from './resolvers/salon.resolver';
 import { PanelModule, InputTextModule, ButtonModule, InputMaskModule, MessageModule,
-         DialogModule, CheckboxModule, PasswordModule, SelectButtonModule, FileUploadModule, ProgressSpinnerModule, ScrollPanelModule, DropdownModule, CalendarModule, RatingModule, OverlayPanelModule, AutoCompleteModule } from 'primeng/primeng';
+         DialogModule, CheckboxModule, PasswordModule, SelectButtonModule, FileUploadModule, ProgressSpinnerModule, ScrollPanelModule, DropdownModule, CalendarModule, RatingModule, OverlayPanelModule, AutoCompleteModule, InplaceModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbTimepickerModule, NgbTooltipModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
@@ -89,7 +89,8 @@ import { DecimalRatingComponent } from './components/decimal-rating/decimal-rati
     VirtualScrollerModule,
     OverlayPanelModule,
     AutoCompleteModule,
-    NgbRatingModule
+    NgbRatingModule,
+    InplaceModule
   ],
   exports: [
     CommonModule,

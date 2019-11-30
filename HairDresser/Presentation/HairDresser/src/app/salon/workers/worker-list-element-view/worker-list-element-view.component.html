@@ -1,5 +1,4 @@
-<p-card header="{{worker.firstName}} {{worker.lastName}}" subheader="Rating: {{worker.rating}}"
-  styleClass="ui-card-shadow">
+<p-card styleClass="ui-card-shadow">
   <p-header>
     <img *ngIf="worker.imageSource" class="my-img my-clickable" [src]="worker.imageSource" (click)="showEditImage()">
     <div *ngIf="worker.imageSource == null" class="my-image-deputy-div my-clickable" (click)="showEditImage()">
@@ -7,13 +6,25 @@
       <p>Photo</p>
     </div>
   </p-header>
-  <p-footer>
-    <div class="my-buttons-wrapper">
-      <button pButton (click)="showEdit()" type="button" class="ui-button-secondary my-footer-button" icon="pi pi-cog"></button>
-      <button pButton (click)="showAssignServices()" type="button" class="ui-button-secondary my-footer-button" icon="pi pi-list"></button>
-      <button pButton (click)="showDeleteDialog()" type="button" class="ui-button-danger my-footer-button" icon="pi pi-times"></button>
-    </div>
-  </p-footer>
+  <div>
+      <p class="my-wroker-name" >{{worker.firstName}} {{worker.lastName}}</p>
+      <div class="ui-g-12 ui-md-12 ui-lg-12">
+          <div class="my-rate" [ngStyle]="{'width': worker.ratingCount > 0 ? 'auto' : '100%' }">
+          <app-decimal-rating [rate]="worker.rating"></app-decimal-rating>
+          </div>
+          <div  *ngIf="worker.ratingCount > 0">
+            <label class="my-rate-count-header">(</label>
+            <label class="my-apostrophe" (click)="showOpinionsDialog()">{{worker.ratingCount}} opinion</label>
+            <label *ngIf="worker.ratingCount > 1" class="my-apostrophe" (click)="showOpinionsDialog()">s</label>
+            <label class="my-rate-count-label">)</label>
+          </div>
+        </div>
+        <div class="my-buttons-wrapper">
+            <button pButton (click)="showEdit()" type="button" class="ui-button-secondary my-footer-button" icon="pi pi-cog"></button>
+            <button pButton (click)="showAssignServices()" type="button" class="ui-button-secondary my-footer-button" icon="pi pi-list"></button>
+            <button pButton (click)="showDeleteDialog()" type="button" class="ui-button-danger my-footer-button" icon="pi pi-times"></button>
+          </div>
+  </div>
 </p-card>
 
 <p-dialog header="Edit worker image" [(visible)]="displayEditImage" [style]="{width: '450px'}">
@@ -33,4 +44,8 @@
 
 <p-dialog header="Assign worker services" [(visible)]="displayAssignServices" [style]="{width: '600px'}">
   <app-assign-services [salonServices]="salonServices" [workerServices]="worker.services" [workerId]="worker.id"></app-assign-services>
+</p-dialog>
+
+<p-dialog *ngIf="worker" header="Opinions about {{worker.firstName}} {{worker.lastName}}" [(visible)]="displayOpinionsDialog" [style]="{width: '80%'}">
+    <app-view-opinion-list *ngIf="displayOpinionsDialog" [opinions]="worker.opinions" [sendOpinionsMode]="false"></app-view-opinion-list>
 </p-dialog>

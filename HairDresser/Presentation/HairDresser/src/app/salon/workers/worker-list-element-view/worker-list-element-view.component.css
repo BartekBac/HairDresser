@@ -1,17 +1,21 @@
 :host ::ng-deep .ui-card {
-  background-color: dimgrey;
+  background-color: #424242;
   border-radius: 40px;
-  height: 280px;
+  /*height: 280px;*/
 }
 
 .my-img{
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
   height: 120px;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
 }
 
 .my-image-deputy-div{
-  padding-top: 30%;
+  padding-top: 25%;
+  height: 120px;
   padding-bottom: 10%;
   text-align: center;
 }
@@ -30,4 +34,32 @@
 
 .my-footer-button{
   margin-right: 3px;
+}
+
+.my-wroker-name{
+  font-weight: bold;
+  font-size: large;
+}
+
+.my-rate-count-header{
+  margin-left: 5px;
+  line-height: 24px;
+  vertical-align: super;
+}
+
+.my-rate-count-label{
+  line-height: 24px;
+  vertical-align: super;
+}
+
+.my-rate{
+  float: left;
+  /*height: 32px;*/
+}
+.my-apostrophe{
+  color: gold;
+  text-decoration-line: underline;
+  line-height: 24px;
+  vertical-align: super;
+  cursor: pointer;
 }

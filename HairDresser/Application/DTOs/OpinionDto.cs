@@ -16,6 +16,7 @@ namespace Application.DTOs
         public string WorkerFirstName { get; set; }
         public string WorkerLastName { get; set; }
         public string Description { get; set; }
+        public string Answer { get; set; }
         public float Rate { get; set; }
         public DateTime Date { get; set; }
         public string ImageSource { get; set; }

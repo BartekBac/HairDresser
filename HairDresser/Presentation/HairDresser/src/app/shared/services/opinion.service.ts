@@ -18,6 +18,9 @@ export class OpinionService {
     return this.http.post<Opinion>(this.baseUrl, opinion);
   }
 
+  updateAnswer(opinionId: string, answer: string) {
+    return this.http.put(this.baseUrl + opinionId + '/update-answer', {id: opinionId, answer: answer});
+  }
 
   deleteOpinion(opinionId: string) {
     return this.http.delete(this.baseUrl + opinionId);

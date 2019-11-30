@@ -9,6 +9,7 @@ export class Opinion {
    workerFirstName: string;
    workerLastName: string;
    description: string;
+   answer: string;
    rate: number;
    date: Date;
    imageSource: string;

@@ -9,11 +9,11 @@ using System.Text;
 
 namespace Application.Handlers.Opinion
 {
-    public class DeleteServiceHandler : RequestHandler<DeleteOpinionCommand>
+    public class DeleteOpinionHandler : RequestHandler<DeleteOpinionCommand>
     {
         private HairDresserDbContext _dbContext;
 
-        public DeleteServiceHandler(HairDresserDbContext dbContext)
+        public DeleteOpinionHandler(HairDresserDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -32,7 +32,7 @@ namespace Application.Handlers.Opinion
             worker.Salon = workerSalon;
             if (worker == null)
             {
-                throw new ApplicationException("Could not find worker with id=" + opinion.WorkerId + " not found.");
+                throw new ApplicationException("Could not find worker with id=" + opinion.WorkerId);
             }
             worker.RevertRating(opinion.Rate);
             var image = _dbContext.Images.FirstOrDefault(i => i.Id == opinion.Id);

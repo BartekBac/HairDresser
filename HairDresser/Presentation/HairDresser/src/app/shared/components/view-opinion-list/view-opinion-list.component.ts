@@ -12,6 +12,7 @@ export class ViewOpinionListComponent implements OnInit {
 
   @Input() opinions: Opinion[] = [];
   @Input() sendOpinionsMode = false;
+  @Input() recivedOpinionsMode = false;
   @Output() deletedOpinion = new EventEmitter<Opinion>();
   displayingOpinions: Opinion[];
   sortKey: string;
@@ -92,6 +93,7 @@ export class ViewOpinionListComponent implements OnInit {
   }
 
   onDeleteOpinion(opinion: Opinion) {
+    this.opinions = this.opinions.filter(o => o.id !== opinion.id);
     this.deletedOpinion.emit(opinion);
   }
 

@@ -38,6 +38,22 @@ namespace WebAPI.Controllers
             }
         }
 
+        [Authorize(Roles = RoleString.Worker)]
+        [HttpPut("{id}/update-answer")]
+        public async Task<IActionResult> UpdateOpinionAnswer(string id, [FromBody] UpdateOpinionAnswerCommand command)
+        {
+            try
+            {
+                command.Id = id;
+                var result = await _mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [Authorize(Roles = RoleString.Client)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOpinion(string id)
