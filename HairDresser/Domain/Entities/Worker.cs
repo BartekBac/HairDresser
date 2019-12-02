@@ -100,6 +100,19 @@ namespace Domain.Entities
             }
         }
 
+        public void RemoveAssignedService(Service service)
+        {
+            if (service != null)
+            {
+                var alreadyAssignedService = _services.FirstOrDefault(s => s.ServiceId == service.Id);
+
+                if (alreadyAssignedService != null)
+                {
+                    _services.Remove(alreadyAssignedService);
+                }
+            }
+        }
+
         public void ClearAssignedServices()
         {
             _services.Clear();

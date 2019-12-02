@@ -42,10 +42,6 @@ namespace Domain.Entities
 
         public void SetAnswer(string answer)
         {
-            if (string.IsNullOrEmpty(answer))
-            {
-                throw new DomainException("Answer cannot be empty.");
-            }
             Answer = answer;
         }
     }
