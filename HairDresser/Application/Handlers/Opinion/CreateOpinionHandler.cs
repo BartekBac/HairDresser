@@ -43,6 +43,7 @@ namespace Application.Handlers.Opinion
                 throw new ApplicationException("Could not add opinion, visit with id=" + request.VisitId + " not found.");
             }
             visit.SetOpinionSent(true);
+            visit.UpdateInfo("Opinion fo this visit has been sent.");
 
             var resolvedImage = ImageService.ResolveToImage(request.ImageSource);
 

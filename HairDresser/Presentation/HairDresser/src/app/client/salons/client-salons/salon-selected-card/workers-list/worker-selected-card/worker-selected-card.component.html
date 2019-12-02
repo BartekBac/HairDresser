@@ -1,6 +1,9 @@
 <div *ngIf="worker" class="ui-fluid my-card-wrapper">
   <div class="ui-g-12 ui-md-12 ui-lg-12 my-img-container">
-    <img [src]="worker.imageSource" class="my-img">
+    <img *ngIf="worker.imageSource" [src]="worker.imageSource" class="my-img">
+    <div *ngIf="worker.imageSource === null" class="my-image-deputy-div p-grid p-align-center p-justify-center">
+      <i class="pi pi-user" style="font-size: 110px"></i>
+    </div>
     <app-overlay-div
       [buttonPaddingRight]="'15px'" [buttonPaddingTop]="'15px'"
       [contentPaddingRight]="'55px'" [contentPaddingTop]="'15px'" [contentWidth]="'80%'"

@@ -25,7 +25,7 @@ namespace Application.Handlers.Workers
                 .Include(w => w.User)
                 /*.Include(w => w.Salon).ThenInclude(s => s.Workers)*/
                 .Include(w => w.Services)
-                .Include(w => w.Visits)
+                .Include(w => w.Visits).ThenInclude(v => v.Services)
                 .Include(w => w.Opinions)
                 .FirstOrDefault(s => s.Id == workerId);
             if (worker == null)
@@ -59,7 +59,11 @@ namespace Application.Handlers.Workers
 
             if(worker.Visits.Any())
             {
-                _dbContext.Visits.RemoveRange(worker.Visits);
+                foreach(var visit in worker.Visits)
+                {
+                    _dbContext.VisitServices.RemoveRange(visit.Services);
+                    _dbContext.Visits.Remove(visit);
+                }
             }
 
             var image = _dbContext.Images.FirstOrDefault(i => i.Id == workerId);

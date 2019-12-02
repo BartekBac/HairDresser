@@ -78,7 +78,11 @@ export class HomeComponent implements OnInit {
   }
 
   private updateSalonModel() {
-    this.salon = Functions.copyObject(this.salonData);
+    this.salon.additionalInfo = this.salonData.additionalInfo;
+    this.salon.name = this.salonData.name;
+    this.salon.type = this.salonData.type;
+    this.salon.address = Functions.copyObject(this.salonData.address);
+    // this.salon = Functions.copyObject(this.salonData);
     this.salon.imageSource = this.uploadedImageSource;
     this.salon.admin = Functions.copyObject(this.userData);
     this.salon.schedule = Functions.copyObject(this.schedule);
@@ -144,6 +148,9 @@ export class HomeComponent implements OnInit {
 
   onAddedWorker(addedWorker: Worker) {
     this.salon.workers.push(addedWorker);
+    this.salonService.getSalon(this.userId).subscribe(
+      res => this.salon = res
+    );
   }
 
   showAddServiceDialog() {
@@ -152,10 +159,13 @@ export class HomeComponent implements OnInit {
 
   onAddedService(addedService: Service) {
     this.salon.services.push(addedService);
+    this.salonService.getSalon(this.userId).subscribe(
+      res => this.salon = res
+    );
   }
 
   onDeleteService(deletedService: Service) {
-    this.salon.services = this.salon.services.filter(s => s !== deletedService);
+    this.salon.services = this.salon.services.filter(s => s.id !== deletedService.id);
     this.salon.workers.forEach(
       w => {
         w.services = w.services.filter(s => s.id !== deletedService.id);
@@ -164,6 +174,9 @@ export class HomeComponent implements OnInit {
 
   onDeleteWorker(deletedWorker: Worker) {
     this.salon.workers = this.salon.workers.filter(s => s.id !== deletedWorker.id);
+    this.salonService.getSalon(this.userId).subscribe(
+      res => this.salon = res
+    );
   }
 
 }

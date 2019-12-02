@@ -60,6 +60,17 @@ namespace Domain.Entities
         {
             Info = info;
         }
+        public void UpdateInfo(string info)
+        {
+            if (string.IsNullOrEmpty(Info))
+            {
+                Info = info;
+            }
+            else
+            {
+                Info += " " + info;
+            }
+        }
         public void SetOpinionSent(bool opinionSent)
         {
             OpinionSent = opinionSent;

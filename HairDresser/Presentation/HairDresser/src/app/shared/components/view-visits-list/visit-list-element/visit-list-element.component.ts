@@ -147,6 +147,7 @@ export class VisitListElementComponent implements OnInit {
 
   onAddedOpinion(opinion: Opinion) {
     this.visit.opinionSent = true;
+    this.visit.info += ' Opinion fo this visit has been sent.';
     this.addedOpinion.emit(opinion);
   }
 
