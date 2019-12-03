@@ -176,8 +176,6 @@ C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\Domain.
 C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.csprojAssemblyReference.cache
 C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\staticwebassets\WebAPI.StaticWebAssets.Manifest.cache
 C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\staticwebassets\WebAPI.StaticWebAssets.xml
-C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.MvcApplicationPartsAssemblyInfo.cs
-C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.AssemblyInfoInputs.cache
 C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.AssemblyInfo.cs
 C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.RazorTargetAssemblyInfo.cache
@@ -185,3 +183,5 @@ C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.
 C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.dll
 C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.pdb
 C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\bin\Debug\netcoreapp3.0\Properties\launchSettings.json
+C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\rep\VII sem\v1\HairDresser\HairDresser\WebAPI\obj\Debug\netcoreapp3.0\WebAPI.MvcApplicationPartsAssemblyInfo.cache
