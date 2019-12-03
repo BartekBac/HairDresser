@@ -5,7 +5,7 @@ import { ClientRoutingModule } from './client-routing.module';
 import { HomeComponent } from './home/home.component';
 import { TabMenuModule, ButtonModule, PanelModule, AccordionModule, CardModule,
          OverlayPanelModule, DropdownModule, SelectButtonModule, AutoCompleteModule,
-         DialogModule, ListboxModule, ScrollPanelModule, CheckboxModule, RatingModule } from 'primeng/primeng';
+         DialogModule, ListboxModule, ScrollPanelModule, CheckboxModule, RatingModule, GMapModule } from 'primeng/primeng';
 import { ClientSalonsComponent } from './salons/client-salons/client-salons.component';
 import { ClientVisitsComponent } from './visits/client-visits/client-visits.component';
 import { ClientOpinionsComponent } from './opinions/client-opinions/client-opinions.component';
@@ -21,6 +21,8 @@ import { FormsModule } from '@angular/forms';
 import { MakeAppointmentComponent } from './salons/make-appointment/make-appointment.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { NgbTooltipModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { SalonListComponent } from './salons/add-salon/salon-list/salon-list.component';
+import { SalonMapComponent } from './salons/add-salon/salon-map/salon-map.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { NgbTooltipModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
     WorkerSelectedCardComponent,
     AddSalonComponent,
     SalonListElementComponent,
-    MakeAppointmentComponent
+    MakeAppointmentComponent,
+    SalonListComponent,
+    SalonMapComponent
   ],
   imports: [
     SharedModule,
@@ -58,7 +62,8 @@ import { NgbTooltipModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
     NgbTooltipModule,
     CheckboxModule,
     RatingModule,
-    NgbRatingModule
+    NgbRatingModule,
+    GMapModule
   ]
 })
 export class ClientModule { }
