@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Text;
 using Test.Pages;
 using Test.Helpers;
+using System.Threading;
 
-namespace Test.Tests.Client
+namespace Test.Client
 {
     [TestFixture]
     class CheckMakingAppointment
@@ -24,6 +25,7 @@ namespace Test.Tests.Client
             authPage.PasswordInput.SendKeys(Constants.ClientCredentials.Password);
             authPage.LoginButton.Click();
             _driver.WaitUntilNavBarLoad();
+            Thread.Sleep(2000);
         }
 
         [Test]
@@ -40,6 +42,8 @@ namespace Test.Tests.Client
             clientPage.MakeAppointmentButton.Click();
             _driver.WaitUntilMakeAppointmentDialogAppear();
             makeAppointmentDialog.FirstWorkerListElement.Click();
+            /*Console.WriteLine(makeAppointmentDialog.FirstWorkerListElement.Text);
+            Console.WriteLine(makeAppointmentDialog.FirstServiceListElement.Text);*/
             makeAppointmentDialog.FirstServiceListElement.Click();
             _driver.WaitUntilMakeAppointmentSummaryRegionAppear();
             makeAppointmentDialog.SelectDateButton.Click();

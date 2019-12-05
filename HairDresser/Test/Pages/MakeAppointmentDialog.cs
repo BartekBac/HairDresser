@@ -24,16 +24,16 @@ namespace Test.Pages
         {
             get
             {
-                var workerDivs = _driver.FindElements(By.ClassName("my-list-element-wrapper"));
-                return workerDivs[0].FindElement(By.TagName("label"));
+                var workerDivs = _driver.FindElements(By.CssSelector("#make-appointment-div #worker-list-accordion-tab .my-list-element-wrapper"));
+                return workerDivs[0];
             }
         }
         public IWebElement FirstServiceListElement
         {
             get
             {
-                var serviceDivs = _driver.FindElements(By.ClassName("my-list-element-wrapper"));
-                return serviceDivs[0].FindElement(By.TagName("label"));
+                var serviceDivs = _driver.FindElements(By.CssSelector("#make-appointment-div #service-list-accordion-tab .ui-listbox-list-wrapper > ul > li"));
+                return serviceDivs[0];
             }
         }
         public IWebElement SelectDateButton
