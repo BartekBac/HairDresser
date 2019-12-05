@@ -6695,11 +6695,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\rep\\VII sem\\v1\\HairDresser\\HairDresser\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "C:\\rep\\VII sem\\v2\\HairDresser\\HairDresser\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\rep\\VII sem\\v1\\HairDresser\\HairDresser\\WebAPI\\WebAPI.csproj",
+      "projectPath": "C:\\rep\\VII sem\\v2\\HairDresser\\HairDresser\\WebAPI\\WebAPI.csproj",
       "packagesPath": "C:\\Users\\Bartek\\.nuget\\packages\\",
-      "outputPath": "C:\\rep\\VII sem\\v1\\HairDresser\\HairDresser\\WebAPI\\obj\\",
+      "outputPath": "C:\\rep\\VII sem\\v2\\HairDresser\\HairDresser\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
@@ -6720,11 +6720,11 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
-            "C:\\rep\\VII sem\\v1\\HairDresser\\HairDresser\\Application\\Application.csproj": {
-              "projectPath": "C:\\rep\\VII sem\\v1\\HairDresser\\HairDresser\\Application\\Application.csproj"
+            "C:\\rep\\VII sem\\v2\\HairDresser\\HairDresser\\Application\\Application.csproj": {
+              "projectPath": "C:\\rep\\VII sem\\v2\\HairDresser\\HairDresser\\Application\\Application.csproj"
             },
-            "C:\\rep\\VII sem\\v1\\HairDresser\\HairDresser\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\rep\\VII sem\\v1\\HairDresser\\HairDresser\\Domain\\Domain.csproj"
+            "C:\\rep\\VII sem\\v2\\HairDresser\\HairDresser\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\rep\\VII sem\\v2\\HairDresser\\HairDresser\\Domain\\Domain.csproj"
             }
           }
         }
