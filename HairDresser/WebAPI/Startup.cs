@@ -95,8 +95,6 @@ namespace WebAPI
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
-
-            HairDresserRoles.SeedRoles(roleManager).Wait();
            
             app.UseHttpsRedirection();
             app.UseRouting();
@@ -105,6 +103,8 @@ namespace WebAPI
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            HairDresserRoles.SeedRoles(roleManager).Wait();
 
             app.UseEndpoints(endpoints =>
             {
