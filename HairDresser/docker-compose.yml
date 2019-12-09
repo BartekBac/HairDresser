@@ -9,6 +9,9 @@ services:
     ports:
       - 1433:1433
   api:
+    depends_on:
+    - db
+    restart: always
     image: 2bartek2/hair-dresser:api
     container_name: hd-api
     ports: 
