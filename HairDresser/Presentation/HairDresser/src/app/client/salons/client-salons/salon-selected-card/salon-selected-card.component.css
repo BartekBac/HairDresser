@@ -25,6 +25,13 @@
   height: 300px;
 }
 
+.my-image-deputy-div{
+  height: 147px;
+  text-align: center;
+  margin: 1.5px;
+  border: 1px solid #dedede;
+}
+
 .my-header-wrapper{
   position: relative;
 }

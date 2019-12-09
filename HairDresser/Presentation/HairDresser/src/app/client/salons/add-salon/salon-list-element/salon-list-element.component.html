@@ -1,7 +1,10 @@
 <div class="ui-g">
   <div class="ui-g-12 ui-fluid p-grid p-align-center my-overlay-container">
     <div class="ui-g-6">
-      <img [src]="salon.imageSource" class='my-list-element-img'>
+      <img *ngIf="salon.imageSource" [src]="salon.imageSource" class='my-list-element-img'>
+      <div *ngIf="salon.imageSource === null" class="my-image-deputy-div p-grid p-align-center p-justify-center">
+        <i class="pi pi-camera" style="font-size: 110px"></i>
+      </div>
       <div class="my-rating-wrapper p-grid p-align-center"
       (mouseenter)="displayRatingFooter=true" (mouseleave)="displayRatingFooter=false">
        <app-decimal-rating [rate]="salon.rating" [showFooter]="displayRatingFooter"></app-decimal-rating>

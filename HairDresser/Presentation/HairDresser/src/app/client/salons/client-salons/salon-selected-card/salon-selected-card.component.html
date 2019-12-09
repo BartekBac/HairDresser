@@ -2,7 +2,10 @@
   class="my-card-background" styleClass="ui-card-shadow">
   <p-header>
     <div class="my-header-wrapper">
-      <img [src]="salon.imageSource" [ngClass]="{'my-grid-element-img': withWorkersMode === false, 'my-grid-element-img-300': withWorkersMode === true}">
+      <img *ngIf="salon.imageSource" [src]="salon.imageSource" [ngClass]="{'my-grid-element-img': withWorkersMode === false, 'my-grid-element-img-300': withWorkersMode === true}">
+      <div *ngIf="salon.imageSource === null" class="my-image-deputy-div p-grid p-align-center p-justify-center">
+        <i class="pi pi-camera" style="font-size: 110px"></i>
+      </div>
       <div class="my-rating-wrapper p-grid p-align-center" [ngStyle]="{'left': withWorkersMode === false ? '55px' : '15px'}"
        (mouseenter)="displayRatingFooter=true" (mouseleave)="displayRatingFooter=false">
         <app-decimal-rating [rate]="salon.rating" [showFooter]="displayRatingFooter"></app-decimal-rating>
