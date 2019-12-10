@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    image: 2bartek2/hair-dresser:database
+    container_name: hd-database
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=HD.Database
+    ports:
+      - 1433:1433
+  api:
+    depends_on:
+    - db
+    restart: always
+    image: 2bartek2/hair-dresser:api
+    container_name: hd-api
+    ports: 
+      - 44365:80
+  client:
+    image: 2bartek2/hair-dresser:client
+    container_name: hd-client
+    ports: 
+      - 4200:80
