@@ -2,7 +2,7 @@
 using Application.DTOs;
 using Application.Services;
 using AutoMapper;
-using Domain.DbContexts;
+using Infrastructure.DbContexts;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;

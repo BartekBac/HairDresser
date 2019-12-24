@@ -1,6 +1,6 @@
 ﻿using Application.Commands;
 using AutoMapper;
-using Domain.DbContexts;
+using Infrastructure.DbContexts;
 using MediatR;
 using System;
 using System.Collections.Generic;
