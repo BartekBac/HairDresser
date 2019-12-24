@@ -1,5 +1,5 @@
 ﻿using Application.Commands.Visit;
-using Domain.DbContexts;
+using Infrastructure.DbContexts;
 using MediatR;
 using System;
 using System.Collections.Generic;

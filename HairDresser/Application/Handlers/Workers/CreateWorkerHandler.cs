@@ -1,6 +1,6 @@
 ﻿using Application.Commands.Workers;
 using Application.Services;
-using Domain.DbContexts;
+using Infrastructure.DbContexts;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using System;

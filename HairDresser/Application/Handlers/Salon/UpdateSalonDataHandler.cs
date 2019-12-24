@@ -1,6 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Queries.Salon;
-using Domain.DbContexts;
+using Infrastructure.DbContexts;
 using MediatR;
 using System;
 using System.Linq;

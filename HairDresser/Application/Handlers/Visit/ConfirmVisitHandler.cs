@@ -1,7 +1,7 @@
 ﻿using Application.Commands.Visit;
 using Application.DTOs;
 using AutoMapper;
-using Domain.DbContexts;
+using Infrastructure.DbContexts;
 using Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
