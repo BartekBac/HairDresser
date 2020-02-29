@@ -36,6 +36,7 @@ import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { RatingPipe } from './pipes/rating.pipe';
 import { SendOpinionListElementComponent } from './components/view-opinion-list/send-opinion-list-element/send-opinion-list-element.component';
 import { DecimalRatingComponent } from './components/decimal-rating/decimal-rating.component';
+import { ViewMapComponent } from './components/view-map/view-map.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { DecimalRatingComponent } from './components/decimal-rating/decimal-rati
     OpinionListElementComponent,
     RatingPipe,
     SendOpinionListElementComponent,
-    DecimalRatingComponent
+    DecimalRatingComponent,
+    ViewMapComponent
   ],
   imports: [
     CommonModule,
@@ -110,7 +112,8 @@ import { DecimalRatingComponent } from './components/decimal-rating/decimal-rati
     ViewVisitsListComponent,
     RatingPipe,
     ViewOpinionListComponent,
-    DecimalRatingComponent
+    DecimalRatingComponent,
+    ViewMapComponent
   ],
   providers: [
     VisitStatusPipe,

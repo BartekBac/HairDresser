@@ -1,0 +1,61 @@
+<p-dataView #dv [value]="salons" [paginator]="true" [rows]="6" paginatorPosition="both" filterBy="{{selectedFilterValue}}"
+  [sortField]="sortField" [sortOrder]="sortOrder">
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-2">
+          <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)"></p-dropdown>
+        </div>
+        <div class="ui-g-6 ui-md-4 filter-container">
+            <p-autoComplete [(ngModel)]="searchValue" [suggestions]="filteredSearchValues"
+            (completeMethod)="filterSearchValues($event)" [size]="30"
+            placeholder="Search by {{selectedFilterLabel}}" [minLength]="0"
+            [dropdown]="true"
+            [autoHighlight]='true'
+            [emptyMessage]="'No salons found'"
+            (onSelect)="dv.filter(searchValue)"
+            (click)="dv.filter($event.target.value)"
+            (keyup)="dv.filter($event.target.value)"></p-autoComplete>
+        </div>
+        <div class="ui-g-6 ui-md-4 filter-container">
+           <p-selectButton [options]="filterOptions" [(ngModel)]="selectedFilterValue" (onChange)="onSelectFilterChange($event)"></p-selectButton>
+        </div>
+        <div class="ui-g-6 ui-md-2" style="text-align:right">
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+      </div>
+    </div>
+  </p-header>
+  <ng-template let-salon pTemplate="listItem">
+    <div class="ui-g-12" style="position: relative;">
+      <app-add-salon-list-element [salon]="salon"></app-add-salon-list-element>
+      <app-overlay-div
+      [buttonPaddingLeft]="'10px'"
+      [buttonPaddingTop]="'15px'"
+      [contentPaddingLeft]="'55px'"
+      [contentPaddingTop]="'15px'"
+      [contentWidth]="'150px'"
+      [buttonIcon]="'pi pi-star'"
+      (buttonClicked)="addToFavourites(salon)">
+      <button pButton type="button" label="Add to favourites"></button>
+    </app-overlay-div>
+    </div>
+  </ng-template>
+  <ng-template let-salon pTemplate="gridItem">
+    <div style="padding:.5em; position: relative;" class="ui-g-12 ui-md-4">
+      <app-client-salon-selected-card [salon]="salon" [withWorkersMode]="false">
+      </app-client-salon-selected-card>
+      <app-overlay-div
+      [buttonPaddingLeft]="'15px'"
+      [buttonPaddingTop]="'15px'"
+      [contentPaddingLeft]="'55px'"
+      [contentPaddingTop]="'15px'"
+      [contentWidth]="'150px'"
+      [buttonIcon]="'pi pi-star'"
+      (buttonClicked)="addToFavourites(salon)">
+      <button pButton type="button" label="Add to favourites"></button>
+    </app-overlay-div>
+    </div>
+  </ng-template>
+</p-dataView>
+
