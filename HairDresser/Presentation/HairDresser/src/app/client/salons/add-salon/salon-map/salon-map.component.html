@@ -1,5 +1,21 @@
-<app-view-map></app-view-map>
+<app-view-map [markers] = "markers"></app-view-map>
 <button type="text" (click)="showSidebar()" pButton icon="pi pi-plus" label="Show"></button>
 <p-sidebar [(visible)]="display" position="right" [modal]="false">
-  Content
+  <div *ngIf="salon" class="ui-g-12">
+    <app-client-salon-selected-card [salon]="salon" [withWorkersMode]="false">
+    </app-client-salon-selected-card>
+    <app-overlay-div
+    [buttonPaddingLeft]="'15px'"
+    [buttonPaddingTop]="'15px'"
+    [contentPaddingLeft]="'55px'"
+    [contentPaddingTop]="'15px'"
+    [contentWidth]="'150px'"
+    [buttonIcon]="'pi pi-star'"
+    (buttonClicked)="addToFavourites(salon)">
+    <button pButton type="button" label="Add to favourites"></button>
+  </app-overlay-div>
+  </div>
+  <div *ngIf="!salon">
+    <p>Select salon marker from map to show details.</p>
+  </div>
 </p-sidebar>

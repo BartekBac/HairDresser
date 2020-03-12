@@ -1,6 +1,8 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Input } from '@angular/core';
 import * as L from 'leaflet';
 import { Constants } from '../../constants/Constants';
+import { MapMarker } from './models/MapMarker';
+import { PositionCache } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-view-map',
@@ -9,7 +11,10 @@ import { Constants } from '../../constants/Constants';
 })
 export class ViewMapComponent implements AfterViewInit {
 
+  @Input() markers: MapMarker[];
+
   private readonly maxZoom = 19;
+  private readonly defaultStaticCoords = {latitude: 51.55, longitude: 19.08};
   private map;
 
   constructor() { }
@@ -29,33 +34,32 @@ export class ViewMapComponent implements AfterViewInit {
     });
     tiles.addTo(this.map);
     this.setCurrentPosition();
-  }
-
-  private setCurrentPosition() {
-    navigator.geolocation.getCurrentPosition((position) => {
-    /* TODO: Salon data to recive:
-        salon name
-        salon coord: lat, lng
-        salon id
-    */
-
-      this.map.flyTo([position.coords.latitude, position.coords.longitude], 12);
-      /*var myIcon = L.icon({
-        iconUrl: '../../../../assets/images/marker-icon.png'
-      });*/
-
-      const marker = L.marker([position.coords.latitude, position.coords.longitude],
-        {title: 'New salon'}).addTo(this.map).on('click', (e) => {
-          console.log(e.latlng);
-      });
-      /*const popup = L.popup()
-            .setContent('<p>Hello world!<br />This is a nice popup.</p>');*/
-      //marker.bindPopup(popup);
+    this.markers.forEach(marker => {
+      this.addMarker(marker.latitude, marker.longitude, marker.title, marker.onClickFunction);
+    });
+    this.map.on('geosearch_showlocation', function (result) {
+      L.marker([result.x, result.y]).addTo(this.map);
     });
   }
 
-  addMarker(position: Position, title: string, onClickFunction: (content: any) => any, iconUrl = '') {
+  private setCurrentPosition() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.map.flyTo([position.coords.latitude, position.coords.longitude], 12);
+      },
+      (error) => {
+        this.map.flyTo([this.defaultStaticCoords.latitude, this.defaultStaticCoords.longitude], 6);
+      },
+      {timeout: 2000});
+  }
 
+  addMarker(latitude: number, longitude: number, title: string, onClickFunction: (content: any) => any) {
+    const marker = L.marker([latitude, longitude],
+      {title}).addTo(this.map).on('click', onClickFunction);
+
+     /*const popup = L.popup()
+            .setContent('<p>Hello world!<br />This is a nice popup.</p>');*/
+      //marker.bindPopup(popup);
   }
 
 }

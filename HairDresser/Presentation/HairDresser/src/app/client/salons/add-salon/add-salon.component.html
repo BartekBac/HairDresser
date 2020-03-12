@@ -14,7 +14,7 @@
       </p-tabMenu>
 
       <app-salon-list *ngIf="activeMenuItem == tabMenuItems[0]" [salons]="salons" [userId]="userId"></app-salon-list>
-      <app-salon-map *ngIf="activeMenuItem == tabMenuItems[1]"></app-salon-map>
+      <app-salon-map *ngIf="activeMenuItem == tabMenuItems[1]" [salons]="salons" [userId]="userId"></app-salon-map>
       </div>
     </div>
   </div>
