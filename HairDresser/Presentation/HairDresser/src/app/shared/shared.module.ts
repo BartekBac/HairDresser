@@ -37,6 +37,7 @@ import { RatingPipe } from './pipes/rating.pipe';
 import { SendOpinionListElementComponent } from './components/view-opinion-list/send-opinion-list-element/send-opinion-list-element.component';
 import { DecimalRatingComponent } from './components/decimal-rating/decimal-rating.component';
 import { ViewMapComponent } from './components/view-map/view-map.component';
+import { FormMapComponent } from './components/form-map/form-map.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ViewMapComponent } from './components/view-map/view-map.component';
     RatingPipe,
     SendOpinionListElementComponent,
     DecimalRatingComponent,
-    ViewMapComponent
+    ViewMapComponent,
+    FormMapComponent
   ],
   imports: [
     CommonModule,
@@ -113,7 +115,8 @@ import { ViewMapComponent } from './components/view-map/view-map.component';
     RatingPipe,
     ViewOpinionListComponent,
     DecimalRatingComponent,
-    ViewMapComponent
+    ViewMapComponent,
+    FormMapComponent
   ],
   providers: [
     VisitStatusPipe,

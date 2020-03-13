@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
 import { SalonData } from '../../models/SalonData';
 import { SalonType } from '../../enums/SalonType';
+import { FormMapComponent } from '../form-map/form-map.component';
 
 @Component({
   selector: 'app-form-salon-data',
@@ -10,7 +11,11 @@ import { SalonType } from '../../enums/SalonType';
 })
 export class FormSalonDataComponent implements OnInit {
 
+  @ViewChild(FormMapComponent, null) formMapComponent: FormMapComponent;
   @Input() salon: SalonData;
+
+  displaySetLocation = false;
+  private newLocation: Location;
 
   salonTypes: SelectItem[] = [
     {label: 'Unisex', value: SalonType.Unisex},
@@ -20,7 +25,27 @@ export class FormSalonDataComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  showSetLocation() {
+    this.displaySetLocation = true;
+    // this.newLocation = this.salon.location;
+    setTimeout(() => this.formMapComponent.initMap(), 100);
+  }
+
+  resetLocation() {
+    this.displaySetLocation = false;
+    // this.newLocation = this.salon.location;
+  }
+
+  onSelectedLocation(location: Location) {
+    this.newLocation = location;
+  }
+
+  saveLocation() {
+    console.log('Location saved.');
+    console.log(this.newLocation);
+    // this.salon.location = this.newLocation
   }
 
 }

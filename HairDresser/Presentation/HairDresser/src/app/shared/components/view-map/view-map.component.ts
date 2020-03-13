@@ -2,7 +2,6 @@ import { Component, AfterViewInit, Input } from '@angular/core';
 import * as L from 'leaflet';
 import { Constants } from '../../constants/Constants';
 import { MapMarker } from './models/MapMarker';
-import { PositionCache } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-view-map',
@@ -56,10 +55,6 @@ export class ViewMapComponent implements AfterViewInit {
   addMarker(latitude: number, longitude: number, title: string, onClickFunction: (content: any) => any) {
     const marker = L.marker([latitude, longitude],
       {title}).addTo(this.map).on('click', onClickFunction);
-
-     /*const popup = L.popup()
-            .setContent('<p>Hello world!<br />This is a nice popup.</p>');*/
-      //marker.bindPopup(popup);
   }
 
 }
