@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { SelectItem } from 'primeng/primeng';
+import { SelectItem, MessageService } from 'primeng/primeng';
 import { SalonData } from '../../models/SalonData';
 import { SalonType } from '../../enums/SalonType';
 import { FormMapComponent } from '../form-map/form-map.component';
+import { Location } from '../../models/Location';
 
 @Component({
   selector: 'app-form-salon-data',
@@ -23,19 +24,18 @@ export class FormSalonDataComponent implements OnInit {
     {label: 'Male', value: SalonType.Male}
   ];
 
-  constructor() { }
+  constructor(private toastService: MessageService) { }
 
   ngOnInit() {}
 
   showSetLocation() {
     this.displaySetLocation = true;
-    // this.newLocation = this.salon.location;
     setTimeout(() => this.formMapComponent.initMap(), 100);
   }
 
   resetLocation() {
+    this.newLocation = this.salon.location;
     this.displaySetLocation = false;
-    // this.newLocation = this.salon.location;
   }
 
   onSelectedLocation(location: Location) {
@@ -43,9 +43,10 @@ export class FormSalonDataComponent implements OnInit {
   }
 
   saveLocation() {
-    console.log('Location saved.');
-    console.log(this.newLocation);
-    // this.salon.location = this.newLocation
+    this.salon.location = this.newLocation;
+    this.displaySetLocation = false;
+    this.toastService.add({severity: 'info', summary: 'Salon location defined',
+      detail: 'To save the salon location, click "Save" button.'});
   }
 
 }

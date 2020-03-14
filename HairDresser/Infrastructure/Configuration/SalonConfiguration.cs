@@ -21,6 +21,8 @@ namespace Infrastructure.Configuration
 
             builder.OwnsOne(s => s.Address);
 
+            builder.OwnsOne(s => s.Location);
+
             builder.Metadata.FindNavigation(nameof(Salon.Services))
                    .SetPropertyAccessMode(PropertyAccessMode.Field);
 

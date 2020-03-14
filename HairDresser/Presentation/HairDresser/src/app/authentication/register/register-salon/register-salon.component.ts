@@ -32,6 +32,10 @@ export class RegisterSalonComponent implements OnInit {
       street: '',
       houseNumber: '',
     },
+    location: {
+      latitude: 0,
+      longitude: 0
+    },
     schedule: {
       monday: {
         begin: { hour: 8, minute: 0, },
@@ -89,6 +93,10 @@ export class RegisterSalonComponent implements OnInit {
       zipCode: '',
       street: '',
       houseNumber: '',
+    },
+    location: {
+      latitude: 0,
+      longitude: 0
     }
   };
 
@@ -106,6 +114,7 @@ export class RegisterSalonComponent implements OnInit {
     this.registerCredentials.additionalInfo = this.salonData.additionalInfo;
     this.registerCredentials.type = this.salonData.type;
     this.registerCredentials.address = this.salonData.address;
+    this.registerCredentials.location = this.salonData.location;
   }
 
   dataValid(): ValidationMessage {
@@ -131,6 +140,8 @@ export class RegisterSalonComponent implements OnInit {
       toReturn.update(false, "Street cannot by empty.");
     } else if (this.registerCredentials.address.zipCode === '') {
       toReturn.update(false, "Zip code cannot by empty.");
+    } else if (this.registerCredentials.location.latitude === 0 && this.registerCredentials.location.longitude === 0) {
+      toReturn.update(false, "Salon location must be set.");
     }
     return toReturn;
   }

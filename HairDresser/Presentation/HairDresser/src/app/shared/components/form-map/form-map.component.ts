@@ -40,10 +40,7 @@ export class FormMapComponent implements AfterViewInit {
   }
 
   private setCurrentPosition() {
-    if (this.salonLocation !== null) {
-      this.map.flyTo([this.salonLocation.latitude, this.salonLocation.longitude], 12);
-      this.moveMarker(this.salonLocation.latitude, this.salonLocation.longitude);
-    } else {
+    if (this.salonLocation.latitude === 0 && this.salonLocation.longitude === 0) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           this.map.flyTo([position.coords.latitude, position.coords.longitude], 12);
@@ -54,6 +51,9 @@ export class FormMapComponent implements AfterViewInit {
           this.moveMarker(this.defaultStaticCoords.latitude, this.defaultStaticCoords.longitude);
         },
         {timeout: 1000});
+    } else {
+      this.map.flyTo([this.salonLocation.latitude, this.salonLocation.longitude], 12);
+      this.moveMarker(this.salonLocation.latitude, this.salonLocation.longitude);
     }
   }
 

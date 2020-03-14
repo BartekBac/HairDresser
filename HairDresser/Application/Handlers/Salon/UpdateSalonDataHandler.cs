@@ -37,6 +37,7 @@ namespace Application.Handlers.Salon
                 request.Name,
                 request.AdditionalInfo,
                 _mapper.Map<Address>(request.Address),
+                _mapper.Map<Location>(request.Location),
                 request.Type))
             {
                 if (_dbContext.SaveChanges() == 0)

@@ -1,6 +1,6 @@
 <div class="ui-g ui-fluid">
   <div *ngIf="displaySetLocation" class="ui-g-12">
-    <app-form-map [salonLocation]="null" (selectedLocation)="onSelectedLocation($event)"></app-form-map>
+    <app-form-map [salonLocation]="this.salon.location" (selectedLocation)="onSelectedLocation($event)"></app-form-map>
     <button type="text" class="my-hide-location-button ui-button-danger" (click)="resetLocation()"
      pButton icon="pi pi-times"></button>
      <button type="text" class="my-save-location-button ui-button-success" (click)="saveLocation()"
@@ -37,7 +37,7 @@
         <input id="input-address-street" [(ngModel)]="salon.address.street" type="text" size="30" pInputText>
         <label for="input-address-street">Street</label>
       </span>
-      <br>
+
     </div>
     <div class="ui-g-6">
       <span class="ui-float-label">

@@ -126,30 +126,5 @@ namespace WebAPI.Controllers
                 return BadRequest(e.Message);
             }
         }
-
-        /*[Authorize(Roles = RoleString.Salon)]
-        [HttpPost]
-        public async Task<IActionResult> CreateSalonAsync(SalonCreationDto salonCreation)
-        {
-            //var user = _mapper.Map<IdentityUser>(salonCreation);
-
-            IdentityUser user = await _userManager.FindByIdAsync(salonCreation.userId);
-
-            if (user == null)
-            {
-                var errorMessage = "Failed. Cannot find user with given ID (" + salonCreation.userId + ")";
-                return BadRequest(errorMessage);
-            }
-
-            try
-            {
-                var salon = _salonService.CreateSalon(salonCreation, user);
-                return Created("salon", salon);
-            } 
-            catch(Exception e)
-            {
-                return BadRequest(e.Message);
-            } 
-        }*/
     }
 }
