@@ -2,6 +2,8 @@ import { Time } from '../models/Time';
 import { Day } from '../models/Day';
 import { VisitStatus } from '../enums/VisitStatus';
 import { Visit } from '../models/Visit';
+import { Location } from '../models/Location';
+import { Address } from '../models/Address';
 
 export class Functions {
   public static copyObject(obj: any): any {
@@ -37,6 +39,14 @@ export class Functions {
 
   public static timeToString(time: Time): string {
     return time.hour.toString() + ':' + time.minute.toString().padStart(2, '0');
+  }
+
+  public static isNotLocationSet(location: Location): boolean {
+    return location.latitude === 0 && location.longitude === 0;
+  }
+
+  public static concatAddressToSearchString(address: Address): string {
+    return address.city + ', ' + address.zipCode + ', ' + address.street + ' ' + address.houseNumber;
   }
 
   public static getVisitBackgroundColor(visit: Visit) {

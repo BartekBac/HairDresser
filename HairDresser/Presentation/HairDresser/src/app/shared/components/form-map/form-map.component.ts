@@ -2,6 +2,7 @@ import { Component, Input, AfterViewInit, EventEmitter, Output } from '@angular/
 import { Location } from '../../models/Location';
 import { Constants } from '../../constants/Constants';
 import * as L from 'leaflet';
+import { Functions } from '../../constants/Functions';
 
 @Component({
   selector: 'app-form-map',
@@ -39,21 +40,30 @@ export class FormMapComponent implements AfterViewInit {
     this.setCurrentPosition();
   }
 
+  private getMarkerLocation(): Location {
+    const selectedLatLng = this.marker.getLatLng();
+    const location: Location = {latitude: selectedLatLng.lat, longitude: selectedLatLng.lng};
+    return location;
+  }
+
   private setCurrentPosition() {
-    if (this.salonLocation.latitude === 0 && this.salonLocation.longitude === 0) {
+    if (Functions.isNotLocationSet(this.salonLocation)) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           this.map.flyTo([position.coords.latitude, position.coords.longitude], 12);
           this.moveMarker(position.coords.latitude, position.coords.longitude);
+          this.selectedLocation.emit(this.getMarkerLocation());
         },
         (error) => {
           this.map.flyTo([this.defaultStaticCoords.latitude, this.defaultStaticCoords.longitude], 6);
           this.moveMarker(this.defaultStaticCoords.latitude, this.defaultStaticCoords.longitude);
+          this.selectedLocation.emit(this.getMarkerLocation());
         },
         {timeout: 1000});
     } else {
       this.map.flyTo([this.salonLocation.latitude, this.salonLocation.longitude], 12);
       this.moveMarker(this.salonLocation.latitude, this.salonLocation.longitude);
+      this.selectedLocation.emit(this.getMarkerLocation());
     }
   }
 
@@ -62,9 +72,7 @@ export class FormMapComponent implements AfterViewInit {
       {title: 'Drag marker to select location', draggable: true})
       .addTo(this.map)
       .on('dragend', () => {
-        const selectedLatLng = this.marker.getLatLng();
-        const location: Location = {latitude: selectedLatLng.lat, longitude: selectedLatLng.lng};
-        this.selectedLocation.emit(location);
+        this.selectedLocation.emit(this.getMarkerLocation());
       });
   }
 
