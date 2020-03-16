@@ -47,7 +47,7 @@ export class FormMapComponent implements AfterViewInit {
   }
 
   private setCurrentPosition() {
-    if (Functions.isNotLocationSet(this.salonLocation)) {
+    if (!Functions.isLocationSet(this.salonLocation)) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           this.map.flyTo([position.coords.latitude, position.coords.longitude], 12);

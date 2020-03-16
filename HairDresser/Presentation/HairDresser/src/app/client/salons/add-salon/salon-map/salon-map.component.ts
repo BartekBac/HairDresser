@@ -3,6 +3,7 @@ import { MapMarker } from 'src/app/shared/components/view-map/models/MapMarker';
 import { Salon } from 'src/app/shared/models/Salon';
 import { ClientService } from 'src/app/shared/services/client.service';
 import { MessageService } from 'primeng/primeng';
+import { Functions } from 'src/app/shared/constants/Functions';
 
 @Component({
   selector: 'app-salon-map',
@@ -18,7 +19,7 @@ export class SalonMapComponent implements OnInit {
   selectedSalonId: number;
   salon: Salon;
 
-  markers: MapMarker[];
+  markers: MapMarker[] = [];
 
   markerAction(salonId: string) {
     console.log('Selected salon: ' + salonId);
@@ -32,7 +33,17 @@ export class SalonMapComponent implements OnInit {
     private toastService: MessageService) { }
 
   ngOnInit() {
-    this.markers = [
+    this.salons.forEach(salon => {
+      if (Functions.isLocationSet(salon.location)) {
+        this.markers.push({
+          latitude: salon.location.latitude,
+          longitude: salon.location.longitude,
+          title: salon.name,
+          onClickFunction: () => this.markerAction(salon.id)
+        });
+      }
+    });
+    /*this.markers = [
       { latitude: 50.1400188,
         longitude: 18.8703222,
         title: 'Test2',
@@ -41,7 +52,7 @@ export class SalonMapComponent implements OnInit {
           longitude: 18.8803222,
           title: 'Test2',
           onClickFunction: () => this.markerAction('6ca41f45-bce9-40a6-b374-5428e9eb1309') }
-    ];
+    ];*/
   }
 
   showSidebar() {

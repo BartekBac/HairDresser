@@ -140,8 +140,6 @@ export class RegisterSalonComponent implements OnInit {
       toReturn.update(false, "Street cannot by empty.");
     } else if (this.registerCredentials.address.zipCode === '') {
       toReturn.update(false, "Zip code cannot by empty.");
-    } else if (this.registerCredentials.location.latitude === 0 && this.registerCredentials.location.longitude === 0) {
-      toReturn.update(false, "Salon location must be set.");
     }
     return toReturn;
   }

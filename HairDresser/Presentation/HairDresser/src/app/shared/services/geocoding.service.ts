@@ -47,7 +47,7 @@ export class GeocodingService {
       '&format=json').pipe(
         map(res => {
           const address: Address = {
-            city: res.address.town,
+            city: res.address.county,
             houseNumber: res.address.house_number,
             street: res.address.road,
             zipCode: res.address.postcode

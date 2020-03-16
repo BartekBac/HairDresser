@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { SelectItem, MessageService } from 'primeng/primeng';
+import { SelectItem, MessageService, ConfirmationService } from 'primeng/primeng';
 import { SalonData } from '../../models/SalonData';
 import { SalonType } from '../../enums/SalonType';
 import { FormMapComponent } from '../form-map/form-map.component';
 import { Location } from '../../models/Location';
 import { GeocodingService } from '../../services/geocoding.service';
 import { Functions } from '../../constants/Functions';
-import { Address } from '../../models/Address';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-form-salon-data',
@@ -28,13 +28,14 @@ export class FormSalonDataComponent implements OnInit {
   ];
 
   constructor(private toastService: MessageService,
-              private geocodingService: GeocodingService) { }
+              private geocodingService: GeocodingService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit() {}
 
   showSetLocation() {
     this.displaySetLocation = true;
-    if (Functions.isNotLocationSet(this.salon.location)) {
+    if (!Functions.isLocationSet(this.salon.location)) {
       this.geocodingService.search(Functions.concatAddressToSearchString(this.salon.address))
       .subscribe(res => {
         if (res.length > 0) {
@@ -69,10 +70,32 @@ export class FormSalonDataComponent implements OnInit {
   }
 
   saveLocation() {
-    this.salon.location = this.newLocation;
+    if (!_.isEqual(this.salon.location, this.newLocation)) {
+      this.salon.location = this.newLocation;
+      this.toastService.add({severity: 'info', summary: 'Salon location defined',
+                             detail: 'To save the salon location, click "Save" button.'});
+      this.geocodingService.reverse(this.newLocation.latitude, this.newLocation.longitude)
+        .subscribe(
+          res => {
+            if (!_.isEqual(res, this.salon.address)) {
+              this.confirmationService.confirm({
+                message: 'Do you want to change the address of the salon to ' +
+                          res.city + ' (' + res.zipCode + '), ' +
+                          res.street + ' ' + res.houseNumber + '?',
+                header: 'Mismatched address detected',
+                icon: 'pi pi-exclamation-triangle',
+                blockScroll: false,
+                accept: () => {
+                  this.salon.address = res;
+                  this.toastService.add({severity: 'info', summary: 'Salon location & address changed',
+                    detail: 'To save changes, click "Save" button.'});
+                }
+            });
+            }
+          }
+        );
+    }
     this.displaySetLocation = false;
-    this.toastService.add({severity: 'info', summary: 'Salon location defined',
-      detail: 'To save the salon location, click "Save" button.'});
   }
 
 }

@@ -41,8 +41,8 @@ export class Functions {
     return time.hour.toString() + ':' + time.minute.toString().padStart(2, '0');
   }
 
-  public static isNotLocationSet(location: Location): boolean {
-    return location.latitude === 0 && location.longitude === 0;
+  public static isLocationSet(location: Location): boolean {
+    return location.latitude !== 0 || location.longitude !== 0;
   }
 
   public static concatAddressToSearchString(address: Address): string {

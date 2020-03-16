@@ -34,7 +34,6 @@ export class ClientSalonsListElementComponent implements OnInit {
   }
 
   removeFromFavourites() {
-
     this.confirmationService.confirm({
         message: 'Are you sure that you want to remove ' + this.salon.name + ' from favourites list?',
         header: 'Delete Confirmation',
