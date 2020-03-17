@@ -51,8 +51,9 @@ export class FormSalonDataComponent implements OnInit {
         this.toastService.add({severity: 'info', life: 10000, summary: 'Location not found',
         detail: 'Location cannot be automatically defined based on the provided address.' +
          'Set the location manually, apply changes and click "Save" button to commit changes.'});
-        console.log(err);
+        setTimeout(() => this.formMapComponent.initMap(), 100);
       }, /* complete */ () => {
+        console.log('from compelte');
         setTimeout(() => this.formMapComponent.initMap(), 100);
       });
     } else {

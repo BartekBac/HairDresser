@@ -43,16 +43,6 @@ export class SalonMapComponent implements OnInit {
         });
       }
     });
-    /*this.markers = [
-      { latitude: 50.1400188,
-        longitude: 18.8703222,
-        title: 'Test2',
-        onClickFunction: () => this.markerAction('28d5d061-6d2c-4569-903d-9334a89696ef')},
-        { latitude: 50.1400188,
-          longitude: 18.8803222,
-          title: 'Test2',
-          onClickFunction: () => this.markerAction('6ca41f45-bce9-40a6-b374-5428e9eb1309') }
-    ];*/
   }
 
   showSidebar() {

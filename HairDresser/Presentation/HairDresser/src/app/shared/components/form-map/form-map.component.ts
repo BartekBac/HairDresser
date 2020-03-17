@@ -37,6 +37,7 @@ export class FormMapComponent implements AfterViewInit {
       });
       tiles.addTo(this.map);
     }
+    console.log('from init');
     this.setCurrentPosition();
   }
 
