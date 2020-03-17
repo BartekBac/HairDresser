@@ -1,9 +1,10 @@
 import { Address } from './Address';
-import { Schedule } from './Schedule';
+import { Location } from './Location';
 
 export class SalonData {
   name: string;
   address: Address;
+  location: Location;
   additionalInfo: string;
   type: number;
 }

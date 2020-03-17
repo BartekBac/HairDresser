@@ -38,6 +38,7 @@ namespace Application.Services
             var salon = new Salon(admin,
                                   salonCreation.Name,
                                   _mapper.Map<Address>(salonCreation.Address),
+                                  _mapper.Map<Location>(salonCreation.Location),
                                   salonCreation.AdditionalInfo,
                                   salonCreation.Type,
                                   schedule,

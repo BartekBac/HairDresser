@@ -1,4 +1,12 @@
 <div class="ui-g ui-fluid">
+  <div *ngIf="displaySetLocation" class="ui-g-12">
+    <app-form-map [salonLocation]="this.salon.location" (selectedLocation)="onSelectedLocation($event)"></app-form-map>
+    <button type="text" class="my-hide-location-button ui-button-danger" (click)="resetLocation()"
+     pButton icon="pi pi-times"></button>
+     <button type="text" class="my-save-location-button ui-button-success" (click)="saveLocation()"
+     pButton icon="pi pi-check"></button>
+  </div>
+  <div *ngIf="!displaySetLocation">
     <div class="ui-g-12">
       <h4>Salon data</h4>
     </div>
@@ -29,12 +37,12 @@
         <input id="input-address-street" [(ngModel)]="salon.address.street" type="text" size="30" pInputText>
         <label for="input-address-street">Street</label>
       </span>
-      <br>
+
     </div>
     <div class="ui-g-6">
       <span class="ui-float-label">
-        <p-inputMask id="input-address-zipcode" [(ngModel)]="salon.address.zipCode" mask="99-999" type="text"
-          size="30"></p-inputMask>
+        <p-inputMask id="input-address-zipcode" [(ngModel)]="salon.address.zipCode" mask="99-999" type="text" size="30">
+        </p-inputMask>
         <label for="input-address-zipcode">Zip code</label>
       </span>
     </div>
@@ -46,9 +54,23 @@
     </div>
     <div class="ui-g-6">
       <span class="ui-float-label">
-        <input id="input-adrress-housenumber" [(ngModel)]="salon.address.houseNumber" type="text" size="30"
-          pInputText>
+        <input id="input-adrress-housenumber" [(ngModel)]="salon.address.houseNumber" type="text" size="30" pInputText>
         <label for="input-adrress-housenumber">House number</label>
       </span>
     </div>
+    <div class="ui-g-12">
+      <button type="text" (click)="showSetLocation()" pButton icon="pi pi-map-marker" label="Edit location"></button>
+    </div>
   </div>
+</div>
+
+<!--<p-dialog header="Edit salon location" [(visible)]="displaySetLocation" [appendTo]="body"
+  [style]="{width: '600px', height: '400px', position:'relative'}">
+  <app-form-map [salonLocation]="null" (selectedLocation)="onSelectedLocation($event)"></app-form-map>
+  <p-footer>
+    <div class="my-footer-wrapper">
+      <button pButton type="button" class="ui-button-raised" (click)="saveLocation()" label="Save" icon="pi pi-save"
+        iconPos="left"></button>
+    </div>
+  </p-footer>
+</p-dialog>-->

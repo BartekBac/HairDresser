@@ -22,6 +22,8 @@ namespace WebAPI.Configurations
             CreateMap<IdentityUser, UserDto>();
             CreateMap<AddressDto, Address>();
             CreateMap<Address, AddressDto>();
+            CreateMap<LocationDto, Location>();
+            CreateMap<Location, LocationDto>();
             CreateMap<Client, ClientDto>()
                 .ForPath(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
 

@@ -15,21 +15,23 @@ namespace Domain.Entities
         private ISet<Worker> _workers = new HashSet<Worker>();
         private ISet<ClientSalons> _clients = new HashSet<ClientSalons>();
 
-        public Salon(IdentityUser admin, string name, Address address, string additionalInfo, SalonType type, Schedule schedule) : base(Guid.Parse(admin.Id))
+        public Salon(IdentityUser admin, string name, Address address, Location location, string additionalInfo, SalonType type, Schedule schedule) : base(Guid.Parse(admin.Id))
         {
             Admin = admin;
             Name = name;
             Address = address;
+            Location = location;
             Rating = -1.0f;
             AdditionalInfo = additionalInfo;
             Type = type;
             Schedule = new Schedule(Guid.Parse(admin.Id), schedule);
         }
-        public Salon(IdentityUser admin, string name, Address address, string additionalInfo, SalonType type, Schedule schedule, byte[] imageSource, string imageHeader) : base(Guid.Parse(admin.Id), imageSource, imageHeader)
+        public Salon(IdentityUser admin, string name, Address address, Location location, string additionalInfo, SalonType type, Schedule schedule, byte[] imageSource, string imageHeader) : base(Guid.Parse(admin.Id), imageSource, imageHeader)
         {
             Admin = admin;
             Name = name;
             Address = address;
+            Location = location;
             Rating = -1.0f;
             AdditionalInfo = additionalInfo;
             Type = type;
@@ -42,6 +44,7 @@ namespace Domain.Entities
         public IdentityUser Admin { get; private set; }
         public string Name { get; private set; }
         public Address Address { get; set; }
+        public Location Location { get; set; }
         public float Rating { get; private set; }
         public string AdditionalInfo { get; private set; }
         public SalonType Type { get; private set; }
@@ -62,7 +65,7 @@ namespace Domain.Entities
             set => _clients = new HashSet<ClientSalons>(value);
         }
 
-        public bool UpdateData(string name, string additionalInfo, Address address, SalonType type)
+        public bool UpdateData(string name, string additionalInfo, Address address, Location location, SalonType type)
         {
             var updated = false;
             if(Name != name)
@@ -78,6 +81,11 @@ namespace Domain.Entities
             if (Address != address)
             {
                 Address = address;
+                updated = true;
+            }
+            if (Location != location)
+            {
+                Location = location;
                 updated = true;
             }
             if (Type != type)

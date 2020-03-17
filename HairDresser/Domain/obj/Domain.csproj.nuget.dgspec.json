@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\rep\\VII sem\\v5\\HairDresser\\HairDresser\\Domain\\Domain.csproj": {}
+    "C:\\rep\\VII sem\\projekt\\HairDresser\\HairDresser\\HairDresser\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\rep\\VII sem\\v5\\HairDresser\\HairDresser\\Domain\\Domain.csproj": {
+    "C:\\rep\\VII sem\\projekt\\HairDresser\\HairDresser\\HairDresser\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\rep\\VII sem\\v5\\HairDresser\\HairDresser\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\rep\\VII sem\\projekt\\HairDresser\\HairDresser\\HairDresser\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\rep\\VII sem\\v5\\HairDresser\\HairDresser\\Domain\\Domain.csproj",
+        "projectPath": "C:\\rep\\VII sem\\projekt\\HairDresser\\HairDresser\\HairDresser\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\Bartek\\.nuget\\packages\\",
-        "outputPath": "C:\\rep\\VII sem\\v5\\HairDresser\\HairDresser\\Domain\\obj\\",
+        "outputPath": "C:\\rep\\VII sem\\projekt\\HairDresser\\HairDresser\\HairDresser\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",

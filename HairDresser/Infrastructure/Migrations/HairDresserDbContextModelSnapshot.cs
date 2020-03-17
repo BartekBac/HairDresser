@@ -615,6 +615,25 @@ namespace Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("SalonId");
                         });
+
+                    b.OwnsOne("Domain.ValueObjects.Location", "Location", b1 =>
+                        {
+                            b1.Property<Guid>("SalonId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<float>("Latitude")
+                                .HasColumnType("real");
+
+                            b1.Property<float>("Longitude")
+                                .HasColumnType("real");
+
+                            b1.HasKey("SalonId");
+
+                            b1.ToTable("Salons");
+
+                            b1.WithOwner()
+                                .HasForeignKey("SalonId");
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Schedule", b =>

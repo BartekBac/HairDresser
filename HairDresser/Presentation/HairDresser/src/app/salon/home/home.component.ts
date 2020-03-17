@@ -43,6 +43,10 @@ export class HomeComponent implements OnInit {
       zipCode: '',
       street: '',
       houseNumber: '',
+    },
+    location: {
+      latitude: 0,
+      longitude: 0
     }
   };
   protected userData: UserData = {
@@ -68,6 +72,11 @@ export class HomeComponent implements OnInit {
     this.salon = this.route.snapshot.data.salon;
     console.log(this.salon);
     this.loadChildDataModels();
+
+    if (this.salon.location.latitude === 0 && this.salon.location.longitude === 0) {
+      this.toastService.add({severity: 'warn', sticky: true, summary: 'No salon location defined',
+        detail: 'To set the salon location, open the "Address" tab, click the edit icon and select "Edit location".'});
+    }
   }
 
   private loadChildDataModels() {
@@ -82,6 +91,7 @@ export class HomeComponent implements OnInit {
     this.salon.name = this.salonData.name;
     this.salon.type = this.salonData.type;
     this.salon.address = Functions.copyObject(this.salonData.address);
+    this.salon.location = Functions.copyObject(this.salonData.location);
     // this.salon = Functions.copyObject(this.salonData);
     this.salon.imageSource = this.uploadedImageSource;
     this.salon.admin = Functions.copyObject(this.userData);

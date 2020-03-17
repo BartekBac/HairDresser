@@ -32,6 +32,10 @@ export class RegisterSalonComponent implements OnInit {
       street: '',
       houseNumber: '',
     },
+    location: {
+      latitude: 0,
+      longitude: 0
+    },
     schedule: {
       monday: {
         begin: { hour: 8, minute: 0, },
@@ -89,6 +93,10 @@ export class RegisterSalonComponent implements OnInit {
       zipCode: '',
       street: '',
       houseNumber: '',
+    },
+    location: {
+      latitude: 0,
+      longitude: 0
     }
   };
 
@@ -106,6 +114,7 @@ export class RegisterSalonComponent implements OnInit {
     this.registerCredentials.additionalInfo = this.salonData.additionalInfo;
     this.registerCredentials.type = this.salonData.type;
     this.registerCredentials.address = this.salonData.address;
+    this.registerCredentials.location = this.salonData.location;
   }
 
   dataValid(): ValidationMessage {

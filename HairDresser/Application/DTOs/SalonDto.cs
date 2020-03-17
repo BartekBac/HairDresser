@@ -11,6 +11,7 @@ namespace Application.DTOs
         public string Id { get; set; }
         public string Name { get; set; }
         public AddressDto Address { get; set; }
+        public LocationDto Location { get; set; }
         public string AdditionalInfo { get; set; }
         public SalonType Type { get; set; }
         public float Rating { get; set; }

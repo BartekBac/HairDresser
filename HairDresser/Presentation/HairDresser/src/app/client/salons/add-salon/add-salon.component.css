@@ -1,3 +1,7 @@
 .my-column-wrapper{
   width: 90%;
+  margin-left: 5%;
+}
+.my-menuitem-text{
+  float: right;
 }
