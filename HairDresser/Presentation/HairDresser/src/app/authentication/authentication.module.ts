@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './login/login.component';
 import { PasswordModule, InputTextModule, PanelModule, ButtonModule, DialogModule,
-         MessageModule, TabViewModule } from 'primeng/primeng';
-import { HomeComponent } from './home/home.component';
+         MessageModule, TabViewModule, ScrollPanelModule, StepsModule } from 'primeng/primeng';
+import { ContainerComponent } from './container/container.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterClientComponent } from './register/register-client/register-client.component';
@@ -25,8 +25,10 @@ import { SharedModule } from '../shared/shared.module';
     DialogModule,
     TabViewModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ScrollPanelModule,
+    StepsModule
   ],
-  declarations: [LoginComponent, HomeComponent, RegisterClientComponent, RegisterSalonComponent]
+  declarations: [LoginComponent, ContainerComponent, RegisterClientComponent, RegisterSalonComponent]
 })
 export class AuthenticationModule { }

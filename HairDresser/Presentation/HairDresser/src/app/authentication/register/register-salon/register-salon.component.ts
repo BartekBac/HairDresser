@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { RegisterSalonCredentials } from '../../models/RegisterSalonCredentials';
-import { SelectItem, MessageService } from 'primeng/primeng';
+import { SelectItem, MessageService, MenuItem } from 'primeng/primeng';
 import { AuthService } from '../../services/auth.service';
 import { ValidationMessage } from 'src/app/shared/models/ValidationMessage';
 import { SalonData } from 'src/app/shared/models/SalonData';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-register-salon',
@@ -13,8 +14,18 @@ import { SalonData } from 'src/app/shared/models/SalonData';
 export class RegisterSalonComponent implements OnInit {
 
   @Output() closeDialog = new EventEmitter<boolean>();
+  protected userDataBookmarkId = 'userDataBookmark';
+  protected salonDataBookmarkId = 'salonDataBookmark';
+  protected scheduleBookmarkId = 'scheduleBookmark';
+  protected imageBookmarkId = 'imageBookmark';
 
-  protected tabIndex = 0;
+  registerSteps: MenuItem[] = [
+    {label: 'User data'},
+    {label: 'Salon data'},
+    {label: 'Schedule'},
+    {label: 'Image'},
+  ];
+  registerStepsIndex = 0;
 
   salonTypes: SelectItem[] = [
     {label: 'Unisex', value: 0},
@@ -107,6 +118,11 @@ export class RegisterSalonComponent implements OnInit {
     private toastService: MessageService) { }
 
   ngOnInit() {
+    const self = this;
+    document.getElementsByClassName('ui-scrollpanel-content')[1]
+      .addEventListener('scroll', () => {
+        self.onScrollContentPanel();
+     });
   }
 
   private updateRegisterCredentials() {
@@ -159,6 +175,47 @@ export class RegisterSalonComponent implements OnInit {
         err => this.toastService.add({severity: 'error', summary: 'Register failed', detail: err.error})
       );
     }
+  }
+
+  private scrollToBookmark(bookmarkId: string) {
+    setTimeout(() => {
+      const element = document.getElementById(bookmarkId);
+      element.focus();
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
+
+    }, 200);
+  }
+
+  private getBookmarkScrollTopOffset(bookmarkId: string): number {
+    return $('#' + bookmarkId).offset().top;
+  }
+
+  private onScrollContentPanel() {
+    const switchOffset = 170;
+    if (this.getBookmarkScrollTopOffset(this.imageBookmarkId) < switchOffset) {
+      this.registerStepsIndex = 3;
+    } else if (this.getBookmarkScrollTopOffset(this.scheduleBookmarkId) < switchOffset) {
+      this.registerStepsIndex = 2;
+    } else if (this.getBookmarkScrollTopOffset(this.salonDataBookmarkId) < switchOffset) {
+      this.registerStepsIndex = 1;
+    } else {
+      this.registerStepsIndex = 0;
+    }
+  }
+
+  toggleSteps(index) {
+    switch (index) {
+      case 0: this.scrollToBookmark(this.userDataBookmarkId); break;
+      case 1: this.scrollToBookmark(this.salonDataBookmarkId); break;
+      case 2: this.scrollToBookmark(this.scheduleBookmarkId); break;
+      case 3: this.scrollToBookmark(this.imageBookmarkId); break;
+    }
+  }
+
+  goToLoginPage() {
+
   }
 
 }

@@ -1,3 +1,43 @@
 .my-label{
   font-size: 13px;
 }
+
+.my-full-window{
+  height: 100vh;
+  width: 100vw;
+}
+
+.my-content{
+  height: 75vh;
+}
+
+.my-scroll-body {
+  height: 80%;
+}
+
+.my-big-side-button {
+  color: #dedede;
+  font-size: 100px;
+  background-color: inherit;
+  border: none;
+}
+
+.my-big-side-button:hover:enabled {
+  color: #FFB300;
+}
+
+.my-big-side-button:disabled {
+  color: #666666;
+}
+
+.my-big-side-button-container {
+  height: 100%;
+}
+
+:host ::ng-deep .ui-steps .ui-steps-item {
+  width: 25%;
+}
+
+.my-scroll-panel-wrapper{
+  position: relative;
+}

@@ -1,26 +1,58 @@
-<div class="ui-g ui-fluid">
-  <div class="ui-g-12">
-    <p-tabView [activeIndex]="tabIndex">
-      <p-tabPanel header="User Data">
-        <app-form-user-data [userData]="registerCredentials.userData"></app-form-user-data>
-      </p-tabPanel>
-      <p-tabPanel header="Salon Data">
-        <app-form-salon-data [salon]="salonData"></app-form-salon-data>
-      </p-tabPanel>
-      <p-tabPanel header="Schedule">
-        <app-form-schedule [schedule]="registerCredentials.schedule"></app-form-schedule>
-      </p-tabPanel>
-      <p-tabPanel header="Image">
-        <app-form-upload-image [imageSrc]="registerCredentials.imageData" (imageUploaded)="onImageUpload($event)"></app-form-upload-image>
-      </p-tabPanel>
-    </p-tabView>
+<div class="ui-g-12 ui-fluid p-grid p-justify-center my-full-window">
+  <div class="ui-g-12 my-content">
+  <div class="ui-g-2 p-grid p-align-center vertical-container my-big-side-button-container">
+    <div class="ui-g-12 p-grid p-justify-end">
+      <button class="pi pi-chevron-left my-big-side-button" [disabled]="registerStepsIndex === 0"
+              (click)="toggleSteps(registerStepsIndex-1)"></button>
+    </div>
   </div>
-  <div class="ui-g-12">
-    <div class="ui-g-12">
-      <button pButton type="button" (click)="submit()" class="ui-button-raised" label="Add salon"></button>
-      <p-message severity="{{validationMessage?.isValid ? 'success' : 'error'}}" class="my-message"
-        text="{{validationMessage?.message}}" [ngStyle]="{'visibility': validationMessage ? 'visible' : 'hidden'}">
-      </p-message>
+  <div class="ui-g-8 my-scroll-panel-wrapper">
+    <p-scrollPanel #contentScrollPanel id="contentScrollPanel" [style]="{width: '100%', height: '75vh'}">
+      <div id="userDataBookmark"></div>
+      <p-panel header="User data">
+        <app-form-user-data [userData]="registerCredentials.userData"></app-form-user-data>
+      </p-panel>
+      <div id="salonDataBookmark"></div>
+      <p-panel header="Salon data">
+        <app-form-salon-data [salon]="salonData"></app-form-salon-data>
+      </p-panel>
+      <div id="scheduleBookmark"></div>
+      <p-panel #scheduleHeader id="scheduleHeader" header="Schedule">
+        <app-form-schedule [schedule]="registerCredentials.schedule"></app-form-schedule>
+      </p-panel>
+      <div id="{{imageBookmarkId}}"></div>
+      <p-panel header="Image">
+        <app-form-upload-image [imageSrc]="registerCredentials.imageData" (imageUploaded)="onImageUpload($event)">
+        </app-form-upload-image>
+      </p-panel>
+      <div class="ui-g-12">
+        <div class="ui-g-12">
+          <button pButton type="button" (click)="submit()" class="ui-button-raised" label="Add salon"></button>
+          <p-message severity="{{validationMessage?.isValid ? 'success' : 'error'}}" class="my-message"
+            text="{{validationMessage?.message}}" [ngStyle]="{'visibility': validationMessage ? 'visible' : 'hidden'}">
+          </p-message>
+        </div>
+      </div>
+    </p-scrollPanel>
+  </div>
+  <div class="ui-g-2 p-grid p-align-center vertical-container my-big-side-button-container">
+    <div class="ui-g-12 p-grid p-justify-start">
+      <button class="pi pi-chevron-right my-big-side-button" [disabled]="registerStepsIndex === registerSteps.length - 1"
+              (click)="toggleSteps(registerStepsIndex+1)"></button>
+    </div>
+  </div>
+</div>
+  <div class="ui-g-12 p-grid p-align-center vertical-container my-footer">
+    <div class="ui-g-2">
+      <button pButton type="button" class="ui-button-raised ui-button-rounded"
+              label="Return" icon="pi pi-arrow-left" iconPos="left" routerLink="/auth"></button>
+    </div>
+    <div class="ui-g-8">
+      <p-steps [model]="registerSteps" [activeIndex]="registerStepsIndex" [readonly]="false" (activeIndexChange)="toggleSteps($event)"></p-steps>
+    </div>
+    <div class="ui-g-2">
+      <button pButton type="button" class="ui-button-raised ui-button-rounded"
+              label="Confirm" icon="pi pi-check" iconPos="right"></button>
     </div>
   </div>
 </div>

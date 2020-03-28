@@ -34,7 +34,7 @@
 
       <div class="ui-g-12 my-group-row-container">
         <label class="my-label">Do you run your own business? </label>
-        <a class="my-a-label" (click)="showRegisterSalonDialog()">  Add your Salon</a>
+        <a class="my-a-label" href="auth/register-salon">  Add your Salon</a>
         <label class="my-label">.</label>
       </div>
     </div>
@@ -45,8 +45,3 @@
   <app-register-client (closeDialog)="onCloseRegisterClientDialog($event)" ></app-register-client>
   <p-footer></p-footer>
 </p-dialog>
-
-<p-dialog header="Add your salon" [(visible)]="displayRegisterSalon" [style]="{width: '450px'}">
-    <app-register-salon (closeDialog)="onCloseRegisterSalonDialog($event)"></app-register-salon>
-    <p-footer></p-footer>
-  </p-dialog>
